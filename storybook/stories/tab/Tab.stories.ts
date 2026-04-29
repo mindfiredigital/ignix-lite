@@ -12,7 +12,7 @@ export const Default = () => `
 `
 
 export const Underline = () => `
-<ix-tabs variant="underline">
+<ix-tabs data-variant="underline">
   <button slot="tab">Profile</button>
   <button slot="tab">Activity</button>
   <button slot="tab">Security</button>
@@ -21,7 +21,7 @@ export const Underline = () => `
 `
 
 export const Pill = () => `
-<ix-tabs variant="pill">
+<ix-tabs data-variant="pill">
   <button slot="tab">Files</button>
   <button slot="tab">Shared</button>
   <button slot="tab">Starred</button>
@@ -31,7 +31,7 @@ export const Pill = () => `
 
 
 export const Gradient = () => `
-<ix-tabs variant="gradient">
+<ix-tabs data-variant="gradient">
   <button slot="tab">Home</button>
   <button slot="tab">Dashboard</button>
   <button slot="tab">Reports</button>
