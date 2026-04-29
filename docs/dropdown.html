@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dropdown - ignix-lite</title>
+
+  <link rel="stylesheet" href="../packages/core/ignix-lite.min.css" />
+  <script src="../packages/core/ignix-lite.min.js" defer></script>
+</head>
+
+<body>
+
+<header>
+  <h1>Dropdown</h1>
+  <p><a href="./index.html">- Back to Docs</a></p>
+</header>
+
+<main>
+
+<section>
+  <h2>Usage</h2>
+
+<pre><code>
+&lt;ix-dropdown&gt;
+  &lt;button slot="trigger"&gt;Options ▾&lt;/button&gt;
+  &lt;ul slot="menu"&gt;
+    &lt;li&gt;&lt;button&gt;Profile&lt;/button&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;button&gt;Settings&lt;/button&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ix-dropdown&gt;
+</code></pre>
+
+<ix-dropdown>
+  <button slot="trigger">Options ▾</button>
+  <ul slot="menu">
+    <li><button>Profile</button></li>
+    <li><button>Settings</button></li>
+  </ul>
+</ix-dropdown>
+
+</section>
+
+
+<section>
+  <h2>Intent Variants</h2>
+
+<pre><code>
+&lt;ix-dropdown data-intent="primary"&gt;
+  &lt;button slot="trigger"&gt;Primary ▾&lt;/button&gt;
+  &lt;ul slot="menu"&gt;
+    &lt;li&gt;&lt;button&gt;Dashboard&lt;/button&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;button&gt;Profile&lt;/button&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ix-dropdown&gt;
+
+&lt;ix-dropdown data-intent="success"&gt;
+  &lt;button slot="trigger"&gt;Success ▾&lt;/button&gt;
+  &lt;ul slot="menu"&gt;
+    &lt;li&gt;&lt;button&gt;Saved&lt;/button&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;button&gt;Completed&lt;/button&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ix-dropdown&gt;
+
+&lt;ix-dropdown data-intent="warning"&gt;
+  &lt;button slot="trigger"&gt;Warning ▾&lt;/button&gt;
+  &lt;ul slot="menu"&gt;
+    &lt;li&gt;&lt;button&gt;Pending&lt;/button&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;button&gt;Review&lt;/button&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ix-dropdown&gt;
+
+&lt;ix-dropdown data-intent="danger"&gt;
+  &lt;button slot="trigger"&gt;Danger ▾&lt;/button&gt;
+  &lt;ul slot="menu"&gt;
+    &lt;li&gt;&lt;button&gt;Delete&lt;/button&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;button&gt;Remove&lt;/button&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ix-dropdown&gt;
+
+&lt;ix-dropdown data-intent="neutral"&gt;
+  &lt;button slot="trigger"&gt;Neutral ▾&lt;/button&gt;
+  &lt;ul slot="menu"&gt;
+    &lt;li&gt;&lt;button&gt;Docs&lt;/button&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;button&gt;Help&lt;/button&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ix-dropdown&gt;
+</code></pre>
+
+<ix-dropdown data-intent="primary">
+  <button slot="trigger">Primary ▾</button>
+  <ul slot="menu">
+    <li><button>Dashboard</button></li>
+    <li><button>Profile</button></li>
+  </ul>
+</ix-dropdown>
+
+<ix-dropdown data-intent="success">
+  <button slot="trigger">Success ▾</button>
+  <ul slot="menu">
+    <li><button>Saved</button></li>
+    <li><button>Completed</button></li>
+  </ul>
+</ix-dropdown>
+
+<ix-dropdown data-intent="warning">
+  <button slot="trigger">Warning ▾</button>
+  <ul slot="menu">
+    <li><button>Pending</button></li>
+    <li><button>Review</button></li>
+  </ul>
+</ix-dropdown>
+
+<ix-dropdown data-intent="danger">
+  <button slot="trigger">Danger ▾</button>
+  <ul slot="menu">
+    <li><button>Delete</button></li>
+    <li><button>Remove</button></li>
+  </ul>
+</ix-dropdown>
+
+<ix-dropdown data-intent="neutral">
+  <button slot="trigger">Neutral ▾</button>
+  <ul slot="menu">
+    <li><button>Docs</button></li>
+    <li><button>Help</button></li>
+  </ul>
+</ix-dropdown>
+
+</section>
+
+
+<section>
+  <h2>Ghost</h2>
+
+<pre><code>
+&lt;ix-dropdown data-intent="ghost"&gt;
+  &lt;button slot="trigger"&gt;Ghost ▾&lt;/button&gt;
+  &lt;ul slot="menu"&gt;
+    &lt;li&gt;&lt;button&gt;Item 1&lt;/button&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;button&gt;Item 2&lt;/button&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ix-dropdown&gt;
+</code></pre>
+
+<ix-dropdown data-intent="ghost">
+  <button slot="trigger">Ghost ▾</button>
+  <ul slot="menu">
+    <li><button>Item 1</button></li>
+    <li><button>Item 2</button></li>
+  </ul>
+</ix-dropdown>
+
+</section>
+
+
+<section>
+  <h2>Gradient</h2>
+
+<pre><code>
+&lt;ix-dropdown data-intent="gradient"&gt;
+  &lt;button slot="trigger"&gt;Gradient ▾&lt;/button&gt;
+  &lt;ul slot="menu"&gt;
+    &lt;li&gt;&lt;button&gt;Cool&lt;/button&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;button&gt;Modern&lt;/button&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ix-dropdown&gt;
+</code></pre>
+
+<ix-dropdown data-intent="gradient">
+  <button slot="trigger">Gradient ▾</button>
+  <ul slot="menu">
+    <li><button>Cool</button></li>
+    <li><button>Modern</button></li>
+  </ul>
+</ix-dropdown>
+
+</section>
+
+</main>
+
+<footer>
+  <p>ignix-lite - Dropdown Docs</p>
+</footer>
+
+</body>
+</html>

@@ -26,10 +26,6 @@
   &lt;button slot="tab"&gt;Overview&lt;/button&gt;
   &lt;button slot="tab"&gt;Analytics&lt;/button&gt;
   &lt;button slot="tab"&gt;Settings&lt;/button&gt;
-
-  &lt;section slot="panel"&gt;Overview content&lt;/section&gt;
-  &lt;section slot="panel"&gt;Analytics content&lt;/section&gt;
-  &lt;section slot="panel"&gt;Settings content&lt;/section&gt;
 &lt;/ix-tabs&gt;
 </code></pre>
 
@@ -47,18 +43,14 @@
   <h2>Underline</h2>
 
 <pre><code>
-&lt;ix-tabs variant="underline"&gt;
+&lt;ix-tabs data-variant="underline"&gt;
   &lt;button slot="tab"&gt;Profile&lt;/button&gt;
   &lt;button slot="tab"&gt;Activity&lt;/button&gt;
   &lt;button slot="tab"&gt;Security&lt;/button&gt;
-
-  &lt;section slot="panel"&gt;Profile settings&lt;/section&gt;
-  &lt;section slot="panel"&gt;User activity&lt;/section&gt;
-  &lt;section slot="panel"&gt;Security options&lt;/section&gt;
 &lt;/ix-tabs&gt;
 </code></pre>
 
-<ix-tabs variant="underline">
+<ix-tabs data-variant="underline">
   <button slot="tab">Profile</button>
   <button slot="tab">Activity</button>
   <button slot="tab">Security</button>
@@ -71,18 +63,14 @@
   <h2>Pill</h2>
 
 <pre><code>
-&lt;ix-tabs variant="pill"&gt;
+&lt;ix-tabs data-variant="pill"&gt;
   &lt;button slot="tab"&gt;Files&lt;/button&gt;
   &lt;button slot="tab"&gt;Shared&lt;/button&gt;
   &lt;button slot="tab"&gt;Starred&lt;/button&gt;
-
-  &lt;section slot="panel"&gt;All files&lt;/section&gt;
-  &lt;section slot="panel"&gt;Shared with you&lt;/section&gt;
-  &lt;section slot="panel"&gt;Starred items&lt;/section&gt;
 &lt;/ix-tabs&gt;
 </code></pre>
 
-<ix-tabs variant="pill">
+<ix-tabs data-variant="pill">
   <button slot="tab">Files</button>
   <button slot="tab">Shared</button>
   <button slot="tab">Starred</button>
@@ -94,8 +82,16 @@
 
 <section>
     <h2>Gradient</h2>
+<pre><code>
+&lt;ix-tabs data-variant="gradient"&gt;
+  &lt;button slot="tab"&gt;Home&lt;/button&gt;
+  &lt;button slot="tab"&gt;Dashboard&lt;/button&gt;
+  &lt;button slot="tab"&gt;Reports&lt;/button&gt;
+&lt;/ix-tabs&gt;
+</code></pre>
 
-<ix-tabs variant="gradient">
+
+<ix-tabs data-variant="gradient">
    <button slot="tab">Home</button>
    <button slot="tab">Dashboard</button>
    <button slot="tab">Reports</button>
