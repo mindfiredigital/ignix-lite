@@ -42,7 +42,7 @@ html {
 
   --ix-divider: #9ca3af;
 
-  /* SURFACE */
+  /* SURFACE */ 
   --ix-surface: #f9fafb;
   --ix-surface-raised: #ffffff;
 
@@ -89,7 +89,7 @@ html {
   --ix-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
   /* Gradient */
-  --ix-gradient: linear-gradient(0deg,rgba(7, 240, 240, 1) 22%, rgba(54, 80, 99, 1) 100%);
+  --ix-gradient: linear-gradient(to right,#b20a2c, #fffbd5);
 }
 
 @media (prefers-color-scheme: dark) {

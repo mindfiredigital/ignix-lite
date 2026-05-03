@@ -40,6 +40,11 @@ button[data-intent='success'] {
   color: #fff;
 }
 
+button[data-intent='gradient'] {
+  background: var(--ix-gradient);
+  color: #fff;
+}
+
 button[data-intent='ghost'] {
   background: transparent;
   color: var(--ix-text-muted);

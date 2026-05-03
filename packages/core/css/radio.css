@@ -1,6 +1,7 @@
 label input[type='radio'] {
   accent-color: var(--ix-primary);
   cursor: pointer;
+  width: auto;
 }
 
 label:has(input[type='radio']) {

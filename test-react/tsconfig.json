@@ -1,14 +1,12 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
     "jsx": "react-jsx",
-
     "strict": true,
-    "skipLibCheck": true,
-
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "moduleResolution": "bundler",
-    "isolatedModules": true
+    "module": "ESNext",
+    "target": "ESNext"
   },
   "include": ["src"]
 }

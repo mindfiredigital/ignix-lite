@@ -13,7 +13,7 @@ export const Basic = () => `
   Show Toast
 </button>
 `
-
+    
 export const Intents = () => `
 <ix-toast id="toast-intents"></ix-toast>
 
