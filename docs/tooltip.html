@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tooltip - ignix-lite</title>
+
+  <link rel="stylesheet" href="../packages/core/ignix-lite.min.css" />
+
+</head>
+
+<body>
+
+<header>
+  <h1>Tooltip</h1>
+  <p>Lightweight tooltip component for ignix-lite</p>
+  <p><a href="./index.html">← Back to Docs</a></p>
+</header>
+
+<main>
+
+<section>
+  <h2>Basic</h2>
+
+<pre><code>
+&lt;ix-tooltip content="Hello tooltip"&gt;
+  &lt;button&gt;Hover me&lt;/button&gt;
+&lt;/ix-tooltip&gt;
+</code></pre>
+
+  <div class="demo">
+    <ix-tooltip content="Hello tooltip">
+      <button>Hover me</button>
+    </ix-tooltip>
+  </div>
+</section>
+
+<section>
+  <h2>Positions</h2>
+
+<pre><code>
+&lt;ix-tooltip content="Top tooltip"&gt;
+  &lt;button&gt;Top&lt;/button&gt;
+&lt;/ix-tooltip&gt;
+
+&lt;ix-tooltip content="Bottom tooltip" data-position="bottom"&gt;
+  &lt;button&gt;Bottom&lt;/button&gt;
+&lt;/ix-tooltip&gt;
+
+&lt;ix-tooltip content="Left tooltip" data-position="left"&gt;
+  &lt;button&gt;Left&lt;/button&gt;
+&lt;/ix-tooltip&gt;
+
+&lt;ix-tooltip content="Right tooltip" data-position="right"&gt;
+  &lt;button&gt;Right&lt;/button&gt;
+&lt;/ix-tooltip&gt;
+</code></pre>
+
+  <div class="demo">
+    <ix-tooltip content="Top tooltip">
+      <button>Top</button>
+    </ix-tooltip>
+
+    <ix-tooltip content="Bottom tooltip" data-position="bottom">
+      <button>Bottom</button>
+    </ix-tooltip>
+
+    <ix-tooltip content="Left tooltip" data-position="left">
+      <button>Left</button>
+    </ix-tooltip>
+
+    <ix-tooltip content="Right tooltip" data-position="right">
+      <button>Right</button>
+    </ix-tooltip>
+  </div>
+</section>
+
+<section>
+  <h2>Intent Variants</h2>
+
+<pre><code>
+&lt;ix-tooltip content="Success tooltip" data-intent="success"&gt;
+  &lt;button&gt;Success&lt;/button&gt;
+&lt;/ix-tooltip&gt;
+
+&lt;ix-tooltip content="Danger tooltip" data-intent="danger"&gt;
+  &lt;button&gt;Danger&lt;/button&gt;
+&lt;/ix-tooltip&gt;
+
+&lt;ix-tooltip content="Warning tooltip" data-intent="warning"&gt;
+  &lt;button&gt;Warning&lt;/button&gt;
+&lt;/ix-tooltip&gt;
+</code></pre>
+
+  <div class="demo">
+    <ix-tooltip content="Success tooltip" data-intent="success">
+      <button>Success</button>
+    </ix-tooltip>
+
+    <ix-tooltip content="Danger tooltip" data-intent="danger">
+      <button>Danger</button>
+    </ix-tooltip>
+
+    <ix-tooltip content="Warning tooltip" data-intent="warning">
+      <button>Warning</button>
+    </ix-tooltip>
+  </div>
+</section>
+
+<section>
+  <h2>Accessibility</h2>
+
+<pre><code>
+&lt;ix-tooltip content="Accessible tooltip"&gt;
+  &lt;button&gt;Focus me (Tab)&lt;/button&gt;
+&lt;/ix-tooltip&gt;
+</code></pre>
+
+  <div class="demo">
+    <ix-tooltip content="Accessible tooltip">
+      <button>Focus me</button>
+    </ix-tooltip>
+  </div>
+
+  <p>Supports hover and keyboard focus.</p>
+</section>
+
+</main>
+
+<footer>
+  <p>ignix-lite Tooltip Documentation</p>
+</footer>
+
+<script src="../packages/core/ignix-lite.min.js"></script>
+
+</body>
+</html>

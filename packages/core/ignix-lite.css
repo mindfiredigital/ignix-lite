@@ -18,7 +18,8 @@
 @import './css/table.css';
 @import './css/avatar.css';
 @import './css/navigation.css';
-@import './css/divider.css';
+@import './css/tooltip.css';
+
 
 /* 1. MINIMAL RESET */
 
@@ -40,7 +41,7 @@ html {
   --ix-primary: #2563eb;
   --ix-primary-hover: #1d4ed8;
   --ix-primary-contrast: #bfdbfe;
-  
+
   --ix-danger: #dc2626;
   --ix-danger-text: #dc2626;
 
@@ -54,7 +55,6 @@ html {
   --ix-success-bg: #dcfce7;
   --ix-info-bg: #f3f4f6;
 
-  
   --ix-on-danger: #ffffff;
   --ix-on-warning: #000000;
   --ix-on-success: #ffffff;
