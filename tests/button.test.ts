@@ -13,7 +13,7 @@ describe('Ignix Button Component', () => {
 
     expect(btn.getAttribute('data-intent')).toBe('primary')
   })
-
+  
   it('supports all intent values', () => {
     const intents = ['primary', 'danger', 'warning', 'success', 'neutral', 'ghost']
 

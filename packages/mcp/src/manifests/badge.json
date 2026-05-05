@@ -1,0 +1,82 @@
+{
+  "component": "badge",
+  "version": "2.0",
+  "description": "Status indicator using mark or span[role=status] with intent styling.",
+
+  "element": "badge",
+
+  "emmet": "mark[data-intent=?]{Label}",
+  "tokens": 3,
+
+  "props": {
+    "data-intent": {
+      "type": "enum",
+      "values": ["success", "danger", "warning", "neutral"],
+      "default": "neutral",
+      "native": false,
+      "agent_hint": "Controls badge color"
+    },
+
+    "role": {
+      "type": "enum",
+      "values": ["status"],
+      "native": true,
+      "agent_hint": "Required when using span"
+    }
+  },
+
+  "allowed_elements": ["mark", "span"],
+
+  "required_conditions": [
+    "span must have role=status"
+  ],
+
+  "states": [],
+
+  "required_props": [],
+
+  "forbidden_props": [
+    "class",
+    "variant",
+    "color",
+    "style",
+    "onclick"
+  ],
+
+  "do": [
+    "Use mark for standard badges",
+    "Use span with role=status for accessibility cases",
+    "Use data-intent to convey meaning",
+    "Keep text short"
+  ],
+
+  "dont": [
+    "Do not use class attribute",
+    "Do not use variant or color props",
+    "Do not attach JS handlers",
+    "Do not use span without role=status"
+  ],
+
+  "examples": [
+    {
+        "label": "Basic badge",
+        "emmet": "mark[data-intent=neutral]{Active}",
+        "html": "<mark data-intent=\"neutral\">Active</mark>"
+    },
+    {
+      "label": "Success badge",
+      "emmet": "mark[data-intent=success]{Active}",
+      "html": "<mark data-intent=\"success\">Active</mark>"
+    },
+    {
+      "label": "Danger badge",
+      "emmet": "mark[data-intent=danger]{Error}",
+      "html": "<mark data-intent=\"danger\">Error</mark>"
+    },
+    {
+      "label": "Status badge",
+      "emmet": "span[role=status data-intent=success]{Active}",
+      "html": "<span role=\"status\" data-intent=\"success\">Active</span>"
+    }
+  ]
+}
