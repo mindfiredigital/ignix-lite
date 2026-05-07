@@ -1,0 +1,176 @@
+---
+sidebar_position: 4
+title: Button
+description: Lightweight semantic button component for ignix-lite with intent variants, loading states, and accessibility support.
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import Preview from '@site/src/components/Preview'
+
+
+# Button
+
+A lightweight semantic button component built with native HTML and CSS variables.
+
+The Button component in ignix-lite uses the native `<button>` element and supports multiple intent variants, loading states, focus styles, and accessibility-friendly interactions.
+
+---
+
+### Intent Variant
+<Tabs defaultValue="preview">
+
+  <TabItem value="preview" label="Preview">
+    <Preview>
+        <button data-intent="primary">Primary</button>
+        <button data-intent="danger">Danger</button>
+        <button data-intent="warning">Warning</button>
+        <button data-intent="success">Success</button>
+        <button data-intent="neutral">Neutral</button>
+        <button data-intent="ghost">Ghost</button>
+    </Preview>
+ </TabItem>
+
+
+<TabItem value="code" label="Code">
+```html
+<button data-intent="primary">Primary</button>
+<button data-intent="danger">Danger</button>
+<button data-intent="warning">Warning</button>
+<button data-intent="success">Success</button>
+<button data-intent="neutral">Neutral</button>
+<button data-intent="ghost">Ghost</button>
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### Disabled
+<Tabs defaultValue="preview">
+
+  <TabItem value="preview" label="Preview">
+    <Preview>
+        <button data-intent="primary" disabled>Disabled</button>
+    </Preview>
+  </TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<button data-intent="primary" disabled>
+  Disabled
+</button>
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### Loading
+
+<Tabs defaultValue="preview">
+
+  <TabItem value="preview" label="Preview">
+    <Preview>
+        <button data-intent="primary" aria-busy="true">
+        <span>Loading</span>
+        </button>
+    </Preview>
+  </TabItem>
+
+<TabItem value="code" label="Code">
+```html
+<button data-intent="primary" aria-busy="true">
+  <span>Loading</span>
+</button>
+```
+
+</TabItem>
+</Tabs>
+
+
+---
+## Installation
+
+<Tabs defaultValue="npm">
+
+<TabItem value="npm" label="npm">
+
+```bash
+npm install @mindfiredigital/ignix-lite
+```
+
+```js
+import '@mindfiredigital/ignix-lite/dist/ignix-lite.min.css'
+```
+
+</TabItem>
+
+<TabItem value="cdn" label="CDN">
+
+```html
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/@mindfiredigital/ignix-lite/dist/ignix-lite.min.css"
+/>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Usage
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+  <div style={{ display: 'flex', gap: '0.75rem' }}>
+    <button data-intent="primary">
+      Save Changes
+    </button>
+
+    <button data-intent="neutral">
+      Cancel
+    </button>
+  </div>
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<div class="actions">
+  <button data-intent="primary">
+    Save Changes
+  </button>
+
+  <button data-intent="neutral">
+    Cancel
+  </button>
+</div>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Attributes
+
+| Attribute | Type | Description |
+|---|---|---|
+| `data-intent` | `'primary' \| 'danger' \| 'warning' \| 'success' \| 'neutral' \| 'ghost'` | Applies semantic visual styles |
+| `disabled` | `boolean` | Disables interactions and reduces opacity |
+| `aria-busy` | `boolean` | Displays loading spinner state |
+| `type` | `'button' \| 'submit' \| 'reset'` | Native HTML button type |
+| `class` | `string` | Add custom utility or component classes |
+| `children` | `HTML content` | Button label or content |
