@@ -21,6 +21,7 @@
 @use './components/radio';
 @use './components/skeleton';
 @use './components/table';
+@use './components//card';
 
 
 
@@ -60,6 +61,7 @@ html {
   --ix-on-warning: #000000;
   --ix-on-success: #ffffff;
   --ix-on-primary: #ffffff;
+
 
   --ix-divider: #9ca3af;
 
@@ -113,6 +115,9 @@ html {
   /* GRADIENT */
   --ix-gradient: linear-gradient(to right, #b20a2c,#fffbd5);
   --ix-gradient-bg: linear-gradient(to right, #e32d51, #d7d4bc);
+
+  --ix-skeleton-bg: #e5e7eb; 
+  --ix-skeleton-shimmer: rgba(255, 255, 255, 0.6);
 }
 
 html[data-theme='dark'],
@@ -142,6 +147,9 @@ html[data-theme='dark'],
   --ix-info-bg: #1e293b;
 
   --ix-gradient-bg: linear-gradient(to right, #e32d51, #aba67a);
+
+  --ix-skeleton-bg: #1e293b; 
+  --ix-skeleton-shimmer: rgba(255, 255, 255, 0.1);
 }
 
 .ix-root {

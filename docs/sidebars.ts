@@ -5,7 +5,8 @@ const sidebars = {
       type: "category",
       label: "Getting Started",
       items: [
-        "introduction" 
+        "introduction" ,
+        "installation"
       ]
     },
 
@@ -13,20 +14,31 @@ const sidebars = {
       type: "category",
       label: "Components",
       items: [
-        "components/button",
-        "components/input",
-        "components/checkbox",
-        "components/radio",
-        "components/badge",
-        "components/dialog",
-        "components/form",
-        "components/select",
+        "components/accordion",
         "components/alert",
         "components/avatar",
+        "components/badge",
+        "components/button",
+        "components/card",
+        "components/checkbox",
+        "components/codeblock",
+        "components/combobox",
+        "components/dialog",
+        "components/divider",
+        "components/dropdown",
+        "components/form",
+        "components/input",
         "components/meter",
         "components/progress",
-        "components/codeblock",
-        "components/tooltip"
+        "components/radio",
+        "components/select",
+        "components/skeleton",
+        "components/tab",
+        "components/table",
+        "components/textarea",
+        "components/toast",
+        "components/tooltip", 
+         
       ]
     },
     {

@@ -1,4 +1,4 @@
-article {
+ix-card {
   display: flex;
   flex-direction: column;
 
@@ -12,45 +12,45 @@ article {
   max-width: 320px;
   margin: 0;
 
-  > [slot="avatar"],
-  > [slot="title"] {
+  > [slot='avatar'],
+  > [slot='title'] {
     display: inline-block;
     vertical-align: middle;
   }
 }
 
-[slot='avatar'] {
+ix-card [slot='avatar'] {
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
   margin-right: var(--ix-space-sm);
 }
 
-[slot='title'] {
+ix-card [slot='title'] {
   font-size: var(--ix-size-lg);
   font-weight: 600;
 }
 
-[slot='meta'] {
+ix-card [slot='meta'] {
   font-size: var(--ix-size-sm);
   color: var(--ix-text-muted);
 }
 
-[slot="body"] {
+ix-card [slot='body'] {
   font-size: var(--ix-size-md);
 }
 
-[slot="action"],
-[slot="footer"] {
+ix-card [slot='action'],
+ix-card [slot='footer'] {
   display: inline-block;
   vertical-align: middle;
 }
 
-[slot="action"] {
+ix-card [slot='action'] {
   margin-top: var(--ix-space-md);
 }
 
-[slot="footer"] {
+ix-card [slot='footer'] {
   margin-left: var(--ix-space-md);
   font-size: var(--ix-size-sm);
   color: var(--ix-text-muted);

@@ -1,0 +1,95 @@
+.hero-h1 {
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+.gradient-anim {
+  background: linear-gradient(
+    90deg,
+    #ff6b6b 0%,
+    #ff2b2b 40%,
+    #ff8a00 100%
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+
+  background-size: 200% 100%;
+
+  animation: gradientShift 6s linear infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.code-pill {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 12px;
+
+  padding: 0.5rem 1rem;
+
+  backdrop-filter: blur(6px);
+}
+
+.copy-btn {
+  border-radius: 6px;
+
+  padding: 0.25rem;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: hsl(var(--primary));
+
+  color: white;
+
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+}
+
+.btn-glass {
+  background: rgba(255, 255, 255, 0.05);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  backdrop-filter: blur(8px);
+}

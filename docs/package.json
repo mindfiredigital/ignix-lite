@@ -4,7 +4,10 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
-    "start": "docusaurus start",
+    "sync:ignix": "copy ..\\packages\\core\\dist\\ignix-lite.min.js .\\static\\ignix-lite.min.js",
+
+    "start": "pnpm sync:ignix && docusaurus start",
+    "build": "pnpm sync:ignix && docusaurus build",
     
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
@@ -13,6 +16,7 @@
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
     "typecheck": "tsc"
+    
   },
   "dependencies": {
     "@docusaurus/core": "3.10.1",

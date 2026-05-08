@@ -78,6 +78,12 @@ const config: Config = {
       darkTheme: prismThemes.dracula,
     },
   } satisfies Preset.ThemeConfig,
+  scripts: [
+  {
+    src: '/ignix-lite.min.js',
+    defer: true,
+  },
+],
 }
 
 export default config
