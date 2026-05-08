@@ -21,7 +21,6 @@ Built with a lightweight philosophy, Ignix Lite avoids heavy runtime dependencie
 - Responsive and modern UI
 - Easy integration
 - Dark mode support
-- Minimal and scalable architecture
 
 ---
 
@@ -33,7 +32,6 @@ Built with a lightweight philosophy, Ignix Lite avoids heavy runtime dependencie
 npm install @mindfiredigital/ignix-lite
 ```
 
-
 ---
 
 ## Usage
@@ -43,7 +41,6 @@ npm install @mindfiredigital/ignix-lite
 ```html
 <link rel="stylesheet" href="node_modules/ignix-lite/ignix-lite.min.css" />
 ```
-
 
 ---
 
@@ -61,18 +58,11 @@ npm install @mindfiredigital/ignix-lite
 # Example
 
 ```html
-<button data-intent="primary">
-  Primary Button
-</button>
+<button data-intent="primary">Primary Button</button>
 
-<button data-intent="danger">
-  Delete
-</button>
+<button data-intent="danger">Delete</button>
 
-<input
-  type="text"
-  placeholder="Enter text"
-/>
+<input type="text" placeholder="Enter text" />
 ```
 
 ---
@@ -113,6 +103,7 @@ Ignix Lite currently includes:
 Documentation is powered by Docusaurus and deployed automatically using GitHub Pages.
 
 Explore:
+
 - Installation guides
 - Component APIs
 - Usage examples
@@ -154,6 +145,7 @@ Ignix Lite uses:
 Contributions are welcome.
 
 Please ensure:
+
 - Semantic HTML usage
 - Accessibility support
 - Consistent styling patterns

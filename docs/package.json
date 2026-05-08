@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
-    "sync:ignix": "copy ..\\packages\\core\\dist\\ignix-lite.min.js .\\static\\ignix-lite.min.js",
-
+    "sync:ignix": "cp ../packages/core/dist/ignix-lite.min.js ./static/ignix-lite.min.js",
     "start": "pnpm sync:ignix && docusaurus start",
     "build": "pnpm sync:ignix && docusaurus build",
     
