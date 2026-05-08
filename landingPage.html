@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ignix Lite - Build Faster. Ship Smarter.</title>
+
+  <link rel="stylesheet" href="./packages//core//ignix-lite.min.css" />
+  <script src="./packages/core/ignix-lite.min.js" defer></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+ <style>
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+
+  --red-main: #ff274b;
+  --red-soft: #ff5c77;
+  --red-glow: rgba(255,39,75,0.28);
+
+  --bg-primary: #060606;
+  --bg-secondary: #0f0f10;
+  --surface: rgba(255,255,255,0.04);
+
+  --border: rgba(255,255,255,0.08);
+
+  --text-primary: #ffffff;
+  --text-secondary: #b4b4bc;
+  --text-muted: #71717a;
+
+  --shadow-red:
+    0 12px 35px rgba(255,39,75,0.16);
+
+  --glass:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.04),
+      rgba(255,255,255,0.015)
+    );
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+
+  font-family: 'DM Sans', sans-serif;
+
+  background:
+
+    radial-gradient(
+      circle at top,
+      rgba(255,39,75,0.16),
+      transparent 32%
+    ),
+
+    linear-gradient(
+      180deg,
+      #0c0c0d 0%,
+      #050505 100%
+    );
+
+  color: var(--text-primary);
+
+  overflow-x: hidden;
+   margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+section {
+  padding: 7rem 0;
+}
+
+.section-label {
+
+  font-size: 0.78rem;
+
+  letter-spacing: 0.24em;
+
+  text-transform: uppercase;
+
+  color: var(--red-soft);
+
+  margin-bottom: 0.8rem;
+}
+
+.section-title {
+
+  font-family: 'Bebas Neue', sans-serif;
+
+  font-size: clamp(3rem, 6vw, 5.5rem);
+
+  line-height: 0.95;
+
+  color: white;
+
+  margin-bottom: 1.2rem;
+}
+
+.section-sub {
+
+  color: var(--text-secondary);
+
+  font-size: 1.08rem;
+
+  max-width: 620px;
+
+  line-height: 1.85;
+}
+
+.site-nav {
+
+  position: sticky;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+
+  z-index: 1000;
+
+  background: rgba(5,5,5,0.82);
+
+  backdrop-filter: blur(18px);
+
+  border-bottom:
+    1px solid rgba(255,255,255,0.05);
+}
+
+.nav-inner {
+
+  width: 100%;
+
+  padding: 1rem 3rem;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+.logo {
+
+  font-family: 'Bebas Neue', sans-serif;
+
+  font-size: 1.9rem;
+
+  letter-spacing: 0.08em;
+
+  color: white;
+}
+
+.logo span {
+  color: var(--red-main);
+}
+
+.site-nav nav ul {
+
+  display: flex;
+
+  gap: 2.4rem;
+
+  list-style: none;
+}
+
+.site-nav nav a {
+
+  position: relative;
+
+  text-decoration: none;
+
+  color: #d4d4d8;
+
+  font-size: 0.95rem;
+
+  transition: 0.25s ease;
+
+  padding-bottom: 0.4rem;
+}
+
+.site-nav nav a:hover {
+  color: white;
+}
+
+.site-nav nav a {
+
+  position: relative;
+
+  text-decoration: none;
+
+  color: #d4d4d8;
+
+  font-size: 0.96rem;
+
+  font-weight: 500;
+
+  transition: all 0.25s ease;
+
+  padding-bottom: 0.55rem;
+}
+
+.site-nav nav a:hover {
+  color: white;
+}
+
+.site-nav nav a.active {
+  color: var(--red-soft);
+}
+
+.site-nav nav a::after {
+
+  content: '';
+
+  position: absolute;
+
+  left: 0;
+  bottom: -2px;
+
+  width: 0%;
+
+  height: 2px;
+
+  border-radius: 999px;
+
+  transition: width 0.3s ease;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--red-main),
+      var(--red-soft)
+    );
+}
+
+.site-nav nav a.active::after {
+  width: 100%;
+}
+
+.hero {
+
+  min-height: 96vh;
+
+  display: flex;
+
+  align-items: center;
+
+  position: relative;
+
+  overflow: hidden;
+}
+
+.hero-grid {
+
+  position: absolute;
+
+  inset: 0;
+
+  background-image:
+
+    linear-gradient(
+      rgba(255,39,75,0.06) 1px,
+      transparent 1px
+    ),
+
+    linear-gradient(
+      90deg,
+      rgba(255,39,75,0.06) 1px,
+      transparent 1px
+    );
+
+  background-size: 52px 52px;
+
+  mask-image:
+    radial-gradient(
+      ellipse 80% 60% at 50% 0%,
+      black 40%,
+      transparent 100%
+    );
+}
+
+.hero-glow {
+
+  position: absolute;
+
+  top: -250px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: 820px;
+  height: 820px;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(255,39,75,0.32) 0%,
+      rgba(255,39,75,0.12) 38%,
+      transparent 74%
+    );
+
+  pointer-events: none;
+}
+
+.hero-content {
+
+  position: relative;
+
+  z-index: 2;
+
+  max-width: 780px;
+}
+
+.hero-badge {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 0.6rem;
+
+  margin-bottom: 2rem;
+}
+
+.hero-title {
+
+  font-family: 'Bebas Neue', sans-serif;
+
+  font-size: clamp(4rem, 10vw, 8rem);
+
+  line-height: 0.92;
+
+  margin-bottom: 1.5rem;
+}
+
+.hero-title span {
+  color: var(--red-main);
+}
+
+.hero-desc {
+
+  font-size: 1.16rem;
+
+  color: var(--text-secondary);
+
+  max-width: 600px;
+
+  line-height: 1.9;
+
+  margin-bottom: 2.7rem;
+}
+
+.hero-actions {
+
+  display: flex;
+
+  gap: 1rem;
+
+  flex-wrap: wrap;
+
+  align-items: center;
+}
+
+.hero-stats {
+
+  display: flex;
+
+  gap: 3.5rem;
+
+  margin-top: 4rem;
+
+  padding-top: 2.5rem;
+
+  border-top:
+    1px solid rgba(255,255,255,0.08);
+}
+
+.stat-num {
+
+  font-family: 'Bebas Neue', sans-serif;
+
+  font-size: 3rem;
+
+  line-height: 1;
+
+  color: white;
+}
+
+.stat-label {
+
+  margin-top: 0.3rem;
+
+  color: var(--text-muted);
+
+  font-size: 0.84rem;
+}
+
+
+.features-grid,
+.showcase-grid,
+.pricing-grid,
+.testimonials-grid {
+
+  display: grid;
+
+  gap: 1.6rem;
+
+  margin-top: 3rem;
+}
+
+.features-grid,
+.pricing-grid,
+.testimonials-grid {
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.showcase-grid {
+
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 760px) {
+
+  .showcase-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+.feature-card,
+.showcase-card,
+.pricing-card,
+.testimonial-card {
+
+  background: var(--glass);
+
+  border:
+    1px solid rgba(255,255,255,0.07);
+
+  border-radius: 24px;
+
+  padding: 2rem;
+
+  backdrop-filter: blur(16px);
+
+  transition:
+    transform 0.28s ease,
+    border-color 0.28s ease,
+    box-shadow 0.28s ease;
+}
+
+.feature-card:hover,
+.showcase-card:hover,
+.pricing-card:hover,
+.testimonial-card:hover {
+
+  transform: translateY(-7px);
+
+  border-color:
+    rgba(255,39,75,0.45);
+
+  box-shadow: var(--shadow-red);
+}
+
+.feature-icon {
+
+  font-size: 2rem;
+
+  margin-bottom: 1rem;
+
+  display: block;
+}
+
+.feature-title {
+
+  font-family: 'Bebas Neue', sans-serif;
+
+  font-size: 1.5rem;
+
+  margin-bottom: 0.6rem;
+
+  letter-spacing: 0.04em;
+}
+
+.feature-desc {
+
+  color: var(--text-secondary);
+
+  line-height: 1.8;
+
+  font-size: 0.96rem;
+}
+
+.showcase-card h4 {
+
+  font-size: 0.72rem;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.16em;
+
+  color: var(--text-muted);
+
+  margin-bottom: 1.3rem;
+}
+
+.showcase-card .row {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 0.7rem;
+
+  align-items: center;
+
+  margin-bottom: 0.9rem;
+}
+
+.pricing-card.featured {
+
+  border-color:
+    rgba(255,39,75,0.45);
+
+  background:
+
+    linear-gradient(
+      145deg,
+      rgba(255,39,75,0.16),
+      rgba(255,255,255,0.02)
+    );
+}
+
+.pricing-badge {
+
+  position: absolute;
+
+  top: -12px;
+
+  right: 1.5rem;
+}
+
+.pricing-name {
+
+  font-family: 'Bebas Neue', sans-serif;
+
+  font-size: 1.7rem;
+}
+
+.pricing-price {
+
+  font-family: 'Bebas Neue', sans-serif;
+
+  font-size: 4rem;
+
+  line-height: 1;
+
+  margin: 1rem 0 0.3rem;
+}
+
+.pricing-price span {
+
+  font-size: 1rem;
+
+  color: var(--text-muted);
+
+  font-family: 'DM Sans', sans-serif;
+}
+
+.pricing-desc {
+
+  color: var(--text-secondary);
+
+  margin-bottom: 1.5rem;
+
+  font-size: 0.92rem;
+}
+
+.pricing-features {
+
+  list-style: none;
+
+  margin-bottom: 2rem;
+}
+
+.pricing-features li {
+
+  padding: 0.6rem 0;
+
+  border-bottom:
+    1px solid rgba(255,255,255,0.06);
+
+  color: #d4d4d8;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.5rem;
+}
+
+.pricing-features li::before {
+
+  content: '✓';
+
+  color: var(--red-soft);
+
+  font-weight: bold;
+}
+
+
+.testimonial-quote {
+
+  color: #d4d4d8;
+
+  line-height: 1.85;
+
+  margin-bottom: 1.5rem;
+
+  font-size: 0.97rem;
+}
+
+
+.faq-list {
+
+  max-width: 720px;
+
+  margin: 3rem auto 0;
+}
+
+.cta-section {
+
+  position: relative;
+
+  text-align: center;
+}
+
+.cta-glow {
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+
+    radial-gradient(
+      ellipse 60% 80% at 50% 50%,
+      rgba(255,39,75,0.18) 0%,
+      transparent 74%
+    );
+
+  pointer-events: none;
+}
+
+.cta-inner {
+
+  position: relative;
+
+  z-index: 2;
+}
+
+.cta-actions {
+
+  display: flex;
+
+  gap: 1rem;
+
+  justify-content: center;
+
+  flex-wrap: wrap;
+
+  margin-top: 2rem;
+}
+
+
+.site-footer {
+
+  border-top:
+    1px solid rgba(255,255,255,0.06);
+
+  padding: 3rem 0;
+}
+
+.footer-inner {
+
+  max-width: 1150px;
+
+  margin: 0 auto;
+
+  padding: 0 2rem;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  flex-wrap: wrap;
+
+  gap: 1rem;
+}
+
+.footer-copy {
+
+  text-align: center;
+
+  margin-top: 2rem;
+
+  color: var(--text-muted);
+
+  font-size: 0.85rem;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<header class="site-nav">
+  <div class="nav-inner">
+    <div class="logo">Ignix-Lite<span>.</span></div>
+    <nav>
+      <ul>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#components">Components</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </nav>
+    <div style="display:flex; gap:0.5rem;">
+      <button data-intent="ghost">Login</button>
+      <button data-intent="gradient">Get Started</button>
+    </div>
+  </div>
+</header>
+
+<!--HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="container">
+    <div class="hero-content">
+
+      <div class="hero-badge">
+        <mark data-intent="neutral">v1.0 just shipped</mark>
+        <mark data-intent="success">Now with Web Components</mark>
+      </div>
+
+      <h1 class="hero-title">
+        Build UI<br>
+        <span>Faster</span> Than<br>
+        Ever Before.
+      </h1>
+
+      <p class="hero-desc">
+        Ignix Lite is a zero-dependency UI library built on semantic HTML.
+        No config. No bloat. Just components that work - beautifully.
+      </p>
+
+      <div class="hero-actions">
+        <button data-intent="gradient" onclick="heroToast.show({ title: '🚀 You\'re in!', message: 'Check your inbox to get started.', intent: 'success', variant: 'slide' })">
+          Start for Free
+        </button>
+        <a 
+        href="https://your-docs-link.com" 
+        target="_blank"
+        style="text-decoration:none;"
+        >
+        <button data-intent="ghost">
+            View Docs ->
+        </button>
+      </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ALERTS -->
+<div class="container" style="padding-bottom: 2rem;">
+  <aside data-intent="danger"> Ignix Lite 1.0 is out - featuring Tabs, Combobox, Tooltips & more.</aside>
+</div>
+
+<!--FEATURES -->
+<section id="features">
+  <div class="container">
+    <p class="section-label">Why Ignix Lite</p>
+    <h2 class="section-title">Everything You Need.<br>Nothing You Don't.</h2>
+    <p class="section-sub">Designed for developers who care about craft - semantic, accessible, and beautiful out of the box.</p>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <span class="feature-icon">⚡</span>
+        <div class="feature-title">Zero Dependencies</div>
+        <p class="feature-desc">No React. No Vue. No build step required. Drop in a CSS and JS file and you're done.</p>
+        <br>
+        <progress value="100" max="100"></progress>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-icon">♿</span>
+        <div class="feature-title">Accessibility First</div>
+        <p class="feature-desc">Every component uses native HTML semantics — ARIA roles, keyboard nav, and focus management baked in.</p>
+        <br>
+        <aside data-intent="success">WCAG 2.1 AA Compliant</aside>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-icon">🎨</span>
+        <div class="feature-title">Intent System</div>
+        <p class="feature-desc">One consistent <code>data-intent</code> API across every component. Switch themes in one attribute.</p>
+        <br>
+        <div style="display:flex; gap:0.4rem; flex-wrap:wrap; margin-top:0.5rem;">
+          <mark data-intent="success">success</mark>
+          <mark data-intent="danger">danger</mark>
+          <mark data-intent="warning">warning</mark>
+          <mark data-intent="neutral">neutral</mark>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-icon">🧩</span>
+        <div class="feature-title">Web Components</div>
+        <p class="feature-desc">Tabs, Tooltips, Combobox, Toast, Dropdown — all as native custom elements. Works in any framework.</p>
+        <br>
+        <meter value="80" min="0" max="100" low="30" high="70" optimum="100"></meter>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-icon">📦</span>
+        <div class="feature-title">Tiny Bundle</div>
+        <p class="feature-desc">Under 4kb gzipped. Loads instantly. Keeps your Lighthouse score green.</p>
+        <br>
+        <pre><code data-lang="bash">npm install ignix-lite</code></pre>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-icon">🔧</span>
+        <div class="feature-title">Fully Customisable</div>
+        <p class="feature-desc">Override CSS variables globally or per-component. No !important hacks needed.</p>
+        <br>
+        <pre><code data-lang="css">--ix-primary: #7c3aed;</code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--COMPONENT SHOWCASE  -->
+<section id="components">
+  <div class="container">
+    <p class="section-label">Component Library</p>
+    <h2 class="section-title">See It In Action.</h2>
+    <p class="section-sub">Every component you see is powered by Ignix Lite - no extra CSS, no custom wrappers.</p>
+
+    <div class="showcase-grid">
+
+      <!-- Buttons -->
+      <div class="showcase-card">
+        <h4>Buttons</h4>
+        <div class="row">
+          <button data-intent="primary">Primary</button>
+          <button data-intent="success">Success</button>
+          <button data-intent="danger">Danger</button>
+          <button data-intent="warning">Warning</button>
+          <button data-intent="ghost">Ghost</button>
+          <button data-intent="primary" disabled>Disabled</button>
+        </div>
+      </div>
+
+      <!-- Badges -->
+      <div class="showcase-card">
+        <h4>Badges</h4>
+        <div class="row">
+          <mark data-intent="success">Shipped</mark>
+          <mark data-intent="danger">Breaking</mark>
+          <mark data-intent="warning">Beta</mark>
+          <mark data-intent="neutral">Stable</mark>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div class="showcase-card">
+        <h4>Form Inputs</h4>
+        <form onsubmit="event.preventDefault(); formToast.show({ title: 'Sent!', message: 'We got your message.', intent: 'success', variant: 'pop' })">
+          <label>Name <input type="text" placeholder="John Doe"></label>
+          <label>Email <input type="email" placeholder="hello@ignix.dev"></label>
+          <label data-state="error">
+            Password
+            <input type="password" aria-invalid="true">
+            <small>Must be at least 8 characters.</small>
+          </label>
+          <button type="submit" data-intent="primary">Send Message</button>
+        </form>
+      </div>
+
+      <!-- Select & Checkbox -->
+      <div class="showcase-card">
+        <h4>Select & Checkboxes</h4>
+        <label>
+          Framework
+          <select data-intent="primary">
+            <option>React</option>
+            <option>Vue</option>
+            <option>Svelte</option>
+            <option>Vanilla JS</option>
+          </select>
+        </label>
+        <br>
+        <label><input type="checkbox" checked> Accept terms</label>
+        <label><input type="checkbox"> Subscribe to newsletter</label>
+        <label data-intent="success"><input type="checkbox" checked> All systems go</label>
+      </div>
+
+      <!-- Tabs -->
+      <div class="showcase-card">
+        <h4>Tabs</h4>
+        <ix-tabs data-variant="underline" style="margin-bottom:1rem;">
+          <button slot="tab">Overview</button>
+          <button slot="tab">Usage</button>
+          <button slot="tab">API</button>
+        </ix-tabs>
+        <ix-tabs data-variant="pill">
+          <button slot="tab">Files</button>
+          <button slot="tab">Shared</button>
+          <button slot="tab">Archived</button>
+        </ix-tabs>
+      </div>
+
+      <!-- Toast & Tooltip -->
+      <div class="showcase-card">
+        <h4>Toast & Tooltip</h4>
+        <div class="row" style="margin-bottom:1rem;">
+          <button data-intent="success" onclick="showcaseToast.show({ title:'Saved', message:'All changes saved.', intent:'success', variant:'slide' })">Show Success</button>
+          <button data-intent="danger" onclick="showcaseToast.show({ title:'Error', message:'Something failed.', intent:'danger', variant:'pop' })">Show Error</button>
+        </div>
+        <div class="row">
+          <ix-tooltip content="This is a top tooltip">
+            <button data-intent="neutral">Hover Top</button>
+          </ix-tooltip>
+          <ix-tooltip content="Danger zone" data-position="bottom" data-intent="danger">
+            <button data-intent="neutral">Hover Bottom</button>
+          </ix-tooltip>
+           <ix-tooltip content="Right side!" data-position="right" data-intent="success">
+            <button data-intent="neutral">Hover Right</button>
+          </ix-tooltip>
+        </div>
+      </div>
+
+      <!-- Accordion -->
+      <div class="showcase-card">
+        <h4>Accordion</h4>
+        <details open>
+          <summary>Is Ignix Lite free?</summary>
+          <p>Yes! The core library is 100% open source and MIT licensed.</p>
+        </details>
+        <details>
+          <summary>Does it work without JavaScript?</summary>
+          <p>Most components do. Accordions, forms, and layouts work with pure HTML and CSS.</p>
+        </details>
+      </div>
+
+      <!-- Avatar + Card -->
+      <div class="showcase-card">
+        <h4>Avatar & Card</h4>
+        <article>
+          <img slot="avatar" src="https://i.pravatar.cc/100?img=47" alt="User">
+          <span slot="title">Aryan Mehta</span>
+          <span slot="meta">Full-Stack Developer</span>
+          <p slot="body">Ignix Lite cut our design system setup from 2 weeks to 2 days.</p>
+          <button slot="action" data-intent="primary">Follow</button>
+          <span slot="footer">Joined 2024</span>
+        </article>
+      </div>
+
+      <!-- Dropdown & Combobox -->
+      <div class="showcase-card">
+        <h4>Dropdown & Combobox</h4>
+        <div class="row" style="margin-bottom:1rem;">
+          <ix-dropdown data-intent="primary">
+            <button slot="trigger">Actions ▾</button>
+            <ul slot="menu">
+              <li><button>Edit Profile</button></li>
+              <li><button>Settings</button></li>
+              <li><button>Logout</button></li>
+            </ul>
+          </ix-dropdown>
+          <ix-dropdown data-intent="danger">
+            <button slot="trigger">Danger ▾</button>
+            <ul slot="menu">
+              <li><button>Delete Account</button></li>
+              <li><button>Remove Data</button></li>
+            </ul>
+          </ix-dropdown>
+        </div>
+        <ix-combobox data-intent="primary">
+          <label part="control">
+            <input placeholder="Search framework..." />
+            <button data-clear>Clear</button>
+          </label>
+          <ul>
+            <li>React</li>
+            <li>Vue</li>
+            <li>Angular</li>
+            <li>Svelte</li>
+          </ul>
+        </ix-combobox>
+      </div>
+
+      <!-- Progress & Meter & Skeleton -->
+      <div class="showcase-card">
+        <h4>Progress, Meter & Skeleton</h4>
+        <p style="font-size:0.8rem; color:#71717a; margin-bottom:0.4rem;">Upload progress</p>
+        <progress value="65" max="100"></progress>
+        <p style="font-size:0.8rem; color:#71717a; margin: 0.75rem 0 0.4rem;">Password strength</p>
+        <meter value="75" min="0" max="100" low="30" high="60" optimum="100"></meter>
+        <p style="font-size:0.8rem; color:#71717a; margin: 0.75rem 0 0.4rem;">Loading state</p>
+        <span role="status" aria-busy="true" aria-label="loading" data-shape="text" data-lines="2"></span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!--  TESTIMONIALS  -->
+<section>
+  <div class="container">
+    <p class="section-label">Loved by Developers</p>
+    <h2 class="section-title">Real Teams.<br>Real Results.</h2>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"We replaced our entire Tailwind setup with Ignix Lite. Our codebase is 30% smaller. Really appreciable. Great Job!"</p>
+        <article>
+          <img slot="avatar" src="https://i.pravatar.cc/100?img=12" alt="User">
+          <span slot="title">Priya Nair</span>
+          <span slot="meta">Lead Designer @ Finova</span>
+          <span slot="footer"><mark data-intent="success">Verified User</mark></span>
+        </article>
+      </div>
+
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"The intent system is genius. One attribute controls everything - colour, border, shadow. I shipped our MVP in 4 days."</p>
+        <article>
+          <img slot="avatar" src="https://i.pravatar.cc/100?img=33" alt="User">
+          <span slot="title">Marcus Lin</span>
+          <span slot="meta">Indie Hacker</span>
+          <span slot="footer"><mark data-intent="neutral">Pro Plan</mark></span>
+        </article>
+      </div>
+
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"Zero config, zero dependencies, and it still passes our WCAG audits automatically. Ignix Lite is the missing piece we needed."</p>
+        <article>
+          <img slot="avatar" src="https://i.pravatar.cc/100?img=55" alt="User">
+          <span slot="title">Sara Okonkwo</span>
+          <span slot="meta">Frontend Architect @ NovaCorp</span>
+          <span slot="footer"><mark data-intent="warning">Enterprise</mark></span>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--  PRICING  -->
+<section id="pricing">
+  <div class="container">
+    <p class="section-label">Pricing</p>
+    <h2 class="section-title">Simple Pricing.<br>No Surprises.</h2>
+    <p class="section-sub">Start free. Scale when you're ready. Cancel anytime.</p>
+
+    <div class="pricing-grid">
+
+      <div class="pricing-card">
+        <div class="pricing-name">Free</div>
+        <div class="pricing-price">$0 <span>/ mo</span></div>
+        <p class="pricing-desc">Perfect for side projects and solo devs.</p>
+        <ul class="pricing-features">
+          <li>All core components</li>
+          <li>MIT License</li>
+          <li>Community support</li>
+          <li>1 project</li>
+        </ul>
+        <button data-intent="neutral" style="width:100%">Get Started Free</button>
+      </div>
+
+      <div class="pricing-card featured">
+        <div class="pricing-badge"><mark data-intent="success">Most Popular</mark></div>
+        <div class="pricing-name">Pro</div>
+        <div class="pricing-price">$12 <span>/ mo</span></div>
+        <p class="pricing-desc">For teams shipping fast and at scale.</p>
+        <ul class="pricing-features">
+          <li>Everything in Free</li>
+          <li>Premium Web Components</li>
+          <li>Priority support</li>
+          <li>Unlimited projects</li>
+        </ul>
+        <button data-intent="gradient" style="width:100%" onclick="showcaseToast.show({ title:'Pro Plan', message:'Starting your Pro trial...', intent:'primary', variant:'slide' })">
+          Start Pro Trial
+        </button>
+      </div>
+
+      <div class="pricing-card">
+        <div class="pricing-name">Enterprise</div>
+        <div class="pricing-price">Custom</div>
+        <p class="pricing-desc">For large orgs with custom needs.</p>
+        <ul class="pricing-features">
+          <li>Everything in Pro</li>
+          <li>SLA & dedicated support</li>
+          <li>Custom theming</li>
+          <li>SSO & audit logs</li>
+        </ul>
+        <button data-intent="ghost" style="width:100%">Contact Sales</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FAQ  -->
+<section id="faq">
+  <div class="container">
+    <p class="section-label" style="text-align:center;">FAQ</p>
+    <h2 class="section-title" style="text-align:center;">Got Questions?</h2>
+
+    <div class="faq-list">
+      <details open>
+        <summary>Is Ignix Lite really free?</summary>
+        <p>Yes - the core library is MIT licensed and will always be free. Pro and Enterprise plans unlock premium components and support.</p>
+      </details>
+      <details>
+        <summary>Do I need a build step?</summary>
+        <p>Nope. Just include the CSS and JS files via CDN or npm and you're good to go.</p>
+      </details>
+      <details>
+        <summary>How do I customise the design tokens?</summary>
+        <p>Override CSS variables in your root stylesheet. Every color, radius, shadow and spacing value is a variable.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!--  CTA  -->
+<section class="cta-section">
+  <div class="cta-glow"></div>
+  <div class="container cta-inner" style="text-align:center;">
+    <mark data-intent="neutral">Open Source . MIT License</mark>
+    <br><br>
+    <h2 class="section-title">Ready to Build<br><span style="color:var(--accent);">Something Great?</span></h2>
+    <p class="section-sub" style="margin: 0 auto 2rem; text-align:center;">
+      Join thousands of developers who ship beautiful UIs faster with Ignix Lite.
+    </p>
+    <div class="cta-actions">
+      <button data-intent="gradient" onclick="heroToast.show({ title: 'Welcome!', message: 'Check docs to get started.', intent: 'success', variant: 'pop' })">
+        Get Started - It's Free
+      </button>
+      <a 
+        href="https://github.com/mindfiredigital/ignix-lite" 
+        target="_blank"
+        style="text-decoration:none;"
+        >
+        <button data-intent="ghost">
+            View on GitHub ->
+        </button>
+    </a>
+    </div>
+    <br><br>
+    <aside data-intent="info" style="max-width:500px; margin:0 auto;">No credit card required. Up and running in under 2 minutes.</aside>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="logo">Ignix-Lite<span>.</span></div>
+    <nav>
+      <ul>
+        <li><a href="#">Docs</a></li>
+        <li><a href="#">GitHub</a></li>
+        <li><a href="#">Twitter</a></li>
+        <li><a href="#">Discord</a></li>
+      </ul>
+    </nav>
+    <div style="display:flex; gap:0.5rem;">
+      <mark data-intent="neutral">MIT License</mark>
+      <mark data-intent="success">v1.0.0</mark>
+    </div>
+  </div>
+  <div style="text-align:center; padding-top:1.5rem;">
+    <hr>
+    <p class="footer-copy" style="margin-top:1.5rem;">© 2025 Ignix Lite. Built with semantic HTML</p>
+  </div>
+</footer>
+
+<!-- Toast instances -->
+<ix-toast id="heroToast" data-position="bottom-right"></ix-toast>
+<ix-toast id="formToast" data-position="top-right"></ix-toast>
+<ix-toast id="showcaseToast" data-position="bottom-right"></ix-toast>
+
+<script>
+
+const sections = document.querySelectorAll("section[id]");
+const navLinks = document.querySelectorAll(".site-nav nav a");
+
+window.addEventListener("scroll", () => {
+
+  let current = "";
+
+  sections.forEach(section => {
+
+    const sectionTop = section.offsetTop - 140;
+
+    if (window.scrollY >= sectionTop) {
+      current = section.getAttribute("id");
+    }
+
+  });
+
+  navLinks.forEach(link => {
+
+    link.classList.remove("active");
+
+    if (link.getAttribute("href") === `#${current}`) {
+      link.classList.add("active");
+    }
+
+  });
+
+});
+
+</script>
+
+</body>
+</html>
