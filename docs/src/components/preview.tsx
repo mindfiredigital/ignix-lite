@@ -1,5 +1,4 @@
 import React from "react"
-
 export default function Preview({ children }: { children: React.ReactNode }) {
   return (
     <div
