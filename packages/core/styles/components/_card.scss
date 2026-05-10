@@ -12,8 +12,8 @@ article {
   max-width: 320px;
   margin: 0;
 
-  > [slot="avatar"],
-  > [slot="title"] {
+  > [slot='avatar'],
+  > [slot='title'] {
     display: inline-block;
     vertical-align: middle;
   }
@@ -36,21 +36,21 @@ article {
   color: var(--ix-text-muted);
 }
 
-[slot="body"] {
+[slot='body'] {
   font-size: var(--ix-size-md);
 }
 
-[slot="action"],
-[slot="footer"] {
+[slot='action'],
+[slot='footer'] {
   display: inline-block;
   vertical-align: middle;
 }
 
-[slot="action"] {
+[slot='action'] {
   margin-top: var(--ix-space-md);
 }
 
-[slot="footer"] {
+[slot='footer'] {
   margin-left: var(--ix-space-md);
   font-size: var(--ix-size-sm);
   color: var(--ix-text-muted);

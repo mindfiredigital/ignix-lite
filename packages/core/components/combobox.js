@@ -9,7 +9,6 @@ class IxCombobox extends HTMLElement {
     this.isMultiple = this.hasAttribute('multiple')
     this.activeIndex = -1
 
-
     this.input.setAttribute('role', 'combobox')
     this.input.setAttribute('aria-expanded', 'false')
     this.input.setAttribute('aria-controls', 'ix-combobox-list')
@@ -33,7 +32,7 @@ class IxCombobox extends HTMLElement {
     this.input.addEventListener('input', () => this.filter())
     this.input.addEventListener('keydown', (e) => this.onKey(e))
 
-    this.options.forEach(opt => {
+    this.options.forEach((opt) => {
       opt.addEventListener('click', () => this.select(opt))
     })
 
@@ -62,14 +61,14 @@ class IxCombobox extends HTMLElement {
   filter() {
     const value = this.input.value.toLowerCase()
 
-    this.options.forEach(opt => {
+    this.options.forEach((opt) => {
       const match = opt.textContent.toLowerCase().includes(value)
       opt.hidden = !match
     })
   }
 
   onKey(e) {
-    const visible = this.options.filter(o => !o.hidden)
+    const visible = this.options.filter((o) => !o.hidden)
 
     if (e.key === 'ArrowDown') {
       e.preventDefault()
@@ -101,12 +100,12 @@ class IxCombobox extends HTMLElement {
     const el = visible[this.activeIndex]
     if (el) {
       el.setAttribute('data-active', 'true')
-      el.scrollIntoView({ block: 'nearest' }) 
+      el.scrollIntoView({ block: 'nearest' })
     }
   }
 
   clearActive() {
-    this.options.forEach(o => o.removeAttribute('data-active'))
+    this.options.forEach((o) => o.removeAttribute('data-active'))
   }
 
   select(opt) {
@@ -115,7 +114,7 @@ class IxCombobox extends HTMLElement {
       if (isSelected) opt.removeAttribute('data-selected')
       else opt.setAttribute('data-selected', 'true')
     } else {
-      this.options.forEach(o => o.removeAttribute('data-selected'))
+      this.options.forEach((o) => o.removeAttribute('data-selected'))
       opt.setAttribute('data-selected', 'true')
       this.input.value = opt.textContent
       this.close()
@@ -126,7 +125,7 @@ class IxCombobox extends HTMLElement {
   }
 
   clearAll() {
-    this.options.forEach(o => o.removeAttribute('data-selected'))
+    this.options.forEach((o) => o.removeAttribute('data-selected'))
     this.input.value = ''
     this.filter()
     this.updateClear()
@@ -134,14 +133,14 @@ class IxCombobox extends HTMLElement {
   }
 
   removeOne(label) {
-    const opt = this.options.find(o => o.textContent === label)
+    const opt = this.options.find((o) => o.textContent === label)
     if (opt) opt.removeAttribute('data-selected')
     this.updateClear()
     this.renderChips()
   }
 
   updateClear() {
-    const hasSelection = this.options.some(o =>
+    const hasSelection = this.options.some((o) =>
       o.hasAttribute('data-selected')
     )
     this.clearBtn.style.display = hasSelection ? 'block' : 'none'
@@ -151,12 +150,12 @@ class IxCombobox extends HTMLElement {
     if (!this.isMultiple || !this.chips) return
 
     const selected = this.options
-      .filter(o => o.hasAttribute('data-selected'))
-      .map(o => o.textContent)
+      .filter((o) => o.hasAttribute('data-selected'))
+      .map((o) => o.textContent)
 
     this.chips.innerHTML = ''
 
-    selected.forEach(text => {
+    selected.forEach((text) => {
       const chip = document.createElement('span')
       chip.textContent = text
 

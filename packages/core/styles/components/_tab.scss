@@ -19,7 +19,9 @@ ix-tabs {
 
     border-radius: var(--ix-radius);
 
-    transition: background 0.25s ease, color 0.25s ease;
+    transition:
+      background 0.25s ease,
+      color 0.25s ease;
 
     &:hover {
       background: var(--ix-surface);
@@ -35,7 +37,6 @@ ix-tabs {
       color: var(--ix-on-primary);
     }
   }
-
 
   &[data-variant='underline'] {
     background: none;
@@ -60,7 +61,6 @@ ix-tabs {
       }
     }
   }
-
 
   &[data-variant='pill'] {
     > [slot='tab'] {

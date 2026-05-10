@@ -74,20 +74,12 @@ html {
   --ix-focus: 2px solid var(--ix-primary);
 
   /* TYPOGRAPHY */
- --ix-font:
-    "Segoe UI Variable",
-    "Segoe UI",
-    "Roboto",
-    "Noto Sans",
-    system-ui,
+  --ix-font:
+    'Segoe UI Variable', 'Segoe UI', 'Roboto', 'Noto Sans', system-ui,
     sans-serif;
 
-  --ix-font-mono:
-    "JetBrains Mono",
-    "SFMono-Regular",
-    Consolas,
-    monospace;
-    
+  --ix-font-mono: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
+
   --ix-size-xs: 0.75rem;
   --ix-size-sm: 0.875rem;
   --ix-size-md: 1rem;
@@ -109,7 +101,7 @@ html {
   --ix-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
   /* Gradient */
-  --ix-gradient: linear-gradient(to right, #b20a2c,#fffbd5)
+  --ix-gradient: linear-gradient(to right, #b20a2c, #fffbd5);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -150,7 +142,4 @@ body {
   font-family: var(--ix-font);
   font-size: var(--ix-size-md);
   line-height: var(--ix-line-height);
-
 }
-
-

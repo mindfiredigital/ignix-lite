@@ -28,7 +28,6 @@ class IxToast extends HTMLElement {
     toast.setAttribute('aria-labelledby', titleId)
     toast.setAttribute('aria-describedby', msgId)
 
-   
     toast.innerHTML = `
       <strong id="${titleId}">${title || intent}</strong>
       <span id="${msgId}">${message}</span>

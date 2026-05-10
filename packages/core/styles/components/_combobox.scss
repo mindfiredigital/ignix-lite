@@ -1,33 +1,31 @@
 ix-combobox {
   position: relative;
-  display: inline-block;   
-  width: 260px;           
+  display: inline-block;
+  width: 260px;
 }
 
-
-ix-combobox [part="control"] {
+ix-combobox [part='control'] {
   position: relative;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 4px;
 
-  padding: 6px 28px 6px 6px;  
+  padding: 6px 28px 6px 6px;
 
   border: 1px solid var(--ix-border);
   border-radius: var(--ix-radius);
   background: var(--ix-surface-raised);
 }
 
-ix-combobox [part="control"]:focus-within {
+ix-combobox [part='control']:focus-within {
   border-color: var(--ix-primary);
   box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.25);
 }
 
-
 ix-combobox input {
   flex: 1;
-  min-width: 0;  
+  min-width: 0;
 
   padding: 4px;
   border: none;
@@ -49,7 +47,6 @@ ix-combobox input:focus-visible {
   box-shadow: none;
 }
 
-
 ix-combobox button[data-clear] {
   all: unset;
   position: absolute;
@@ -62,13 +59,12 @@ ix-combobox button[data-clear] {
   cursor: pointer;
 
   color: var(--ix-text-muted);
-  text-decoration: none;   
-
-ix-combobox button[data-clear]:hover {
-  color: var(--ix-text);
   text-decoration: none;
-}
 
+  ix-combobox button[data-clear]:hover {
+    color: var(--ix-text);
+    text-decoration: none;
+  }
 }
 ix-combobox [data-chips] {
   display: flex;
@@ -101,7 +97,6 @@ ix-combobox [data-chips] button:hover {
   opacity: 1;
 }
 
-
 ix-combobox ul {
   position: absolute;
   top: calc(100% + 6px);
@@ -129,46 +124,45 @@ ix-combobox li {
 }
 
 ix-combobox li:hover,
-ix-combobox li[data-active="true"] {
+ix-combobox li[data-active='true'] {
   background: var(--ix-surface);
 }
 
-ix-combobox li[data-selected="true"] {
+ix-combobox li[data-selected='true'] {
   font-weight: 500;
 }
 
-
-ix-combobox[data-intent="primary"] li:hover,
-ix-combobox[data-intent="primary"] li[data-selected="true"],
-ix-combobox[data-intent="primary"] li[data-active="true"] {
+ix-combobox[data-intent='primary'] li:hover,
+ix-combobox[data-intent='primary'] li[data-selected='true'],
+ix-combobox[data-intent='primary'] li[data-active='true'] {
   background: var(--ix-primary);
   color: var(--ix-on-primary);
 }
 
-ix-combobox[data-intent="success"] li:hover,
-ix-combobox[data-intent="success"] li[data-selected="true"],
-ix-combobox[data-intent="success"] li[data-active="true"] {
+ix-combobox[data-intent='success'] li:hover,
+ix-combobox[data-intent='success'] li[data-selected='true'],
+ix-combobox[data-intent='success'] li[data-active='true'] {
   background: var(--ix-success);
   color: var(--ix-on-success);
 }
 
-ix-combobox[data-intent="warning"] li:hover,
-ix-combobox[data-intent="warning"] li[data-selected="true"],
-ix-combobox[data-intent="warning"] li[data-active="true"] {
+ix-combobox[data-intent='warning'] li:hover,
+ix-combobox[data-intent='warning'] li[data-selected='true'],
+ix-combobox[data-intent='warning'] li[data-active='true'] {
   background: var(--ix-warning);
   color: var(--ix-on-warning);
 }
 
-ix-combobox[data-intent="danger"] li:hover,
-ix-combobox[data-intent="danger"] li[data-selected="true"],
-ix-combobox[data-intent="danger"] li[data-active="true"] {
+ix-combobox[data-intent='danger'] li:hover,
+ix-combobox[data-intent='danger'] li[data-selected='true'],
+ix-combobox[data-intent='danger'] li[data-active='true'] {
   background: var(--ix-danger);
   color: var(--ix-on-danger);
 }
 
-ix-combobox[data-intent="gradient"] li:hover,
-ix-combobox[data-intent="gradient"] li[data-selected="true"],
-ix-combobox[data-intent="gradient"] li[data-active="true"] {
+ix-combobox[data-intent='gradient'] li:hover,
+ix-combobox[data-intent='gradient'] li[data-selected='true'],
+ix-combobox[data-intent='gradient'] li[data-active='true'] {
   background: var(--ix-gradient);
   color: var(--ix-on-primary);
 }

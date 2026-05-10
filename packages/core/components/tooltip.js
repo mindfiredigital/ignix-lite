@@ -4,7 +4,6 @@ class IxTooltip extends HTMLElement {
   }
 
   connectedCallback() {
-    
     if (!this.hasAttribute('tabindex')) {
       this.tabIndex = 0
     }

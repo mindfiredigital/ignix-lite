@@ -2,7 +2,7 @@ ix-dropdown {
   position: relative;
   display: inline-block;
 
-  > [slot="trigger"] {
+  > [slot='trigger'] {
     all: unset;
     cursor: pointer;
     display: inline-flex;
@@ -25,11 +25,11 @@ ix-dropdown {
     }
   }
 
-  [slot="menu"] {
+  [slot='menu'] {
     position: absolute;
     top: calc(100% + 6px);
     left: 0;
-    z-index: 9999; 
+    z-index: 9999;
 
     min-width: 180px;
     padding: 4px;
@@ -50,7 +50,7 @@ ix-dropdown {
     padding: 0;
   }
 
-  [slot="menu"] button {
+  [slot='menu'] button {
     all: unset;
     display: block;
     width: 100%;
@@ -67,115 +67,105 @@ ix-dropdown {
     }
   }
 
- 
   &:not([data-intent]) {
-    > [slot="trigger"] {
+    > [slot='trigger'] {
       background: var(--ix-surface-raised);
     }
   }
 
+  &[data-intent='ghost'] {
+    > [slot='trigger'] {
+      background: transparent;
+      border: 1px solid var(--ix-border);
+      color: var(--ix-text);
 
-    &[data-intent="ghost"] {
-
-
-    > [slot="trigger"] {
-        background: transparent;
-        border: 1px solid var(--ix-border);
-        color: var(--ix-text);
-
-        &:hover {
+      &:hover {
         background: var(--ix-surface);
-        }
+      }
     }
 
-    
-    [slot="menu"] {
+    [slot='menu'] {
+      background: transparent;
+      border: 1px solid var(--ix-border);
+      box-shadow: none;
+    }
+
+    [slot='menu'] button {
+      color: var(--ix-text);
+
+      &:hover {
         background: transparent;
-        border: 1px solid var(--ix-border);
-        box-shadow: none;
+      }
     }
+  }
 
-    
-    [slot="menu"] button {
-        color: var(--ix-text);
-
-        &:hover {
-        background: transparent;
-        }
-    }
-    }
-  
-  &[data-intent="primary"] {
-    > [slot="trigger"] {
+  &[data-intent='primary'] {
+    > [slot='trigger'] {
       background: var(--ix-primary);
       color: var(--ix-on-primary);
     }
 
-    [slot="menu"] button:hover {
+    [slot='menu'] button:hover {
       background: var(--ix-primary);
       color: var(--ix-on-primary);
     }
   }
 
-  
-  &[data-intent="success"] {
-    > [slot="trigger"] {
+  &[data-intent='success'] {
+    > [slot='trigger'] {
       background: var(--ix-success);
       color: var(--ix-on-success);
     }
 
-    [slot="menu"] button:hover {
+    [slot='menu'] button:hover {
       background: var(--ix-success);
       color: var(--ix-on-success);
     }
   }
 
- 
-  &[data-intent="warning"] {
-    > [slot="trigger"] {
+  &[data-intent='warning'] {
+    > [slot='trigger'] {
       background: var(--ix-warning);
       color: var(--ix-on-warning);
     }
 
-    [slot="menu"] button:hover {
+    [slot='menu'] button:hover {
       background: var(--ix-warning);
     }
   }
 
-  
-  &[data-intent="danger"] {
-    > [slot="trigger"] {
+  &[data-intent='danger'] {
+    > [slot='trigger'] {
       background: var(--ix-danger);
       color: var(--ix-on-danger);
     }
 
-    [slot="menu"] button:hover {
+    [slot='menu'] button:hover {
       background: var(--ix-danger);
       color: var(--ix-on-danger);
     }
   }
 
-  &[data-intent="gradient"] {
-    > [slot="trigger"] {
+  &[data-intent='gradient'] {
+    > [slot='trigger'] {
       background: var(--ix-gradient);
       color: var(--ix-on-text);
     }
 
-    [slot="menu"] button:hover {
+    [slot='menu'] button:hover {
       background: var(--ix-gradient);
       color: var(--ix-text);
     }
   }
-  & > [slot="trigger"]:focus-visible {
-  outline: 2px solid var(--ix-primary);
-  outline-offset: 2px;
-}
-
-[slot="menu"] button {
-  &:focus-visible {
+  & > [slot='trigger']:focus-visible {
     outline: 2px solid var(--ix-primary);
-    outline-offset: -2px;
+    outline-offset: 2px;
   }
-}
-  
+
+  [slot='menu'] button {
+    &:focus-visible {
+      outline: 2px solid var(--ix-primary);
+      outline-offset: -2px;
+    }
+  }
 }

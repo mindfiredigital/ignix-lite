@@ -41,7 +41,6 @@ label {
     }
   }
 
-
   &[data-intent='success'] input {
     accent-color: var(--ix-success);
   }
@@ -57,7 +56,6 @@ label {
   &[data-intent='neutral'] input {
     accent-color: var(--ix-border);
   }
-
 
   &[data-size='sm'] input {
     transform: scale(0.85);
