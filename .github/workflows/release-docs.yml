@@ -2,8 +2,7 @@ name: Release docs Workflow
 
 on:
   push:
-    branches:
-      - main
+    branches: ["main", "development"]
   workflow_dispatch:
 
 jobs:
@@ -24,14 +23,18 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Enable Corepack
+      - name: Install pnpm
         run: npm install -g pnpm
 
-      - name: 'Install dependencies and build'
-        run: |
-          cd docs
-          pnpm install
-          pnpm run build
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build core package
+        run: pnpm run build
+
+      - name: Build docs
+        working-directory: docs
+        run: pnpm run build
 
       - name: 'Fetch branches'
         run: git fetch origin
@@ -47,7 +50,7 @@ jobs:
           mkdir -p /tmp/temp-directory
           # Enable dotglob to copy hidden files (like .gitignore)
           shopt -s dotglob
-          # Copy the build from the docs-docusaurus/build folder
+          # Copy the build from the docs/build folder
           cp -r docs/build/* /tmp/temp-directory/
           shopt -u dotglob
           # Stash any changes to prevent checkout conflicts
@@ -71,8 +74,3 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git push origin gh-pages --force || echo "No changes to push"
-
-      - name: 'Switch back to main branch'
-        run: |
-          git checkout main
-          git stash pop || true  # Restore stashed changes if any
