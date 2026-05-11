@@ -22,7 +22,6 @@ Built with a lightweight philosophy, Ignix Lite avoids heavy runtime dependencie
 - Easy integration
 - Dark mode support
 
-
 ---
 
 # Installation
