@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
-    "sync:ignix": "node -e \"require('fs').copyFileSync('../packages/core/dist/ignix-lite.min.js','./static/ignix-lite.min.js')\"",
+    "sync:ignix": "node -e \"const fs=require('fs'); const path=require.resolve('@mindfiredigital/ignix-lite/dist/ignix-lite.min.js'); fs.copyFileSync(path,'./static/ignix-lite.min.js')\"",
     "start": "pnpm sync:ignix && docusaurus start",
     "build": "pnpm sync:ignix && docusaurus build",
     
