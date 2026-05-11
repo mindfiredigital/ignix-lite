@@ -29,7 +29,7 @@ jobs:
 
       - name: 'Install dependencies and build'
         run: |
-          cd apps/docs
+          cd docs
           pnpm install
           pnpm run build
 
@@ -48,7 +48,7 @@ jobs:
           # Enable dotglob to copy hidden files (like .gitignore)
           shopt -s dotglob
           # Copy the build from the docs-docusaurus/build folder
-          cp -r apps/docs/build/* /tmp/temp-directory/
+          cp -r docs/build/* /tmp/temp-directory/
           shopt -u dotglob
           # Stash any changes to prevent checkout conflicts
           git stash push
