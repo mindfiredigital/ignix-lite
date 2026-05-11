@@ -30,27 +30,59 @@ Ignix Lite avatars support multiple sizes and text fallbacks for initials.
     flexWrap: 'wrap',
   }}
 >
-  <img
-    src="https://picsum.photos/100"
-    alt="User"
-    data-size="sm"
-  />
 
-  <img
-    src="https://picsum.photos/100"
-    alt="User"
-    data-size="md"
-  />
+  <div className="avatar-wrapper">
+    <span
+      className="avatar-skeleton"
+      data-size="sm"
+    ></span>
 
-  <img
-    src="https://picsum.photos/100"
-    alt="User"
-    data-size="lg"
-  />
+    <img
+      src="https://picsum.photos/100"
+      alt="User"
+      data-size="sm"
+      onLoad={(e) => {
+        e.currentTarget.previousElementSibling?.remove()
+      }}
+    />
+  </div>
+
+  <div className="avatar-wrapper">
+    <span
+      className="avatar-skeleton"
+      data-size="md"
+    ></span>
+
+    <img
+      src="https://picsum.photos/100"
+      alt="User"
+      data-size="md"
+      onLoad={(e) => {
+        e.currentTarget.previousElementSibling?.remove()
+      }}
+    />
+  </div>
+
+  <div className="avatar-wrapper">
+    <span
+      className="avatar-skeleton"
+      data-size="lg"
+    ></span>
+
+    <img
+      src="https://picsum.photos/100"
+      alt="User"
+      data-size="lg"
+      onLoad={(e) => {
+        e.currentTarget.previousElementSibling?.remove()
+      }}
+    />
+  </div>
 
   <span data-size="md">
     JD
   </span>
+
 </div>
 
 </Preview>
@@ -118,40 +150,6 @@ npm install @mindfiredigital/ignix-lite
 
 ## Usage
 
-```html
-<img
-  src="https://picsum.photos/100"
-  alt="User"
-  data-size="md"
-/>
-```
-
----
-
-## Sizes
-
-```html
-<img data-size="sm" />
-
-<img data-size="md" />
-
-<img data-size="lg" />
-```
-
----
-
-## Fallback Initials
-
-```html
-<span data-size="md">
-  JD
-</span>
-```
-
----
-
-## Real World Example
-
 <Tabs defaultValue="preview">
 
 <TabItem value="preview" label="Preview">
@@ -165,18 +163,31 @@ npm install @mindfiredigital/ignix-lite
     gap: '1rem',
   }}
 >
-  <img
-    src="https://picsum.photos/100"
-    alt="Sarah"
-    data-size="md"
-  />
+
+  <div className="avatar-wrapper">
+    <span
+      className="avatar-skeleton"
+      data-size="md"
+    ></span>
+
+    <img
+      src="https://picsum.photos/100"
+      alt="Sarah"
+      data-size="md"
+      onLoad={(e) => {
+        e.currentTarget.previousElementSibling?.remove()
+      }}
+    />
+  </div>
 
   <div>
     <strong>Sarah Johnson</strong>
+
     <p style={{ margin: 0 }}>
       Product Designer
     </p>
   </div>
+
 </div>
 
 </Preview>
@@ -186,18 +197,18 @@ npm install @mindfiredigital/ignix-lite
 <TabItem value="code" label="Code">
 
 ```html
-<div>
+
   <img
     src="https://picsum.photos/100"
     alt="Sarah"
     data-size="md"
   />
 
-  <div>
+ 
     <strong>Sarah Johnson</strong>
+
     <p>Product Designer</p>
-  </div>
-</div>
+
 ```
 
 </TabItem>
