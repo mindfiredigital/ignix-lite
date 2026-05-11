@@ -6,12 +6,6 @@
       "repo": "mindfiredigital/ignix-lite"
     }
   ],
-  "changelog": [
-    "@changesets/changelog-github",
-    {
-      "repo": "mindfiredigital/ignix-lite"
-    }
-  ],
   "commit": false,
   "access": "public",
   "baseBranch": "main",
