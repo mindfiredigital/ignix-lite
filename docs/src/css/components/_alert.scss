@@ -1,0 +1,42 @@
+aside[data-intent] {
+  display: block;
+  width: 100%;
+
+  padding: var(--ix-space-md);
+  border-radius: var(--ix-radius);
+  border: 1px solid var(--ix-neutral);
+  background: var(--ix-surface-raised);
+  color: var(--ix-text);
+  box-shadow: var(--ix-shadow);
+
+  font-size: var(--ix-size-sm);
+  line-height: var(--ix-line-height);
+
+  & + aside[data-intent] {
+    margin-top: var(--ix-space-md);
+  }
+
+  &[data-intent='danger'] {
+    background: var(--ix-danger-bg);
+    border-color: var(--ix-danger);
+    color: var(--ix-text);
+  }
+
+  &[data-intent='warning'] {
+    background: var(--ix-warning-bg);
+    border-color: var(--ix-warning);
+    color: var(--ix-text);
+  }
+
+  &[data-intent='success'] {
+    background: var(--ix-success-bg);
+    border-color: var(--ix-success);
+    color: var(--ix-text);
+  }
+
+  &[data-intent='info'] {
+    background: var(--ix-info-bg);
+    border-color: var(--ix-neutral);
+    color: var(--ix-text);
+  }
+}

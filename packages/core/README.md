@@ -1,19 +1,36 @@
-# ignix-lite
+# Ignix Lite
 
-A lightweight, browser-native CSS UI library focused on accessibility, simplicity, and performance.
-
----
-
-## Overview
-
-ignix-lite is a minimal CSS design system that provides semantic, accessible, and production-ready UI components using pure HTML and CSS — no JavaScript required.
+A lightweight, semantic, and browser-native CSS UI library focused on simplicity, accessibility, and performance.
 
 ---
 
-## Installation
+# Overview
+
+Ignix Lite is a modern CSS-first UI toolkit that provides accessible, production-ready, and semantic UI components using native HTML and CSS.
+
+Built with a lightweight philosophy, Ignix Lite avoids heavy runtime dependencies while delivering clean and customizable components for modern web applications.
+
+---
+
+# Features
+
+- Semantic HTML-first components
+- Accessibility-focused design
+- Lightweight bundle size
+- CSS variable powered
+- Responsive and modern UI
+- Easy integration
+- Dark mode support
+
+
+---
+
+# Installation
+
+## Using npm
 
 ```bash
-npm install ignix-lite
+npm install @mindfiredigital/ignix-lite
 ```
 
 ---
@@ -26,68 +43,123 @@ npm install ignix-lite
 <link rel="stylesheet" href="node_modules/ignix-lite/ignix-lite.min.css" />
 ```
 
-### Using CDN
+---
+
+# CDN Usage
 
 ```html
 <link
   rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/ignix-lite/ignix-lite.min.css"
+  href="https://cdn.jsdelivr.net/npm/@mindfiredigital/ignix-lite/style.css"
 />
 ```
 
 ---
 
-## Features
+# Example
 
-- Semantic HTML-first components
-- Accessibility-first (ARIA support)
-- Zero JavaScript dependency
-- Lightweight and fast
-- Easy integration
+```html
+<button data-intent="primary">Primary Button</button>
+
+<button data-intent="danger">Delete</button>
+
+<input type="text" placeholder="Enter text" />
+```
 
 ---
 
-## Components
+# Components
 
-- Form
-- Input
-- Button
-- Badge
-- Alert
-- Checkbox
-- Radio
-- Select
-- Textarea
-- Table
-- Card
-- Avatar
-- Code Block
-- Navigation
-- Progress
-- Meter
+Ignix Lite currently includes:
+
 - Accordion
+- Alert
+- Avatar
+- Badge
+- Button
+- Card
+- Checkbox
+- Codeblock
+- Combobox
 - Dialog
 - Divider
+- Dropdown
+- Form
+- Input
+- Meter
+- Progress
+- Radio
+- Select
 - Skeleton
+- Table
+- Tabs
+- Textarea
+- Toast
+- Tooltip
 
 ---
 
-## Package Structure
+# Documentation
 
+Documentation is powered by Docusaurus and deployed automatically using GitHub Pages.
+
+Explore:
+
+- Installation guides
+- Component APIs
+- Usage examples
+- Styling and customization
+- Accessibility patterns
+
+---
+
+# Development
+
+Install dependencies:
+
+```bash
+pnpm install
 ```
-ignix-lite/
-  ignix-lite.css
-  ignix-lite.min.css
+
+Build packages:
+
+```bash
+pnpm build
 ```
 
 ---
 
-## Version
+# Release Workflow
 
-Current version: **1.0.2**
+Ignix Lite uses:
+
+- Changesets for versioning
+- Automated changelog generation
+- GitHub Actions for CI/CD
+- GitHub Pages for documentation deployment
+- Automated npm publishing workflows
 
 ---
 
-## License
+# Contributing
 
-MIT
+Contributions are welcome.
+
+Please ensure:
+
+- Semantic HTML usage
+- Accessibility support
+- Consistent styling patterns
+- Proper documentation updates
+
+---
+
+# License
+
+MIT License
+
+---
+
+# Maintained By
+
+Mindfire Digital

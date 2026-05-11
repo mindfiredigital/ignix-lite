@@ -1,0 +1,37 @@
+mark[data-intent],
+span[role='status'][data-intent] {
+  display: inline-block;
+
+  font-size: var(--ix-size-sm);
+  line-height: var(--ix-line-height);
+
+  padding: 0 var(--ix-space-md);
+  border-radius: var(--ix-badge-radius);
+
+  border: 1px solid var(--ix-border);
+
+  background: var(--ix-surface-raised);
+  color: var(--ix-text);
+
+  vertical-align: middle;
+
+  &[data-intent='danger'] {
+    background: var(--ix-danger);
+    color: var(--ix-on-danger);
+  }
+
+  &[data-intent='warning'] {
+    background: var(--ix-warning);
+    color: var(--ix-on-warning);
+  }
+
+  &[data-intent='success'] {
+    background: var(--ix-success);
+    color: var(--ix-on-success);
+  }
+
+  &[data-intent='neutral'] {
+    background: var(--ix-surface-raised);
+    color: var(--ix-text);
+  }
+}

@@ -1,6 +1,6 @@
 {
-  "name": "ignix-lite",
-  "version": "1.0.8",
+  "name": "@mindfiredigital/ignix-lite",
+  "version": "1.0.0",
   "description": "Browser-native, agent-optimized UI CSS library",
   "main": "ignix-lite.min.css",
   "style": "ignix-lite.min.css",

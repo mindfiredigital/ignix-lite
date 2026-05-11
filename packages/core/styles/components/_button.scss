@@ -37,6 +37,11 @@ button {
     color: #fff;
   }
 
+  &[data-intent='gradient'] {
+    background: var(--ix-gradient-bg);
+    color: #fff;
+  }
+
   &[data-intent='ghost'] {
     background: transparent;
     color: var(--ix-text-muted);

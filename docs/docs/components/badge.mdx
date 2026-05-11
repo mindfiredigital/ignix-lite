@@ -1,0 +1,237 @@
+---
+sidebar_position: 3
+title: Badge
+description: Lightweight semantic badge component for statuses, labels, and UI indicators.
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import Preview from '@site/src/components/preview'
+
+# Badge
+
+Badges are lightweight UI elements used to display status, labels, counters, and semantic states.
+
+Ignix Lite badges are built using native HTML elements and semantic attributes for accessibility and simplicity.
+
+---
+
+## Intent Variants
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<div
+  style={{
+    display: 'flex',
+    gap: '0.75rem',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+  }}
+>
+  <mark data-intent="success">Success</mark>
+
+  <mark data-intent="danger">Error</mark>
+
+  <mark data-intent="warning">Warning</mark>
+
+  <mark data-intent="neutral">Neutral</mark>
+</div>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<mark data-intent="success">
+  Success
+</mark>
+
+<mark data-intent="danger">
+  Error
+</mark>
+
+<mark data-intent="warning">
+  Warning
+</mark>
+
+<mark data-intent="neutral">
+  Neutral
+</mark>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Status Badge
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<span role="status" data-intent="success">
+  Active
+</span>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<span
+  role="status"
+  data-intent="success"
+>
+  Active
+</span>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Long Text Badge
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<mark data-intent="warning">
+  Very Long Badge Text
+</mark>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<mark data-intent="warning">
+  Very Long Badge Text
+</mark>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+
+## Installation
+
+<Tabs defaultValue="npm">
+
+<TabItem value="npm" label="npm">
+
+```bash
+npm install @mindfiredigital/ignix-lite
+```
+
+</TabItem>
+
+<TabItem value="cdn" label="CDN">
+
+```html
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/@mindfiredigital/ignix-lite/dist/ignix-lite.min.css"
+/>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+
+## Usage
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<div
+  style={{
+    display: 'flex',
+    gap: '0.75rem',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+  }}
+>
+  <span role="status" data-intent="success">
+    Live
+  </span>
+
+  <span role="status" data-intent="warning">
+    Pending
+  </span>
+
+  <span role="status" data-intent="danger">
+    Failed
+  </span>
+</div>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<span
+  role="status"
+  data-intent="success"
+>
+  Live
+</span>
+
+<span
+  role="status"
+  data-intent="warning"
+>
+  Pending
+</span>
+
+<span
+  role="status"
+  data-intent="danger"
+>
+  Failed
+</span>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Attributes
+
+| Attribute | Type | Description |
+|---|---|---|
+| `data-intent` | `'success' \| 'danger' \| 'warning' \| 'neutral'` | Applies semantic badge styles |
+| `role="status"` | `string` | Announces live status information for accessibility |
+| `class` | `string` | Add custom utility or component classes |
+| `children` | `text` | Badge label content |

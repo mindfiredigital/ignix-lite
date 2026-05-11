@@ -1,0 +1,77 @@
+ix-tabs {
+  display: inline-block;
+  padding: 4px;
+  background: var(--ix-surface-raised);
+  border: 1px solid var(--ix-border);
+  border-radius: var(--ix-radius-lg);
+
+  > [slot='tab'] {
+    all: unset;
+    cursor: pointer;
+
+    display: inline-block;
+    margin-right: 4px;
+    padding: 6px 12px;
+
+    font-size: var(--ix-size-sm);
+    font-family: var(--ix-font);
+    color: var(--ix-text);
+
+    border-radius: var(--ix-radius);
+
+    transition: background 0.25s ease, color 0.25s ease;
+
+    &:hover {
+      background: var(--ix-surface);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--ix-primary);
+      outline-offset: 2px;
+    }
+
+    &[aria-selected='true'] {
+      background: var(--ix-primary);
+      color: var(--ix-on-primary);
+    }
+  }
+
+
+  &[data-variant='underline'] {
+    background: none;
+    border: none;
+    padding: 0;
+
+    > [slot='tab'] {
+      background: none;
+      border-radius: 0;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 6px;
+
+      &:hover {
+        background: none;
+        border-bottom-color: var(--ix-border);
+      }
+
+      &[aria-selected='true'] {
+        background: none;
+        color: var(--ix-primary);
+        border-bottom-color: var(--ix-primary);
+      }
+    }
+  }
+
+
+  &[data-variant='pill'] {
+    > [slot='tab'] {
+      border-radius: 999px;
+    }
+  }
+
+  &[data-variant='gradient'] {
+    > [slot='tab'][aria-selected='true'] {
+      background: var(--ix-gradient);
+      color: var(--ix-on-primary);
+    }
+  }
+}

@@ -25,7 +25,8 @@ dialog {
   }
 
   &::backdrop {
-    background: var(--ix-surface-raised);
+    background: rgb(0 0 0 / 0.45);
+    backdrop-filter: blur(2px);
   }
 
   &[data-intent='danger'] {
@@ -44,7 +45,7 @@ dialog {
   }
 
   &:focus-visible {
-    outline: var(--ix-primary);
+    outline: 2px solid var(--ix-primary);
     outline-offset: 2px;
   }
 }

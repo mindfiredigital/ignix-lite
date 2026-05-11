@@ -5,35 +5,68 @@ on:
     branches:
       - main
 
+  workflow_dispatch:
+
 jobs:
   release:
+    name: Release
+
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write
+      packages: write
+      pull-requests: write
+      actions: write
+
     steps:
-      - name: Checkout
+
+      - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 24
-          registry-url: https://registry.npmjs.org
+          node-version: 22
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 9
+      - name: Install pnpm
+        run: npm install -g pnpm
 
-      - name: Install deps
+      - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
-      - name: Build
+      - name: Build packages
         run: pnpm build
 
-      - name: Create release / publish
+      - name: Configure Git
+        run: |
+          git config --local user.email "github-actions@github.com"
+          git config --local user.name "GitHub Actions"
+
+      - name: Generate changeset
+        run: pnpm changeset:autogenerate
+
+      - name: Create Release PR or Publish
+        id: changesets
+
         uses: changesets/action@v1
+
         with:
-          publish: pnpm release
+          commit: "chore(release): version packages"
+
+          title: "chore(release): version packages"
+
+          version:
+            node .github/changeset-version.mjs
+
+          publish:
+            npx changeset publish
+
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN:
+            ${{ secrets.GITHUB_TOKEN }}
+
+          NPM_TOKEN:
+            ${{ secrets.NPM_TOKEN }}
