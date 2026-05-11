@@ -60,3 +60,9 @@ span[aria-busy='true'] {
     transform: translateX(100%);
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  span[aria-busy='true']::after {
+    animation: none;
+  }
+}
