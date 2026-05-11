@@ -1,7 +1,7 @@
 {
   "files": [],
   "references": [
-    { "path": "./packages/core" },
+    
     { "path": "./packages/mcp" },
     { "path": "./packages/react" },
     { "path": "./packages/svelte" },

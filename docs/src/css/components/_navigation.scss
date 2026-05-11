@@ -1,0 +1,25 @@
+ix-nav {
+  display: block;
+}
+
+ix-nav .ix-nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--ix-space-md);
+}
+
+ix-nav a {
+  text-decoration: none;
+  color: var(--ix-text);
+  font-size: var(--ix-size-md);
+
+  &[aria-current='page'] {
+    font-weight: 600;
+    border-bottom: 2px solid var(--ix-primary);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ix-primary);
+    outline-offset: 2px;
+  }
+}

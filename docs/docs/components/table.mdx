@@ -1,0 +1,144 @@
+---
+sidebar_position: 15
+title: Table
+description: Lightweight semantic table component for ignix-lite with sortable headers and accessible structure.
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import Preview from '@site/src/components/preview'
+
+# Table
+
+The Table component provides semantic and accessible data tables with lightweight styling.
+
+
+---
+
+## Default Table
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<div
+  style={{
+    width: '100%',
+    overflowX: 'auto',
+  }}
+>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Role</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>John Doe</td>
+      <td>john@example.com</td>
+      <td><mark data-intent="success">Developer</mark></td>
+    </tr>
+
+    <tr>
+      <td>Jane Smith</td>
+      <td>jane@example.com</td>
+      <td><mark data-intent="danger">Designer</mark></td>
+    </tr>
+
+    <tr>
+      <td>Alex Johnson</td>
+      <td>alex@example.com</td>
+      <td><mark data-intent="warning">Manager</mark></td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Role</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>John Doe</td>
+      <td>john@example.com</td>
+      <td><mark data-intent="success">Developer</mark></td>
+    </tr>
+
+    <tr>
+      <td>Jane Smith</td>
+      <td>jane@example.com</td>
+      <td><mark data-intent="danger">Designer</mark></td>
+    </tr>
+
+    <tr>
+      <td>Alex Johnson</td>
+      <td>alex@example.com</td>
+      <td><mark data-intent="warning">Manager</mark></td>
+    </tr>
+  </tbody>
+</table>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Installation
+
+<Tabs defaultValue="npm">
+
+<TabItem value="npm" label="npm">
+
+```bash
+npm install @mindfiredigital/ignix-lite
+```
+
+
+</TabItem>
+
+<TabItem value="cdn" label="CDN">
+
+```html
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/@mindfiredigital/ignix-lite/dist/ignix-lite.min.css"
+/>
+
+```
+
+</TabItem>
+
+</Tabs>
+
+
+---
+
+## Attributes
+
+| Attribute | Type | Description |
+|---|---|---|
+| `data-sortable` | `boolean` | Enables sortable styling |
+| `aria-sort` | `'ascending' \| 'descending' \| 'none'` | Sort direction state |

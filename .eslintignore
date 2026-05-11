@@ -1,2 +1,4 @@
-node_modules
-dist
+**/*.min.js
+**/*.min.css
+dist/
+node_modules/

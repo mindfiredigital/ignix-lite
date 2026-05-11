@@ -1,0 +1,196 @@
+
+# How to Contribute
+
+We are thrilled that you are interested in contributing to Ignix Lite\! Your contributions are invaluable in making this project better for everyone. This guide will walk you through the entire process, from setting up your environment to submitting a high-quality pull request.
+
+## Table of Contents
+
+  - [Code of Conduct](#code-of-conduct)
+  - [Finding Something to Work On](#finding-something-to-work-on)
+  - [Contribution Workflow](#contribution-workflow)
+      - [1. Setup Your Environment](#1-setup-your-environment)
+      - [2. Create a Branch](#2-create-a-branch)
+      - [3. Develop in Storybook (The Fun Part\!)](#3-develop-in-storybook-the-fun-part)
+      - [4. Add Documentation](#4-add-documentation)
+      - [5. Write Unit Tests](#5-write-unit-tests)
+      - [6. Commit and Push Your Changes](#6-commit-and-push-your-changes)
+      - [7. Create a Pull Request](#7-create-a-pull-request)
+  - [Code Review Process](#code-review-process)
+  - [Licensing](#licensing)
+
+-----
+
+## Code of Conduct
+
+We are committed to fostering a welcoming and inclusive community. Before contributing, please take a moment to review our [Code of Conduct](https://www.google.com/search?q=./CODE_OF_CONDUCT.md).
+
+-----
+
+## Finding Something to Work On
+
+1.  **Explore the Issues:** Head over to our [issue tracker](https://github.com/mindfiredigital/ignix-ui/issues). This is the best place to find tasks.
+2.  **Good First Issues:** Look for issues tagged with `good first issue` or `help wanted`. These are specifically prepared for new contributors.
+3.  **Propose a New Feature:** If you have an idea for a new component or feature, please **open an issue first**. This allows us to discuss the feature and make sure it aligns with the project's goals before you start working on it.
+
+-----
+
+## Contribution Workflow
+
+### 1\. Setup Your Environment
+
+First, get the project running on your local machine.
+
+  - **Fork the repository:** Click the "Fork" button at the top-right of the [Ignix UI repository](https://github.com/mindfiredigital/ignix-ui).
+  - **Clone your forked repository:**
+    ```bash
+    git clone https://github.com/your-username/ignix-ui.git
+    cd ignix-ui
+    ```
+  - **Install dependencies:** This project uses `pnpm` as its package manager.
+    ```bash
+    pnpm install
+    ```
+
+### 2\. Create a Branch
+
+Create a new branch for your changes. A descriptive name helps us understand what you're working on.
+
+  - For new features: `feature/short-feature-description`
+  - For bug fixes: `fix/short-bug-description`
+
+
+```bash
+# Example for a new feature
+git checkout -b feature/add-avatar-component
+
+# Example for a bug fix
+git checkout -b fix/button-alignment-issue
+```
+
+### 3\. Develop in Storybook (The Fun Part\!)
+
+We use **Storybook** as our primary development environment. It allows you to build and test components in complete isolation, which is faster and more efficient.
+
+  - **Create Component Files:** Navigate to `storybook/stories/` and create a new directory for your component (e.g., `button`).
+
+  - **Create a Story File:** In the *same directory*, create a story file named `[component-name].stories.tsx` (e.g., `Button.stories.ts`). This file will contain different visual test cases for your component.
+
+    *Example `Button.stories.ts`:*
+
+    ```ts
+    const meta = {
+    title: 'Components/Button'
+    }
+
+    export default meta
+
+    export const Default = {
+    render: () => `<button>Default</button>`
+    }
+
+    export const Primary = {
+    render: () => `<button data-intent="primary">Primary</button>`
+    }
+
+    export const Danger = {
+    render: () => `<button data-intent="danger">Danger</button>`
+    }
+
+    export const Ghost = {
+    render: () => `<button data-intent="ghost">Ghost</button>`
+    }
+
+    export const Warning = {
+    render: () => `<button data-intent="warning">Warning</button>`
+    }
+
+    export const Success = {
+    render: () => `<button data-intent="success">Success</button>`
+    }
+
+    export const Neutral = {
+    render: () => `<button data-intent="neutral">Neutral</button>`
+    }
+
+    export const Disabled = {
+    render: () => `<button data-intent="primary" disabled>Disabled</button>`
+    }
+
+    export const Loading = {
+    render: () => `<button data-intent="primary" aria-busy="true"><span>Loading</span></button>`
+    }
+
+    export const AllVariants = {
+    render: () => `
+        <section>
+        <button data-intent="primary">Primary</button>
+        <button data-intent="danger">Danger</button>
+        <button data-intent="ghost">Ghost</button>
+        <button data-intent="warning">Warning</button>
+        <button data-intent="success">Success</button>
+        <button data-intent="neutral">Neutral</button>
+        
+        </section>
+    `
+    }
+
+    ```
+
+  - **Launch Storybook:** Run the Storybook server from the **root directory**.
+
+    ```bash
+    pnpm storybook
+    ```
+
+    This will open a new browser tab. You can now build, view, and test your component in real-time\!
+
+### 4\. Add Documentation
+
+Now that your component is complete, add documentation for it.
+
+  - Create a new MDX file in `apps/docs/docs/components/` (e.g., `button.mdx`).
+  - Describe what your component does and provide usage examples.
+  - Add a link to your new documentation page in the sidebar by editing the `apps/docs/sidebars.ts` file.
+
+### 5\. Write Unit Tests
+
+We require tests for all new features to maintain code quality.
+
+  - Add test cases for your component in a file located alongside the component source code.
+  - Ensure all tests pass before submitting your changes.
+    ```bash
+    pnpm vitest
+    ```
+
+### 6\. Commit and Push Your Changes
+
+  - **Stage and Commit:** Add your changes and write a clear, descriptive commit message that follows the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification.
+    ```bash
+    git add .
+    git commit -m "feat(component): add new avatar component with storybook and tests"
+    ```
+  - **Push to Your Fork:**
+    ```bash
+    git push origin feature/add-avatar-component
+    ```
+
+### 7\. Create a Pull Request
+
+  - Go to your forked repository on GitHub and click "Compare & pull request".
+  - Set the base branch to `development`.
+  - Fill out the Pull Request (PR) template with all the required information.
+  - Click "Create pull request" to submit it for review.
+
+-----
+
+## Code Review Process
+
+  - Once your PR is submitted, one or more maintainers will review it.
+  - If changes are requested, simply make the updates on your branch and push them. Your PR will update automatically.
+  - Once the PR is approved, a maintainer will merge it. Congratulations\! 🎉
+
+-----
+
+## Licensing
+
+By contributing to Ignix Lite, you agree that your contributions will be licensed under the project's MIT License.

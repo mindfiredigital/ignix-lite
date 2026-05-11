@@ -1,0 +1,23 @@
+details {
+  border: 1px solid var(--ix-border);
+  border-radius: var(--ix-radius);
+  padding: var(--ix-space-sm);
+
+  background: var(--ix-surface);
+  color: var(--ix-text);
+
+  p {
+    margin-top: var(--ix-space-sm);
+    color: var(--ix-text-muted);
+  }
+}
+
+summary {
+  cursor: pointer;
+  font-weight: 500;
+
+  &:focus-visible {
+    outline: var(--ix-focus);
+    outline-offset: 2px;
+  }
+}

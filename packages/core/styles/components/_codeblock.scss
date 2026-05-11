@@ -1,0 +1,14 @@
+pre {
+  background: var(--ix-surface);
+  border-radius: var(--ix-radius);
+  overflow-x: auto;
+
+  code {
+    display: block;
+    padding: var(--ix-space-md);
+    font-family: var(--ix-font-mono);
+    font-size: var(--ix-size-sm);
+    color: var(--ix-text);
+    background: var(--ix-surface-raised);
+  }
+}

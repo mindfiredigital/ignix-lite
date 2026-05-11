@@ -1,0 +1,25 @@
+progress {
+  width: 50%;
+  height: var(--ix-space-sm);
+
+  border-radius: var(--ix-radius);
+  border: 1px solid var(--ix-border);
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  &::-webkit-progress-bar {
+    background: var(--ix-surface-raised);
+    border-radius: var(--ix-radius);
+  }
+
+  &::-webkit-progress-value {
+    background: var(--ix-primary);
+    border-radius: var(--ix-radius);
+  }
+
+  &::-moz-progress-bar {
+    background: var(--ix-primary);
+    border-radius: var(--ix-radius);
+  }
+}

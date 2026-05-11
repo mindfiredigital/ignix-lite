@@ -1,0 +1,223 @@
+---
+sidebar_position: 10
+title: Meter
+description: Lightweight semantic meter component for ignix-lite with native HTML support.
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import Preview from '@site/src/components/preview'
+
+# Meter
+
+The Meter component provides a semantic way to visualize scalar measurements within a known range using the native HTML `meter` element.
+
+Ignix Lite meters support low, medium, and high states with accessible styling.
+
+---
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<div
+  style={{
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '1rem',
+    width: '100%',
+  }}
+>
+  <meter
+    value="20"
+    min="0"
+    max="100"
+    low="30"
+    high="70"
+    optimum="100"
+    style={{
+      width: '100%',
+      maxWidth: '28rem',
+      height: '1rem',
+    }}
+  />
+
+  <meter
+    value="50"
+    min="0"
+    max="100"
+    low="30"
+    high="70"
+    optimum="100"
+    style={{
+      width: '100%',
+      maxWidth: '28rem',
+      height: '1rem',
+    }}
+  />
+
+  <meter
+    value="90"
+    min="0"
+    max="100"
+    low="30"
+    high="70"
+    optimum="100"
+    style={{
+      width: '100%',
+      maxWidth: '28rem',
+      height: '1rem',
+    }}
+  />
+</div>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<meter
+  value="20"
+  min="0"
+  max="100"
+  low="30"
+  high="70"
+  optimum="100"
+></meter>
+
+<meter
+  value="50"
+  min="0"
+  max="100"
+  low="30"
+  high="70"
+  optimum="100"
+></meter>
+
+<meter
+  value="90"
+  min="0"
+  max="100"
+  low="30"
+  high="70"
+  optimum="100"
+></meter>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Installation
+
+<Tabs defaultValue="npm">
+
+<TabItem value="npm" label="npm">
+
+```bash
+npm install @mindfiredigital/ignix-lite
+```
+
+</TabItem>
+
+<TabItem value="cdn" label="CDN">
+
+```html
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/@mindfiredigital/ignix-lite/dist/ignix-lite.min.css"
+/>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Usage
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<div
+  style={{
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.75rem',
+    width: '100%',
+  }}
+>
+  <strong>
+    Storage Usage
+  </strong>
+
+  <meter
+    value="68"
+    min="0"
+    max="100"
+    low="30"
+    high="70"
+    optimum="100"
+    style={{
+      width: '100%',
+      maxWidth: '28rem',
+      height: '1rem',
+    }}
+  />
+
+  <span>
+    68% used
+  </span>
+</div>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<strong>
+  Storage Usage
+</strong>
+
+<meter
+  value="68"
+  min="0"
+  max="100"
+  low="30"
+  high="70"
+  optimum="100"
+></meter>
+
+<span>
+  68% used
+</span>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Attributes
+
+| Attribute | Type | Description |
+|---|---|---|
+| `value` | `number` | Current meter value |
+| `min` | `number` | Minimum value |
+| `max` | `number` | Maximum value |
+| `low` | `number` | Lower threshold |
+| `high` | `number` | Upper threshold |
+| `optimum` | `number` | Ideal value |

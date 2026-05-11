@@ -2,3 +2,9 @@ node_modules
 dist
 .turbo
 packages/core/example.html
+*.tgz
+debug.log
+.vscode/settings.json
+
+*storybook.log
+storybook-static

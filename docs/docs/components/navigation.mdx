@@ -1,0 +1,199 @@
+---
+sidebar_position: 6
+title: Navigation
+description: Lightweight semantic navigation component for ignix-lite with accessible active links and keyboard focus support.
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import Preview from '@site/src/components/preview'
+
+# Navigation
+
+The Navigation component provides lightweight semantic navigation links using native HTML elements.
+
+Ignix Lite navigation supports active states, keyboard accessibility, and flexible layouts.
+
+---
+
+## Installation
+
+<Tabs defaultValue="npm">
+
+<TabItem value="npm" label="npm">
+
+```bash
+npm install @mindfiredigital/ignix-lite
+```
+
+</TabItem>
+
+<TabItem value="cdn" label="CDN">
+
+```html
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/@mindfiredigital/ignix-lite/dist/ignix-lite.min.css"
+/>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Usage
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<ix-nav>
+
+  <div className="ix-nav-links">
+
+    <a href="#" aria-current="page">
+      Home
+    </a>
+
+    <a href="#">
+      About
+    </a>
+
+    <a href="#">
+      Contact
+    </a>
+
+  </div>
+
+</ix-nav>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<nav>
+  <ul>
+    <li>
+      <a href="#" aria-current="page">
+        Home
+      </a>
+    </li>
+
+    <li>
+      <a href="#">
+        About
+      </a>
+    </li>
+
+    <li>
+      <a href="#">
+        Contact
+      </a>
+    </li>
+  </ul>
+</nav>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Multiple Links
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<ix-nav>
+
+  <div className="ix-nav-links">
+
+    <a href="#" aria-current="page">
+      Dashboard
+    </a>
+
+    <a href="#">
+      Projects
+    </a>
+
+    <a href="#">
+      Settings
+    </a>
+
+    <a href="#">
+      Profile
+    </a>
+
+  </div>
+
+</ix-nav>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<nav>
+  <ul>
+    <li>
+      <a href="#" aria-current="page">
+        Dashboard
+      </a>
+    </li>
+
+    <li>
+      <a href="#">
+        Projects
+      </a>
+    </li>
+
+    <li>
+      <a href="#">
+        Settings
+      </a>
+    </li>
+
+    <li>
+      <a href="#">
+        Profile
+      </a>
+    </li>
+  </ul>
+</nav>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Accessibility
+
+| Feature | Description |
+|---|---|
+| Semantic HTML | Uses native `nav` element |
+| Active state | Supports `aria-current="page"` |
+| Keyboard support | Accessible focus styles |
+
+---
+
+## Attributes
+
+| Attribute | Type | Description |
+|---|---|---|
+| `aria-current` | `'page'` | Indicates active navigation link |
+| `href` | `string` | Navigation target |

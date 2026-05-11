@@ -1,0 +1,447 @@
+# ─────────────────────────────────────────────────────────────────────────────
+#  CodeRabbit Configuration for mindfiredigital/ignix-lite
+#
+#  Stack   : CSS/SCSS + Vanilla JS (core) · React / Vue / Svelte wrappers
+#            MCP server (Node.js) · TypeScript
+#  Tooling : pnpm workspaces · Turborepo · Vite · tsup · Vitest
+#            ESLint · Prettier · Storybook · Changesets
+#  Pattern : Multi-package monorepo (packages/core, react, vue, svelte, mcp)
+#
+#  Validate : https://docs.coderabbit.ai/configuration/yaml-validator
+#  Reference: https://docs.coderabbit.ai/reference/configuration
+# ─────────────────────────────────────────────────────────────────────────────
+
+language: "en-US"
+
+# Max 250 characters
+tone_instructions: "Senior UI library reviewer for a multi-framework CSS design system. Be concise and specific. Cite CSS, a11y, and TypeScript best-practices when flagging issues. Suggest concrete fixes. Praise good patterns too."
+
+early_access: false
+
+# ─────────────────────────────────────────────────────────────────────────────
+#  REVIEWS
+# ─────────────────────────────────────────────────────────────────────────────
+reviews:
+  profile: "assertive"
+  request_changes_workflow: true
+
+  # PR description enrichment
+  high_level_summary: true
+  high_level_summary_instructions: >
+    Summarise the PR as a concise bullet-point list. Group changes by:
+    (1) Core CSS/JS component changes,
+    (2) Framework wrapper updates (React / Vue / Svelte),
+    (3) MCP server changes,
+    (4) Bug fixes,
+    (5) Tooling / config / CI changes,
+    (6) Docs / Storybook updates.
+    End with a "Breaking changes" section (write "None" if absent).
+  high_level_summary_in_walkthrough: false
+
+  # Walkthrough & diagnostics
+  collapse_walkthrough: false
+  changed_files_summary: true
+  sequence_diagrams: true
+  estimate_code_review_effort: true
+  assess_linked_issues: true
+  related_issues: true
+  related_prs: true
+
+  # Labels
+  suggested_labels: true
+  auto_apply_labels: false
+  labeling_instructions:
+    - label: "pkg: core"
+      instructions: "Apply when the PR modifies files under packages/core/."
+    - label: "pkg: react"
+      instructions: "Apply when the PR modifies files under packages/react/."
+    - label: "pkg: vue"
+      instructions: "Apply when the PR modifies files under packages/vue/."
+    - label: "pkg: svelte"
+      instructions: "Apply when the PR modifies files under packages/svelte/."
+    - label: "pkg: mcp"
+      instructions: "Apply when the PR modifies files under packages/mcp/."
+    - label: "component: new"
+      instructions: "Apply when the PR introduces a brand-new UI component (CSS + JS) under packages/core/."
+    - label: "component: enhancement"
+      instructions: "Apply when the PR extends an existing component's styles, variants, or JS behaviour."
+    - label: "breaking change"
+      instructions: "Apply when the PR removes or renames exported CSS classes, JS APIs, or component markup in a backwards-incompatible way."
+    - label: "a11y"
+      instructions: "Apply when the PR touches ARIA attributes, keyboard navigation, focus management, or screen-reader behaviour."
+    - label: "css"
+      instructions: "Apply when the PR adds or modifies SCSS/CSS styles, custom properties, or design tokens."
+    - label: "docs"
+      instructions: "Apply when the PR only changes documentation, HTML demo pages, README files, or JSDoc."
+    - label: "storybook"
+      instructions: "Apply when the PR adds or modifies Storybook stories or Storybook config."
+    - label: "tests"
+      instructions: "Apply when the PR adds or modifies Vitest test files (*.test.ts)."
+    - label: "build"
+      instructions: "Apply when the PR changes vite.config.*, tsup.config.*, turbo.json, package.json scripts, or CI workflows."
+    - label: "dependencies"
+      instructions: "Apply when the PR bumps or removes npm/pnpm dependencies."
+
+  # Reviewer suggestions
+  suggested_reviewers: true
+  auto_assign_reviewers: false
+
+  # Commit status
+  commit_status: true
+  fail_commit_status: false
+  review_status: true
+  review_details: true
+
+  # Display
+  poem: false
+  in_progress_fortune: false
+
+  # Auto-review triggers
+  auto_review:
+    enabled: true
+    base_branches:
+      - main
+      - development
+
+  # Files excluded from review (still cloned for context)
+  path_filters:
+    - "!**/dist/**"
+    - "!**/node_modules/**"
+    - "!pnpm-lock.yaml"
+    - "!package-lock.json"
+    - "!yarn.lock"
+    - "!**/*.snap"
+    - "!**/__snapshots__/**"
+    - "!.husky/**"
+    - "!coverage/**"
+    - "!.turbo/**"
+    - "!**/.turbo/**"
+    - "!storybook-static/**"
+    - "!packages/core/ignix-lite.min.css"
+    - "!packages/core/ignix-lite.min.js"
+
+  # ───────────────────────────────────────────────────────────────────────────
+  #  Path-specific review instructions
+  # ───────────────────────────────────────────────────────────────────────────
+  path_instructions:
+    # ── Core: SCSS / CSS ────────────────────────────────────────────────────
+    - path: "packages/core/styles/**/*.scss"
+      instructions: |
+        ## SCSS Review Checklist
+
+        ### Design Tokens & Custom Properties
+        - All colors, spacing, and typography values must use CSS custom properties.
+        - Token names must follow the naming convention: --ignix-{category}-{name}.
+        - Avoid hardcoded colour hex values — use tokens or custom properties.
+
+        ### Component Styles
+        - Use BEM or a consistent class naming convention (e.g. .ignix-button, .ignix-button--primary).
+        - Avoid deeply nested selectors (max 3 levels).
+        - Dark-mode support should use [data-theme="dark"] or prefers-color-scheme.
+        - Responsive styles must be mobile-first with min-width media queries.
+
+        ### Accessibility
+        - Focus states must be visible (:focus-visible).
+        - Colour contrast must meet WCAG 2.1 AA (4.5:1 text, 3:1 UI components).
+        - Avoid hiding focus outlines without providing an alternative.
+
+        ### Performance
+        - Avoid @import in favour of @use / @forward (Dart Sass).
+        - Avoid expensive selectors (e.g. universal *, deep descendant chains).
+
+    - path: "packages/core/styles/components/**"
+      instructions: |
+        Per-component SCSS file. Verify:
+        1. Class naming matches the component directory name (e.g. _button.scss -> .ignix-button).
+        2. All variants (sizes, colours, states) are documented via comments.
+        3. No utility classes leak into component styles.
+
+    - path: "packages/core/ignix-lite.scss"
+      instructions: |
+        This is the root SCSS entry point. Verify:
+        - All component partials are @use'd / @forward'd here.
+        - Newly added components have been added to this file.
+        - Import order is logical: tokens -> base -> components.
+
+    # ── Core: Vanilla JS Components ─────────────────────────────────────────
+    - path: "packages/core/components/**/*.js"
+      instructions: |
+        ## Vanilla JS Component Review Checklist
+
+        ### DOM & Events
+        - Use event delegation where possible.
+        - Clean up event listeners on destroy/disconnect.
+        - Use data-* attributes for component identification, not class names.
+
+        ### Accessibility (a11y)
+        - Use semantic HTML elements (button not div with click handler).
+        - ARIA attributes must be correct (role, aria-label, aria-expanded, etc.).
+        - Keyboard navigation must work without a mouse.
+        - All interactive components must be focusable.
+
+        ### Browser Compatibility
+        - No APIs that require polyfills for modern evergreen browsers.
+        - No dependency on framework-specific globals.
+
+        ### Code Quality
+        - Functions should be small and single-purpose.
+        - Avoid any; use JSDoc type annotations for public APIs.
+        - Export init/mount functions, not side-effects at module level.
+
+    # ── Core: Build & Config ────────────────────────────────────────────────
+    - path: "packages/core/vite.config.*"
+      instructions: |
+        Review the Vite library build config:
+        - Entry must be build.js.
+        - Output must produce ignix-lite.min.js and ignix-lite.min.css.
+        - Minification should be enabled (esbuild).
+        - Ensure CSS is not code-split (cssCodeSplit: false).
+
+    - path: "packages/core/package.json"
+      instructions: |
+        - "main" and "style" fields must point to the correct CSS entry.
+        - "files" array must include all publishable assets.
+        - Build script must chain vite build and postbuild.
+        - Verify no unnecessary dependencies are included.
+
+    # ── React Wrapper ───────────────────────────────────────────────────────
+    - path: "packages/react/src/**/*.ts"
+      instructions: |
+        ## React Wrapper Review Checklist
+
+        ### TypeScript & Props
+        - All props must be typed via an exported interface.
+        - Avoid any; prefer unknown or generics.
+
+        ### React Patterns
+        - Functional components only.
+        - React.forwardRef for components wrapping DOM elements.
+        - Wrappers should be thin — delegate all styling to the core CSS.
+
+        ### Exports
+        - All public components must be re-exported from packages/react/src/index.ts.
+
+    - path: "packages/react/src/index.ts"
+      instructions: |
+        This is the React package entry point. Verify:
+        - All components are re-exported.
+        - No internal helpers are leaked.
+        - Named exports only for tree-shaking.
+
+    - path: "packages/react/package.json"
+      instructions: |
+        - Build uses tsup with ESM + CJS + DTS output.
+        - peerDependencies should list react with a broad semver range.
+        - No core CSS deps should be bundled — they should be peer/external.
+
+    # ── Vue Wrapper ─────────────────────────────────────────────────────────
+    - path: "packages/vue/src/**/*.ts"
+      instructions: |
+        ## Vue Wrapper Review Checklist
+        - Components should use Composition API (setup / <script setup>).
+        - Props must be typed with defineProps<T>() or equivalent.
+        - Wrappers should be thin — delegate all styling to the core CSS.
+        - All public components must be re-exported from packages/vue/src/index.ts.
+
+    - path: "packages/vue/package.json"
+      instructions: |
+        - Build uses tsup with ESM + CJS + DTS output.
+        - peerDependencies should list vue with a broad semver range.
+
+    # ── Svelte Wrapper ──────────────────────────────────────────────────────
+    - path: "packages/svelte/src/**/*.ts"
+      instructions: |
+        ## Svelte Wrapper Review Checklist
+        - Components should use Svelte 5 runes or Svelte 4 reactive syntax.
+        - Props must be typed via TypeScript.
+        - Wrappers should be thin — delegate all styling to the core CSS.
+        - All public components must be re-exported from packages/svelte/src/index.ts.
+
+    - path: "packages/svelte/package.json"
+      instructions: |
+        - Build uses tsup with ESM + CJS + DTS output.
+        - peerDependencies should list svelte with a broad semver range.
+
+    # ── MCP Server ──────────────────────────────────────────────────────────
+    - path: "packages/mcp/src/**/*.ts"
+      instructions: |
+        ## MCP Server Review Checklist
+
+        The MCP server is Node-only. Review for:
+        - No browser-only APIs (window, document, localStorage).
+        - No framework imports (React, Vue, Svelte).
+        - Proper error handling and graceful shutdown.
+        - TypeScript strict mode compliance.
+
+    - path: "packages/mcp/tsup.config.ts"
+      instructions: |
+        Review the MCP build config:
+        - Entry must be src/server.ts.
+        - Formats: ESM + CJS.
+        - DTS generation must be enabled.
+        - Minification and sourcemaps should be configured.
+
+    - path: "packages/mcp/package.json"
+      instructions: |
+        - "type": "module" must be set for ESM support.
+        - Build must use tsup.
+        - No browser or UI framework dependencies.
+
+    # ── Tests (top-level) ───────────────────────────────────────────────────
+    - path: "tests/**/*.test.ts"
+      instructions: |
+        ## Test Review Checklist (Vitest + jsdom)
+
+        - Tests must cover: render without crashing, DOM structure, user interactions,
+          attribute correctness, and edge cases.
+        - Prefer DOM queries by role or semantic selectors over test IDs.
+        - Each test file should test one component.
+        - Aim for >= 80% branch coverage on new components.
+        - Mock only what is necessary — prefer testing real DOM behaviour.
+
+    # ── Storybook ───────────────────────────────────────────────────────────
+    - path: "storybook/**/*.ts"
+      instructions: |
+        - Stories must use CSF3 format (export default meta + named exports).
+        - Each component should have at least a Default story and key variant stories.
+        - Args must match the component's public API.
+        - Verify that the story renders correctly (no missing CSS imports).
+
+    - path: "storybook/.storybook/**"
+      instructions: |
+        - Verify main.ts/preview.ts are correctly configured.
+        - The core CSS file must be imported for styles to render.
+        - Addon list should include @storybook/addon-a11y for accessibility checks.
+
+    # ── Docs (HTML demos) ──────────────────────────────────────────────────
+    - path: "docs/**/*.html"
+      instructions: |
+        - Demo pages must import the core CSS (ignix-lite.min.css or CDN equivalent).
+        - HTML must be semantic and valid.
+        - Code examples should be self-contained and copy-paste-friendly.
+        - Each demo should show multiple variants of the component.
+
+    # ── Root Config Files ───────────────────────────────────────────────────
+    - path: "turbo.json"
+      instructions: |
+        - Task dependencies must be correct (build depends on ^build).
+        - Output globs must match actual build output directories.
+        - Dev, lint, test, and format tasks should be defined.
+
+    - path: "tsconfig*.json"
+      instructions: |
+        - strict: true must remain enabled.
+        - Path aliases must be consistent across packages.
+        - Composite project references should be used for monorepo builds.
+
+    - path: "vitest.config.*"
+      instructions: |
+        - Environment must be jsdom for DOM testing.
+        - globals: true should be set for convenience imports.
+        - Coverage thresholds should be configured if present.
+
+    - path: "eslint.config.*"
+      instructions: |
+        - TypeScript ESLint recommended rules must be included.
+        - Storybook plugin must be configured.
+        - Ignores must cover dist, node_modules, and minified files.
+        - Flag any disabled rules that relate to TypeScript type safety.
+
+    - path: "package.json"
+      instructions: |
+        Root workspace package.json. Verify:
+        - Turborepo scripts are correct (dev, build, lint, test, format, typecheck).
+        - packageManager field matches the pnpm version in CI.
+        - Storybook scripts point to the correct config dir (storybook/.storybook).
+        - Changeset scripts are present (changeset, version, release).
+        - No production dependencies should be at root level.
+
+    - path: "pnpm-workspace.yaml"
+      instructions: |
+        - Must list "packages/*" to include all workspace packages.
+        - Flag if any package directory is missing from the glob.
+
+    - path: ".github/workflows/**"
+      instructions: |
+        - All actions must be pinned to a specific version tag (not @main).
+        - Secrets must be accessed via ${{ secrets.* }} — no hardcoded values.
+        - pnpm version must be pinned in uses: pnpm/action-setup.
+        - Test and lint steps must fail the build on error (continue-on-error: false).
+        - A typecheck step (tsc -b or pnpm typecheck) must exist alongside lint.
+        - Node version should match the project's target (>=18).
+
+    - path: "commitlint.config.*"
+      instructions: |
+        - Must extend @commitlint/config-conventional.
+        - Custom scopes should match package names (core, react, vue, svelte, mcp).
+        - Flag if conventional commit enforcement is disabled.
+
+    - path: "scripts/**"
+      instructions: |
+        - Utility scripts must be documented with comments.
+        - postbuild.js must correctly process Vite build output.
+        - size.js should measure bundle sizes for all publishable packages.
+        - File naming should be camelCase.
+        - Any new script must be referenced in the root package.json scripts.
+
+    - path: "**/*.md"
+      instructions: |
+        - Code examples must use fenced code blocks with a language tag.
+        - Component usage examples should show HTML markup with correct CSS classes.
+        - Verify relative links point to existing files.
+
+    - path: ".changeset/**"
+      instructions: |
+        - Changeset entries must reference the correct package name(s).
+        - Bump type (major/minor/patch) must match the scope of changes.
+        - Description should be user-facing and concise.
+
+  # Static analysis tools (nested under reviews per schema)
+  tools:
+    eslint:
+      enabled: true
+    biome:
+      enabled: false
+    markdownlint:
+      enabled: true
+    actionlint:
+      enabled: true
+    gitleaks:
+      enabled: true
+    htmlhint:
+      enabled: true
+    checkov:
+      enabled: true
+    languagetool:
+      enabled: true
+      enabled_rules:
+        - "OXFORD_COMMA"
+        - "EN_QUOTES"
+        - "COMMA_PARENTHESIS_WHITESPACE"
+      disabled_categories:
+        - "TYPOGRAPHY"
+    yamllint:
+      enabled: true
+    ast-grep:
+      essential_rules: true
+
+# ─────────────────────────────────────────────────────────────────────────────
+#  CHAT
+# ─────────────────────────────────────────────────────────────────────────────
+chat:
+  auto_reply: true
+
+# ─────────────────────────────────────────────────────────────────────────────
+#  KNOWLEDGE BASE
+# ─────────────────────────────────────────────────────────────────────────────
+knowledge_base:
+  opt_out: false
+  web_search:
+    enabled: true
+  code_guidelines:
+    enabled: true
+    filePatterns:
+      - "CONTRIBUTING.md"
+      - "README.md"
+  learnings:
+    scope: auto

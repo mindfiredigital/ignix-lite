@@ -1,0 +1,275 @@
+---
+sidebar_position: 17
+title: Accordion
+description: Lightweight semantic accordion component for ignix-lite using native details and summary elements.
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import Preview from '@site/src/components/preview'
+
+# Accordion
+
+The Accordion component provides lightweight expandable content sections using native HTML elements.
+
+Ignix Lite accordions are accessible by default and work without JavaScript.
+
+---
+
+## Default Accordion
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+
+
+<details>
+  <summary>
+    What is ignix-lite?
+  </summary>
+
+  <p>
+    ignix-lite is a lightweight semantic UI library.
+  </p>
+</details>
+
+
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<details>
+  <summary>
+    What is ignix-lite?
+  </summary>
+
+  <p>
+    ignix-lite is a lightweight semantic UI library.
+  </p>
+</details>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Open by Default
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+
+
+<details open>
+  <summary>
+    How does this work?
+  </summary>
+
+  <p>
+    Uses native browser behavior without JavaScript.
+  </p>
+</details>
+
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<details open>
+  <summary>
+    How does this work?
+  </summary>
+
+  <p>
+    Uses native browser behavior without JavaScript.
+  </p>
+</details>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Multiple Accordions
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+
+<details>
+  <summary>
+    What is ignix-lite?
+  </summary>
+
+  <p>
+    A lightweight semantic UI library.
+  </p>
+</details>
+
+<details>
+  <summary>
+    Is it accessible?
+  </summary>
+
+  <p>
+    Yes, it uses native HTML semantics.
+  </p>
+</details>
+
+<details>
+  <summary>
+    Does it require JavaScript?
+  </summary>
+
+  <p>
+    No, it works without JavaScript.
+  </p>
+</details>
+
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<details>
+  <summary>
+    What is ignix-lite?
+  </summary>
+
+  <p>
+    A lightweight semantic UI library.
+  </p>
+</details>
+
+<details>
+  <summary>
+    Is it accessible?
+  </summary>
+
+  <p>
+    Yes, it uses native HTML semantics.
+  </p>
+</details>
+
+<details>
+  <summary>
+    Does it require JavaScript?
+  </summary>
+
+  <p>
+    No, it works without JavaScript.
+  </p>
+</details>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Installation
+
+<Tabs defaultValue="npm">
+
+<TabItem value="npm" label="npm">
+
+```bash
+npm install @mindfiredigital/ignix-lite
+```
+
+</TabItem>
+
+<TabItem value="cdn" label="CDN">
+
+```html
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/@mindfiredigital/ignix-lite/dist/ignix-lite.min.css"
+/>
+
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Usage
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+
+<details>
+  <summary>
+    Is the library lightweight?
+  </summary>
+
+  <p>
+    Yes, ignix-lite focuses on minimal styles and native elements.
+  </p>
+</details>
+
+<details>
+  <summary>
+    Does it support accessibility?
+  </summary>
+
+  <p>
+    Accessibility is built in using semantic HTML.
+  </p>
+</details>
+
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+
+<details>
+  <summary>
+    Is the library lightweight?
+  </summary>
+
+  <p>
+    Yes, ignix-lite focuses on minimal styles and native elements.
+  </p>
+</details>
+
+<details>
+  <summary>
+    Does it support accessibility?
+  </summary>
+
+  <p>
+    Accessibility is built in using semantic HTML.
+  </p>
+</details>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Attributes
+
+| Attribute | Type | Description |
+|---|---|---|
+| `open` | `boolean` | Keeps accordion expanded by default |

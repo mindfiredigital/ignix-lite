@@ -1,0 +1,57 @@
+article {
+  display: flex;
+  flex-direction: column;
+
+  padding: var(--ix-space-md);
+  gap: var(--ix-space-sm);
+
+  border: 1px solid var(--ix-border);
+  border-radius: var(--ix-radius);
+  background: var(--ix-surface);
+
+  max-width: 320px;
+  margin: 0;
+
+  > [slot='avatar'],
+  > [slot='title'] {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+[slot='avatar'] {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  margin-right: var(--ix-space-sm);
+}
+
+[slot='title'] {
+  font-size: var(--ix-size-lg);
+  font-weight: 600;
+}
+
+[slot='meta'] {
+  font-size: var(--ix-size-sm);
+  color: var(--ix-text-muted);
+}
+
+[slot='body'] {
+  font-size: var(--ix-size-md);
+}
+
+[slot='action'],
+[slot='footer'] {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+[slot='action'] {
+  margin-top: var(--ix-space-md);
+}
+
+[slot='footer'] {
+  margin-left: var(--ix-space-md);
+  font-size: var(--ix-size-sm);
+  color: var(--ix-text-muted);
+}
