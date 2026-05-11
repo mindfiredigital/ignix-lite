@@ -1,13 +1,12 @@
 {
   "name": "docs",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
     "sync:ignix": "node -e \"const fs=require('fs'); const path=require.resolve('@mindfiredigital/ignix-lite/ignix-lite.min.js'); fs.copyFileSync(path,'./static/ignix-lite.min.js')\"",
     "start": "pnpm sync:ignix && docusaurus start",
     "build": "pnpm sync:ignix && docusaurus build",
-    
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
@@ -15,7 +14,6 @@
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
     "typecheck": "tsc"
-    
   },
   "dependencies": {
     "@docusaurus/core": "3.10.1",
