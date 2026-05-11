@@ -14,7 +14,10 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.33.0",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
   "devDependencies": {
     "tsup": "^8.5.1",
     "vitest": "^4.1.4",

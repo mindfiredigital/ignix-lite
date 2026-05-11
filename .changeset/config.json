@@ -1,7 +1,22 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@2.3.1/schema.json",
-  "changelog": ["@changesets/changelog-github", { "repo": "mindfire-test/ignix-lite" }],
+  "changelog": [
+    "@changesets/changelog-github",
+    {
+      "repo": "mindfiredigital/ignix-lite"
+    }
+  ],
   "commit": false,
   "access": "public",
-  "baseBranch": "main"
+  "baseBranch": "main",
+  "updateInternalDependencies": "patch",
+  "linked": [
+    [
+      "@mindfiredigital/ignix-lite",
+      "@mindfiredigital/ignix-lite-react",
+      "@mindfiredigital/ignix-lite-vue",
+      "@mindfiredigital/ignix-lite-svelte",
+      "@mindfiredigital/ignix-lite-mcp"
+    ]
+  ]
 }

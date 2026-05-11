@@ -7,38 +7,43 @@ if (fs.existsSync('.changeset')) {
 
   const existing = fs
     .readdirSync('.changeset')
-    .filter(file => file.endsWith('.md'))
+    .filter(f => f.endsWith('.md'))
 
   if (existing.length > 0) {
 
     console.log(
-      ' Changeset already exists, skipping generation'
+      'Changeset already exists, skipping generation'
     )
 
     process.exit(0)
   }
 }
 
-// Latest commit message
+// Get latest commit message
 const commitMessage = execSync(
   'git log -1 --format=%s'
 ).toString().trim()
 
 console.log(
-  ` Processing commit: "${commitMessage}"`
+  `Processing commit message: "${commitMessage}"`
 )
 
-// Commit patterns
+// Valid scopes for release
+const validScopes = ['core', 'react', 'vue', 'svelte', 'mcp']
+
+// Regex patterns (with ! support)
 const commitPatterns = {
-  minor: /^feat\(core\)!?: (.+)/,
-  patch: /^fix\(core\)!?: (.+)/
+  minor: /^feat\(([^)]+)\)!?: (.+)/,
+  patch: /^fix\(([^)]+)\)!?: (.+)/,
 }
 
-// Breaking change
+// Detect breaking change
 const isBreaking =
   /!:/.test(commitMessage) ||
   commitMessage.includes('BREAKING CHANGE')
 
+// Identify type, package, and description
+let packageScope = null
 let changeType = null
 let description = null
 
@@ -47,16 +52,17 @@ if (isBreaking) {
 
   const match =
     commitMessage.match(
-      /^feat\(core\)!?: (.+)/
+      /^feat\(([^)]+)\)!?: (.+)/
     ) ||
     commitMessage.match(
-      /^fix\(core\)!?: (.+)/
+      /^fix\(([^)]+)\)!?: (.+)/
     )
 
-  if (match) {
+  if (match && validScopes.includes(match[1])) {
 
     changeType = 'major'
-    description = match[1]
+    packageScope = match[1]
+    description = match[2]
   }
 }
 
@@ -68,8 +74,12 @@ else if (
   const match =
     commitMessage.match(commitPatterns.minor)
 
-  changeType = 'minor'
-  description = match[1]
+  if (validScopes.includes(match[1])) {
+
+    changeType = 'minor'
+    packageScope = match[1]
+    description = match[2]
+  }
 }
 
 // PATCH
@@ -80,17 +90,41 @@ else if (
   const match =
     commitMessage.match(commitPatterns.patch)
 
-  changeType = 'patch'
-  description = match[1]
+  if (validScopes.includes(match[1])) {
+
+    changeType = 'patch'
+    packageScope = match[1]
+    description = match[2]
+  }
 }
 
 // Generate changeset
-if (changeType) {
+if (packageScope) {
+
+  packageScope = packageScope.trim()
+  description =
+    description?.trim() || 'No description provided.'
+
+  // Scope → npm package mapping
+  const scopeToPackage = {
+    core: '@mindfiredigital/ignix-lite',
+    react: '@mindfiredigital/ignix-lite-react',
+    vue: '@mindfiredigital/ignix-lite-vue',
+    svelte: '@mindfiredigital/ignix-lite-svelte',
+    mcp: '@mindfiredigital/ignix-lite-mcp',
+  }
+
+  const packageName = scopeToPackage[packageScope]
+
+  if (!packageName) {
+
+    console.log('Invalid package mapping')
+    process.exit(0)
+  }
 
   const changesetContent = `---
-'@mindfiredigital/ignix-lite': ${changeType}
+'${packageName}': ${changeType}
 ---
-
 ${description}
 `
 
@@ -100,12 +134,12 @@ ${description}
   )
 
   console.log(
-    ` Changeset created (${changeType})`
+    `Changeset created → ${packageName} (${changeType})`
   )
 
 } else {
 
   console.log(
-    'No valid release commit found'
+    'No valid commit found. Use: feat(scope), fix(scope), or ! for breaking'
   )
 }
