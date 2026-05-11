@@ -21,6 +21,7 @@ Built with a lightweight philosophy, Ignix Lite avoids heavy runtime dependencie
 - Responsive and modern UI
 - Easy integration
 - Dark mode support
+- Minimal and scalable architecture
 
 ---
 
