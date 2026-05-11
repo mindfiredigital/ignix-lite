@@ -72,5 +72,6 @@ jobs:
       - name: Push to gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HUSKY: '0'
         run: |
           git push origin gh-pages --force || echo "No changes to push"
