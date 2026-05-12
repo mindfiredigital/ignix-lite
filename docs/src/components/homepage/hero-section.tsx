@@ -91,7 +91,7 @@ function HeroSection() {
           Ultra-light
           <br />
           <span className={styles.gradientText}>
-            browser-native UI toolkit for <TypewriterWord />.
+            browser-native UI toolkit for <TypewriterWord />
           </span>
         </h1>
 

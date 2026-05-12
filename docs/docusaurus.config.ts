@@ -7,7 +7,7 @@ const config: Config = {
   tagline: 'Minimal CSS-first UI system',
   favicon: 'img/logo.png',
 
-  
+
   url: 'https://mindfiredigital.github.io',
   baseUrl: '/ignix-lite/', 
 
@@ -35,7 +35,7 @@ const config: Config = {
         },
         blog: false,
         theme: {
-          customCss:[ 
+          customCss: [
             require.resolve('./src/css/framework.scss'),
             require.resolve('./src/css/custom.css'),
             require.resolve('./src/css/homepage.scss'),
@@ -83,11 +83,11 @@ const config: Config = {
     },
   } satisfies Preset.ThemeConfig,
   scripts: [
-  {
-    src: '/ignix-lite/ignix-lite.min.js',
-    defer: true,
-  },
-],
+    {
+      src: '/ignix-lite/ignix-lite.min.js',
+      defer: true,
+    },
+  ],
 }
 
 export default config
