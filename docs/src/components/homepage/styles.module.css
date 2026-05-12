@@ -5,6 +5,7 @@
   --surface: #f7f8fc;
   --surface-soft: #eef0f7;
   --border: #dde0ed;
+  --dark-text: #ffffff;
   --text: #0a0c17;
   --muted: #555869;
   --primary: #e8193c;
@@ -199,11 +200,16 @@
   50%       { opacity: 0; }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .cursor {
+    animation: none;
+  }
+}
 
 .heroSubtitle {
   font-size: 1.08rem;
   line-height: 1.9;
-  color: #0a0c17;
+  color: var(--text);
   font-weight: 600;
   max-width: 560px;
   margin: 0 auto;
@@ -211,7 +217,7 @@
 }
 
 [data-theme='dark'] .heroSubtitle {
-  color: #ffffff;
+  color: var(--dark-text);
   font-weight: 400;
 }
 
