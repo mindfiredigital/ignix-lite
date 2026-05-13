@@ -6,6 +6,44 @@ import { ShowcaseSection } from './component-showcase'
 import { CTASection } from './cta-section'
 import { Footer } from './footer'
 
+const WORDS = ['AI', 'Humans']
+
+function TypewriterWord() {
+  const [wordIndex, setWordIndex] = useState(0)
+  const [displayed, setDisplayed] = useState('')
+  const [phase, setPhase] = useState<'typing' | 'pause' | 'deleting'>('typing')
+
+  useEffect(() => {
+    const word = WORDS[wordIndex]
+
+    if (phase === 'typing') {
+      if (displayed.length < word.length) {
+        const t = setTimeout(() => setDisplayed(word.slice(0, displayed.length + 1)), 110)
+        return () => clearTimeout(t)
+      } else {
+        const t = setTimeout(() => setPhase('deleting'), 1400)
+        return () => clearTimeout(t)
+      }
+    }
+
+    if (phase === 'deleting') {
+      if (displayed.length > 0) {
+        const t = setTimeout(() => setDisplayed(displayed.slice(0, -1)), 70)
+        return () => clearTimeout(t)
+      } else {
+        setWordIndex((i) => (i + 1) % WORDS.length)
+        setPhase('typing')
+      }
+    }
+  }, [displayed, phase, wordIndex])
+
+  return (
+    <span className={styles.typewriterWord}>
+      {displayed || '\u00A0'}
+    </span>
+  )
+}
+
 function CopyButton({ text }: { text: string }) {
   const [copied, setCopied] = useState(false)
 
@@ -17,19 +55,25 @@ function CopyButton({ text }: { text: string }) {
 
   return (
     <button
-      className={styles.copyBtn}
+      className={`${styles.copyBtn} ${copied ? styles.copyBtnCopied : ''}`}
       onClick={async () => {
         try { await navigator.clipboard.writeText(text); setCopied(true) } catch { /* empty */ }
       }}
-      aria-label={copied ? 'Copied' : 'Copy'}
+      aria-label={copied ? 'Copied!' : 'Copy'}
       title={copied ? 'Copied!' : 'Copy'}
     >
-      {copied ? '✓' : (
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-          <rect x="9" y="9" width="13" height="13" rx="2"/>
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-        </svg>
-      )}
+      {copied
+        ? (
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M20 6L9 17l-5-5"/>
+          </svg>
+        ) : (
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2"/>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+          </svg>
+        )
+      }
     </button>
   )
 }
@@ -39,24 +83,40 @@ function HeroSection() {
     <section className={styles.hero}>
       <div className={styles.heroInner}>
 
-        <div className={styles.badge}>
-          <span className={styles.badgeDot} />
-          Lightweight CSS-first UI Toolkit
-        </div>
+        <mark className={styles.badge}>
+          Ignix Lite
+        </mark>
 
-        <h1 className={styles.heroTitle}>
-          Build Modern UI,
+       <h1 className={styles.heroTitle}>
+          Ultra-light
           <br />
           <span className={styles.gradientText}>
-            Without Heavy Frameworks
+            browser-native UI toolkit for <TypewriterWord />
           </span>
         </h1>
 
         <p className={styles.heroSubtitle}>
-          Ignix Lite is a modern semantic component library powered through
-          CSS variables and native HTML.
-          Fast, accessible and framework agnostic.
-        </p>
+          Designed for humans. Optimized for AI. Built for the modern web.
+          </p>
+
+        <div className={styles.stats}>
+          <div className={styles.statItem}>
+            <strong>~4KB</strong>
+            <span>Bundle Size</span>
+          </div>
+          <div className={styles.statItem}>
+            <strong>0</strong>
+            <span>Dependencies</span>
+          </div>
+          <div className={styles.statItem}>
+            <strong>100%</strong>
+            <span>Framework Free</span>
+          </div>
+          <div className={styles.statItem}>
+            <strong>A11y</strong>
+            <span>Accessible</span>
+          </div>
+        </div>
 
         <div className={styles.buttons}>
           <Link to="/docs/introduction">
@@ -80,7 +140,7 @@ function HeroSection() {
 
         <div className={styles.installBox}>
           <CopyButton text="pnpm add @mindfiredigital/ignix-lite" />
-          <code>pnpm add @mindfiredigital/ignix-lite</code>
+          <code>npm install @mindfiredigital/ignix-lite</code>
         </div>
 
       </div>

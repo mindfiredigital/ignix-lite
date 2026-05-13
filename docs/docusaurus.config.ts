@@ -5,11 +5,11 @@ import type * as Preset from '@docusaurus/preset-classic'
 const config: Config = {
   title: 'Ignix Lite',
   tagline: 'Minimal CSS-first UI system',
-  favicon: 'img/logo.svg',
+  favicon: 'img/logo.png',
 
 
   url: 'https://mindfiredigital.github.io',
-  baseUrl: '/ignix-lite/',
+  baseUrl: '/ignix-lite/', 
 
 
   organizationName: 'mindfiredigital',
@@ -50,8 +50,9 @@ const config: Config = {
     image: 'img/logo.png',
 
     colorMode: {
-      defaultMode: 'light',
+      defaultMode: 'dark',
       disableSwitch: false,
+      respectPrefersColorScheme: false,
     },
 
     navbar: {
@@ -65,11 +66,12 @@ const config: Config = {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
           position: 'left',
-          label: 'Docs',
+          label: 'Documentation',
         },
         {
           href: 'https://github.com/mindfiredigital/ignix-lite',
-          label: 'GitHub',
+          className: 'header--github-link',
+          "aria-label": 'GitHub repository',
           position: 'right',
         },
       ],
