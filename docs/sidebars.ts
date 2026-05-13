@@ -18,6 +18,7 @@ const sidebars = {
         "components/alert",
         "components/avatar",
         "components/badge",
+        "components/breadcrumb",
         "components/button",
         "components/card",
         "components/checkbox",
@@ -27,6 +28,7 @@ const sidebars = {
         "components/divider",
         "components/dropdown",
         "components/form",
+        "components/grid",
         "components/input",
         "components/meter",
         "components/progress",
@@ -38,6 +40,7 @@ const sidebars = {
         "components/textarea",
         "components/toast",
         "components/tooltip", 
+        
          
       ]
     },
