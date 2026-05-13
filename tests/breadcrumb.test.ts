@@ -48,13 +48,6 @@ describe('Breadcrumb Component', () => {
     expect(el.getAttribute('data-style')).toBe('guillemet')
   })
 
-  it('supports pipe style', () => {
-    const el = document.createElement('nav')
-
-    el.setAttribute('data-style', 'pipe')
-
-    expect(el.getAttribute('data-style')).toBe('pipe')
-  })
 
   it('supports arrow style', () => {
     const el = document.createElement('nav')

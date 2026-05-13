@@ -10,7 +10,7 @@ const box = (label: string) =>
 const spanBox = (label: string, col: string, bg: string, color: string) =>
   `<article data-col="${col}" style="background:var(--ix-${bg}-bg);color:var(--ix-${color});padding:var(--ix-space-md);border-radius:var(--ix-radius);font-size:var(--ix-size-sm);font-family:var(--ix-font);font-weight:600;text-align:center;">${label}</article>`
 
-export const TwoColumn  = {
+export const Default  = {
   render: () => `
     <section data-grid="2">
       ${box('Column 1')}

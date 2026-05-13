@@ -40,7 +40,7 @@ export const SlashStyle = {
   `,
 }
 
-export const GuilleметStyle = {
+export const GuillemетStyle = {
   render: () => `
     <nav aria-label="Breadcrumb" data-style="guillemet">
       <ol>
@@ -52,24 +52,6 @@ export const GuilleметStyle = {
         </li>
         <li>
           <a href="#" onclick="event.preventDefault()" aria-current="page">Guillemet</a>
-        </li>
-      </ol>
-    </nav>
-  `,
-}
-
-export const PipeStyle= {
-  render: () => `
-    <nav aria-label="Breadcrumb" data-style="pipe">
-      <ol>
-        <li>
-          <a href="#" onclick="event.preventDefault()">Home</a>
-        </li>
-        <li>
-          <a href="#" onclick="event.preventDefault()">Settings</a>
-        </li>
-        <li>
-          <a href="#" onclick="event.preventDefault()" aria-current="page">Pipe</a>
         </li>
       </ol>
     </nav>
