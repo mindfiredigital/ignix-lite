@@ -24,7 +24,13 @@ Ignix Lite dialogs support intent variants, accessible focus management, and cle
 
 <Preview>
 
-<div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+<section
+  style={{
+    display: 'flex',
+    gap: '1rem',
+    flexWrap: 'wrap',
+  }}
+>
 
 <button
   data-intent="danger"
@@ -64,38 +70,19 @@ Ignix Lite dialogs support intent variants, accessible focus management, and cle
   Open Info
 </button>
 
-</div>
+</section>
 
 <dialog id="danger-dialog" data-intent="danger">
 
   <h2>Confirm Delete</h2>
 
-  <p>
-    Are you sure you want to delete this item?
-  </p>
+  <p>Are you sure you want to delete this item?</p>
 
-  <p>
-    This action cannot be undone.
-  </p>
+  <p>This action cannot be undone.</p>
 
-  <div
-    style={{
-      display: 'flex',
-      gap: '0.75rem',
-      marginTop: '1rem',
-    }}
-  >
+  <footer data-actions>
 
     <button
-      style={{
-        all: 'unset',
-        padding: '0.6rem 1rem',
-        border: '1px solid var(--ix-border)',
-        borderRadius: 'var(--ix-radius)',
-        cursor: 'pointer',
-        background: 'var(--ix-surface)',
-        color: 'var(--ix-text)',
-      }}
       onClick={() => {
         const dialog = document.querySelector('#danger-dialog')
 
@@ -108,14 +95,7 @@ Ignix Lite dialogs support intent variants, accessible focus management, and cle
     </button>
 
     <button
-      style={{
-        all: 'unset',
-        padding: '0.6rem 1rem',
-        borderRadius: 'var(--ix-radius)',
-        cursor: 'pointer',
-        background: 'var(--ix-danger)',
-        color: 'var(--ix-on-danger)',
-      }}
+      data-intent="danger"
       onClick={() => {
         const dialog = document.querySelector('#danger-dialog')
 
@@ -127,7 +107,7 @@ Ignix Lite dialogs support intent variants, accessible focus management, and cle
       Delete
     </button>
 
-  </div>
+  </footer>
 
 </dialog>
 
@@ -135,15 +115,11 @@ Ignix Lite dialogs support intent variants, accessible focus management, and cle
 
   <h2>Unsaved Changes</h2>
 
-  <p>
-    You have unsaved changes.
-  </p>
+  <p>You have unsaved changes.</p>
 
-  <p>
-    Leaving now may result in data loss.
-  </p>
+  <p>Leaving now may result in data loss.</p>
 
-  <div>
+  <footer data-actions>
 
     <button
       onClick={() => {
@@ -158,7 +134,7 @@ Ignix Lite dialogs support intent variants, accessible focus management, and cle
     </button>
 
     <button
-      
+      data-intent="warning"
       onClick={() => {
         const dialog = document.querySelector('#warning-dialog')
 
@@ -170,7 +146,7 @@ Ignix Lite dialogs support intent variants, accessible focus management, and cle
       Continue
     </button>
 
-  </div>
+  </footer>
 
 </dialog>
 
@@ -178,15 +154,11 @@ Ignix Lite dialogs support intent variants, accessible focus management, and cle
 
   <h2>Session Expiring</h2>
 
-  <p>
-    Your session will expire in 2 minutes.
-  </p>
+  <p>Your session will expire in 2 minutes.</p>
 
-  <p>
-    Save your work before continuing.
-  </p>
+  <p>Save your work before continuing.</p>
 
-  <div>
+  <footer data-actions>
 
     <button
       onClick={() => {
@@ -201,6 +173,7 @@ Ignix Lite dialogs support intent variants, accessible focus management, and cle
     </button>
 
     <button
+      data-intent="primary"
       onClick={() => {
         const dialog = document.querySelector('#info-dialog')
 
@@ -212,7 +185,7 @@ Ignix Lite dialogs support intent variants, accessible focus management, and cle
       Save Work
     </button>
 
-  </div>
+  </footer>
 
 </dialog>
 
@@ -223,7 +196,7 @@ Ignix Lite dialogs support intent variants, accessible focus management, and cle
 <TabItem value="code" label="Code">
 
 ```html
-<button onclick="confirmDialog.showModal()">
+<button onclick="document.querySelector('#confirmDialog').showModal()">
   Delete Item
 </button>
 
@@ -231,24 +204,24 @@ Ignix Lite dialogs support intent variants, accessible focus management, and cle
 
   <h2>Confirm Delete</h2>
 
-  <p>
-    Are you sure you want to delete this item?
-  </p>
+  <p>Are you sure you want to delete this item?</p>
 
-  <p>
-    This action cannot be undone.
-  </p>
+  <p>This action cannot be undone.</p>
 
-  <button onclick="confirmDialog.close()">
-    Cancel
-  </button>
+  <footer data-actions>
 
-  <button
-    data-intent="danger"
-    onclick="confirmDialog.close()"
-  >
-    Delete
-  </button>
+    <button onclick="document.querySelector('#confirmDialog').close()">
+      Cancel
+    </button>
+
+    <button
+      data-intent="danger"
+      onclick="document.querySelector('#confirmDialog').close()"
+    >
+      Delete
+    </button>
+
+  </footer>
 
 </dialog>
 ```
@@ -288,46 +261,115 @@ npm install @mindfiredigital/ignix-lite
 
 ## Usage
 
-```html
-<dialog id="dialog">
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<button
+  onClick={() => {
+    const dialog = document.querySelector('#usage-dialog')
+
+    if (dialog instanceof HTMLDialogElement) {
+      dialog.showModal()
+    }
+  }}
+>
+  Open Dialog
+</button>
+
+<dialog id="usage-dialog">
 
   <h2>Dialog Title</h2>
 
   <p>
-    Dialog content goes here.
+    This is a simple dialog example.
   </p>
 
-  <button onclick="dialog.close()">
-    Close
-  </button>
+  <footer data-actions>
+
+    <button
+      onClick={() => {
+        const dialog = document.querySelector('#usage-dialog')
+
+        if (dialog instanceof HTMLDialogElement) {
+          dialog.close()
+        }
+      }}
+    >
+      Cancel
+    </button>
+
+    <button
+      data-intent="primary"
+      onClick={() => {
+        const dialog = document.querySelector('#usage-dialog')
+
+        if (dialog instanceof HTMLDialogElement) {
+          dialog.close()
+        }
+      }}
+    >
+      Confirm
+    </button>
+
+  </footer>
 
 </dialog>
 
-<button onclick="dialog.showModal()">
-  Open Dialog
-</button>
-```
+</Preview>
 
----
+</TabItem>
 
-## Intent Variants
+<TabItem value="code" label="Code">
 
 ```html
-<dialog data-intent="danger"></dialog>
+<button onclick="document.querySelector('#myDialog').showModal()">
+  Open Dialog
+</button>
 
-<dialog data-intent="warning"></dialog>
+<dialog id="myDialog">
 
-<dialog data-intent="info"></dialog>
+  <h2>Dialog Title</h2>
+
+  <p>
+    This is a simple dialog example.
+  </p>
+
+  <footer data-actions>
+
+    <button onclick="document.querySelector('#myDialog').close()">
+      Cancel
+    </button>
+
+    <button
+      data-intent="primary"
+      onclick="document.querySelector('#myDialog').close()"
+    >
+      Confirm
+    </button>
+
+  </footer>
+
+</dialog>
 ```
 
+</TabItem>
+
+</Tabs>
+
 ---
+
 
 ## Attributes
 
 | Attribute | Type | Description |
 |---|---|---|
-| `data-intent` | `'danger' \| 'warning' \| 'info'` | Applies semantic dialog styling |
+| `data-intent` | `'danger' \| 'warning' \| 'info'` | Applies semantic styling to the dialog border and background |
+| `data-actions` | `attribute` on `<footer>` | Wraps action buttons in a semantic footer action row |
+| `data-intent` on `<button>` | `'danger' \| 'warning' \| 'primary' \| 'success'` | Colors an individual action button independently |
 | `open` | `boolean` | Native dialog open state |
-| `id` | `string` | Unique dialog identifier |
-| `showModal()` | `method` | Opens the dialog as a modal |
+| `id` | `string` | Unique dialog identifier for JS targeting |
+| `showModal()` | `method` | Opens the dialog as a modal with backdrop |
 | `close()` | `method` | Closes the dialog |

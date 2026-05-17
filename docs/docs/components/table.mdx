@@ -10,8 +10,7 @@ import Preview from '@site/src/components/preview'
 
 # Table
 
-The Table component provides semantic and accessible data tables with lightweight styling.
-
+The Table component provides semantic, accessible and sortable data tables with lightweight styling.
 
 ---
 
@@ -23,9 +22,8 @@ The Table component provides semantic and accessible data tables with lightweigh
 
 <Preview>
 
-<div
+<section
   style={{
-    width: '100%',
     overflowX: 'auto',
   }}
 >
@@ -43,24 +41,36 @@ The Table component provides semantic and accessible data tables with lightweigh
     <tr>
       <td>John Doe</td>
       <td>john@example.com</td>
-      <td><mark data-intent="success">Developer</mark></td>
+      <td>
+        <mark data-intent="success">
+          Developer
+        </mark>
+      </td>
     </tr>
 
     <tr>
       <td>Jane Smith</td>
       <td>jane@example.com</td>
-      <td><mark data-intent="danger">Designer</mark></td>
+      <td>
+        <mark data-intent="danger">
+          Designer
+        </mark>
+      </td>
     </tr>
 
     <tr>
       <td>Alex Johnson</td>
       <td>alex@example.com</td>
-      <td><mark data-intent="warning">Manager</mark></td>
+      <td>
+        <mark data-intent="warning">
+          Manager
+        </mark>
+      </td>
     </tr>
   </tbody>
 </table>
 
-</div>
+</section>
 
 </Preview>
 
@@ -82,21 +92,133 @@ The Table component provides semantic and accessible data tables with lightweigh
     <tr>
       <td>John Doe</td>
       <td>john@example.com</td>
-      <td><mark data-intent="success">Developer</mark></td>
+      <td>
+        <mark data-intent="success">
+          Developer
+        </mark>
+      </td>
     </tr>
 
     <tr>
       <td>Jane Smith</td>
       <td>jane@example.com</td>
-      <td><mark data-intent="danger">Designer</mark></td>
+      <td>
+        <mark data-intent="danger">
+          Designer
+        </mark>
+      </td>
     </tr>
 
     <tr>
       <td>Alex Johnson</td>
       <td>alex@example.com</td>
-      <td><mark data-intent="warning">Manager</mark></td>
+      <td>
+        <mark data-intent="warning">
+          Manager
+        </mark>
+      </td>
     </tr>
   </tbody>
+</table>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Sortable Table
+
+Click headers or press **Enter** to sort.
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<section
+  style={{
+    overflowX: 'auto',
+  }}
+>
+
+<table is="ix-table">
+
+<thead>
+<tr>
+<th data-sortable>Name</th>
+<th data-sortable>Age</th>
+<th data-sortable>Role</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td>John</td>
+<td>28</td>
+<td>Developer</td>
+</tr>
+
+<tr>
+<td>Alex</td>
+<td>21</td>
+<td>Designer</td>
+</tr>
+
+<tr>
+<td>Emma</td>
+<td>32</td>
+<td>Manager</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</section>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<table is="ix-table">
+
+<thead>
+<tr>
+<th data-sortable>Name</th>
+<th data-sortable>Age</th>
+<th data-sortable>Role</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td>John</td>
+<td>28</td>
+<td>Developer</td>
+</tr>
+
+<tr>
+<td>Alex</td>
+<td>21</td>
+<td>Designer</td>
+</tr>
+
+<tr>
+<td>Emma</td>
+<td>32</td>
+<td>Manager</td>
+</tr>
+
+</tbody>
+
 </table>
 ```
 
@@ -116,7 +238,6 @@ The Table component provides semantic and accessible data tables with lightweigh
 npm install @mindfiredigital/ignix-lite
 ```
 
-
 </TabItem>
 
 <TabItem value="cdn" label="CDN">
@@ -126,13 +247,125 @@ npm install @mindfiredigital/ignix-lite
   rel="stylesheet"
   href="https://unpkg.com/@mindfiredigital/ignix-lite/dist/ignix-lite.min.css"
 />
-
 ```
 
 </TabItem>
 
 </Tabs>
 
+---
+
+## Usage
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<table is="ix-table">
+
+<thead>
+<tr>
+<th data-sortable>Name</th>
+<th data-sortable>Status</th>
+<th data-sortable>Department</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td>Riya Sharma</td>
+<td>
+<mark data-intent="success">
+Active
+</mark>
+</td>
+<td>Engineering</td>
+</tr>
+
+<tr>
+<td>Aditya Rao</td>
+<td>
+<mark data-intent="warning">
+Pending
+</mark>
+</td>
+<td>Design</td>
+</tr>
+
+<tr>
+<td>Neha Kapoor</td>
+<td>
+<mark data-intent="danger">
+Inactive
+</mark>
+</td>
+<td>Marketing</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<table is="ix-table">
+
+<thead>
+<tr>
+<th data-sortable>Name</th>
+<th data-sortable>Status</th>
+<th data-sortable>Department</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td>Riya Sharma</td>
+<td>
+<mark data-intent="success">
+Active
+</mark>
+</td>
+<td>Engineering</td>
+</tr>
+
+<tr>
+<td>Aditya Rao</td>
+<td>
+<mark data-intent="warning">
+Pending
+</mark>
+</td>
+<td>Design</td>
+</tr>
+
+<tr>
+<td>Neha Kapoor</td>
+<td>
+<mark data-intent="danger">
+Inactive
+</mark>
+</td>
+<td>Marketing</td>
+</tr>
+
+</tbody>
+
+</table>
+```
+
+</TabItem>
+
+</Tabs>
 
 ---
 
@@ -140,5 +373,6 @@ npm install @mindfiredigital/ignix-lite
 
 | Attribute | Type | Description |
 |---|---|---|
-| `data-sortable` | `boolean` | Enables sortable styling |
+| `data-sortable` | `boolean` | Enables sortable behavior |
 | `aria-sort` | `'ascending' \| 'descending' \| 'none'` | Sort direction state |
+| `is="ix-table"` | `string` | Enables sortable table enhancement |
