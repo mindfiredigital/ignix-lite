@@ -6,7 +6,7 @@
   "element": "article",
 
   "emmet": "article>(img[slot=avatar])+(span[slot=title])+(p[slot=body])",
-  "tokens": 4,
+  
 
   "props": {},
 

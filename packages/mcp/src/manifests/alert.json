@@ -7,7 +7,7 @@
   "element": "aside",
 
   "emmet": "aside[data-intent=?]{message}",
-  "tokens": 3,
+  
 
   "props": {
     "data-intent": {

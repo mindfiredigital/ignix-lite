@@ -6,7 +6,7 @@
   "element": "input",
 
   "emmet": "label[data-intent=? data-size=?]>(input[type=checkbox]+{Label})",
-  "tokens": 8,
+  
 
   "props": {
     "type": {

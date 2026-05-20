@@ -6,7 +6,6 @@
   "element": "input",
 
   "emmet": "label>{Label}+input[type=?]",
-  "tokens": 4,
 
   "props": {
     "type": {

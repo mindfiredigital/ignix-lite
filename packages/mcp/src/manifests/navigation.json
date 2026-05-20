@@ -7,7 +7,6 @@
 
   "emmet": "nav>ul>li*3>a",
 
-  "tokens": 2,
 
   "props": {
     "aria-current": {

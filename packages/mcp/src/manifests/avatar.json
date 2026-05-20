@@ -7,7 +7,7 @@
   "element": "img | span",
 
   "emmet": "img[src=? alt=? data-size=?]",
-  "tokens": 3,
+ 
 
   "props": {
     "data-size": {

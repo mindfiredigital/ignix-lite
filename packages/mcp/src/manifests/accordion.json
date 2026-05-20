@@ -7,7 +7,7 @@
   "element": "details",
 
   "emmet": "details[open?]>summary{title}+p{content}",
-  "tokens": 3,
+  
 
   "props": {
     "open": {

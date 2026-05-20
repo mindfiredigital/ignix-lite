@@ -6,7 +6,7 @@
   "element": "button",
 
   "emmet": "button[data-intent=?]{label}",
-  "tokens": 3,
+  
 
   "props": {
     "data-intent": {

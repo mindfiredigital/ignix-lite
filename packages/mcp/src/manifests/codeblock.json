@@ -7,7 +7,7 @@
   "element": "pre > code",
 
   "emmet": "pre>code[data-lang=?]{content}",
-  "tokens": 3,
+  
 
   "props": {
     "data-lang": {

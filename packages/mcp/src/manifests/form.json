@@ -6,7 +6,6 @@
   "element": "form",
 
   "emmet": "form#id>(label>{Label}+input[type=? name=?])+button[type=submit]{Submit}",
-  "tokens": 8,
 
   "props": {
     "id": {
