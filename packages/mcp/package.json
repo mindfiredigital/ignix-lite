@@ -6,10 +6,10 @@
   "main": "index.js",
   "scripts": {
     "test": "vitest run",
-    "dev": "tsup src/server.ts --watch",
+    "dev": "tsup src/server.ts --watch --format esm",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "build": "tsup"
+    "build": "tsup && copyfiles -u 2 src/manifests/*.json dist"
   },
   "keywords": [],
   "author": "",
@@ -20,8 +20,10 @@
   },
   "devDependencies": {
     "@types/node": "^25.6.0",
+    "copyfiles": "^2.4.1",
     "eslint": "^10.2.0",
     "prettier": "^3.8.3",
+    "tiktoken": "^1.0.22",
     "tsup": "^8.5.1",
     "typescript": "^5.4.5",
     "vitest": "^4.1.4"

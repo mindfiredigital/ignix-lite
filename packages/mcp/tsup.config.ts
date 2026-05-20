@@ -2,9 +2,11 @@ import { defineConfig } from 'tsup'
 
 export default defineConfig({
   entry: ['src/server.ts'],
-  format: ['esm', 'cjs'],
+  format: ['esm'],
+  target: 'es2020',
   dts: true,
   clean: true,
   sourcemap: true,
-  minify: true
+  bundle: true,
+  external: ['tiktoken']
 })
