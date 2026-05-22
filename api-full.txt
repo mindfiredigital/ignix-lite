@@ -1,0 +1,49 @@
+ignix-lite v2. Native HTML + ~8KB CSS. Zero classes. Zero JS (95%).
+
+ELEMENTS:
+button[data-intent=primary|danger|warning|success|neutral|ghost][disabled][aria-busy][type=button|submit|reset]
+input[type=text|email|password|number|date|search|tel|url|file][required][disabled][aria-invalid][data-intent]
+textarea[rows placeholder][disabled][required][aria-invalid][data-intent]
+select[data-intent][disabled][required][aria-invalid][multiple]>option
+label[data-intent][data-size]>(input[type=checkbox][checked][disabled][required][name][value]+{Label})
+label[data-intent][data-size]>(input[type=radio][checked][disabled][required][name][value]+{Label})
+dialog#id[data-intent=danger|warning|info]>(h2+p+button*)
+details>summary+p ; [open]=default
+progress[value max]
+meter[value min max low high optimum]
+aside[role=alert data-intent=danger|warning|success|info]{message}
+mark[data-intent=success|danger|warning|neutral]{label}
+img[src alt data-size=sm|md|lg]
+span[role=status][aria-busy][data-shape=text|rect|circle]
+article>(img[slot=avatar])+(span[slot=title])+(small[slot=meta])+(p[slot=body])+(button[slot=action])+(small[slot=footer])
+nav>ul>(li>a[href][aria-current=page]{label})*
+nav[aria-label=Breadcrumb][data-style=chevron|slash|guillemet|arrow|thread|pipe][data-intent]>ol>(li>a)*
+form#id[action][method=get|post][aria-busy][data-loading]>(label+input)+button[type=submit]
+section[data-grid=1|2|3|4|5|6|auto|fill][data-gap][data-align][data-justify][data-dense]>article[data-col][data-row]*
+hr[data-orientation=horizontal|vertical]
+pre>code[data-lang=js|ts|python|bash|html|css|json]
+table[is=ix-table]>thead>tr+tbody ; th[data-sortable][aria-sort]
+
+WEB COMPONENTS:
+ix-tabs[data-variant=underline|pill|gradient]>(button[slot=tab][aria-selected])+(section[slot=panel][hidden])
+ix-dropdown>(button[slot=trigger][aria-expanded])+ul[slot=menu]>(li>button)*
+ix-combobox>(label>(span[data-chips])+input[placeholder]+button[data-clear])+ul>(li{Option})*
+ix-tooltip[content][data-position=top|bottom|left|right][data-intent]>button
+ix-toast#toast[data-intent][data-variant=fade|slide|pop|action][data-position] ; show({title,message,intent,duration})
+
+THEME:
+:root{--ix-primary --ix-danger --ix-success --ix-surface --ix-text --ix-radius}
+DARK:prefers-color-scheme
+STATE:disabled|checked|open|loading|required|aria-busy|aria-invalid|aria-expanded|aria-selected|hidden|ascending|descending
+
+RULES:
+Use data-intent not class/variant/color
+Use native attrs for state
+Preserve slots & wrappers
+Prefer semantic HTML
+
+MCP:
+npx ignix-lite mcp
+
+TOOLS:
+list_components|get_manifest|validate|how_to_build|get_emmet|check_a11y|generate_theme|preview|create_handoff|apply_handoff
