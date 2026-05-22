@@ -1,0 +1,31 @@
+ignix-lite v2.Native HTML+8KBCSS.Zero classes.
+
+ELEMENTS:
+button[data-intent][disabled][aria-busy]
+input[type=*][required][disabled][aria-invalid]
+textarea[rows]
+select[data-intent]>option
+label>(input[type=checkbox|radio]+{Label})
+dialog#id[data-intent]
+details>summary+p
+progress[value]
+meter[value]
+aside[role=alert data-intent]
+mark[data-intent]
+article>(slot=avatar|title|body)
+form#id>(label+input)+button
+nav>ul>li>a
+breadcrumb:nav>ol>li>a
+section[data-grid]
+hr
+pre>code
+img[src alt]
+span[aria-busy=true data-shape=text]
+table[is=ix-table]
+
+WEB:ix-tabs|ix-dropdown|ix-combobox|ix-tooltip|ix-toast
+
+THEME:--ix-primary|--ix-danger|--ix-surface|--ix-text|--ix-radius
+STATE:disabled|open|aria-busy|aria-invalid|aria-expanded
+RULES:data-intent only;no class|variant|color
+MCP:list_components|get_manifest|validate|get_emmet|how_to_build
