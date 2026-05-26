@@ -6,7 +6,7 @@ export default function Preview({ children }: { children: React.ReactNode }) {
         border: "1px solid var(--ifm-color-emphasis-300)",
         borderRadius: "12px",
         padding: "24px",
-        background: "var(--ifm-background-surface-color)",
+        background: "var(--ifm-background-color)",
         marginBottom: "16px"
       }}
     >

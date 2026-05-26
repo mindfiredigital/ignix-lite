@@ -5,36 +5,37 @@ class IxCombobox extends HTMLElement {
     this.options = Array.from(this.querySelectorAll('li'))
     this.clearBtn = this.querySelector('[data-clear]')
     this.chips = this.querySelector('[data-chips]')
-
     this.isMultiple = this.hasAttribute('multiple')
     this.activeIndex = -1
-
     this.input.setAttribute('role', 'combobox')
     this.input.setAttribute('aria-expanded', 'false')
-    this.input.setAttribute('aria-controls', 'ix-combobox-list')
+    this.input.setAttribute('aria-autocomplete', 'list')
 
-    this.list.setAttribute('role', 'listbox')
     this.list.id = 'ix-combobox-list'
+    this.input.setAttribute('aria-controls', this.list.id)
     this.list.hidden = true
 
     this.options.forEach((opt, i) => {
+      opt.id = `ix-option-${i}`
       opt.setAttribute('role', 'option')
-      opt.setAttribute('data-index', i)
     })
 
+    this.clearBtn.hidden = true
     this.bindEvents()
-    this.updateClear()
     this.renderChips()
   }
 
   bindEvents() {
     this.input.addEventListener('focus', () => this.open())
-    this.input.addEventListener('input', () => this.filter())
-    this.input.addEventListener('keydown', (e) => this.onKey(e))
-
-    this.options.forEach((opt) => {
-      opt.addEventListener('click', () => this.select(opt))
+    this.input.addEventListener('input', () => {
+      this.filter()
+      this.open()
     })
+
+    this.input.addEventListener('keydown', (e) => this.onKey(e))
+    this.options.forEach((opt) =>
+      opt.addEventListener('click', () => this.select(opt))
+    )
 
     this.clearBtn.addEventListener('mousedown', (e) => {
       e.preventDefault()
@@ -42,7 +43,9 @@ class IxCombobox extends HTMLElement {
     })
 
     document.addEventListener('click', (e) => {
-      if (!this.contains(e.target)) this.close()
+      if (!this.contains(e.target)) {
+        this.close()
+      }
     })
   }
 
@@ -53,25 +56,24 @@ class IxCombobox extends HTMLElement {
 
   close() {
     this.list.hidden = true
-    this.input.setAttribute('aria-expanded', 'false')
     this.activeIndex = -1
+    this.input.setAttribute('aria-expanded', 'false')
     this.clearActive()
   }
 
   filter() {
     const value = this.input.value.toLowerCase()
-
     this.options.forEach((opt) => {
-      const match = opt.textContent.toLowerCase().includes(value)
-      opt.hidden = !match
+      opt.hidden = !opt.textContent.toLowerCase().includes(value)
     })
   }
 
   onKey(e) {
     const visible = this.options.filter((o) => !o.hidden)
-
+    if (!visible.length) return
     if (e.key === 'ArrowDown') {
       e.preventDefault()
+      this.open()
       this.activeIndex = (this.activeIndex + 1) % visible.length
       this.setActive(visible)
     }
@@ -85,12 +87,15 @@ class IxCombobox extends HTMLElement {
 
     if (e.key === 'Enter') {
       e.preventDefault()
-      if (visible[this.activeIndex]) {
-        this.select(visible[this.activeIndex])
-      }
+      const el = visible[this.activeIndex]
+      if (el) this.select(el)
     }
 
-    if (e.key === 'Escape' || e.key === 'Tab') {
+    if (e.key === 'Escape') {
+      this.close()
+    }
+
+    if (e.key === 'Tab') {
       this.close()
     }
   }
@@ -98,10 +103,12 @@ class IxCombobox extends HTMLElement {
   setActive(visible) {
     this.clearActive()
     const el = visible[this.activeIndex]
-    if (el) {
-      el.setAttribute('data-active', 'true')
-      el.scrollIntoView({ block: 'nearest' })
-    }
+    if (!el) return
+    el.setAttribute('data-active', 'true')
+    this.input.setAttribute('aria-activedescendant', el.id)
+    el.scrollIntoView({
+      block: 'nearest'
+    })
   }
 
   clearActive() {
@@ -110,9 +117,8 @@ class IxCombobox extends HTMLElement {
 
   select(opt) {
     if (this.isMultiple) {
-      const isSelected = opt.hasAttribute('data-selected')
-      if (isSelected) opt.removeAttribute('data-selected')
-      else opt.setAttribute('data-selected', 'true')
+      opt.toggleAttribute('data-selected')
+      this.renderChips()
     } else {
       this.options.forEach((o) => o.removeAttribute('data-selected'))
       opt.setAttribute('data-selected', 'true')
@@ -121,61 +127,43 @@ class IxCombobox extends HTMLElement {
     }
 
     this.updateClear()
-    this.renderChips()
   }
 
   clearAll() {
     this.options.forEach((o) => o.removeAttribute('data-selected'))
     this.input.value = ''
-    this.filter()
-    this.updateClear()
     this.renderChips()
-  }
-
-  removeOne(label) {
-    const opt = this.options.find((o) => o.textContent === label)
-    if (opt) opt.removeAttribute('data-selected')
     this.updateClear()
-    this.renderChips()
+    this.close()
   }
 
   updateClear() {
-    const hasSelection = this.options.some((o) =>
-      o.hasAttribute('data-selected')
-    )
-    this.clearBtn.style.display = hasSelection ? 'block' : 'none'
+    const selected = this.options.some((o) => o.hasAttribute('data-selected'))
+    this.clearBtn.hidden = !selected
   }
 
   renderChips() {
     if (!this.isMultiple || !this.chips) return
-
-    const selected = this.options
-      .filter((o) => o.hasAttribute('data-selected'))
-      .map((o) => o.textContent)
-
     this.chips.innerHTML = ''
 
-    selected.forEach((text) => {
-      const chip = document.createElement('span')
-      chip.textContent = text
+    this.options
+      .filter((o) => o.hasAttribute('data-selected'))
+      .forEach((opt) => {
+        const chip = document.createElement('span')
+        chip.textContent = opt.textContent
+        const btn = document.createElement('button')
+        btn.innerHTML = '&times;'
+        btn.addEventListener('mousedown', (e) => {
+          e.preventDefault()
+          opt.removeAttribute('data-selected')
+          this.renderChips()
+          this.updateClear()
+        })
 
-      const btn = document.createElement('button')
-      btn.textContent = '⨯'
-      btn.setAttribute('aria-label', `Remove ${text}`)
-
-      btn.addEventListener('mousedown', (e) => {
-        e.preventDefault()
-        this.removeOne(text)
+        chip.append(btn)
+        this.chips.append(chip)
       })
-
-      chip.appendChild(btn)
-      this.chips.appendChild(chip)
-    })
-
-    this.input.value = ''
   }
 }
 
-if (!customElements.get('ix-combobox')) {
-  customElements.define('ix-combobox', IxCombobox)
-}
+customElements.define('ix-combobox', IxCombobox)
