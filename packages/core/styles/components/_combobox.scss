@@ -1,19 +1,27 @@
 ix-combobox {
   position: relative;
-
   display: inline-flex;
   flex-direction: column;
-
   gap: var(--ix-space-sm);
+  width: 320px;
+}
 
-  width: 260px;
+ix-combobox label[part='control'] {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto;
+  align-items: stretch;
+  gap: var(--ix-space-sm);
+  width: 100%;
 }
 
 ix-combobox [data-chips] {
+  grid-column: 1 / -1;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  gap: 4px;
+  gap: 8px;
+  width: 100%;
 }
 
 ix-combobox [data-chips]:empty {
@@ -23,119 +31,121 @@ ix-combobox [data-chips]:empty {
 ix-combobox [data-chips] span {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
+  padding: 5px var(--ix-space-md);
+  border-radius: var(--ix-badge-radius);
 
-  padding: 0 var(--ix-space-sm);
-  border-radius: var(--ix-radius);
-
-  border: 1px solid var(--ix-border);
+  border: 1px solid transparent;
   background: var(--ix-surface-raised);
   color: var(--ix-text);
-
   font-size: var(--ix-size-sm);
-  line-height: var(--ix-line-height);
 
   white-space: nowrap;
 }
 
 ix-combobox [data-chips] button {
   all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  border-radius: 999px;
   cursor: pointer;
-  opacity: 0.7;
   font-size: 12px;
   line-height: 1;
+  transition:
+    background 0.15s ease,
+    opacity 0.15s ease;
 }
 
 ix-combobox [data-chips] button:hover {
-  opacity: 1;
+  background: rgb(255 255 255 / 0.12);
 }
 
-ix-combobox [data-input] {
-  display: flex;
-  align-items: center;
-
+ix-combobox input {
   width: 100%;
-
+  min-width: 0;
+  box-sizing: border-box;
+  padding: var(--ix-space-sm);
   border: 1px solid var(--ix-border);
   border-radius: var(--ix-radius);
+  outline: none;
   background: var(--ix-surface);
 
-  transition:
-    border-color 0.15s ease,
-    box-shadow 0.15s ease;
+  color: var(--ix-text);
+
+  font-size: var(--ix-size-sm);
+
+  font-family: var(--ix-font);
 }
 
-ix-combobox [data-input]:focus-within {
+ix-combobox input:focus {
   border-color: var(--ix-primary);
   box-shadow: 0 0 0 2px rgb(99 102 241 / 0.12);
 }
 
-ix-combobox input {
-  flex: 1;
-  min-width: 0;
-
-  padding: var(--ix-space-sm);
-  border: none;
-  outline: none;
-
-  background: transparent;
-  color: var(--ix-text);
-
-  font-size: var(--ix-size-sm);
-  font-family: var(--ix-font);
-
-  -webkit-appearance: none;
-  appearance: none;
-}
-
-ix-combobox input::placeholder {
-  color: var(--ix-text-muted);
-}
-
-ix-combobox [data-input] button[data-clear] {
+ix-combobox [data-clear] {
   all: unset;
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
-  flex-shrink: 0;
-
-  margin-left: auto;
-  padding: 0 var(--ix-space-sm);
-
-  height: 100%;
-
-  cursor: pointer;
+  min-width: 64px;
+  padding: 0 14px;
+  border: 1px solid var(--ix-border);
+  border-radius: var(--ix-radius);
+  background: var(--ix-surface-raised);
   color: var(--ix-text-muted);
-  font-size: 12px;
-  line-height: 1;
+  cursor: pointer;
+  white-space: nowrap;
 }
 
-ix-combobox [data-input] button[data-clear]:hover {
+ix-combobox [data-clear]:hover {
+  border-color: var(--ix-primary);
+
   color: var(--ix-text);
+}
+
+ix-combobox [data-clear][hidden] {
+  display: none;
 }
 
 ix-combobox ul {
   position: absolute;
+
   top: calc(100% + 6px);
+
   left: 0;
+
   width: 100%;
 
+  box-sizing: border-box;
+
   margin: 0;
+
   padding: 4px;
+
   list-style: none;
 
   background: var(--ix-surface-raised);
+
   border: 1px solid var(--ix-border);
+
   border-radius: var(--ix-radius-lg);
+
   box-shadow: var(--ix-shadow);
+
   z-index: 1000;
+
+  overflow: hidden;
 }
 
 ix-combobox li {
   padding: 8px 10px;
+
   border-radius: var(--ix-radius);
+
   cursor: pointer;
 
   transition:
@@ -156,6 +166,13 @@ ix-combobox[data-intent='primary'] li:hover,
 ix-combobox[data-intent='primary'] li[data-selected='true'],
 ix-combobox[data-intent='primary'] li[data-active='true'] {
   background: var(--ix-primary);
+
+  color: var(--ix-on-primary);
+}
+
+ix-combobox[data-intent='primary'] [data-chips] span {
+  background: var(--ix-primary);
+
   color: var(--ix-on-primary);
 }
 
@@ -163,6 +180,13 @@ ix-combobox[data-intent='success'] li:hover,
 ix-combobox[data-intent='success'] li[data-selected='true'],
 ix-combobox[data-intent='success'] li[data-active='true'] {
   background: var(--ix-success);
+
+  color: var(--ix-on-success);
+}
+
+ix-combobox[data-intent='success'] [data-chips] span {
+  background: var(--ix-success);
+
   color: var(--ix-on-success);
 }
 
@@ -173,10 +197,23 @@ ix-combobox[data-intent='warning'] li[data-active='true'] {
   color: var(--ix-on-warning);
 }
 
+ix-combobox[data-intent='warning'][data-chips] span {
+  background: var(--ix-warning);
+
+  color: var(--ix-on-warning);
+}
+
 ix-combobox[data-intent='danger'] li:hover,
 ix-combobox[data-intent='danger'] li[data-selected='true'],
 ix-combobox[data-intent='danger'] li[data-active='true'] {
   background: var(--ix-danger);
+
+  color: var(--ix-on-danger);
+}
+
+ix-combobox[data-intent='danger'] [data-chips] span {
+  background: var(--ix-danger);
+
   color: var(--ix-on-danger);
 }
 
@@ -184,34 +221,12 @@ ix-combobox[data-intent='gradient'] li:hover,
 ix-combobox[data-intent='gradient'] li[data-selected='true'],
 ix-combobox[data-intent='gradient'] li[data-active='true'] {
   background: var(--ix-gradient);
+
   color: var(--ix-on-primary);
 }
 
-ix-combobox[data-intent='primary'] [data-chips] span {
-  background: var(--ix-primary);
+ix-combobox[data-intent='gradient'] [data-chips] span {
+  background: var(--ix-gradient);
+
   color: var(--ix-on-primary);
-  border-color: transparent;
-}
-
-ix-combobox[data-intent='danger'] [data-chips] span {
-  background: var(--ix-danger);
-  color: var(--ix-on-danger);
-  border-color: transparent;
-}
-
-ix-combobox[data-intent='warning'] [data-chips] span {
-  background: var(--ix-warning);
-  color: var(--ix-on-warning);
-  border-color: transparent;
-}
-
-ix-combobox[data-intent='success'] [data-chips] span {
-  background: var(--ix-success);
-  color: var(--ix-on-success);
-  border-color: transparent;
-}
-
-ix-combobox[data-intent='neutral'] [data-chips] span {
-  background: var(--ix-surface-raised);
-  color: var(--ix-text);
 }
