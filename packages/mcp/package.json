@@ -6,10 +6,11 @@
   "main": "index.js",
   "scripts": {
     "test": "vitest run",
-    "dev": "tsup src/server.ts --watch --format esm",
+    "dev": "tsup src/server.ts --watch --format esm --no-clean --onSuccess \"copyfiles -u 2 src/manifests/*.json dist/manifests\"",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "build": "tsup && copyfiles -u 2 src/manifests/*.json dist"
+    "build": "tsup && copyfiles -u 2 src/manifests/*.json dist/manifests && pnpm build:index",
+    "build:index": "tsx src/tools/build-index.ts"
   },
   "keywords": [],
   "author": "",
@@ -30,6 +31,7 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.29.0",
+    "emmet": "^2.4.11",
     "node-html-parser": "^7.1.0",
     "zod": "^4.4.3"
   }
