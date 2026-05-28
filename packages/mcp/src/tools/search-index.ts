@@ -1,6 +1,6 @@
-import { readFileSync } from 'fs'
+import { readFileSync, existsSync } from 'fs'
 import { embedText } from './embedder.js'
-import { cosineSimilarity } from './cosine.js'
+import { cosineSimilarity } from '../utils/cosine.js'
 
 type IndexItem = {
   name: string
@@ -9,10 +9,24 @@ type IndexItem = {
   embedding: number[]
 }
 
-const index: IndexItem[] = JSON.parse(
-  readFileSync('dist/vector-index.json', 'utf8')
-)
+let _index: IndexItem[] | null = null
+
+function loadIndex(): IndexItem[] {
+  if (_index) return _index
+  const path = 'dist/vector-index.json'
+  if (!existsSync(path)) {
+    console.warn(
+      '[search-index] dist/vector-index.json not found - run pnpm build:index'
+    )
+    _index = []
+    return _index
+  }
+  _index = JSON.parse(readFileSync(path, 'utf8'))
+  return _index!
+}
+
 export function searchIndex(description: string) {
+  const index = loadIndex()
   const queryEmbedding = embedText(description)
 
   const words = description.toLowerCase().split(/\s+/)
