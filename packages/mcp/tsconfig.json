@@ -5,7 +5,8 @@
     "moduleResolution": "NodeNext",
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "strict": true
+    "strict": true,
+    "outDir": "./dist"
   },
   "include": ["src/**/*", "src/**/*.json"]
 }

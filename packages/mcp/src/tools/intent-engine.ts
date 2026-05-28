@@ -1,6 +1,7 @@
 import { searchIndex } from './search-index.js'
 import { getIntentEntries, scoreEntry } from '../utils/intent-parser.js'
 import { getTokenCount } from '../utils/tokenizer.js'
+import { tokenise } from '../utils/intent-helpers.js'
 import {
   expandEmmet,
   extractComponents,
