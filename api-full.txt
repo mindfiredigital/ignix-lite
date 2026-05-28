@@ -46,3 +46,240 @@ npx ignix-lite mcp
 
 TOOLS:
 list_components|get_manifest|validate|how_to_build|get_emmet|check_a11y|generate_theme|preview|create_handoff|apply_handoff
+
+INTENTS:
+[caveman prompt -> emmet. match closest.]
+
+--- DESTROY / DANGER ---
+user want delete thing
+- button[data-intent=danger]{Delete}
+
+user want remove item from list
+- button[data-intent=danger]{Remove}
+
+user want cancel account / danger zone
+- section>(h2{Danger Zone})+p{Cannot undo.}+button[data-intent=danger]{Delete Account}
+
+user need confirm before destroy
+- dialog#confirm[data-intent=danger]>(h2{Are you sure?})+p{This cannot be undone.}+(button{Cancel})+(button[data-intent=danger]{Delete})
+
+--- WARN USER ---
+user about to do risky thing
+- dialog#warn[data-intent=warning]>(h2{Warning})+p{This will affect all users.}+(button{Cancel})+(button[data-intent=warning]{Continue})
+
+show yellow warning banner
+- aside[data-intent=warning]{Your session will expire soon.}
+
+--- TELL USER SUCCESS ---
+thing worked. show green
+- aside[data-intent=success]{Changes saved!}
+
+show success popup / toast
+- ix-toast#t[data-intent=success data-variant=slide];show({title:"Done",message:"Saved.",intent:"success",duration:3000})
+
+--- TELL USER ERROR ---
+something broke. show red
+- aside[data-intent=danger]{Something went wrong. Please try again.}
+
+input is wrong. highlight field
+- label>(input[type=text aria-invalid=true data-intent=danger]+span{Error message here})
+
+show error popup
+- ix-toast#t[data-intent=danger data-variant=pop];show({title:"Error",message:"Failed.",intent:"danger"})
+
+--- SHOW INFO ---
+neutral info banner / tip
+- aside[data-intent=info]{Your data syncs every 5 minutes.}
+
+--- LOADING / ASYNC ---
+button doing async work right now
+- button[aria-busy=true data-intent=primary]{Saving…}
+
+whole form submitting
+- form#f[aria-busy=true]>(label{Email}+input[type=email])+button[type=submit aria-busy=true]{Submitting…}
+
+page section loading
+- span[role=status aria-busy=true data-shape=rect]
+
+show skeleton card while data loads
+- article>(span[slot=avatar aria-busy data-shape=circle])+(span[slot=title aria-busy data-shape=text])+(p[slot=body aria-busy data-shape=text])
+
+--- USER INPUT: TEXT ---
+user type text
+- label{Label}+input[type=text]
+
+user type email
+- label{Email}+input[type=email required]
+
+user type password
+- label{Password}+input[type=password required]
+
+user type number
+- label{Amount}+input[type=number]
+
+user type phone
+- label{Phone}+input[type=tel]
+
+user type url
+- label{Website}+input[type=url]
+
+user pick date
+- label{Date}+input[type=date]
+
+user search / filter list
+- label{Search}+input[type=search]
+
+user upload file
+- label{Upload}+input[type=file]
+
+user write long text / bio / message
+- label{Message}+textarea[rows=4 placeholder="Type here…"]
+
+--- USER INPUT: CHOICE ---
+user pick one from dropdown list
+- select[required]>(option{Choose…})+(option[value=a]{Option A})+(option[value=b]{Option B})
+
+user pick one with radio buttons
+- (label>(input[type=radio name=g value=a]+{Option A}))+(label>(input[type=radio name=g value=b]+{Option B}))
+
+user toggle yes/no with checkbox
+- label>(input[type=checkbox]+{I agree to terms})
+
+user pick many items / multi-select chips
+- ix-combobox>(label>(span[data-chips])+input[placeholder="Search…"]+button[data-clear])+ul>(li{Option A})+(li{Option B})+(li{Option C})
+
+--- FORM ---
+basic form with submit
+- form#f[method=post]>(label{Name}+input[type=text required])+button[type=submit data-intent=primary]{Submit}
+
+login form
+- form#login>(label{Email}+input[type=email required])+(label{Password}+input[type=password required])+button[type=submit data-intent=primary]{Sign In}
+
+login form with avatar / login with profile picture
+- form#login>(img[src=? alt="User avatar" data-size=md])+(label{Email}+input[type=email required])+(label{Password}+input[type=password required])+button[type=submit data-intent=primary]{Sign In}
+
+signup / register form
+- form#signup>(label{Name}+input[type=text required])+(label{Email}+input[type=email required])+(label{Password}+input[type=password required])+button[type=submit data-intent=primary]{Create Account}
+
+contact / message form
+- form#contact>(label{Name}+input[type=text required])+(label{Email}+input[type=email required])+(label{Message}+textarea[rows=5 required])+button[type=submit data-intent=primary]{Send}
+
+settings form with save button
+- form#settings>(label{Display Name}+input[type=text])+(label{Email}+input[type=email])+button[type=submit data-intent=primary]{Save Changes}
+
+--- NAVIGATION ---
+top nav / menu links
+- nav>ul>(li>a[href=/]{Home})+(li>a[href=/about]{About})+(li>a[href=/contact]{Contact})
+
+breadcrumb trail
+- nav[aria-label=Breadcrumb data-style=chevron]>ol>(li>a[href=/]{Home})+(li>a[href=/settings]{Settings})+(li{Profile})
+
+tabs / tabbed sections
+- ix-tabs[data-variant=underline]>(button[slot=tab aria-selected=true]{Tab 1})+(button[slot=tab]{Tab 2})+(section[slot=panel]{Content 1})+(section[slot=panel hidden]{Content 2})
+
+pill tabs
+- ix-tabs[data-variant=pill]>(button[slot=tab aria-selected=true]{Overview})+(button[slot=tab]{Details})+(section[slot=panel]{…})+(section[slot=panel hidden]{…})
+
+--- DROPDOWN / MENU ---
+button that opens menu
+- ix-dropdown>(button[slot=trigger aria-expanded=false]{Options ▾})+ul[slot=menu]>(li>button{Edit})+(li>button{Duplicate})+(li>button[data-intent=danger]{Delete})
+
+user avatar menu / profile menu
+- ix-dropdown>(button[slot=trigger]{Profile ▾})+ul[slot=menu]>(li>a[href=/profile]{My Profile})+(li>a[href=/settings]{Settings})+(li>button[data-intent=danger]{Sign Out})
+
+--- TOOLTIP / HINT ---
+show hint on hover
+- ix-tooltip[content="More info here" data-position=top]>button{?}
+
+show danger warning on hover
+- ix-tooltip[content="This will delete everything" data-intent=danger data-position=top]>button[data-intent=danger]{Delete}
+
+--- BADGE / LABEL / TAG ---
+green status badge
+- mark[data-intent=success]{Active}
+
+red status badge / error tag
+- mark[data-intent=danger]{Failed}
+
+yellow warning tag
+- mark[data-intent=warning]{Pending}
+
+neutral grey tag
+- mark[data-intent=neutral]{Draft}
+
+--- CARD ---
+user profile card
+- article>(img[slot=avatar src=? alt="User photo" data-size=md])+(h2[slot=title]{Name})+(small[slot=meta]{Role})+(p[slot=body]{Short bio here.})+(button[slot=action data-intent=primary]{View Profile})
+
+product card
+- article>(img[slot=avatar src=? alt="Product"])+(h3[slot=title]{Product Name})+(small[slot=meta]{$29.99})+(p[slot=body]{Short description.})+(a[slot=action href=? data-intent=primary]{Buy Now})
+
+simple content card / info card
+- article>(h3[slot=title]{Card Title})+(p[slot=body]{Card body content goes here.})+(button[slot=action data-intent=ghost]{Learn More})
+
+--- ACCORDION / FAQ ---
+expandable section / FAQ item
+- details>summary{Question goes here?}+p{Answer goes here.}
+
+multiple FAQ items
+- (details>summary{Question 1}+p{Answer 1})+(details>summary{Question 2}+p{Answer 2})+(details>summary{Question 3}+p{Answer 3})
+
+default open accordion
+- details[open]>summary{Already Open}+p{This is visible by default.}
+
+--- PROGRESS / METER ---
+show how far along task is
+- progress[value=60 max=100]
+
+show health / score / level gauge
+- meter[value=7 min=0 max=10 low=3 high=8 optimum=9]
+
+--- TABLE ---
+data table with sort
+- table[is=ix-table]>(thead>tr>(th[data-sortable]{Name})+(th[data-sortable]{Status})+(th{Actions}))+(tbody>tr>(td{Row 1})+(td>mark[data-intent=success]{Active})+(td>button[data-intent=danger]{Delete}))
+
+--- CODE / PREFORMATTED ---
+show code snippet
+- pre>code[data-lang=js]{const x = 1;}
+
+--- DIVIDER ---
+horizontal line / separator
+- hr[data-orientation=horizontal]
+
+vertical divider between items
+- hr[data-orientation=vertical]
+
+--- AVATAR / IMAGE ---
+user avatar small
+- img[src=? alt="User" data-size=sm]
+
+user avatar large
+- img[src=? alt="User" data-size=lg]
+
+--- GRID LAYOUT ---
+2-column card grid
+- section[data-grid=2 data-gap]>(article{Card 1})+(article{Card 2})+(article{Card 3})+(article{Card 4})
+
+3-column responsive grid
+- section[data-grid=3 data-gap]>(article{A})+(article{B})+(article{C})
+
+auto-fill responsive grid
+- section[data-grid=fill data-gap]>(article{Item})*6
+
+--- FULL PAGE PATTERNS ---
+settings page with danger zone
+- main>(form#settings>(label{Email}+input[type=email])+button[type=submit data-intent=primary]{Save})+(section>(h2{Danger Zone})+button[data-intent=danger]{Delete Account})
+
+dashboard with cards and table
+- main>(section[data-grid=3 data-gap]>(article>(h3[slot=title]{Users})+(p[slot=body]{142}))+(article>(h3[slot=title]{Revenue})+(p[slot=body]{$4,200}))+(article>(h3[slot=title]{Issues})+(p[slot=body]>mark[data-intent=danger]{3 open})))+(table[is=ix-table]>(thead>tr>(th[data-sortable]{Name})+(th{Status}))+(tbody>tr>(td{Alice})+(td>mark[data-intent=success]{Active})))
+
+login page
+- main>(h1{Sign In})+(form#login>(label{Email}+input[type=email required])+(label{Password}+input[type=password required])+button[type=submit data-intent=primary]{Sign In})
+
+--- NEVER DO ---
+never use class=         - use data-intent
+never use variant=       - use data-intent
+never use color=         - use data-intent
+never use isDisabled=    - use disabled
+never use isLoading=     - use aria-busy=true
+never use onClick on CSS component - CSS-only, no JS handler needed

@@ -10,6 +10,9 @@ import { getManifest } from './tools/get-manifests.js'
 import { getEmmet } from './tools/get-emmet.js'
 import { validate } from './tools/validator.js'
 import { howToBuild } from './tools/intent-engine.js'
+import { apiContext } from './context/api-context.js'
+import { generateTheme } from './tools/generate-theme.js'
+import { checkA11y } from './tools/check-a11y.js'
 
 type ValidateArgs = {
   html?: string
@@ -17,6 +20,10 @@ type ValidateArgs = {
 
 type IntentArgs = {
   description?: string
+}
+
+type A11yArgs = {
+  html?: string
 }
 
 const server = new Server(
@@ -98,7 +105,46 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
         },
         required: ['description']
       }
-    }
+    },
+    {
+      name: 'generate_theme',
+
+      description:
+        'Generate ignix theme tokens',
+
+      inputSchema: {
+        type: 'object',
+
+        properties: {
+          prompt: {
+            type: 'string'
+          }
+        },
+
+        required: [
+          'prompt'
+        ]
+      }
+    },
+    {
+      name: 'check_a11y',
+
+      description: 'Check accessibility',
+
+      inputSchema: {
+        type: 'object',
+
+        properties: {
+          html: {
+            type: 'string'
+          }
+        },
+
+        required: [
+          'html'
+        ]
+      }
+    },
   ]
 }))
 
@@ -126,6 +172,15 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
       return howToBuild(intentArgs.description ?? '')
     }
+    case 'generate_theme': {
+      return generateTheme(args)
+    }
+    case 'check_a11y': {
+      const a11yArgs = args as A11yArgs
+
+      return checkA11y(a11yArgs.html ?? '')
+
+    }
 
     default:
       return {
@@ -143,6 +198,9 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 })
 
 async function start() {
+
+  console.log('API loaded')
+  console.log(apiContext.length)
   const transport = new StdioServerTransport()
   await server.connect(transport)
   console.log('Ignix MCP started')
