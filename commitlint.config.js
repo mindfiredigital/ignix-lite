@@ -18,7 +18,8 @@ export default {
         'docs',
         'release',
         'deps',
-        'test'
+        'test',
+        'stories'
       ],
     ],
     'scope-empty': [2, 'never'],

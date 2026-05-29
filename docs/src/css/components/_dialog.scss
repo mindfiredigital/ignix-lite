@@ -1,11 +1,27 @@
 dialog {
   padding: var(--ix-space-md);
+
   border-radius: var(--ix-radius);
+
   border: 1px solid var(--ix-border);
+
   background: var(--ix-surface);
+
   color: var(--ix-text);
+
   box-shadow: var(--ix-shadow);
+
   max-width: 28rem;
+
+  position: fixed;
+
+  margin: auto;
+
+  width: revert;
+
+  height: revert;
+
+  transition: opacity 0.2s ease;
 
   h2 {
     margin: 0 0 var(--ix-space-sm);
@@ -13,6 +29,7 @@ dialog {
 
   p {
     margin: 0 0 var(--ix-space-md);
+
     color: var(--ix-text-muted);
   }
 
@@ -24,28 +41,37 @@ dialog {
     }
   }
 
- &::backdrop {
+  &::backdrop {
     background: rgb(0 0 0 / 0.45);
+
     backdrop-filter: blur(2px);
- }
+  }
 
   &[data-intent='danger'] {
     border-color: var(--ix-danger);
+
     background: var(--ix-danger-bg);
   }
 
   &[data-intent='warning'] {
     border-color: var(--ix-warning);
+
     background: var(--ix-warning-bg);
   }
 
   &[data-intent='info'] {
     border-color: var(--ix-neutral);
+
     background: var(--ix-info-bg);
   }
 
   &:focus-visible {
     outline: 2px solid var(--ix-primary);
+
     outline-offset: 2px;
   }
+}
+
+dialog[open] {
+  display: block;
 }
