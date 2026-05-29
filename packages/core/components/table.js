@@ -4,17 +4,32 @@ class IxTable extends HTMLTableElement {
 
     headers.forEach((header) => {
       header.tabIndex = 0
+    })
 
-      header.addEventListener('click', () => this.sortColumn(header))
+    this._tableClickListener = (event) => {
+      const header = event.target.closest('th[data-sortable]')
+      if (header && this.contains(header)) {
+        this.sortColumn(header)
+      }
+    }
 
-      header.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter' || event.key === ' ') {
+    this._tableKeydownListener = (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        const header = event.target.closest('th[data-sortable]')
+        if (header && this.contains(header)) {
           event.preventDefault()
-
           this.sortColumn(header)
         }
-      })
-    })
+      }
+    }
+
+    this.addEventListener('click', this._tableClickListener)
+    this.addEventListener('keydown', this._tableKeydownListener)
+  }
+
+  disconnectedCallback() {
+    this.removeEventListener('click', this._tableClickListener)
+    this.removeEventListener('keydown', this._tableKeydownListener)
   }
 
   sortColumn(header) {
@@ -23,7 +38,9 @@ class IxTable extends HTMLTableElement {
     if (!tbody) return
 
     const rows = Array.from(tbody.querySelectorAll('tr'))
-    const columnIndex = Array.from(header.parentElement.children).indexOf(header)
+    const columnIndex = Array.from(header.parentElement.children).indexOf(
+      header
+    )
     const ascending = header.getAttribute('aria-sort') !== 'ascending'
     this.querySelectorAll('th').forEach((th) => th.removeAttribute('aria-sort'))
     header.setAttribute('aria-sort', ascending ? 'ascending' : 'descending')

@@ -42,11 +42,30 @@ class IxCombobox extends HTMLElement {
       this.clearAll()
     })
 
-    document.addEventListener('click', (e) => {
+    this._outsideClickListener = (e) => {
       if (!this.contains(e.target)) {
         this.close()
       }
-    })
+    }
+    document.addEventListener('click', this._outsideClickListener)
+
+    if (this.chips) {
+      this.chips.addEventListener('mousedown', (e) => {
+        const btn = e.target.closest('button')
+        if (btn && btn._option) {
+          e.preventDefault()
+          btn._option.removeAttribute('data-selected')
+          this.renderChips()
+          this.updateClear()
+        }
+      })
+    }
+  }
+
+  disconnectedCallback() {
+    if (this._outsideClickListener) {
+      document.removeEventListener('click', this._outsideClickListener)
+    }
   }
 
   open() {
@@ -153,12 +172,7 @@ class IxCombobox extends HTMLElement {
         chip.textContent = opt.textContent
         const btn = document.createElement('button')
         btn.innerHTML = '&times;'
-        btn.addEventListener('mousedown', (e) => {
-          e.preventDefault()
-          opt.removeAttribute('data-selected')
-          this.renderChips()
-          this.updateClear()
-        })
+        btn._option = opt
 
         chip.append(btn)
         this.chips.append(chip)

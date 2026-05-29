@@ -109,8 +109,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
     {
       name: 'generate_theme',
 
-      description:
-        'Generate ignix theme tokens',
+      description: 'Generate ignix theme tokens',
 
       inputSchema: {
         type: 'object',
@@ -121,9 +120,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
           }
         },
 
-        required: [
-          'prompt'
-        ]
+        required: ['prompt']
       }
     },
     {
@@ -140,11 +137,9 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
           }
         },
 
-        required: [
-          'html'
-        ]
+        required: ['html']
       }
-    },
+    }
   ]
 }))
 
@@ -170,7 +165,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
     case 'how_to_build': {
       const intentArgs = args as IntentArgs
 
-      return howToBuild(intentArgs.description ?? '')
+      return await howToBuild(intentArgs.description ?? '')
     }
     case 'generate_theme': {
       return generateTheme(args)
@@ -179,7 +174,6 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       const a11yArgs = args as A11yArgs
 
       return checkA11y(a11yArgs.html ?? '')
-
     }
 
     default:
@@ -198,7 +192,6 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 })
 
 async function start() {
-
   console.log('API loaded')
   console.log(apiContext.length)
   const transport = new StdioServerTransport()

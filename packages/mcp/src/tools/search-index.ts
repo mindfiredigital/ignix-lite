@@ -1,4 +1,6 @@
+import path from 'path'
 import { readFileSync, existsSync } from 'fs'
+import { fileURLToPath } from 'url'
 import { embedText } from './embedder.js'
 import { cosineSimilarity } from '../utils/cosine.js'
 
@@ -9,19 +11,27 @@ type IndexItem = {
   embedding: number[]
 }
 
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
 let _index: IndexItem[] | null = null
 
 function loadIndex(): IndexItem[] {
   if (_index) return _index
-  const path = 'dist/vector-index.json'
-  if (!existsSync(path)) {
+  const indexPath = path.resolve(__dirname, '../../dist/vector-index.json')
+  if (!existsSync(indexPath)) {
     console.warn(
-      '[search-index] dist/vector-index.json not found - run pnpm build:index'
+      `[search-index] dist/vector-index.json not found at: ${indexPath} - run pnpm build:index`
     )
     _index = []
     return _index
   }
-  _index = JSON.parse(readFileSync(path, 'utf8'))
+  try {
+    _index = JSON.parse(readFileSync(indexPath, 'utf8'))
+  } catch (err) {
+    console.error(`[search-index] Failed to load index from ${indexPath}:`, err)
+    _index = []
+  }
   return _index!
 }
 

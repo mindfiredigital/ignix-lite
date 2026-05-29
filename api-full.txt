@@ -26,7 +26,7 @@ table[is=ix-table]>thead>tr+tbody ; th[data-sortable][aria-sort=ascending|descen
 
 WEB COMPONENTS:
 ix-tabs[data-variant=underline|pill|gradient]>(button[slot=tab][aria-selected])+(section[slot=panel][hidden])
-ix-dropdown>(button[slot=trigger][aria-expanded])+ul[slot=menu]>(li>button)*
+ix-dropdown>(button[slot=trigger][aria-haspopup=menu][aria-expanded])+ul[slot=menu]>(li>button)*
 ix-combobox>(label>(span[data-chips])+input[placeholder]+button[data-clear])+ul>(li{Option})*
 ix-tooltip[content][data-position=top|bottom|left|right][data-intent=success|danger|warning]>button
 ix-toast#toast[data-intent][data-variant=fade|slide|pop|action][data-position];show({title,message,intent,duration,actionText})
@@ -182,10 +182,10 @@ pill tabs
 
 --- DROPDOWN / MENU ---
 button that opens menu
-- ix-dropdown>(button[slot=trigger aria-expanded=false]{Options ▾})+ul[slot=menu]>(li>button{Edit})+(li>button{Duplicate})+(li>button[data-intent=danger]{Delete})
+- ix-dropdown>(button[slot=trigger aria-haspopup=menu aria-expanded=false]{Options ▾})+ul[slot=menu]>(li>button{Edit})+(li>button{Duplicate})+(li>button[data-intent=danger]{Delete})
 
 user avatar menu / profile menu
-- ix-dropdown>(button[slot=trigger]{Profile ▾})+ul[slot=menu]>(li>a[href=/profile]{My Profile})+(li>a[href=/settings]{Settings})+(li>button[data-intent=danger]{Sign Out})
+- ix-dropdown>(button[slot=trigger aria-haspopup=menu aria-expanded=false]{Profile ▾})+ul[slot=menu]>(li>a[href=/profile]{My Profile})+(li>a[href=/settings]{Settings})+(li>button[data-intent=danger]{Sign Out})
 
 --- TOOLTIP / HINT ---
 show hint on hover

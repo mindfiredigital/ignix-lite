@@ -23,19 +23,7 @@ class IxTabs extends HTMLElement {
           this.tabs[(i - 1 + this.tabs.length) % this.tabs.length].focus()
         }
 
-        if (e.key === 'Tab') {
-          if (!e.shiftKey) {
-            if (i < this.tabs.length - 1) {
-              e.preventDefault()
-              this.tabs[i + 1].focus()
-            }
-          } else {
-            if (i > 0) {
-              e.preventDefault()
-              this.tabs[i - 1].focus()
-            }
-          }
-        }
+
 
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault()

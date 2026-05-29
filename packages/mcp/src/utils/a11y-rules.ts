@@ -26,7 +26,7 @@ function findBrokenAriaRefs(
   return val
     .trim()
     .split(/\s+/)
-    .filter((id) => !root.querySelector(`#${id}`))
+    .filter((id) => !root.querySelector(`[id="${id}"]`))
 }
 
 // Walks child nodes skipping any subtree rooted at aria-hidden="true"
@@ -62,7 +62,7 @@ function getAccessibleName(el: HTMLElement, root: HTMLElement): string {
     const name = labelledBy
       .trim()
       .split(/\s+/)
-      .map((id) => root.querySelector(`#${id}`)?.text.trim() ?? '')
+      .map((id) => root.querySelector(`[id="${id}"]`)?.text.trim() ?? '')
       .join(' ')
       .trim()
     if (name) return name
@@ -222,7 +222,7 @@ export function checkEmptyLabels(root: HTMLElement): RuleResult {
 
     // Check broken label[for] association
     const forAttr = label.getAttribute('for')
-    if (forAttr && !root.querySelector(`#${forAttr}`)) {
+    if (forAttr && !root.querySelector(`[id="${forAttr}"]`)) {
       issues.push({
         type: 'error',
         rule: ruleName,

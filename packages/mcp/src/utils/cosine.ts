@@ -9,5 +9,7 @@ export function cosineSimilarity(a: number[], b: number[]): number {
     magB += b[i] * b[i]
   }
 
+  if (magA === 0 || magB === 0) return 0
+
   return dot / (Math.sqrt(magA) * Math.sqrt(magB))
 }

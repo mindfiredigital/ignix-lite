@@ -6,7 +6,6 @@
   "element": "hr",
 
   "emmet": "hr",
- 
 
   "props": {
     "data-orientation": {

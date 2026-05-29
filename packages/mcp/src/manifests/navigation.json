@@ -7,7 +7,6 @@
 
   "emmet": "nav>ul>li*3>a",
 
-
   "props": {
     "aria-current": {
       "type": "enum",

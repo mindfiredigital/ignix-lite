@@ -2,7 +2,7 @@ import { z } from 'zod'
 import type { MCPResponse } from '../types.js'
 import { resolveTokens, buildCss } from './theme-tokens.js'
 
-const schema = z.object({ prompt: z.string() })
+const schema = z.object({ prompt: z.string().min(1) })
 
 export function generateTheme(args: unknown): MCPResponse {
   const parsed = schema.safeParse(args)
