@@ -1,7 +1,7 @@
 dialog {
-  padding: var(--ix-space-md);
+  padding: var(--ix-space-lg);
 
-  border-radius: var(--ix-radius);
+  border-radius: var(--ix-radius-lg);
 
   border: 1px solid var(--ix-border);
 
@@ -11,67 +11,136 @@ dialog {
 
   box-shadow: var(--ix-shadow);
 
-  max-width: 28rem;
-
-  position: fixed;
-
-  margin: auto;
-
+  max-width: 36rem;
+  min-width: 24rem;
   width: revert;
-
   height: revert;
 
+  position: fixed;
+  inset: 0;
+  margin: auto;
+
+  opacity: 0;
   transition: opacity 0.2s ease;
 
   h2 {
     margin: 0 0 var(--ix-space-sm);
+    font-size: var(--ix-size-lg);
+    color: var(--ix-text);
   }
 
   p {
-    margin: 0 0 var(--ix-space-md);
+    margin: 0;
+    color: var(--ix-text);
+    opacity: 0.75;
+    font-size: var(--ix-size-sm);
+    line-height: var(--ix-line-height);
 
-    color: var(--ix-text-muted);
+    & + p {
+      margin-top: var(--ix-space-sm);
+    }
   }
 
-  button {
-    margin-top: var(--ix-space-sm);
+  [data-actions] {
+    display: flex;
+    align-items: center;
+    gap: var(--ix-space-sm);
+    margin-top: var(--ix-space-lg);
+  }
 
-    & + button {
-      margin-left: var(--ix-space-md);
+  [data-actions] button {
+    all: unset;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0.55rem 1.25rem;
+
+    border-radius: var(--ix-radius);
+    border: 1px solid var(--ix-border);
+
+    background: var(--ix-surface-raised);
+    color: var(--ix-text);
+
+    font-size: var(--ix-size-sm);
+    font-family: var(--ix-font);
+
+    cursor: pointer;
+
+    transition: opacity 0.15s ease;
+
+    &:hover {
+      opacity: 0.85;
     }
+  }
+
+  [data-actions] button[data-intent='danger'] {
+    background: var(--ix-danger);
+    color: var(--ix-on-danger);
+    border-color: transparent;
+  }
+
+  [data-actions] button[data-intent='warning'] {
+    background: var(--ix-warning);
+    color: var(--ix-on-warning);
+    border-color: transparent;
+  }
+
+  [data-actions] button[data-intent='primary'] {
+    background: var(--ix-primary);
+    color: var(--ix-on-primary);
+    border-color: transparent;
+  }
+
+  [data-actions] button[data-intent='success'] {
+    background: var(--ix-success);
+    color: var(--ix-on-success);
+    border-color: transparent;
   }
 
   &::backdrop {
     background: rgb(0 0 0 / 0.45);
-
     backdrop-filter: blur(2px);
   }
 
   &[data-intent='danger'] {
     border-color: var(--ix-danger);
-
     background: var(--ix-danger-bg);
+
+    h2 {
+      color: var(--ix-danger);
+    }
   }
 
   &[data-intent='warning'] {
     border-color: var(--ix-warning);
-
     background: var(--ix-warning-bg);
+
+    h2 {
+      color: var(--ix-warning);
+    }
   }
 
   &[data-intent='info'] {
     border-color: var(--ix-neutral);
-
     background: var(--ix-info-bg);
   }
 
   &:focus-visible {
     outline: 2px solid var(--ix-primary);
-
     outline-offset: 2px;
   }
 }
 
 dialog[open] {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  opacity: 1;
+}
+
+@starting-style {
+  dialog[open] {
+    opacity: 0;
+  }
 }

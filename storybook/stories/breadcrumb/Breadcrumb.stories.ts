@@ -40,7 +40,7 @@ export const SlashStyle = {
   `,
 }
 
-export const GuillemетStyle = {
+export const GuillemetStyle = {
   render: () => `
     <nav aria-label="Breadcrumb" data-style="guillemet">
       <ol>
