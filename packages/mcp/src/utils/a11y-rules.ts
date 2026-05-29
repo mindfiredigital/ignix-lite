@@ -869,3 +869,5 @@ export function checkLang(root: HTMLElement): RuleResult {
 
   return { ruleName, issues }
 }
+
+
