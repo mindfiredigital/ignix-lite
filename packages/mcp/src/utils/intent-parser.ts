@@ -1,5 +1,6 @@
-import { readFileSync } from 'fs'
+import { readFileSync, existsSync } from 'fs'
 import path from 'path'
+import { fileURLToPath } from 'url'
 import { tokenise, isSimilar } from './intent-helpers.js'
 
 export type IntentEntry = {
@@ -79,18 +80,28 @@ function parseIntents(raw: string): IntentEntry[] {
 // ---- Resolve the api-full.txt path relative to this package root ----
 function loadIntents(): IntentEntry[] {
   try {
-    const txtPath = path.resolve(process.cwd(), '../../api-full.txt')
+    const currentDir = path.dirname(fileURLToPath(import.meta.url))
+
+    // Try relative paths from current file structure (packages/mcp/src/utils/ or dist/utils/)
+    const path1 = path.resolve(currentDir, '../../../api-full.txt')
+    const path2 = path.resolve(currentDir, '../../api-full.txt')
+    const path3 = path.resolve(currentDir, '../../../../api-full.txt')
+
+    let txtPath = path1
+    if (existsSync(path1)) {
+      txtPath = path1
+    } else if (existsSync(path2)) {
+      txtPath = path2
+    } else if (existsSync(path3)) {
+      txtPath = path3
+    } else {
+      txtPath = path.resolve(process.cwd(), '../../api-full.txt')
+    }
+
     const raw = readFileSync(txtPath, 'utf8')
     return parseIntents(raw)
   } catch {
-    // Fallback: try relative to dist (when running built output)
-    try {
-      const txtPath = path.resolve(process.cwd(), '../../../api-full.txt')
-      const raw = readFileSync(txtPath, 'utf8')
-      return parseIntents(raw)
-    } catch {
-      return []
-    }
+    return []
   }
 }
 

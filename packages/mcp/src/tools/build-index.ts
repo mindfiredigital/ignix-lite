@@ -1,6 +1,4 @@
 import { readdirSync, readFileSync, writeFileSync } from 'fs'
-import path from 'path'
-import { fileURLToPath } from 'url'
 import { embedText } from './embedder.js'
 
 type Example = {
@@ -9,22 +7,25 @@ type Example = {
   html?: string
 }
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
+interface Manifest {
+  component?: string
+  description?: string
+  element?: string
+  emmet?: string
+  states?: string[]
+  do?: string[]
+  dont?: string[]
+  examples?: Example[]
+}
 
-const manifestsDir = path.resolve(__dirname, '../manifests')
-const files = readdirSync(manifestsDir)
+const files = readdirSync('src/manifests')
 
 const index = files
   .filter((file) => file.endsWith('.json'))
   .map((file) => {
-    let manifest: any
-    try {
-      manifest = JSON.parse(readFileSync(path.join(manifestsDir, file), 'utf8'))
-    } catch (err) {
-      console.error(`Error parsing JSON manifest for ${file}:`, err)
-      throw err
-    }
+    const manifest: Manifest = JSON.parse(
+      readFileSync(`src/manifests/${file}`, 'utf8')
+    )
 
     const searchable = [
       manifest.component ?? '',
@@ -50,6 +51,5 @@ const index = files
     }
   })
 
-const outputPath = path.resolve(__dirname, '../../dist/vector-index.json')
-writeFileSync(outputPath, JSON.stringify(index, null, 2))
+writeFileSync('dist/vector-index.json', JSON.stringify(index, null, 2))
 console.log('Vector index built')
