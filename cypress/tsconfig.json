@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+
+    "module": "ESNext",
+
+    "moduleResolution": "Node",
+
+    "types": [
+      "cypress",
+      "node"
+    ],
+
+    "strict": true,
+
+    "isolatedModules": true
+  },
+
+  "include": [
+    "./**/*.ts"
+  ]
+}

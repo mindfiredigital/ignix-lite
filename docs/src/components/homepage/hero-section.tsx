@@ -6,32 +6,32 @@ import { ShowcaseSection } from './component-showcase'
 import { CTASection } from './cta-section'
 import { Footer } from './footer'
 
-const WORDS = ['AI', 'Humans']
+const WORDS = ['AI agents', 'Developers',  ]
 
 function TypewriterWord() {
   const [wordIndex, setWordIndex] = useState(0)
   const [displayed, setDisplayed] = useState('')
-  const [phase, setPhase] = useState<'typing' | 'pause' | 'deleting'>('typing')
+  const [phase, setPhase] = useState<'typing' | 'deleting'>('typing')
 
   useEffect(() => {
     const word = WORDS[wordIndex]
 
     if (phase === 'typing') {
       if (displayed.length < word.length) {
-        const t = setTimeout(() => setDisplayed(word.slice(0, displayed.length + 1)), 110)
+        const t = setTimeout(() => setDisplayed(word.slice(0, displayed.length + 1)), 85)
         return () => clearTimeout(t)
       } else {
-        const t = setTimeout(() => setPhase('deleting'), 1400)
+        const t = setTimeout(() => setPhase('deleting'), 1800)
         return () => clearTimeout(t)
       }
     }
 
     if (phase === 'deleting') {
       if (displayed.length > 0) {
-        const t = setTimeout(() => setDisplayed(displayed.slice(0, -1)), 70)
+        const t = setTimeout(() => setDisplayed(displayed.slice(0, -1)), 50)
         return () => clearTimeout(t)
       } else {
-        setWordIndex((i) => (i + 1) % WORDS.length)
+        setWordIndex(i => (i + 1) % WORDS.length)
         setPhase('typing')
       }
     }
@@ -40,6 +40,7 @@ function TypewriterWord() {
   return (
     <span className={styles.typewriterWord}>
       {displayed || '\u00A0'}
+      <span className={styles.cursor} aria-hidden>|</span>
     </span>
   )
 }
@@ -83,21 +84,21 @@ function HeroSection() {
     <section className={styles.hero}>
       <div className={styles.heroInner}>
 
-        <mark className={styles.badge}>
+        <span className={styles.badge}>
           Ignix Lite
-        </mark>
+        </span>
 
-       <h1 className={styles.heroTitle}>
-          Ultra-light
+        <h1 className={styles.heroTitle}>
+          Native UI for
           <br />
           <span className={styles.gradientText}>
-            browser-native UI toolkit for <TypewriterWord />
+            <TypewriterWord />
           </span>
         </h1>
 
         <p className={styles.heroSubtitle}>
-          Designed for humans. Optimized for AI. Built for the modern web.
-          </p>
+          Zero dependencies. Four kilobytes. Infinite possibilities.
+        </p>
 
         <div className={styles.stats}>
           <div className={styles.statItem}>
@@ -139,7 +140,7 @@ function HeroSection() {
         </div>
 
         <div className={styles.installBox}>
-          <CopyButton text="pnpm add @mindfiredigital/ignix-lite" />
+          <CopyButton text="npm install @mindfiredigital/ignix-lite" />
           <code>npm install @mindfiredigital/ignix-lite</code>
         </div>
 

@@ -1,0 +1,476 @@
+---
+sidebar_position: 5
+title: Grid
+description: Lightweight semantic grid layout component for ignix-lite with responsive column counts, gap control, alignment, and span helpers.
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import Preview from '@site/src/components/preview'
+
+# Grid
+
+A lightweight semantic grid layout component built with native HTML and CSS variables.
+
+The Grid component in ignix-lite uses the `[data-grid]` attribute on any semantic container element — `<section>`, `<ul>`, `<article>`, etc. — and supports responsive column counts, gap sizes, alignment, dense packing, and column/row span helpers.
+
+---
+
+### Two Column
+
+<Tabs defaultValue="preview">
+  <TabItem value="preview" label="Preview">
+    <Preview>
+      <section data-grid="2">
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Column 1</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Column 2</article>
+      </section>
+    </Preview>
+  </TabItem>
+  <TabItem value="code" label="Code">
+```html
+<section data-grid="2">
+  <article>Column 1</article>
+  <article>Column 2</article>
+</section>
+```
+  </TabItem>
+</Tabs>
+
+---
+
+### Three Column
+
+<Tabs defaultValue="preview">
+  <TabItem value="preview" label="Preview">
+    <Preview>
+      <section data-grid="3">
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Column 1</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Column 2</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Column 3</article>
+      </section>
+    </Preview>
+  </TabItem>
+  <TabItem value="code" label="Code">
+```html
+<section data-grid="3">
+  <article>Column 1</article>
+  <article>Column 2</article>
+  <article>Column 3</article>
+</section>
+```
+  </TabItem>
+</Tabs>
+
+---
+
+### Four Column
+
+<Tabs defaultValue="preview">
+  <TabItem value="preview" label="Preview">
+    <Preview>
+      <section data-grid="4">
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Column 1</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Column 2</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Column 3</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Column 4</article>
+      </section>
+    </Preview>
+  </TabItem>
+  <TabItem value="code" label="Code">
+```html
+<section data-grid="4">
+  <article>Column 1</article>
+  <article>Column 2</article>
+  <article>Column 3</article>
+  <article>Column 4</article>
+</section>
+```
+  </TabItem>
+</Tabs>
+
+---
+
+### Five Column
+
+<Tabs defaultValue="preview">
+  <TabItem value="preview" label="Preview">
+    <Preview>
+      <section data-grid="5">
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Col 1</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Col 2</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Col 3</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Col 4</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Col 5</article>
+      </section>
+    </Preview>
+  </TabItem>
+  <TabItem value="code" label="Code">
+```html
+<section data-grid="5">
+  <article>Col 1</article>
+  <article>Col 2</article>
+  <article>Col 3</article>
+  <article>Col 4</article>
+  <article>Col 5</article>
+</section>
+```
+  </TabItem>
+</Tabs>
+
+---
+
+### Six Column
+
+<Tabs defaultValue="preview">
+  <TabItem value="preview" label="Preview">
+    <Preview>
+      <section data-grid="6">
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Col 1</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Col 2</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Col 3</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Col 4</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Col 5</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Col 6</article>
+      </section>
+    </Preview>
+  </TabItem>
+  <TabItem value="code" label="Code">
+```html
+<section data-grid="6">
+  <article>Col 1</article>
+  <article>Col 2</article>
+  <article>Col 3</article>
+  <article>Col 4</article>
+  <article>Col 5</article>
+  <article>Col 6</article>
+</section>
+```
+  </TabItem>
+</Tabs>
+
+---
+
+### Auto Fit
+
+Columns size and wrap automatically — no breakpoints needed.
+
+<Tabs defaultValue="preview">
+  <TabItem value="preview" label="Preview">
+    <Preview>
+      <section data-grid="auto">
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Item 1</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Item 2</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Item 3</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Item 4</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Item 5</article>
+      </section>
+    </Preview>
+  </TabItem>
+  <TabItem value="code" label="Code">
+```html
+<section data-grid="auto">
+  <article>Item 1</article>
+  <article>Item 2</article>
+  <article>Item 3</article>
+  <article>Item 4</article>
+  <article>Item 5</article>
+</section>
+```
+  </TabItem>
+</Tabs>
+
+---
+
+### Auto Fill
+
+Like auto-fit but preserves empty column slots rather than collapsing them.
+
+<Tabs defaultValue="preview">
+  <TabItem value="preview" label="Preview">
+    <Preview>
+      <section data-grid="fill">
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Item 1</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Item 2</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Item 3</article>
+      </section>
+    </Preview>
+  </TabItem>
+  <TabItem value="code" label="Code">
+```html
+<section data-grid="fill">
+  <article>Item 1</article>
+  <article>Item 2</article>
+  <article>Item 3</article>
+</section>
+```
+  </TabItem>
+</Tabs>
+
+---
+
+### Gap
+
+<Tabs defaultValue="preview">
+  <TabItem value="preview" label="Preview">
+    <Preview>
+      <section data-grid="3" data-gap="sm" style={{ marginBottom: 'var(--ix-space-md)' }}>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>sm</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>sm</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>sm</article>
+      </section>
+      <section data-grid="3" data-gap="lg" style={{ marginBottom: 'var(--ix-space-md)' }}>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>lg</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>lg</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>lg</article>
+      </section>
+      <section data-grid="3" data-gap="xl">
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>xl</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>xl</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>xl</article>
+      </section>
+    </Preview>
+  </TabItem>
+  <TabItem value="code" label="Code">
+```html
+<section data-grid="3" data-gap="sm">...</section>
+<section data-grid="3" data-gap="lg">...</section>
+<section data-grid="3" data-gap="xl">...</section>
+```
+  </TabItem>
+</Tabs>
+
+---
+
+### Align Center
+
+<Tabs defaultValue="preview">
+  <TabItem value="preview" label="Preview">
+    <Preview>
+      <section data-grid="3" data-align="center">
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-lg)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Tall</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Short</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-lg) var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Medium</article>
+      </section>
+    </Preview>
+  </TabItem>
+  <TabItem value="code" label="Code">
+```html
+<section data-grid="3" data-align="center">
+  <article>Tall</article>
+  <article>Short</article>
+  <article>Medium</article>
+</section>
+```
+  </TabItem>
+</Tabs>
+
+---
+
+### Align End
+
+<Tabs defaultValue="preview">
+  <TabItem value="preview" label="Preview">
+    <Preview>
+      <section data-grid="3" data-align="end">
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-lg)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Tall</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Short</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-lg) var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Medium</article>
+      </section>
+    </Preview>
+  </TabItem>
+  <TabItem value="code" label="Code">
+```html
+<section data-grid="3" data-align="end">
+  <article>Tall</article>
+  <article>Short</article>
+  <article>Medium</article>
+</section>
+```
+  </TabItem>
+</Tabs>
+
+---
+
+### Column Span
+
+<Tabs defaultValue="preview">
+  <TabItem value="preview" label="Preview">
+    <Preview>
+      <section data-grid="4">
+        <article data-col="2" style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Span 2</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Col</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Col</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Col</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Col</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Col</article>
+      </section>
+    </Preview>
+  </TabItem>
+  <TabItem value="code" label="Code">
+```html
+<section data-grid="4">
+  <article data-col="2">Span 2</article>
+  <article>Col</article>
+  <article>Col</article>
+  <article>Col</article>
+  <article>Col</article>
+  <article>Col</article>
+</section>
+```
+  </TabItem>
+</Tabs>
+
+---
+
+### Full Width Span
+
+<Tabs defaultValue="preview">
+  <TabItem value="preview" label="Preview">
+    <Preview>
+      <section data-grid="3">
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Col 1</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Col 2</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Col 3</article>
+        <article data-col="full" style={{ background: 'var(--ix-success-bg)', color: 'var(--ix-success)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Full Width</article>
+      </section>
+    </Preview>
+  </TabItem>
+  <TabItem value="code" label="Code">
+```html
+<section data-grid="3">
+  <article>Col 1</article>
+  <article>Col 2</article>
+  <article>Col 3</article>
+  <article data-col="full">Full Width</article>
+</section>
+```
+  </TabItem>
+</Tabs>
+
+---
+
+### Row Span
+
+<Tabs defaultValue="preview">
+  <TabItem value="preview" label="Preview">
+    <Preview>
+      <section data-grid="3">
+        <article data-row="2" style={{ background: 'var(--ix-warning-bg)', color: 'var(--ix-warning)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Row Span 2</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>B</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>C</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>D</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>E</article>
+      </section>
+    </Preview>
+  </TabItem>
+  <TabItem value="code" label="Code">
+```html
+<section data-grid="3">
+  <article data-row="2">Row Span 2</article>
+  <article>B</article>
+  <article>C</article>
+  <article>D</article>
+  <article>E</article>
+</section>
+```
+  </TabItem>
+</Tabs>
+
+---
+
+### Dense Packing
+
+Items back-fill empty slots automatically.
+
+<Tabs defaultValue="preview">
+  <TabItem value="preview" label="Preview">
+    <Preview>
+      <section data-grid="4" data-dense>
+        <article data-col="2" style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Wide</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>A</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>B</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>C</article>
+        <article data-col="3" style={{ background: 'var(--ix-success-bg)', color: 'var(--ix-success)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Wider</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>D</article>
+      </section>
+    </Preview>
+  </TabItem>
+  <TabItem value="code" label="Code">
+```html
+<section data-grid="4" data-dense>
+  <article data-col="2">Wide</article>
+  <article>A</article>
+  <article>B</article>
+  <article>C</article>
+  <article data-col="3">Wider</article>
+  <article>D</article>
+</section>
+```
+  </TabItem>
+</Tabs>
+
+---
+
+### Mixed Spans
+
+<Tabs defaultValue="preview">
+  <TabItem value="preview" label="Preview">
+    <Preview>
+      <section data-grid="6" data-gap="sm">
+        <article data-col="3" style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Span 3</article>
+        <article data-col="2" style={{ background: 'var(--ix-success-bg)', color: 'var(--ix-success)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Span 2</article>
+        <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>1</article>
+        <article data-col="full" style={{ background: 'var(--ix-warning-bg)', color: 'var(--ix-warning)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontSize: 'var(--ix-size-sm)', fontFamily: 'var(--ix-font)', fontWeight: 600, textAlign: 'center' }}>Full</article>
+      </section>
+    </Preview>
+  </TabItem>
+  <TabItem value="code" label="Code">
+```html
+<section data-grid="6" data-gap="sm">
+  <article data-col="3">Span 3</article>
+  <article data-col="2">Span 2</article>
+  <article>1</article>
+  <article data-col="full">Full</article>
+</section>
+```
+  </TabItem>
+</Tabs>
+
+---
+
+## Installation
+
+<Tabs defaultValue="npm">
+  <TabItem value="npm" label="npm">
+
+```bash
+npm install @mindfiredigital/ignix-lite
+```
+
+  </TabItem>
+  <TabItem value="cdn" label="CDN">
+
+```html
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/@mindfiredigital/ignix-lite/dist/ignix-lite.min.css"
+/>
+```
+
+  </TabItem>
+</Tabs>
+
+---
+
+## Attributes
+
+| Attribute | Type | Description |
+|---|---|---|
+| `data-grid` | `'1' \| '2' \| '3' \| '4' \| '5' \| '6' \| 'auto' \| 'fill'` | Sets the column layout on the grid container |
+| `data-gap` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | Controls the gap between grid items |
+| `data-align` | `'start' \| 'center' \| 'end' \| 'stretch' \| 'baseline'` | Aligns items on the cross axis |
+| `data-justify` | `'start' \| 'center' \| 'end' \| 'stretch'` | Justifies items on the inline axis |
+| `data-dense` | `boolean` | Enables dense packing to back-fill empty slots |
+| `data-col` | `'1' \| '2' \| '3' \| '4' \| '5' \| '6' \| 'full'` | Sets column span on a child item |
+| `data-row` | `'2' \| '3'` | Sets row span on a child item |
