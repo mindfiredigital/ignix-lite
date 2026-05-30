@@ -1,0 +1,211 @@
+{
+  "version": "2.0.0",
+  "description": "All data-intent values per Ignix-Lite component. Zero class names — styling is driven exclusively by data-intent and native HTML state attributes.",
+
+  "global_rule": "Never use class=, variant=, color=, or any framework-style prop. Use data-intent + native HTML attributes only.",
+
+  "components": {
+    "button": {
+      "element": "button",
+      "data-intent": ["primary", "danger", "warning", "success", "neutral", "ghost"],
+      "default": "primary",
+      "state_attrs": ["disabled", "aria-busy"],
+      "forbidden": ["class", "variant", "color", "isLoading", "isDisabled", "size"],
+      "notes": "Use danger for destructive actions. Use ghost for low-emphasis secondary actions."
+    },
+
+    "input": {
+      "element": "input",
+      "data-intent": ["text", "search", "email", "password", "number", "tel", "url", "date", "time", "file"],
+      "state_attrs": ["disabled", "required", "readonly", "aria-invalid"],
+      "forbidden": ["class", "variant", "size", "isInvalid"],
+      "notes": "Always pair with <label>. Use aria-invalid for error state."
+    },
+
+    "textarea": {
+      "element": "textarea",
+      "data-intent": ["default", "resize", "fixed"],
+      "state_attrs": ["disabled", "required", "readonly", "aria-invalid"],
+      "forbidden": ["class", "variant", "size"]
+    },
+
+    "select": {
+      "element": "select",
+      "data-intent": ["default"],
+      "state_attrs": ["disabled", "required", "multiple"],
+      "forbidden": ["class", "variant"]
+    },
+
+    "checkbox": {
+      "element": "input[type=checkbox]",
+      "data-intent": [],
+      "state_attrs": ["disabled", "required", "checked", "aria-invalid"],
+      "forbidden": ["class", "variant"],
+      "notes": "Wrap in <label> for accessible labelling."
+    },
+
+    "radio": {
+      "element": "input[type=radio]",
+      "data-intent": [],
+      "state_attrs": ["disabled", "required", "checked"],
+      "forbidden": ["class", "variant"]
+    },
+
+    "alert": {
+      "element": "ix-alert",
+      "data-intent": ["info", "success", "warning", "danger"],
+      "default": "info",
+      "state_attrs": [],
+      "forbidden": ["class", "color", "type"]
+    },
+
+    "badge": {
+      "element": "mark | span[role=status]",
+      "data-intent": ["primary", "success", "warning", "danger", "neutral"],
+      "default": "neutral",
+      "state_attrs": [],
+      "forbidden": ["class", "color"],
+      "notes": "Use <mark> for inline highlighted text. Use <span role=status> for badge chips."
+    },
+
+    "avatar": {
+      "element": "ix-avatar",
+      "data-intent": ["image", "initials", "icon"],
+      "data-shape": ["circle", "square"],
+      "state_attrs": [],
+      "forbidden": ["class", "size", "variant"]
+    },
+
+    "card": {
+      "element": "article",
+      "data-intent": ["default", "interactive"],
+      "slots": ["header", "body", "footer", "media"],
+      "state_attrs": [],
+      "forbidden": ["class", "variant"]
+    },
+
+    "dialog": {
+      "element": "dialog",
+      "data-intent": ["default", "danger"],
+      "state_attrs": ["open"],
+      "forbidden": ["class", "variant", "isOpen"]
+    },
+
+    "dropdown": {
+      "element": "details",
+      "data-intent": ["menu", "select"],
+      "state_attrs": ["open"],
+      "forbidden": ["class", "variant"],
+      "notes": "Use <summary> as the trigger. Uses native <details> disclosure."
+    },
+
+    "tab": {
+      "element": "ix-tab",
+      "data-intent": [],
+      "state_attrs": ["aria-selected"],
+      "forbidden": ["class", "active", "isSelected"]
+    },
+
+    "accordion": {
+      "element": "details",
+      "data-intent": ["default"],
+      "state_attrs": ["open"],
+      "forbidden": ["class", "isOpen"]
+    },
+
+    "tooltip": {
+      "element": "ix-tooltip",
+      "data-position": ["top", "bottom", "left", "right"],
+      "default_position": "top",
+      "state_attrs": [],
+      "forbidden": ["class", "placement"]
+    },
+
+    "toast": {
+      "element": "ix-toast",
+      "data-intent": ["info", "success", "warning", "danger"],
+      "state_attrs": ["aria-live"],
+      "forbidden": ["class", "type", "variant"]
+    },
+
+    "progress": {
+      "element": "progress",
+      "data-intent": ["default", "success", "danger"],
+      "state_attrs": ["value", "max"],
+      "forbidden": ["class", "variant", "percent"]
+    },
+
+    "meter": {
+      "element": "meter",
+      "data-intent": [],
+      "state_attrs": ["value", "min", "max", "low", "high", "optimum"],
+      "forbidden": ["class"]
+    },
+
+    "skeleton": {
+      "element": "ix-skeleton",
+      "data-variant": ["text", "circle", "rect", "card"],
+      "state_attrs": [],
+      "forbidden": ["class", "type", "loading"]
+    },
+
+    "breadcrumb": {
+      "element": "nav[aria-label=Breadcrumb] > ol > li > a",
+      "data-intent": [],
+      "state_attrs": ["aria-current"],
+      "forbidden": ["class", "active"]
+    },
+
+    "navigation": {
+      "element": "nav",
+      "data-intent": ["sidebar", "topbar", "tabs"],
+      "state_attrs": ["aria-current"],
+      "forbidden": ["class", "variant"]
+    },
+
+    "table": {
+      "element": "table[is=ix-table]",
+      "data-sortable": "boolean",
+      "state_attrs": ["aria-sort"],
+      "forbidden": ["class", "striped", "bordered"]
+    },
+
+    "grid": {
+      "element": "div[data-grid]",
+      "data-grid": ["auto", "2", "3", "4", "5", "6"],
+      "data-gap": ["sm", "md", "lg"],
+      "data-align": ["start", "center", "end", "stretch"],
+      "data-justify": ["start", "center", "end", "between"],
+      "state_attrs": [],
+      "forbidden": ["class"]
+    },
+
+    "form": {
+      "element": "form",
+      "data-intent": ["default", "inline", "grid"],
+      "state_attrs": [],
+      "forbidden": ["class"]
+    },
+
+    "divider": {
+      "element": "hr | ix-divider",
+      "data-intent": ["horizontal", "vertical"],
+      "state_attrs": [],
+      "forbidden": ["class"]
+    },
+
+    "codeblock": {
+      "element": "ix-codeblock",
+      "data-intent": [],
+      "state_attrs": [],
+      "forbidden": ["class", "language"]
+    },
+
+    "combobox": {
+      "element": "ix-combobox",
+      "data-intent": [],
+      "state_attrs": ["disabled"],
+      "forbidden": ["class", "variant"]
+    }
+  }
+}
