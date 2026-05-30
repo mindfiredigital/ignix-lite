@@ -1,0 +1,69 @@
+{
+  "component": "alert",
+  "version": "2.0",
+
+  "description": "Displays semantic feedback messages using native <aside> element for warnings, errors, success messages, and informational updates.",
+
+  "element": "aside",
+
+  "emmet": "aside[data-intent=?]{message}",
+  
+
+  "props": {
+    "data-intent": {
+      "type": "enum",
+      "values": ["danger", "warning", "success", "info"],
+      "default": "info",
+      "native": false,
+      "agent_hint": "Use danger for errors, warning for cautions, success for confirmations, info for updates."
+    }
+  },
+
+  "states": [],
+
+  "forbidden_props": [
+    "variant",
+    "color",
+    "appearance",
+    "colorScheme",
+    "severity",
+    "status",
+    "class"
+  ],
+
+  "required_props": [],
+
+  "required_slots": [],
+
+  "do": [
+    "Use data-intent='danger' for error states",
+    "Use data-intent='warning' for caution messages",
+    "Use native aside element for semantic alerts"
+  ],
+
+  "dont": [
+    "Do not use div instead of aside",
+    "Do not use variant or severity props",
+    "Do not use class attribute"
+  ],
+
+  "examples": [
+    {
+      "label": "Danger alert",
+      "emmet": "aside[data-intent=danger]{Something went wrong}",
+      "html": "<aside data-intent=\"danger\">Something went wrong</aside>"
+    },
+
+    {
+      "label": "Warning alert",
+      "emmet": "aside[data-intent=warning]{Session expires soon}",
+      "html": "<aside data-intent=\"warning\">Session expires soon</aside>"
+    },
+
+    {
+      "label": "Success alert",
+      "emmet": "aside[data-intent=success]{Saved successfully}",
+      "html": "<aside data-intent=\"success\">Saved successfully</aside>"
+    }
+  ]
+}

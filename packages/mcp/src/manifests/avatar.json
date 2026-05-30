@@ -1,0 +1,75 @@
+{
+  "component": "avatar",
+  "version": "2.0",
+
+  "description": "Displays user profile visuals using native img element with text fallback support through span. Supports multiple sizes and loading skeletons.",
+
+  "element": "img | span",
+
+  "emmet": "img[src=? alt=? data-size=?]",
+ 
+
+  "props": {
+    "data-size": {
+      "type": "enum",
+      "values": ["sm", "md", "lg"],
+      "default": "md",
+      "native": false,
+      "agent_hint": "Use sm for compact lists, md for profile previews, lg for detailed cards."
+    },
+
+    "src": {
+      "type": "string",
+      "native": true,
+      "agent_hint": "Image URL for avatar image."
+    },
+
+    "alt": {
+      "type": "string",
+      "native": true,
+      "agent_hint": "Always provide descriptive alt text for accessibility."
+    }
+  },
+
+  "states": ["loading"],
+
+  "forbidden_props": ["size", "variant", "shape", "rounded", "class"],
+
+  "required_props": [],
+
+  "required_slots": [],
+
+  "fallback_element": "span",
+
+  "do": [
+    "Use img for avatar images",
+    "Use span fallback for initials",
+    "Always provide alt text on images"
+  ],
+
+  "dont": [
+    "Do not use class attribute",
+    "Do not use size prop instead of data-size",
+    "Do not omit alt attribute on img"
+  ],
+
+  "examples": [
+    {
+      "label": "Small avatar",
+      "emmet": "img[src=? alt=User data-size=sm]",
+      "html": "<img src=\"https://picsum.photos/100\" alt=\"User\" data-size=\"sm\">"
+    },
+
+    {
+      "label": "Medium avatar",
+      "emmet": "img[src=? alt=Sarah data-size=md]",
+      "html": "<img src=\"https://picsum.photos/100\" alt=\"Sarah\" data-size=\"md\">"
+    },
+
+    {
+      "label": "Fallback initials",
+      "emmet": "span[data-size=md]{JD}",
+      "html": "<span data-size=\"md\">JD</span>"
+    }
+  ]
+}

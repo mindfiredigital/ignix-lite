@@ -5,7 +5,13 @@ class IxDropdown extends HTMLElement {
 
     if (!this.trigger || !this.menu) return
 
-    this.items = () => [...this.menu.querySelectorAll('button')]
+    this._cachedItems = null
+    this.items = () => {
+      if (!this._cachedItems) {
+        this._cachedItems = [...this.menu.querySelectorAll('button')]
+      }
+      return this._cachedItems
+    }
 
     this.trigger.setAttribute('aria-haspopup', 'menu')
     this.trigger.setAttribute('aria-expanded', 'false')
@@ -54,17 +60,26 @@ class IxDropdown extends HTMLElement {
       }
     })
 
-    document.addEventListener('click', (e) => {
+    this._outsideClickListener = (e) => {
       if (!this.contains(e.target)) this.close()
-    })
+    }
+    document.addEventListener('click', this._outsideClickListener)
+  }
+
+  disconnectedCallback() {
+    if (this._outsideClickListener) {
+      document.removeEventListener('click', this._outsideClickListener)
+    }
   }
 
   open() {
+    this._cachedItems = [...this.menu.querySelectorAll('button')]
     this.menu.hidden = false
     this.trigger.setAttribute('aria-expanded', 'true')
   }
 
   close() {
+    this._cachedItems = null
     this.menu.hidden = true
     this.trigger.setAttribute('aria-expanded', 'false')
   }

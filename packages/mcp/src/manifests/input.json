@@ -1,0 +1,99 @@
+{
+  "component": "input",
+  "version": "2.0",
+  "description": "User input field. Must be wrapped inside <label> for accessibility.",
+
+  "element": "input",
+
+  "emmet": "label>{Label}+input[type=?]",
+
+  "props": {
+    "type": {
+      "type": "enum",
+      "values": [
+        "text",
+        "email",
+        "password",
+        "number",
+        "date",
+        "search",
+        "tel",
+        "url",
+        "file"
+      ],
+      "default": "text",
+      "native": true,
+      "agent_hint": "Choose correct input type based on data"
+    },
+
+    "placeholder": {
+      "type": "string",
+      "native": true,
+      "agent_hint": "Short hint shown inside input"
+    },
+
+    "required": {
+      "type": "boolean",
+      "native": true,
+      "agent_hint": "Marks field as mandatory"
+    },
+
+    "disabled": {
+      "type": "boolean",
+      "native": true,
+      "agent_hint": "Disables user interaction"
+    },
+
+    "aria-invalid": {
+      "type": "boolean",
+      "native": true,
+      "agent_hint": "Set true for validation errors"
+    },
+
+    "data-intent": {
+      "type": "enum",
+      "values": ["primary", "danger", "warning", "success", "neutral"],
+      "default": "neutral",
+      "native": false,
+      "agent_hint": "Controls border color (design intent)"
+    }
+  },
+
+  "states": ["disabled", "aria-invalid"],
+
+  "required_props": ["type"],
+
+  "required_wrapper": "label",
+
+  "forbidden_props": ["variant", "color", "appearance", "size", "class"],
+
+  "do": [
+    "Always wrap input inside <label>",
+    "Use correct type (email, number, etc.)",
+    "Use aria-invalid for error state"
+  ],
+
+  "dont": [
+    "Do not use class attribute",
+    "Do not use variant or color props",
+    "Do not place input outside label"
+  ],
+
+  "examples": [
+    {
+      "label": "Basic input",
+      "emmet": "label>{Name}+input[type=text]",
+      "html": "<label>Name <input type=\"text\" /></label>"
+    },
+    {
+      "label": "Email required",
+      "emmet": "label>{Email}+input[type=email required]",
+      "html": "<label>Email <input type=\"email\" required /></label>"
+    },
+    {
+      "label": "Invalid state",
+      "emmet": "label>{Email}+input[type=email aria-invalid=true]",
+      "html": "<label>Email <input type=\"email\" aria-invalid=\"true\" /></label>"
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "component": "meter",
+
+  "version": "2.0",
+
+  "description": "Visualizes scalar measurements within a known range using the native HTML meter element.",
+
+  "element": "meter",
+
+  "emmet": "meter[value=70 min=0 max=100]",
+
+  "props": {
+    "value": {
+      "type": "number",
+      "required": true,
+      "native": true,
+      "agent_hint": "Current measured value."
+    },
+
+    "min": {
+      "type": "number",
+      "default": 0,
+      "native": true
+    },
+
+    "max": {
+      "type": "number",
+      "default": 1,
+      "native": true
+    },
+
+    "low": {
+      "type": "number",
+      "native": true,
+      "agent_hint": "Lower threshold value."
+    },
+
+    "high": {
+      "type": "number",
+      "native": true,
+      "agent_hint": "Upper threshold value."
+    },
+
+    "optimum": {
+      "type": "number",
+      "native": true,
+      "agent_hint": "Preferred or ideal value."
+    }
+  },
+
+  "states": ["low", "high", "optimum"],
+
+  "forbidden_props": [
+    "variant",
+    "intent",
+    "color",
+    "percentage",
+    "progress",
+    "class"
+  ],
+
+  "required_props": ["value"],
+
+  "required_slots": [],
+
+  "do": [
+    "Use value with min and max",
+    "Use low and high for thresholds",
+    "Use optimum for ideal value ranges"
+  ],
+
+  "dont": [
+    "Do not use class attribute",
+    "Do not use progress prop",
+    "Do not use variant or intent props"
+  ],
+
+  "examples": [
+    {
+      "label": "Storage usage",
+      "emmet": "meter[value=68 min=0 max=100 low=30 high=70 optimum=100]",
+      "html": "<meter value=\"68\" min=\"0\" max=\"100\" low=\"30\" high=\"70\" optimum=\"100\"></meter>"
+    },
+
+    {
+      "label": "Low state",
+      "emmet": "meter[value=20 min=0 max=100 low=30 high=70 optimum=100]",
+      "html": "<meter value=\"20\" min=\"0\" max=\"100\" low=\"30\" high=\"70\" optimum=\"100\"></meter>"
+    },
+
+    {
+      "label": "Medium state",
+      "emmet": "meter[value=50 min=0 max=100 low=30 high=70 optimum=100]",
+      "html": "<meter value=\"50\" min=\"0\" max=\"100\" low=\"30\" high=\"70\" optimum=\"100\"></meter>"
+    },
+
+    {
+      "label": "Optimal state",
+      "emmet": "meter[value=90 min=0 max=100 low=30 high=70 optimum=100]",
+      "html": "<meter value=\"90\" min=\"0\" max=\"100\" low=\"30\" high=\"70\" optimum=\"100\"></meter>"
+    }
+  ]
+}

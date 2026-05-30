@@ -1,0 +1,63 @@
+{
+  "component": "code",
+  "version": "2.0",
+
+  "description": "Displays formatted code snippets using native pre and code elements with language metadata support and horizontal scrolling.",
+
+  "element": "pre > code",
+
+  "emmet": "pre>code[data-lang=?]{content}",
+  
+
+  "props": {
+    "data-lang": {
+      "type": "string",
+      "values": ["js", "ts", "python", "bash", "html", "css", "json"],
+      "default": "text",
+      "native": false,
+      "agent_hint": "Specify language metadata for code examples."
+    }
+  },
+
+  "states": [],
+
+  "forbidden_props": ["language", "variant", "theme", "class"],
+
+  "required_props": [],
+
+  "required_slots": [],
+
+  "required_children": ["code"],
+
+  "do": [
+    "Wrap code inside pre element",
+    "Use data-lang to indicate language",
+    "Use code element for code content"
+  ],
+
+  "dont": [
+    "Do not use div instead of pre",
+    "Do not use language prop",
+    "Do not use class attribute"
+  ],
+
+  "examples": [
+    {
+      "label": "JavaScript code",
+      "emmet": "pre>code[data-lang=js]{function greet(){}}",
+      "html": "<pre><code data-lang=\"js\">function greet(){}</code></pre>"
+    },
+
+    {
+      "label": "Python code",
+      "emmet": "pre>code[data-lang=python]{print('Hello')}",
+      "html": "<pre><code data-lang=\"python\">print('Hello')</code></pre>"
+    },
+
+    {
+      "label": "Bash command",
+      "emmet": "pre>code[data-lang=bash]{npm install ignix-lite}",
+      "html": "<pre><code data-lang=\"bash\">npm install ignix-lite</code></pre>"
+    }
+  ]
+}

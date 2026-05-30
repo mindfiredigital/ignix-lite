@@ -1,0 +1,105 @@
+{
+  "component": "dropdown",
+  "version": "2.0",
+  "description": "Accessible dropdown component using ix-dropdown custom element with trigger and menu slots, keyboard navigation and semantic intents.",
+
+  "element": "ix-dropdown",
+
+  "emmet": "ix-dropdown>button[slot=trigger]+ul[slot=menu]",
+
+  "props": {
+    "data-intent": {
+      "type": "enum",
+      "values": [
+        "primary",
+        "success",
+        "warning",
+        "danger",
+        "ghost",
+        "gradient",
+        "neutral"
+      ],
+      "default": "neutral",
+      "native": false,
+      "agent_hint": "Applies dropdown styling."
+    },
+
+    "slot": {
+      "type": "enum",
+      "values": ["trigger", "menu"],
+      "native": true,
+      "agent_hint": "Defines dropdown trigger and menu."
+    },
+
+    "aria-haspopup": {
+      "type": "string",
+      "values": ["menu"],
+      "default": "menu",
+      "native": true,
+      "agent_hint": "Indicates menu popup."
+    },
+
+    "aria-expanded": {
+      "type": "boolean",
+      "default": false,
+      "native": true,
+      "agent_hint": "Open state of dropdown."
+    }
+  },
+
+  "states": ["closed", "open", "focused"],
+
+  "forbidden_props": ["variant", "theme", "size", "class"],
+
+  "required_props": [],
+
+  "required_slots": ["trigger", "menu"],
+
+  "methods": ["open()", "close()", "toggle()"],
+
+  "do": [
+    "Provide trigger slot",
+    "Provide menu slot",
+    "Use button items inside menu",
+    "Keep menu inside ul"
+  ],
+
+  "dont": [
+    "Do not omit trigger",
+    "Do not omit menu",
+    "Do not use div instead of menu list",
+    "Do not place plain text inside menu"
+  ],
+
+  "examples": [
+    {
+      "label": "Default dropdown",
+      "emmet": "ix-dropdown",
+      "html": "<ix-dropdown><button slot=\"trigger\">Options ▾</button><ul slot=\"menu\"><li><button>Profile</button></li><li><button>Settings</button></li></ul></ix-dropdown>"
+    },
+
+    {
+      "label": "Primary dropdown",
+      "emmet": "ix-dropdown[data-intent=primary]",
+      "html": "<ix-dropdown data-intent=\"primary\"><button slot=\"trigger\">Primary ▾</button><ul slot=\"menu\"><li><button>Dashboard</button></li><li><button>Profile</button></li></ul></ix-dropdown>"
+    },
+
+    {
+      "label": "Ghost dropdown",
+      "emmet": "ix-dropdown[data-intent=ghost]",
+      "html": "<ix-dropdown data-intent=\"ghost\"><button slot=\"trigger\">Ghost ▾</button><ul slot=\"menu\"><li><button>Item 1</button></li><li><button>Item 2</button></li></ul></ix-dropdown>"
+    },
+
+    {
+      "label": "Gradient dropdown",
+      "emmet": "ix-dropdown[data-intent=gradient]",
+      "html": "<ix-dropdown data-intent=\"gradient\"><button slot=\"trigger\">Gradient ▾</button><ul slot=\"menu\"><li><button>Modern</button></li><li><button>Premium</button></li></ul></ix-dropdown>"
+    },
+
+    {
+      "label": "Workspace menu",
+      "emmet": "ix-dropdown[data-intent=primary]",
+      "html": "<ix-dropdown data-intent=\"primary\"><button slot=\"trigger\">Workspace ▾</button><ul slot=\"menu\"><li><button>Settings</button></li><li><button>Invite Members</button></li><li><button>Billing</button></li><li><button>Logout</button></li></ul></ix-dropdown>"
+    }
+  ]
+}

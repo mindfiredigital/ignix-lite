@@ -1,0 +1,85 @@
+{
+  "component": "button",
+  "version": "2.0",
+  "description": "Triggers an action. Renders as native <button>.",
+
+  "element": "button",
+
+  "emmet": "button[data-intent=?]{label}",
+  
+
+  "props": {
+    "data-intent": {
+      "type": "enum",
+      "values": ["primary", "danger", "warning", "success", "neutral", "ghost"],
+      "default": "primary",
+      "native": false,
+      "agent_hint": "Use danger for destructive actions. Use ghost for secondary actions."
+    },
+
+    "disabled": {
+      "type": "boolean",
+      "native": true,
+      "agent_hint": "Use native disabled attribute"
+    },
+
+    "aria-busy": {
+      "type": "boolean",
+      "native": true,
+      "agent_hint": "Use for loading state"
+    },
+
+    "type": {
+      "type": "enum",
+      "values": ["button", "submit", "reset"],
+      "default": "button",
+      "native": true
+    }
+  },
+
+  "states": ["disabled", "aria-busy"],
+
+  "forbidden_props": [
+    "variant",
+    "color",
+    "appearance",
+    "colorScheme",
+    "isLoading",
+    "isDisabled",
+    "size",
+    "class"
+  ],
+
+  "required_props": [],
+  "required_slots": [],
+
+  "do": [
+    "Use data-intent='danger' for destructive actions",
+    "Use aria-busy='true' for loading state",
+    "Use type='submit' inside forms"
+  ],
+
+  "dont": [
+    "Do not use class attribute",
+    "Do not use variant or color props",
+    "Do not use isLoading or isDisabled"
+  ],
+
+  "examples": [
+    {
+      "label": "Primary button",
+      "emmet": "button[data-intent=primary]{Save}",
+      "html": "<button data-intent=\"primary\">Save</button>"
+    },
+    {
+      "label": "Danger button",
+      "emmet": "button[data-intent=danger]{Delete}",
+      "html": "<button data-intent=\"danger\">Delete</button>"
+    },
+    {
+      "label": "Loading button",
+      "emmet": "button[aria-busy=true]{Saving...}",
+      "html": "<button aria-busy=\"true\">Saving...</button>"
+    }
+  ]
+}

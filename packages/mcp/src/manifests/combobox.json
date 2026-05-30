@@ -1,0 +1,33 @@
+{
+  "component": "ix-combobox",
+  "element": "ix-combobox",
+
+  "emmet": "ix-combobox>(label>(span[data-chips])+input[placeholder=?]+button[data-clear]{Clear})+ul>(li{Option})*",
+
+  "required_children": ["label", "input", "ul", "li"],
+
+  "optional_children": ["[data-chips]", "button[data-clear]"],
+
+  "props": {
+    "multiple": {
+      "type": "boolean",
+      "native": true,
+      "agent_hint": "Enables chip rendering and multi-select mode."
+    },
+
+    "data-intent": {
+      "type": "enum",
+      "values": ["primary", "success", "warning", "danger", "gradient"]
+    },
+
+    "data-clear": {
+      "type": "boolean",
+      "native": false
+    },
+
+    "data-chips": {
+      "type": "boolean",
+      "native": false
+    }
+  }
+}

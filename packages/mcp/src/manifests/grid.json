@@ -1,0 +1,143 @@
+{
+  "component": "grid",
+  "version": "2.0",
+  "description": "Responsive semantic grid layout using section container with column spans, gaps, alignment and auto layouts.",
+
+  "element": "section",
+
+  "emmet": "section[data-grid=3]>article*3",
+
+  "props": {
+    "data-grid": {
+      "type": "string",
+
+      "values": ["1", "2", "3", "4", "5", "6", "auto", "fill"],
+
+      "default": "3",
+
+      "agent_hint": "Controls column count or auto layout."
+    },
+
+    "data-gap": {
+      "type": "string",
+
+      "values": ["xs", "sm", "md", "lg", "xl"],
+
+      "default": "md",
+
+      "agent_hint": "Controls spacing between items."
+    },
+
+    "data-align": {
+      "type": "string",
+
+      "values": ["start", "center", "end", "stretch", "baseline"],
+
+      "agent_hint": "Controls vertical alignment."
+    },
+
+    "data-justify": {
+      "type": "string",
+
+      "values": ["start", "center", "end", "stretch"],
+
+      "agent_hint": "Controls horizontal alignment."
+    },
+
+    "data-dense": {
+      "type": "boolean",
+
+      "agent_hint": "Enables dense auto flow packing."
+    }
+  },
+
+  "states": [],
+
+  "slots": {
+    "item": {
+      "required": false,
+
+      "element": ["article", "section", "span", "p", "button"],
+
+      "agent_hint": "Grid content item."
+    }
+  },
+
+  "child_props": {
+    "data-col": {
+      "type": "string",
+
+      "values": ["1", "2", "3", "4", "5", "6", "full"],
+
+      "agent_hint": "Column span for item."
+    },
+
+    "data-row": {
+      "type": "string",
+
+      "values": ["2", "3"],
+
+      "agent_hint": "Row span for item."
+    }
+  },
+
+  "forbidden_props": ["class"],
+
+  "required_props": ["data-grid"],
+
+  "required_slots": [],
+
+  "required_wrapper": null,
+
+  "do": [
+    "Use section as grid container",
+    "Use semantic children",
+    "Use data-col for spans",
+    "Use data-row for row spans",
+    "Use data-gap for spacing"
+  ],
+
+  "dont": [
+    "Do not use div wrappers",
+    "Do not use class attribute",
+    "Do not replace grid config with inline styles"
+  ],
+
+  "examples": [
+    {
+      "label": "Two columns",
+      "emmet": "section[data-grid=2]>article*2",
+      "html": "<section data-grid=\"2\"><article>Column 1</article><article>Column 2</article></section>"
+    },
+
+    {
+      "label": "Three columns",
+      "emmet": "section[data-grid=3]>article*3",
+      "html": "<section data-grid=\"3\"><article>A</article><article>B</article><article>C</article></section>"
+    },
+
+    {
+      "label": "Auto fit",
+      "emmet": "section[data-grid=auto]>article*5",
+      "html": "<section data-grid=\"auto\"><article>1</article><article>2</article><article>3</article></section>"
+    },
+
+    {
+      "label": "Column span",
+      "emmet": "section[data-grid=4]>(article[data-col=2])+(article*4)",
+      "html": "<section data-grid=\"4\"><article data-col=\"2\">Wide</article><article>A</article><article>B</article></section>"
+    },
+
+    {
+      "label": "Full width",
+      "emmet": "section[data-grid=3]>(article*3)+(article[data-col=full])",
+      "html": "<section data-grid=\"3\"><article>1</article><article>2</article><article>3</article><article data-col=\"full\">Full</article></section>"
+    },
+
+    {
+      "label": "Dense layout",
+      "emmet": "section[data-grid=4][data-dense]>article*6",
+      "html": "<section data-grid=\"4\" data-dense><article data-col=\"2\">Wide</article><article>A</article><article>B</article></section>"
+    }
+  ]
+}
