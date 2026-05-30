@@ -1,0 +1,101 @@
+{
+  "component": "skeleton",
+  "version": "2.0",
+  "description": "Displays loading placeholders using native span elements with semantic loading states.",
+
+  "element": "span",
+
+  "emmet": "span[aria-busy=true data-shape=text]",
+
+  "props": {
+    "data-shape": {
+      "type": "enum",
+      "values": ["text", "rect", "circle"],
+      "default": "text",
+      "native": false,
+      "agent_hint": "Use text for content placeholders, rect for cards/banners, circle for avatars."
+    },
+
+    "aria-busy": {
+      "type": "boolean",
+      "native": true,
+      "agent_hint": "Required loading state indicator."
+    },
+
+    "role": {
+      "type": "string",
+      "default": "status",
+      "native": true,
+      "agent_hint": "Use status role for accessibility."
+    },
+
+    "aria-label": {
+      "type": "string",
+      "native": true,
+      "agent_hint": "Provide accessible loading description."
+    },
+
+    "data-lines": {
+      "type": "number",
+      "native": false,
+      "agent_hint": "Use for multiple text line placeholders."
+    }
+  },
+
+  "states": ["loading", "text", "rect", "circle", "multiple-lines"],
+
+  "forbidden_props": [
+    "variant",
+    "intent",
+    "color",
+    "appearance",
+    "size",
+    "isLoading",
+    "class"
+  ],
+
+  "required_props": ["aria-busy"],
+
+  "required_slots": [],
+
+  "do": [
+    "Use aria-busy='true' during loading",
+    "Use data-shape='text' for text placeholders",
+    "Use data-shape='rect' for cards and banners",
+    "Use data-shape='circle' for avatars",
+    "Provide aria-label for accessibility"
+  ],
+
+  "dont": [
+    "Do not use class attribute",
+    "Do not use variant props",
+    "Do not use color props",
+    "Do not use skeleton after content loads"
+  ],
+
+  "examples": [
+    {
+      "label": "Text skeleton",
+      "emmet": "span[role=status aria-busy=true aria-label='loading text' data-shape=text]",
+      "html": "<span role=\"status\" aria-busy=\"true\" aria-label=\"loading text\" data-shape=\"text\"></span>"
+    },
+
+    {
+      "label": "Rectangle skeleton",
+      "emmet": "span[role=status aria-busy=true aria-label='loading rectangle' data-shape=rect]",
+      "html": "<span role=\"status\" aria-busy=\"true\" aria-label=\"loading rectangle\" data-shape=\"rect\"></span>"
+    },
+
+    {
+      "label": "Circle skeleton",
+      "emmet": "span[role=status aria-busy=true aria-label='loading avatar' data-shape=circle]",
+      "html": "<span role=\"status\" aria-busy=\"true\" aria-label=\"loading avatar\" data-shape=\"circle\"></span>"
+    },
+
+    {
+      "label": "Multiple lines",
+      "emmet": "span[role=status aria-busy=true data-shape=text data-lines=3]",
+      "html": "<span role=\"status\" aria-busy=\"true\" data-shape=\"text\" data-lines=\"3\"></span>"
+    }
+  ]
+}

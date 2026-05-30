@@ -1,0 +1,14 @@
+ignix-lite v2.Native HTML.
+
+button[data-intent]
+input[type=*]
+dialog#id
+details>summary+p
+aside[role=alert]
+mark[data-intent]
+article>(slot=avatar|title|body)
+
+WEB:ix-tabs|ix-dropdown|ix-combobox|ix-tooltip|ix-toast
+
+RULE:data-intent only
+MCP:list_components|get_manifest|validate

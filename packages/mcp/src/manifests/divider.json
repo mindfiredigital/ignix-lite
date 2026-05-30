@@ -1,0 +1,47 @@
+{
+  "component": "divider",
+  "version": "2.0",
+  "description": "Visual separator using semantic hr element with orientation support.",
+
+  "element": "hr",
+
+  "emmet": "hr",
+
+  "props": {
+    "data-orientation": {
+      "type": "string",
+
+      "values": ["horizontal", "vertical"],
+
+      "default": "horizontal",
+
+      "agent_hint": "Controls divider direction."
+    }
+  },
+
+  "states": [],
+
+  "forbidden_props": ["class"],
+
+  "required_props": [],
+
+  "required_slots": [],
+
+  "do": ["Use hr element", "Use data-orientation for vertical mode"],
+
+  "dont": ["Do not use div wrappers", "Do not use class attribute"],
+
+  "examples": [
+    {
+      "label": "Horizontal",
+      "emmet": "hr",
+      "html": "<hr>"
+    },
+
+    {
+      "label": "Vertical",
+      "emmet": "hr[data-orientation=vertical]",
+      "html": "<hr data-orientation=\"vertical\">"
+    }
+  ]
+}

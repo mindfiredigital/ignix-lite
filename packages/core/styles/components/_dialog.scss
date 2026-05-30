@@ -133,14 +133,17 @@ dialog {
   }
 }
 
+@keyframes ix-dialog-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 dialog[open] {
   display: flex;
   flex-direction: column;
-  opacity: 1;
-}
-
-@starting-style {
-  dialog[open] {
-    opacity: 0;
-  }
+  animation: ix-dialog-fade-in 0.2s ease forwards;
 }

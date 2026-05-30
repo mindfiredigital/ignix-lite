@@ -28,33 +28,56 @@ class IxToast extends HTMLElement {
     toast.setAttribute('aria-labelledby', titleId)
     toast.setAttribute('aria-describedby', msgId)
 
-    toast.innerHTML = `
-      <strong id="${titleId}">${title || intent}</strong>
-      <span id="${msgId}">${message}</span>
-    `
+    const strong = document.createElement('strong')
+    strong.id = titleId
+    strong.textContent = title || intent
+
+    const span = document.createElement('span')
+    span.id = msgId
+    span.textContent = message
+
+    toast.appendChild(strong)
+    toast.appendChild(span)
+
+    let durationTimeout
+    let fadeTimeout
+
+    const removeToast = () => {
+      clearTimeout(durationTimeout)
+      clearTimeout(fadeTimeout)
+      toast.remove()
+    }
 
     if (variant === 'action') {
       const btn = document.createElement('button')
       btn.textContent = actionText
-
-      btn.onclick = () => toast.remove()
-
+      btn.addEventListener('click', removeToast)
       toast.appendChild(btn)
     }
 
     this.appendChild(toast)
 
     toast.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') toast.remove()
+      if (e.key === 'Escape') removeToast()
     })
 
     requestAnimationFrame(() => {
       toast.setAttribute('data-open', 'true')
     })
 
-    setTimeout(() => {
+    durationTimeout = setTimeout(() => {
       toast.removeAttribute('data-open')
-      setTimeout(() => toast.remove(), 200)
+
+      const onFadeEnd = () => {
+        toast.removeEventListener('transitionend', onFadeEnd)
+        toast.removeEventListener('animationend', onFadeEnd)
+        removeToast()
+      }
+      toast.addEventListener('transitionend', onFadeEnd)
+      toast.addEventListener('animationend', onFadeEnd)
+
+      // Fallback in case transition fails or transitions are disabled
+      fadeTimeout = setTimeout(removeToast, 400)
     }, duration)
   }
 }

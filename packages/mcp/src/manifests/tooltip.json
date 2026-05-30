@@ -1,0 +1,115 @@
+{
+  "component": "tooltip",
+  "version": "2.0",
+  "description": "Provides contextual information using the ix-tooltip custom element with position variants, semantic intents, and keyboard accessibility.",
+
+  "element": "ix-tooltip",
+
+  "emmet": "ix-tooltip[content]>button",
+
+  "props": {
+    "content": {
+      "type": "string",
+      "required": true,
+      "native": false,
+      "agent_hint": "Defines tooltip text."
+    },
+
+    "data-position": {
+      "type": "enum",
+      "values": ["top", "bottom", "left", "right"],
+      "default": "top",
+      "native": false,
+      "agent_hint": "Controls tooltip placement."
+    },
+
+    "data-intent": {
+      "type": "enum",
+      "values": ["success", "danger", "warning"],
+      "native": false,
+      "agent_hint": "Applies semantic tooltip styling."
+    },
+
+    "tabindex": {
+      "type": "number",
+      "default": 0,
+      "native": true,
+      "agent_hint": "Enables keyboard focus."
+    },
+
+    "role": {
+      "type": "string",
+      "default": "tooltip",
+      "native": true,
+      "agent_hint": "Accessibility role."
+    }
+  },
+
+  "states": ["hover", "focus-within", "visible"],
+
+  "forbidden_props": [
+    "variant",
+    "placement",
+    "color",
+    "theme",
+    "position",
+    "class"
+  ],
+
+  "required_props": ["content"],
+
+  "required_slots": [],
+
+  "do": [
+    "Provide tooltip text using content attribute",
+    "Use data-position for placement",
+    "Use semantic intents when needed",
+    "Wrap interactive elements inside ix-tooltip",
+    "Allow keyboard focus"
+  ],
+
+  "dont": [
+    "Do not omit content",
+    "Do not use placement prop",
+    "Do not use custom classes for variants",
+    "Do not place tooltip text inside children"
+  ],
+
+  "examples": [
+    {
+      "label": "Default tooltip",
+      "emmet": "ix-tooltip[content]>button",
+      "html": "<ix-tooltip content=\"Tooltip text\"><button>Hover me</button></ix-tooltip>"
+    },
+
+    {
+      "label": "Position variants",
+      "emmet": "ix-tooltip[data-position]",
+      "html": "<ix-tooltip content=\"Bottom tooltip\" data-position=\"bottom\"><button>Bottom</button></ix-tooltip>"
+    },
+
+    {
+      "label": "Success tooltip",
+      "emmet": "ix-tooltip[data-intent=success]",
+      "html": "<ix-tooltip content=\"Success tooltip\" data-intent=\"success\"><button>Success</button></ix-tooltip>"
+    },
+
+    {
+      "label": "Danger tooltip",
+      "emmet": "ix-tooltip[data-intent=danger]",
+      "html": "<ix-tooltip content=\"Danger tooltip\" data-intent=\"danger\"><button>Delete</button></ix-tooltip>"
+    },
+
+    {
+      "label": "Warning tooltip",
+      "emmet": "ix-tooltip[data-intent=warning]",
+      "html": "<ix-tooltip content=\"Warning tooltip\" data-intent=\"warning\"><button>Warning</button></ix-tooltip>"
+    },
+
+    {
+      "label": "Position example",
+      "emmet": "ix-tooltip[data-position=right]",
+      "html": "<ix-tooltip content=\"Right tooltip\" data-position=\"right\"><button>Info</button></ix-tooltip>"
+    }
+  ]
+}
