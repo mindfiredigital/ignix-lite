@@ -38,7 +38,7 @@ dialog {
     line-height: var(--ix-line-height);
     width: 100%;
 
-    &+p {
+    & + p {
       margin-top: var(--ix-space-sm);
     }
   }
