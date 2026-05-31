@@ -6,54 +6,64 @@ export default meta
 
 export const Default = {
   render: () => `
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-        </tr>
-      </thead>
+    <section>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Status</th>
+          </tr>
+        </thead>
 
-      <tbody>
-        <tr>
-          <td>John</td>
-          <td>john@example.com</td>
-        </tr>
+        <tbody>
+          <tr>
+            <td>John Doe</td>
+            <td>john@example.com</td>
+            <td><mark data-intent="success">Active</mark></td>
+          </tr>
 
-        <tr>
-          <td>Jane</td>
-          <td>jane@example.com</td>
-        </tr>
-      </tbody>
-    </table>
+          <tr>
+            <td>Jane Smith</td>
+            <td>jane@example.com</td>
+            <td><mark data-intent="danger">Inactive</mark></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
   `,
 }
 
 export const Sortable = {
   render: () => `
-    <table data-sortable>
-      <thead>
-        <tr>
-          <th aria-sort="ascending">Name</th>
-          <th aria-sort="descending">Email</th>
-          <th aria-sort="none">Role</th>
-        </tr>
-      </thead>
+    <section>
+      <table is="ix-table">
+        <thead>
+          <tr>
+            <th data-sortable aria-sort="ascending">Name</th>
+            <th data-sortable aria-sort="descending">Email</th>
+            <th data-sortable aria-sort="none">Role</th>
+            <th>Status</th>
+          </tr>
+        </thead>
 
-      <tbody>
-        <tr>
-          <td>Jane</td>
-          <td>jane@example.com</td>
-          <td>Admin</td>
-        </tr>
+        <tbody>
+          <tr>
+            <td>Jane Smith</td>
+            <td>jane@example.com</td>
+            <td>Admin</td>
+            <td><mark data-intent="success">Active</mark></td>
+          </tr>
 
-        <tr>
-          <td>John</td>
-          <td>john@example.com</td>
-          <td>User</td>
-        </tr>
-      </tbody>
-    </table>
+          <tr>
+            <td>John Doe</td>
+            <td>john@example.com</td>
+            <td>User</td>
+            <td><mark data-intent="warning">Pending</mark></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
   `,
 }
 
