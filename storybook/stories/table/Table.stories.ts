@@ -41,8 +41,8 @@ export const Sortable = {
         <thead>
           <tr>
             <th data-sortable aria-sort="ascending">Name</th>
-            <th data-sortable aria-sort="descending">Email</th>
-            <th data-sortable aria-sort="none">Role</th>
+            <th data-sortable aria-sort="ascending">Email</th>
+            <th data-sortable aria-sort="ascending">Role</th>
             <th>Status</th>
           </tr>
         </thead>
