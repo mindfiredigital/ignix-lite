@@ -103,10 +103,10 @@
   <main>
 
     <!-- ── Alerts ────────────────────────────────────────────────────────── -->
-    <ix-alert data-intent="info">Informational message</ix-alert>
-    <ix-alert data-intent="success">Operation completed successfully.</ix-alert>
-    <ix-alert data-intent="warning">Please review before proceeding.</ix-alert>
-    <ix-alert data-intent="danger">Something went wrong.</ix-alert>
+    <aside data-intent="info">Informational message</aside>
+    <aside data-intent="success">Operation completed successfully.</aside>
+    <aside data-intent="warning">Please review before proceeding.</aside>
+    <aside data-intent="danger">Something went wrong.</aside>
 
     <!-- ── Buttons ───────────────────────────────────────────────────────── -->
     <button data-intent="primary">Save</button>
@@ -255,27 +255,31 @@
     </div>
 
     <!-- ── Table ─────────────────────────────────────────────────────────── -->
-    <table is="ix-table" data-sortable>
-      <thead>
-        <tr>
-          <th scope="col" aria-sort="ascending">Name</th>
-          <th scope="col">Status</th>
-          <th scope="col">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Alice</td>
-          <td><mark data-intent="success">Active</mark></td>
-          <td><button data-intent="danger">Remove</button></td>
-        </tr>
-        <tr>
-          <td>Bob</td>
-          <td><mark data-intent="neutral">Inactive</mark></td>
-          <td><button data-intent="danger">Remove</button></td>
-        </tr>
-      </tbody>
-    </table>
+    <!-- Wrap in <section> for responsive horizontal scroll (section:has(table)) -->
+    <section>
+      <table is="ix-table">
+        <thead>
+          <tr>
+            <!-- data-sortable goes on <th>, NOT on <table> -->
+            <th scope="col" data-sortable aria-sort="ascending">Name</th>
+            <th scope="col" data-sortable aria-sort="none">Status</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Alice</td>
+            <td><mark data-intent="success">Active</mark></td>
+            <td><button data-intent="danger">Remove</button></td>
+          </tr>
+          <tr>
+            <td>Bob</td>
+            <td><mark data-intent="neutral">Inactive</mark></td>
+            <td><button data-intent="danger">Remove</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
 
     <!-- ── Breadcrumb ────────────────────────────────────────────────────── -->
     <nav aria-label="Breadcrumb">

@@ -358,16 +358,22 @@ A hands-on reference of real MCP tool calls and their responses.
 
 ### Accessible data table
 ```html
-<table is="ix-table" data-sortable>
-  <thead>
-    <tr>
-      <th scope="col" aria-sort="ascending">Name</th>
-      <th scope="col">Role</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>Alice</td><td>Admin</td></tr>
-    <tr><td>Bob</td><td>Editor</td></tr>
-  </tbody>
-</table>
+<section>
+  <table is="ix-table">
+    <thead>
+      <tr>
+        <th scope="col" data-sortable aria-sort="ascending">Name</th>
+        <th scope="col" data-sortable aria-sort="none">Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Alice</td><td>Admin</td></tr>
+      <tr><td>Bob</td><td>Editor</td></tr>
+    </tbody>
+  </table>
+</section>
 ```
+
+> **Note:** `data-sortable` goes on each `<th>` header, NOT on the `<table>` wrapper.
+> Wrap in `<section>` to activate the responsive horizontal scroll rule.
+
