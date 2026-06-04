@@ -1,0 +1,554 @@
+---
+sidebar_position: 6
+title: Layout
+description: Layout utility components for ignix-lite — stack, flex, center, sidebar, cluster, switcher, and cover — built with zero classes and pure CSS.
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import Preview from '@site/src/components/preview'
+
+# Layout
+
+Layout utility components for structuring page sections, content regions, and UI composition patterns.
+
+All layout components follow the same zero-class, data-attribute design as the rest of ignix-lite. No JavaScript. No wrappers. Pure CSS.
+
+---
+
+## Stack
+
+Stacks children **vertically** with a controlled gap. Use for form fields, page sections, and any vertical sequence.
+
+### Gap Sizes
+
+<Tabs defaultValue="preview">
+  <TabItem value="preview" label="Preview">
+    <Preview>
+      <div data-stack="sm" style={{ marginBottom: 'var(--ix-space-md)' }}>
+        <p style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-sm)', borderRadius: 'var(--ix-radius)', fontFamily: 'var(--ix-font)', fontSize: 'var(--ix-size-sm)' }}>sm gap — Item 1</p>
+        <p style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-sm)', borderRadius: 'var(--ix-radius)', fontFamily: 'var(--ix-font)', fontSize: 'var(--ix-size-sm)' }}>sm gap — Item 2</p>
+        <p style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-sm)', borderRadius: 'var(--ix-radius)', fontFamily: 'var(--ix-font)', fontSize: 'var(--ix-size-sm)' }}>sm gap — Item 3</p>
+      </div>
+      <div data-stack="lg">
+        <p style={{ background: 'var(--ix-success-bg)', color: 'var(--ix-success)', padding: 'var(--ix-space-sm)', borderRadius: 'var(--ix-radius)', fontFamily: 'var(--ix-font)', fontSize: 'var(--ix-size-sm)' }}>lg gap — Item 1</p>
+        <p style={{ background: 'var(--ix-success-bg)', color: 'var(--ix-success)', padding: 'var(--ix-space-sm)', borderRadius: 'var(--ix-radius)', fontFamily: 'var(--ix-font)', fontSize: 'var(--ix-size-sm)' }}>lg gap — Item 2</p>
+        <p style={{ background: 'var(--ix-success-bg)', color: 'var(--ix-success)', padding: 'var(--ix-space-sm)', borderRadius: 'var(--ix-radius)', fontFamily: 'var(--ix-font)', fontSize: 'var(--ix-size-sm)' }}>lg gap — Item 3</p>
+      </div>
+    </Preview>
+  </TabItem>
+  <TabItem value="code" label="Code">
+```html
+<div data-stack="sm">
+  <p>Item 1</p>
+  <p>Item 2</p>
+  <p>Item 3</p>
+</div>
+
+<div data-stack="lg">
+  <p>Item 1</p>
+  <p>Item 2</p>
+  <p>Item 3</p>
+</div>
+```
+  </TabItem>
+</Tabs>
+
+### With Form Fields
+
+<Tabs defaultValue="preview">
+  <TabItem value="preview" label="Preview">
+    <Preview>
+      <form data-stack="md" style={{ maxWidth: '320px' }}>
+        <label>Name<input type="text" placeholder="Your name" /></label>
+        <label>Email<input type="email" placeholder="you@example.com" /></label>
+        <button data-intent="primary" type="submit">Submit</button>
+      </form>
+    </Preview>
+  </TabItem>
+  <TabItem value="code" label="Code">
+```html
+<form data-stack="md">
+  <label>Name<input type="text" placeholder="Your name" /></label>
+  <label>Email<input type="email" placeholder="you@example.com" /></label>
+  <button data-intent="primary" type="submit">Submit</button>
+</form>
+```
+  </TabItem>
+</Tabs>
+
+---
+
+## Flex
+
+Arranges children **horizontally** in a flex row. Controls gap, alignment, and justification.
+
+### Icon + Text
+
+<Tabs defaultValue="preview">
+  <TabItem value="preview" label="Preview">
+    <Preview>
+      <div data-flex data-align="center" data-gap="sm">
+        <span style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-sm)', borderRadius: '50%', width: '2rem', height: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--ix-font)', fontSize: 'var(--ix-size-sm)', fontWeight: 700 }}>★</span>
+        <span style={{ fontFamily: 'var(--ix-font)', fontSize: 'var(--ix-size-md)', color: 'var(--ix-text)' }}>Starred item</span>
+      </div>
+    </Preview>
+  </TabItem>
+  <TabItem value="code" label="Code">
+```html
+<div data-flex data-align="center" data-gap="sm">
+  <span>★</span>
+  <span>Starred item</span>
+</div>
+```
+  </TabItem>
+</Tabs>
+
+### Space Between (Header Bar)
+
+<Tabs defaultValue="preview">
+  <TabItem value="preview" label="Preview">
+    <Preview>
+      <header data-flex data-align="center" data-justify="between" style={{ padding: 'var(--ix-space-md)', border: '1px solid var(--ix-border)', borderRadius: 'var(--ix-radius)', background: 'var(--ix-surface-raised)' }}>
+        <strong style={{ fontFamily: 'var(--ix-font)', color: 'var(--ix-text)' }}>MyApp</strong>
+        <div data-cluster="sm">
+          <button data-intent="ghost">Log in</button>
+          <button data-intent="primary">Sign up</button>
+        </div>
+      </header>
+    </Preview>
+  </TabItem>
+  <TabItem value="code" label="Code">
+```html
+<header data-flex data-align="center" data-justify="between">
+  <strong>MyApp</strong>
+  <div data-cluster="sm">
+    <button data-intent="ghost">Log in</button>
+    <button data-intent="primary">Sign up</button>
+  </div>
+</header>
+```
+  </TabItem>
+</Tabs>
+
+### Growing Middle Child
+
+<Tabs defaultValue="preview">
+  <TabItem value="preview" label="Preview">
+    <Preview>
+      <div data-flex data-align="center" data-gap="sm" style={{ border: '1px solid var(--ix-border)', borderRadius: 'var(--ix-radius)', padding: 'var(--ix-space-sm)', background: 'var(--ix-surface-raised)' }}>
+        <button data-intent="ghost">← Back</button>
+        <p data-grow style={{ margin: 0, textAlign: 'center', fontFamily: 'var(--ix-font)', fontWeight: 600, color: 'var(--ix-text)' }}>Page Title</p>
+        <button data-intent="ghost">Next →</button>
+      </div>
+    </Preview>
+  </TabItem>
+  <TabItem value="code" label="Code">
+```html
+<div data-flex data-align="center" data-gap="sm">
+  <button data-intent="ghost">← Back</button>
+  <p data-grow>Page Title</p>
+  <button data-intent="ghost">Next →</button>
+</div>
+```
+  </TabItem>
+</Tabs>
+
+---
+
+## Center
+
+Constrains content to a **max-width** and centers it horizontally. Use on `<main>`, `<section>`, or `<article>`.
+
+### Width Presets
+
+<Tabs defaultValue="preview">
+  <TabItem value="preview" label="Preview">
+    <Preview>
+      <div data-stack="md">
+        <div data-center="sm" style={{ background: 'var(--ix-primary-bg)', padding: 'var(--ix-space-sm)', borderRadius: 'var(--ix-radius)', textAlign: 'center', fontFamily: 'var(--ix-font)', fontSize: 'var(--ix-size-sm)', color: 'var(--ix-primary)', fontWeight: 600 }}>sm — max 640px</div>
+        <div data-center="md" style={{ background: 'var(--ix-success-bg)', padding: 'var(--ix-space-sm)', borderRadius: 'var(--ix-radius)', textAlign: 'center', fontFamily: 'var(--ix-font)', fontSize: 'var(--ix-size-sm)', color: 'var(--ix-success)', fontWeight: 600 }}>md — max 960px</div>
+        <div data-center="lg" style={{ background: 'var(--ix-warning-bg)', padding: 'var(--ix-space-sm)', borderRadius: 'var(--ix-radius)', textAlign: 'center', fontFamily: 'var(--ix-font)', fontSize: 'var(--ix-size-sm)', color: 'var(--ix-warning)', fontWeight: 600 }}>lg — max 1200px</div>
+      </div>
+    </Preview>
+  </TabItem>
+  <TabItem value="code" label="Code">
+```html
+<!-- 640px max width -->
+<main data-center="sm">...</main>
+
+<!-- 960px max width -->
+<main data-center="md">...</main>
+
+<!-- 1200px max width (default for most pages) -->
+<main data-center="lg">...</main>
+
+<!-- 1440px max width -->
+<main data-center="xl">...</main>
+```
+  </TabItem>
+</Tabs>
+
+---
+
+## Sidebar
+
+Two-column layout: a **fixed-width sidebar** + a **fluid main area**. Automatically stacks on narrow screens.
+
+### App Shell
+
+<Tabs defaultValue="preview">
+  <TabItem value="preview" label="Preview">
+    <Preview>
+      <div data-sidebar style={{ minHeight: '160px', border: '1px solid var(--ix-border)', borderRadius: 'var(--ix-radius)', overflow: 'hidden' }}>
+        <aside style={{ background: 'var(--ix-surface-raised)', padding: 'var(--ix-space-md)', borderRight: '1px solid var(--ix-border)', fontFamily: 'var(--ix-font)', fontSize: 'var(--ix-size-sm)' }}>
+          <nav>
+            <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 'var(--ix-space-sm)' }}>
+              <li><a href="#" aria-current="page" style={{ textDecoration: 'none', color: 'var(--ix-primary)', fontWeight: 600 }}>Dashboard</a></li>
+              <li><a href="#" style={{ textDecoration: 'none', color: 'var(--ix-text)' }}>Users</a></li>
+              <li><a href="#" style={{ textDecoration: 'none', color: 'var(--ix-text)' }}>Settings</a></li>
+            </ul>
+          </nav>
+        </aside>
+        <main style={{ padding: 'var(--ix-space-md)', fontFamily: 'var(--ix-font)', color: 'var(--ix-text)' }}>
+          <h2 style={{ margin: '0 0 var(--ix-space-sm)', fontSize: 'var(--ix-size-lg)' }}>Dashboard</h2>
+          <p style={{ margin: 0, color: 'var(--ix-text-muted)', fontSize: 'var(--ix-size-sm)' }}>Main content area — grows to fill available space.</p>
+        </main>
+      </div>
+    </Preview>
+  </TabItem>
+  <TabItem value="code" label="Code">
+```html
+<div data-sidebar>
+  <aside>
+    <nav>
+      <ul>
+        <li><a href="/dashboard" aria-current="page">Dashboard</a></li>
+        <li><a href="/users">Users</a></li>
+        <li><a href="/settings">Settings</a></li>
+      </ul>
+    </nav>
+  </aside>
+  <main>
+    <h1>Dashboard</h1>
+    <p>Main content area</p>
+  </main>
+</div>
+```
+  </TabItem>
+</Tabs>
+
+### Right Sidebar
+
+<Tabs defaultValue="preview">
+  <TabItem value="preview" label="Preview">
+    <Preview>
+      <div data-sidebar data-sidebar-side="right" style={{ minHeight: '120px', border: '1px solid var(--ix-border)', borderRadius: 'var(--ix-radius)', overflow: 'hidden' }}>
+        <main style={{ padding: 'var(--ix-space-md)', fontFamily: 'var(--ix-font)', color: 'var(--ix-text)', fontSize: 'var(--ix-size-sm)' }}>Main content on the left</main>
+        <aside style={{ background: 'var(--ix-surface-raised)', padding: 'var(--ix-space-md)', borderLeft: '1px solid var(--ix-border)', fontFamily: 'var(--ix-font)', fontSize: 'var(--ix-size-sm)', color: 'var(--ix-text-muted)' }}>Right sidebar</aside>
+      </div>
+    </Preview>
+  </TabItem>
+  <TabItem value="code" label="Code">
+```html
+<div data-sidebar data-sidebar-side="right">
+  <main>Main content</main>
+  <aside>Right sidebar</aside>
+</div>
+```
+  </TabItem>
+</Tabs>
+
+---
+
+## Cluster
+
+A **wrapping inline group** for tags, badges, chips, and button groups. Children wrap to the next line naturally.
+
+### Badge Cluster
+
+<Tabs defaultValue="preview">
+  <TabItem value="preview" label="Preview">
+    <Preview>
+      <div data-cluster="sm">
+        <mark data-intent="primary">React</mark>
+        <mark data-intent="success">TypeScript</mark>
+        <mark data-intent="warning">Beta</mark>
+        <mark data-intent="neutral">CSS</mark>
+        <mark data-intent="danger">Deprecated</mark>
+      </div>
+    </Preview>
+  </TabItem>
+  <TabItem value="code" label="Code">
+```html
+<div data-cluster="sm">
+  <mark data-intent="primary">React</mark>
+  <mark data-intent="success">TypeScript</mark>
+  <mark data-intent="warning">Beta</mark>
+  <mark data-intent="neutral">CSS</mark>
+  <mark data-intent="danger">Deprecated</mark>
+</div>
+```
+  </TabItem>
+</Tabs>
+
+### Action Button Group
+
+<Tabs defaultValue="preview">
+  <TabItem value="preview" label="Preview">
+    <Preview>
+      <div data-cluster="md">
+        <button data-intent="primary">Save</button>
+        <button data-intent="ghost">Cancel</button>
+        <button data-intent="danger">Delete</button>
+      </div>
+    </Preview>
+  </TabItem>
+  <TabItem value="code" label="Code">
+```html
+<div data-cluster="md">
+  <button data-intent="primary">Save</button>
+  <button data-intent="ghost">Cancel</button>
+  <button data-intent="danger">Delete</button>
+</div>
+```
+  </TabItem>
+</Tabs>
+
+---
+
+## Switcher
+
+Children sit **side-by-side** above a width threshold and **stack vertically** below it — no media queries needed.
+
+### Two Panels
+
+<Tabs defaultValue="preview">
+  <TabItem value="preview" label="Preview">
+    <Preview>
+      <div data-switcher data-threshold="sm" data-gap="md">
+        <section style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontFamily: 'var(--ix-font)', fontSize: 'var(--ix-size-sm)', fontWeight: 600 }}>Panel A</section>
+        <section style={{ background: 'var(--ix-success-bg)', color: 'var(--ix-success)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontFamily: 'var(--ix-font)', fontSize: 'var(--ix-size-sm)', fontWeight: 600 }}>Panel B</section>
+      </div>
+    </Preview>
+  </TabItem>
+  <TabItem value="code" label="Code">
+```html
+<div data-switcher data-threshold="sm">
+  <section>Panel A</section>
+  <section>Panel B</section>
+</div>
+```
+  </TabItem>
+</Tabs>
+
+### Feature Blocks
+
+<Tabs defaultValue="preview">
+  <TabItem value="preview" label="Preview">
+    <Preview>
+      <div data-switcher data-threshold="sm" data-gap="md">
+        <article style={{ background: 'var(--ix-surface-raised)', border: '1px solid var(--ix-border)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontFamily: 'var(--ix-font)' }}>
+          <h3 style={{ margin: '0 0 var(--ix-space-sm)', color: 'var(--ix-text)', fontSize: 'var(--ix-size-md)' }}>Fast</h3>
+          <p style={{ margin: 0, color: 'var(--ix-text-muted)', fontSize: 'var(--ix-size-sm)' }}>Under 8KB total.</p>
+        </article>
+        <article style={{ background: 'var(--ix-surface-raised)', border: '1px solid var(--ix-border)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontFamily: 'var(--ix-font)' }}>
+          <h3 style={{ margin: '0 0 var(--ix-space-sm)', color: 'var(--ix-text)', fontSize: 'var(--ix-size-md)' }}>Accessible</h3>
+          <p style={{ margin: 0, color: 'var(--ix-text-muted)', fontSize: 'var(--ix-size-sm)' }}>WCAG 2.2 AA out of the box.</p>
+        </article>
+        <article style={{ background: 'var(--ix-surface-raised)', border: '1px solid var(--ix-border)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontFamily: 'var(--ix-font)' }}>
+          <h3 style={{ margin: '0 0 var(--ix-space-sm)', color: 'var(--ix-text)', fontSize: 'var(--ix-size-md)' }}>Agent-Ready</h3>
+          <p style={{ margin: 0, color: 'var(--ix-text-muted)', fontSize: 'var(--ix-size-sm)' }}>Built-in MCP server.</p>
+        </article>
+      </div>
+    </Preview>
+  </TabItem>
+  <TabItem value="code" label="Code">
+```html
+<div data-switcher data-threshold="sm" data-gap="md">
+  <article>
+    <h3>Fast</h3>
+    <p>Under 8KB total.</p>
+  </article>
+  <article>
+    <h3>Accessible</h3>
+    <p>WCAG 2.2 AA out of the box.</p>
+  </article>
+  <article>
+    <h3>Agent-Ready</h3>
+    <p>Built-in MCP server.</p>
+  </article>
+</div>
+```
+  </TabItem>
+</Tabs>
+
+---
+
+## Cover
+
+Full-height section that **centers content vertically and horizontally**. Use for hero sections, empty states, and landing pages.
+
+### Hero Section
+
+<Tabs defaultValue="preview">
+  <TabItem value="preview" label="Preview">
+    <Preview>
+      <section data-cover="contained" style={{ minHeight: '240px', background: 'var(--ix-primary-bg)', borderRadius: 'var(--ix-radius)' }}>
+        <div data-stack="md" style={{ alignItems: 'center' }}>
+          <h1 style={{ margin: 0, fontFamily: 'var(--ix-font)', color: 'var(--ix-primary)', fontSize: 'var(--ix-size-xl)' }}>Welcome to ignix-lite</h1>
+          <p style={{ margin: 0, fontFamily: 'var(--ix-font)', color: 'var(--ix-text-muted)', fontSize: 'var(--ix-size-md)' }}>Zero classes. Native HTML. Agent-ready.</p>
+          <button data-intent="primary">Get Started</button>
+        </div>
+      </section>
+    </Preview>
+  </TabItem>
+  <TabItem value="code" label="Code">
+```html
+<section data-cover>
+  <div data-stack="md">
+    <h1>Welcome to ignix-lite</h1>
+    <p>Zero classes. Native HTML. Agent-ready.</p>
+    <button data-intent="primary">Get Started</button>
+  </div>
+</section>
+```
+  </TabItem>
+</Tabs>
+
+### Empty State
+
+<Tabs defaultValue="preview">
+  <TabItem value="preview" label="Preview">
+    <Preview>
+      <section data-cover="contained" style={{ minHeight: '200px', border: '2px dashed var(--ix-border)', borderRadius: 'var(--ix-radius)' }}>
+        <div data-stack="sm" style={{ alignItems: 'center' }}>
+          <p style={{ margin: 0, fontFamily: 'var(--ix-font)', fontSize: 'var(--ix-size-lg)', color: 'var(--ix-text)', fontWeight: 600 }}>No results found</p>
+          <p style={{ margin: 0, fontFamily: 'var(--ix-font)', color: 'var(--ix-text-muted)', fontSize: 'var(--ix-size-sm)' }}>Try adjusting your search filters.</p>
+          <button data-intent="ghost">Clear filters</button>
+        </div>
+      </section>
+    </Preview>
+  </TabItem>
+  <TabItem value="code" label="Code">
+```html
+<section data-cover="contained">
+  <div data-stack="sm">
+    <p>No results found</p>
+    <p>Try adjusting your search filters.</p>
+    <button data-intent="ghost">Clear filters</button>
+  </div>
+</section>
+```
+  </TabItem>
+</Tabs>
+
+---
+
+## Composing Layouts
+
+Layout components are designed to be **combined**. Here's a full page shell:
+
+<Tabs defaultValue="code">
+  <TabItem value="code" label="Code">
+```html
+<!-- Sidebar shell -->
+<div data-sidebar>
+  <aside>
+    <nav>
+      <ul>
+        <li><a href="/" aria-current="page">Dashboard</a></li>
+        <li><a href="/settings">Settings</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Main area: centered + stacked -->
+  <main data-center="lg">
+    <div data-stack="xl">
+
+      <!-- Header bar -->
+      <header data-flex data-align="center" data-justify="between">
+        <h1>Dashboard</h1>
+        <div data-cluster="sm">
+          <button data-intent="ghost">Export</button>
+          <button data-intent="primary">New Item</button>
+        </div>
+      </header>
+
+      <!-- Stat cards in a switcher -->
+      <div data-switcher data-threshold="sm" data-gap="md">
+        <article><p>Users: 1,204</p></article>
+        <article><p>Revenue: $48k</p></article>
+        <article><p>Uptime: 99.9%</p></article>
+      </div>
+
+      <!-- Content grid -->
+      <section data-grid="2">
+        <article>Recent Activity</article>
+        <article>Quick Actions</article>
+      </section>
+
+    </div>
+  </main>
+</div>
+```
+  </TabItem>
+</Tabs>
+
+---
+
+## Attributes
+
+### Stack
+
+| Attribute | Type | Values | Description |
+|---|---|---|---|
+| `data-stack` | `string` | `xs \| sm \| md \| lg \| xl` | Vertical gap between stacked children |
+
+### Flex
+
+| Attribute | Type | Values | Description |
+|---|---|---|---|
+| `data-flex` | `boolean` | — | Activates horizontal flex row |
+| `data-gap` | `string` | `xs \| sm \| md \| lg \| xl` | Gap between flex children |
+| `data-align` | `string` | `start \| center \| end \| stretch \| baseline` | Cross-axis alignment |
+| `data-justify` | `string` | `start \| center \| end \| between \| around \| evenly` | Main-axis justification |
+| `data-wrap` | `string` | `wrap \| nowrap` | Whether children wrap |
+| `data-grow` | `boolean` | — | On child: makes it fill remaining space |
+| `data-shrink` | `boolean` | — | On child: prevents it from growing |
+
+### Center
+
+| Attribute | Type | Values | Description |
+|---|---|---|---|
+| `data-center` | `string` | `sm \| md \| lg \| xl \| full` | Max-width: 640px / 960px / 1200px / 1440px / 100% |
+
+### Sidebar
+
+| Attribute | Type | Values | Description |
+|---|---|---|---|
+| `data-sidebar` | `boolean` | — | Activates sidebar layout |
+| `data-sidebar-width` | `string` | `sm \| md \| lg` | Sidebar width: 160px / 256px / 352px |
+| `data-sidebar-side` | `string` | `left \| right` | Which side the sidebar is on |
+
+### Cluster
+
+| Attribute | Type | Values | Description |
+|---|---|---|---|
+| `data-cluster` | `string` | `xs \| sm \| md \| lg \| xl` | Gap between clustered items |
+
+### Switcher
+
+| Attribute | Type | Values | Description |
+|---|---|---|---|
+| `data-switcher` | `boolean` | — | Activates switcher layout |
+| `data-threshold` | `string` | `sm \| md \| lg` | Min child width before stacking: 192px / 320px / 480px |
+| `data-gap` | `string` | `xs \| sm \| md \| lg \| xl` | Gap between children |
+
+### Cover
+
+| Attribute | Type | Values | Description |
+|---|---|---|---|
+| `data-cover` | `string` | `screen \| contained` | `screen`=full viewport height, `contained`=fills parent |
+| `data-padding` | `string` | `sm \| md \| lg \| xl` | Inner padding of the cover |

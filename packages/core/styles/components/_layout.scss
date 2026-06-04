@@ -1,0 +1,192 @@
+// ─── Stack ───────────────────────────────────────────────────────────────────
+// Stacks children vertically with a controlled gap.
+// Usage: <div data-stack="md"><p>A</p><p>B</p></div>
+
+[data-stack] {
+  display: flex;
+  flex-direction: column;
+
+  > * {
+    min-width: 0;
+  }
+}
+
+[data-stack='xs'] { gap: calc(var(--ix-space-sm) / 2); }
+[data-stack='sm'] { gap: var(--ix-space-sm); }
+[data-stack='md'] { gap: var(--ix-space-md); }
+[data-stack='lg'] { gap: var(--ix-space-lg); }
+[data-stack='xl'] { gap: calc(var(--ix-space-lg) * 1.5); }
+
+// bare [data-stack] defaults to md gap
+[data-stack]:not([data-stack='xs']):not([data-stack='sm']):not([data-stack='md']):not([data-stack='lg']):not([data-stack='xl']) {
+  gap: var(--ix-space-md);
+}
+
+// ─── Flex ────────────────────────────────────────────────────────────────────
+// Horizontal flex row. Shares data-gap, data-align, data-justify with grid.
+// Usage: <div data-flex data-gap="md" data-align="center">...</div>
+
+[data-flex] {
+  display: flex;
+  flex-direction: row;
+  gap: var(--ix-space-md);
+
+  > * {
+    min-width: 0;
+  }
+}
+
+// gap (shared naming with data-grid)
+[data-flex][data-gap='xs'] { gap: calc(var(--ix-space-sm) / 2); }
+[data-flex][data-gap='sm'] { gap: var(--ix-space-sm); }
+[data-flex][data-gap='md'] { gap: var(--ix-space-md); }
+[data-flex][data-gap='lg'] { gap: var(--ix-space-lg); }
+[data-flex][data-gap='xl'] { gap: calc(var(--ix-space-lg) * 1.5); }
+
+// align (cross axis)
+[data-flex][data-align='start']    { align-items: flex-start; }
+[data-flex][data-align='center']   { align-items: center; }
+[data-flex][data-align='end']      { align-items: flex-end; }
+[data-flex][data-align='stretch']  { align-items: stretch; }
+[data-flex][data-align='baseline'] { align-items: baseline; }
+
+// justify (main axis)
+[data-flex][data-justify='start']   { justify-content: flex-start; }
+[data-flex][data-justify='center']  { justify-content: center; }
+[data-flex][data-justify='end']     { justify-content: flex-end; }
+[data-flex][data-justify='between'] { justify-content: space-between; }
+[data-flex][data-justify='around']  { justify-content: space-around; }
+[data-flex][data-justify='evenly']  { justify-content: space-evenly; }
+
+// wrap
+[data-flex][data-wrap='wrap']   { flex-wrap: wrap; }
+[data-flex][data-wrap='nowrap'] { flex-wrap: nowrap; }
+
+// ─── Center ──────────────────────────────────────────────────────────────────
+// Max-width page wrapper, horizontally centered.
+// Usage: <main data-center="lg"><p>Centered content</p></main>
+
+[data-center] {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: var(--ix-space-md);
+}
+
+[data-center='sm']   { max-width: 40rem; }   // 640px
+[data-center='md']   { max-width: 60rem; }   // 960px
+[data-center='lg']   { max-width: 75rem; }   // 1200px
+[data-center='xl']   { max-width: 90rem; }   // 1440px
+[data-center='full'] { max-width: 100%; }
+
+// bare [data-center] defaults to lg
+[data-center]:not([data-center='sm']):not([data-center='md']):not([data-center='lg']):not([data-center='xl']):not([data-center='full']) {
+  max-width: 75rem;
+}
+
+// ─── Sidebar ─────────────────────────────────────────────────────────────────
+// Two-column layout: one fixed-width sidebar + one fluid main area.
+// First child is sidebar. Stacks vertically on narrow screens.
+// Usage: <div data-sidebar><aside>Nav</aside><main>Content</main></div>
+
+[data-sidebar] {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ix-space-lg);
+
+  > :first-child {
+    flex-basis: 16rem;
+    flex-grow: 1;
+  }
+
+  > :last-child {
+    flex-basis: 0;
+    flex-grow: 999;
+    min-width: min(50%, 20rem);
+  }
+}
+
+[data-sidebar][data-sidebar-width='sm'] > :first-child { flex-basis: 10rem; }
+[data-sidebar][data-sidebar-width='md'] > :first-child { flex-basis: 16rem; }
+[data-sidebar][data-sidebar-width='lg'] > :first-child { flex-basis: 22rem; }
+
+// Right sidebar: swap order
+[data-sidebar][data-sidebar-side='right'] > :first-child { order: 2; }
+[data-sidebar][data-sidebar-side='right'] > :last-child  { order: 1; }
+
+// ─── Cluster ─────────────────────────────────────────────────────────────────
+// Wrapping inline group. For tags, badges, button groups.
+// Usage: <div data-cluster="sm"><mark>Tag A</mark><mark>Tag B</mark></div>
+
+[data-cluster] {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ix-space-sm);
+  align-items: center;
+}
+
+[data-cluster='xs'] { gap: calc(var(--ix-space-sm) / 2); }
+[data-cluster='sm'] { gap: var(--ix-space-sm); }
+[data-cluster='md'] { gap: var(--ix-space-md); }
+[data-cluster='lg'] { gap: var(--ix-space-lg); }
+[data-cluster='xl'] { gap: calc(var(--ix-space-lg) * 1.5); }
+
+// ─── Switcher ────────────────────────────────────────────────────────────────
+// Children sit side-by-side above a threshold, stack below it.
+// Usage: <div data-switcher data-threshold="md"><div>A</div><div>B</div></div>
+
+[data-switcher] {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ix-space-md);
+
+  > * {
+    flex-grow: 1;
+    flex-basis: 20rem;  // default threshold ~320px
+  }
+}
+
+[data-switcher][data-threshold='sm'] > * { flex-basis: 12rem; }
+[data-switcher][data-threshold='md'] > * { flex-basis: 20rem; }
+[data-switcher][data-threshold='lg'] > * { flex-basis: 30rem; }
+
+[data-switcher][data-gap='xs'] { gap: calc(var(--ix-space-sm) / 2); }
+[data-switcher][data-gap='sm'] { gap: var(--ix-space-sm); }
+[data-switcher][data-gap='md'] { gap: var(--ix-space-md); }
+[data-switcher][data-gap='lg'] { gap: var(--ix-space-lg); }
+[data-switcher][data-gap='xl'] { gap: calc(var(--ix-space-lg) * 1.5); }
+
+// ─── Cover ───────────────────────────────────────────────────────────────────
+// Full-height section with vertically centered content.
+// Usage: <section data-cover><h1>Hero</h1></section>
+
+[data-cover] {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100svh;
+  padding: var(--ix-space-lg);
+  text-align: center;
+}
+
+[data-cover='contained'] {
+  min-height: 100%;
+}
+
+[data-cover][data-padding='sm'] { padding: var(--ix-space-sm); }
+[data-cover][data-padding='md'] { padding: var(--ix-space-md); }
+[data-cover][data-padding='lg'] { padding: var(--ix-space-lg); }
+[data-cover][data-padding='xl'] { padding: calc(var(--ix-space-lg) * 2); }
+
+// ─── Shared: data-grow helper for flex children ───────────────────────────────
+// Allows a flex child to grow and fill available space.
+// Usage: <div data-flex><span data-grow>Takes all space</span><button>CTA</button></div>
+
+[data-grow] {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+[data-shrink] {
+  flex: 0 0 auto;
+}

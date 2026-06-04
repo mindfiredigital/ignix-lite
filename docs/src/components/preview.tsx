@@ -2,6 +2,7 @@ import React from "react"
 export default function Preview({ children }: { children: React.ReactNode }) {
   return (
     <div
+      className="preview-container"
       style={{
         border: "1px solid var(--ifm-color-emphasis-300)",
         borderRadius: "12px",

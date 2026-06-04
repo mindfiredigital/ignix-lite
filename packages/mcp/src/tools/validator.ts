@@ -116,7 +116,8 @@ export function validate(html: string): MCPResponse {
     'data-justify',
     'data-col',
     'data-row',
-    'data-dense'
+    'data-dense',
+    'data-ix-manifest'
   ])
 
   for (const el of elements) {
@@ -124,8 +125,10 @@ export function validate(html: string): MCPResponse {
 
     const attrs = el.attributes
 
-    // ix-* support
-    let manifestKey = tag.startsWith('ix-') ? tag.slice(3) : tag
+    // self-describing DOM manifest overriding
+    const dataIxManifest = el.getAttribute('data-ix-manifest')
+    let manifestKey =
+      dataIxManifest || (tag.startsWith('ix-') ? tag.slice(3) : tag)
 
     // built in table
     if (tag === 'table' && attrs.is === 'ix-table') {

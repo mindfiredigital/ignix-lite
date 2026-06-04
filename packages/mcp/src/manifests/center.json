@@ -1,0 +1,69 @@
+{
+  "component": "center",
+  "version": "2.0",
+  "description": "Max-width page wrapper that centers content horizontally. Use on main, section, or div to constrain content width and center it on wide screens.",
+
+  "element": "main",
+
+  "emmet": "main[data-center=lg]",
+
+  "props": {
+    "data-center": {
+      "type": "string",
+      "values": ["sm", "md", "lg", "xl", "full"],
+      "default": "lg",
+      "agent_hint": "Sets max-width: sm=640px, md=960px, lg=1200px, xl=1440px, full=100%."
+    }
+  },
+
+  "states": [],
+
+  "slots": {
+    "content": {
+      "required": false,
+      "element": ["section", "article", "div", "p", "h1", "h2", "form"],
+      "agent_hint": "Any page-level content to be centered within the max-width."
+    }
+  },
+
+  "child_props": {},
+
+  "forbidden_props": ["class"],
+
+  "required_props": ["data-center"],
+
+  "required_slots": [],
+
+  "required_wrapper": null,
+
+  "do": [
+    "Use on semantic container elements: main, section, article",
+    "Use data-center=lg for standard page content (1200px max)",
+    "Use data-center=md for narrower reading layouts like blog posts",
+    "Nest data-stack or data-grid inside for inner layout"
+  ],
+
+  "dont": [
+    "Do not use class attribute",
+    "Do not set inline max-width or margin: auto manually",
+    "Do not use on inline elements"
+  ],
+
+  "examples": [
+    {
+      "label": "Page wrapper",
+      "emmet": "main[data-center=lg]",
+      "html": "<main data-center=\"lg\">Page content here</main>"
+    },
+    {
+      "label": "Narrow reading layout",
+      "emmet": "article[data-center=md]",
+      "html": "<article data-center=\"md\">Blog post content</article>"
+    },
+    {
+      "label": "Center + stack combination",
+      "emmet": "main[data-center=lg]>div[data-stack=xl]>section*3",
+      "html": "<main data-center=\"lg\"><div data-stack=\"xl\"><section>Section 1</section><section>Section 2</section><section>Section 3</section></div></main>"
+    }
+  ]
+}

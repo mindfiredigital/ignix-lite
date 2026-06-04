@@ -9,6 +9,7 @@ import {
 } from '../utils/emmet-helpers.js'
 
 import type { IntentEntry } from '../utils/intent-parser.js'
+import type { MCPResponse } from '../types.js'
 
 // ─── Layer 1: api-full.txt INTENTS lookup ───────────────────────────────────
 
@@ -128,7 +129,7 @@ function searchVectorLayer(description: string): IntentMatch | null {
 
 // ─── Public: howToBuild ──────────────────────────────────────────────────────
 
-export async function howToBuild(description: string) {
+export async function howToBuild(description: string): Promise<MCPResponse> {
   let cleanDesc = description.trim()
   if (cleanDesc.startsWith('{') && cleanDesc.endsWith('}')) {
     try {

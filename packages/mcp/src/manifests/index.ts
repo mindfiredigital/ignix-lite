@@ -1,4 +1,4 @@
-import { readFileSync } from 'fs'
+import { readFileSync, existsSync } from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import type { Manifest } from '../types.js'
@@ -8,7 +8,11 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 function loadManifest(file: string): Manifest {
-  const manifestPath = path.resolve(__dirname, 'manifests', file)
+  let manifestsDir = path.resolve(__dirname, 'manifests')
+  if (!existsSync(manifestsDir) && existsSync(path.resolve(__dirname, file))) {
+    manifestsDir = __dirname
+  }
+  const manifestPath = path.resolve(manifestsDir, file)
   const manifest = JSON.parse(readFileSync(manifestPath, 'utf8')) as Manifest
   manifest.tokens = getTokenCount(manifest.emmet)
   return manifest
@@ -22,12 +26,16 @@ export const manifests: Record<string, Manifest> = {
   breadcrumb: loadManifest('breadcrumb.json'),
   button: loadManifest('button.json'),
   card: loadManifest('card.json'),
+  center: loadManifest('center.json'),
   checkbox: loadManifest('checkbox.json'),
+  cluster: loadManifest('cluster.json'),
   codeblock: loadManifest('codeblock.json'),
   combobox: loadManifest('combobox.json'),
+  cover: loadManifest('cover.json'),
   dialog: loadManifest('dialog.json'),
   divider: loadManifest('divider.json'),
   dropdown: loadManifest('dropdown.json'),
+  flex: loadManifest('flex.json'),
   form: loadManifest('form.json'),
   grid: loadManifest('grid.json'),
   input: loadManifest('input.json'),
@@ -36,7 +44,10 @@ export const manifests: Record<string, Manifest> = {
   progress: loadManifest('progress.json'),
   radio: loadManifest('radio.json'),
   select: loadManifest('select.json'),
+  sidebar: loadManifest('sidebar.json'),
   skeleton: loadManifest('skeleton.json'),
+  stack: loadManifest('stack.json'),
+  switcher: loadManifest('switcher.json'),
   tab: loadManifest('tab.json'),
   table: loadManifest('table.json'),
   textarea: loadManifest('textarea.json'),

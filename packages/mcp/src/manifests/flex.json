@@ -1,0 +1,98 @@
+{
+  "component": "flex",
+  "version": "2.0",
+  "description": "Horizontal flex row. Arranges children side-by-side with control over gap, alignment and justification. For icon+text pairs, header bars, toolbars, and inline groups.",
+
+  "element": "div",
+
+  "emmet": "div[data-flex][data-align=center][data-justify=between]>span*2",
+
+  "props": {
+    "data-flex": {
+      "type": "boolean",
+      "agent_hint": "Activates horizontal flex row. No value needed — bare attribute."
+    },
+    "data-gap": {
+      "type": "string",
+      "values": ["xs", "sm", "md", "lg", "xl"],
+      "default": "md",
+      "agent_hint": "Controls spacing between flex children."
+    },
+    "data-align": {
+      "type": "string",
+      "values": ["start", "center", "end", "stretch", "baseline"],
+      "agent_hint": "Aligns children on the cross (vertical) axis."
+    },
+    "data-justify": {
+      "type": "string",
+      "values": ["start", "center", "end", "between", "around", "evenly"],
+      "agent_hint": "Justifies children on the main (horizontal) axis."
+    },
+    "data-wrap": {
+      "type": "string",
+      "values": ["wrap", "nowrap"],
+      "default": "nowrap",
+      "agent_hint": "Controls whether items wrap to next line."
+    }
+  },
+
+  "states": [],
+
+  "slots": {
+    "item": {
+      "required": false,
+      "element": ["span", "button", "a", "p", "img", "mark", "strong", "label"],
+      "agent_hint": "Inline children placed side by side in the flex row."
+    }
+  },
+
+  "child_props": {
+    "data-grow": {
+      "type": "boolean",
+      "agent_hint": "Makes the child expand to fill remaining space."
+    },
+    "data-shrink": {
+      "type": "boolean",
+      "agent_hint": "Prevents the child from growing."
+    }
+  },
+
+  "forbidden_props": ["class"],
+
+  "required_props": ["data-flex"],
+
+  "required_slots": [],
+
+  "required_wrapper": null,
+
+  "do": [
+    "Use for icon+text pairs, header bars, toolbars",
+    "Use data-justify=between for left/right split layouts",
+    "Use data-grow on the element that should fill remaining space",
+    "Use data-align=center to vertically center inline items"
+  ],
+
+  "dont": [
+    "Do not use class attribute",
+    "Do not use for multi-row grid layouts — use data-grid instead",
+    "Do not use inline styles for alignment"
+  ],
+
+  "examples": [
+    {
+      "label": "Icon + text",
+      "emmet": "div[data-flex][data-align=center][data-gap=sm]>span{Icon}+span{Label}",
+      "html": "<div data-flex data-align=\"center\" data-gap=\"sm\"><span>Icon</span><span>Label</span></div>"
+    },
+    {
+      "label": "Header bar: left + right split",
+      "emmet": "header[data-flex][data-align=center][data-justify=between]>(h1{Logo})+(nav>ul>(li>a{Link})*3)",
+      "html": "<header data-flex data-align=\"center\" data-justify=\"between\"><h1>Logo</h1><nav><ul><li><a href=\"/\">Link</a></li></ul></nav></header>"
+    },
+    {
+      "label": "Growing middle content",
+      "emmet": "div[data-flex][data-align=center]>(button{Back})+(p[data-grow]{Title})+(button{Next})",
+      "html": "<div data-flex data-align=\"center\"><button>Back</button><p data-grow>Title</p><button>Next</button></div>"
+    }
+  ]
+}

@@ -20,6 +20,13 @@ nav>ul>(li>a[href][aria-current=page])*
 nav[aria-label=Breadcrumb][data-style=chevron|slash|guillemet|arrow|thread|pipe][data-intent]>ol>(li>a)*
 form#id[action][method=get|post][aria-busy][data-loading]
 section[data-grid=1|2|3|4|5|6|auto|fill][data-gap][data-align][data-justify][data-dense]>article[data-col][data-row]*
+div[data-stack=xs|sm|md|lg|xl]>*
+div[data-flex][data-gap=xs|sm|md|lg|xl][data-align=start|center|end|stretch|baseline][data-justify=start|center|end|between|around|evenly][data-wrap=wrap|nowrap]>([data-grow]|[data-shrink])*
+main[data-center=sm|md|lg|xl|full]
+div[data-sidebar][data-sidebar-width=sm|md|lg][data-sidebar-side=left|right]>(aside|nav)+(main|section)
+div[data-cluster=xs|sm|md|lg|xl]>(mark|span|button)*
+div[data-switcher][data-threshold=sm|md|lg][data-gap]>div*
+section[data-cover=screen|contained][data-padding=sm|md|lg|xl]
 hr[data-orientation=horizontal|vertical]
 pre>code[data-lang=js|ts|python|bash|html|css|json]
 table[is=ix-table]>thead>tr+tbody ; th[data-sortable][aria-sort=ascending|descending|none]
@@ -172,7 +179,7 @@ top nav / menu links
 - nav>ul>(li>a[href=/]{Home})+(li>a[href=/about]{About})+(li>a[href=/contact]{Contact})
 
 breadcrumb trail
-- nav[aria-label=Breadcrumb data-style=chevron]>ol>(li>a[href=/]{Home})+(li>a[href=/settings]{Settings})+(li{Profile})
+- nav[aria-label=Breadcrumb data-style=chevro]n>ol>(li>a[href=/]{Home})+(li>a[href=/settings]{Settings})+(li[aria-current="page"]{Profile})
 
 tabs / tabbed sections
 - ix-tabs[data-variant=underline]>(button[slot=tab aria-selected=true]{Tab 1})+(button[slot=tab]{Tab 2})+(section[slot=panel]{Content 1})+(section[slot=panel hidden]{Content 2})
@@ -236,7 +243,7 @@ show health / score / level gauge
 
 --- TABLE ---
 data table with sort
-- table[is=ix-table]>(thead>tr>(th[data-sortable]{Name})+(th[data-sortable]{Status})+(th{Actions}))+(tbody>tr>(td{Row 1})+(td>mark[data-intent=success]{Active})+(td>button[data-intent=danger]{Delete}))
+- table[is=ix-table]>(thead>tr>(th[data-sortable aria-sort=ascending]{Name})+(th[data-sortable aria-sort=ascending]{Status})+(th{Actions}))+(tbody>tr>(td{Row 1})+(td>mark[data-intent=success]{Active})+(td>button[data-intent=danger]{Delete}))
 
 --- CODE / PREFORMATTED ---
 show code snippet
@@ -271,7 +278,7 @@ settings page with danger zone
 - main>(form#settings>(label{Email}+input[type=email])+button[type=submit data-intent=primary]{Save})+(section>(h2{Danger Zone})+button[data-intent=danger]{Delete Account})
 
 dashboard with cards and table
-- main>(section[data-grid=3 data-gap]>(article>(h3[slot=title]{Users})+(p[slot=body]{142}))+(article>(h3[slot=title]{Revenue})+(p[slot=body]{$4,200}))+(article>(h3[slot=title]{Issues})+(p[slot=body]>mark[data-intent=danger]{3 open})))+(table[is=ix-table]>(thead>tr>(th[data-sortable]{Name})+(th{Status}))+(tbody>tr>(td{Alice})+(td>mark[data-intent=success]{Active})))
+- main>(section[data-grid=3 data-gap]>(article>(h3[slot=title]{Users})+(p[slot=body]{142}))+(article>(h3[slot=title]{Revenue})+(p[slot=body]{$4,200}))+(article>(h3[slot=title]{Issues})+(p[slot=body]>mark[data-intent=danger]{3 open})))+(table[is=ix-table]>(thead>tr>(th[data-sortable aria-sort=ascending]{Name})+(th{Status}))+(tbody>tr>(td{Alice})+(td>mark[data-intent=success]{Active})))
 
 login page
 - main>(h1{Sign In})+(form#login>(label{Email}+input[type=email required])+(label{Password}+input[type=password required])+button[type=submit data-intent=primary]{Sign In})
