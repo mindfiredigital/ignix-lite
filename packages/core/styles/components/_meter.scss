@@ -34,4 +34,69 @@ meter {
     background: var(--ix-primary);
     border-radius: var(--ix-radius);
   }
+
+  &[data-intent='primary'] {
+
+    &::-webkit-meter-optimum-value,
+    &::-webkit-meter-suboptimum-value,
+    &::-webkit-meter-even-less-good-value {
+      background: var(--ix-primary);
+    }
+
+    &::-moz-meter-bar {
+      background: var(--ix-primary);
+    }
+  }
+
+  &[data-intent='success'] {
+
+    &::-webkit-meter-optimum-value,
+    &::-webkit-meter-suboptimum-value,
+    &::-webkit-meter-even-less-good-value {
+      background: var(--ix-success);
+    }
+
+    &::-moz-meter-bar {
+      background: var(--ix-success);
+    }
+  }
+
+  &[data-intent='warning'] {
+
+    &::-webkit-meter-optimum-value,
+    &::-webkit-meter-suboptimum-value,
+    &::-webkit-meter-even-less-good-value {
+      background: var(--ix-warning);
+    }
+
+    &::-moz-meter-bar {
+      background: var(--ix-warning);
+    }
+  }
+
+  &[data-intent='danger'] {
+
+    &::-webkit-meter-optimum-value,
+    &::-webkit-meter-suboptimum-value,
+    &::-webkit-meter-even-less-good-value {
+      background: var(--ix-danger);
+    }
+
+    &::-moz-meter-bar {
+      background: var(--ix-danger);
+    }
+  }
+
+  &[data-intent='neutral'] {
+
+    &::-webkit-meter-optimum-value,
+    &::-webkit-meter-suboptimum-value,
+    &::-webkit-meter-even-less-good-value {
+      background: var(--ix-neutral);
+    }
+
+    &::-moz-meter-bar {
+      background: var(--ix-neutral);
+    }
+  }
 }

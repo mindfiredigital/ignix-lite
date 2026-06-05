@@ -4,8 +4,9 @@ const sidebars = {
     {
       type: "category",
       label: "Getting Started",
+      collapsed: false,
       items: [
-        "introduction" ,
+        "introduction",
         "installation"
       ]
     },
@@ -13,6 +14,7 @@ const sidebars = {
     {
       type: "category",
       label: "Components",
+      collapsed: false,
       items: [
         "components/accordion",
         "components/alert",
@@ -40,14 +42,15 @@ const sidebars = {
         "components/table",
         "components/textarea",
         "components/toast",
-        "components/tooltip", 
-        
-         
+        "components/tooltip",
+
+
       ]
     },
     {
       type: "category",
       label: "Contribution Guide",
+      collapsed: false,
       items: [
         "contribution-guide/how-to-contribute",
         "contribution-guide/code-of-conduct"
