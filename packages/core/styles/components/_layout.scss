@@ -190,3 +190,332 @@
 [data-shrink] {
   flex: 0 0 auto;
 }
+
+// ─── AppShell ─────────────────────────────────────────────────────────────────
+// Complete application frame. Viewport-bound with grid system.
+// Slots: brand, navigation, user profile, sidebar, footer, main content.
+// Usage:
+// <div data-appshell>
+//   <header>
+//     <div data-brand>Logo</div>
+//     <nav>Nav</nav>
+//     <div data-profile>User</div>
+//   </header>
+//   <aside>Sidebar</aside>
+//   <main>Main Content</main>
+//   <footer>Footer</footer>
+// </div>
+
+[data-appshell] {
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "sidebar main"
+    "footer footer";
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: var(--ix-appshell-sidebar-width, 16rem) 1fr;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: var(--ix-surface);
+  color: var(--ix-text);
+
+  > header {
+    grid-area: header;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--ix-space-sm) var(--ix-space-md);
+    background-color: var(--ix-surface-raised);
+    border-bottom: 1px solid var(--ix-border);
+    z-index: 10;
+  }
+
+  > aside {
+    grid-area: sidebar;
+    background-color: var(--ix-surface-raised);
+    border-right: 1px solid var(--ix-border);
+    padding: var(--ix-space-md);
+    overflow-y: auto;
+  }
+
+  > main {
+    grid-area: main;
+    padding: var(--ix-space-lg);
+    overflow-y: auto;
+    background-color: var(--ix-surface);
+  }
+
+  > footer {
+    grid-area: footer;
+    padding: var(--ix-space-sm) var(--ix-space-md);
+    background-color: var(--ix-surface-raised);
+    border-top: 1px solid var(--ix-border);
+    text-align: center;
+    font-size: var(--ix-size-xs);
+    color: var(--ix-text-muted);
+  }
+
+  // Responsive: stack sidebar and components on smaller screens
+  @media (max-width: 768px) {
+    grid-template-areas:
+      "header"
+      "sidebar"
+      "main"
+      "footer";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr auto;
+
+    > aside {
+      border-right: none;
+      border-bottom: 1px solid var(--ix-border);
+    }
+  }
+}
+
+// ─── Box ─────────────────────────────────────────────────────────────────────
+// Flexible box container wrapper. Customizable padding, bg, radius, border, shadow.
+// Usage: <div data-box data-padding="md" data-bg="raised" data-shadow="sm">...</div>
+
+[data-box] {
+  display: block;
+  box-sizing: border-box;
+}
+
+// padding
+[data-box][data-padding='xs'] { padding: calc(var(--ix-space-sm) / 2); }
+[data-box][data-padding='sm'] { padding: var(--ix-space-sm); }
+[data-box][data-padding='md'] { padding: var(--ix-space-md); }
+[data-box][data-padding='lg'] { padding: var(--ix-space-lg); }
+[data-box][data-padding='xl'] { padding: calc(var(--ix-space-lg) * 1.5); }
+
+// background
+[data-box][data-bg='surface']  { background-color: var(--ix-surface); }
+[data-box][data-bg='raised']   { background-color: var(--ix-surface-raised); }
+[data-box][data-bg='primary']  { background-color: var(--ix-primary-bg); color: var(--ix-text); }
+[data-box][data-bg='danger']   { background-color: var(--ix-danger-bg); color: var(--ix-text); }
+[data-box][data-bg='warning']  { background-color: var(--ix-warning-bg); color: var(--ix-text); }
+[data-box][data-bg='success']  { background-color: var(--ix-success-bg); color: var(--ix-text); }
+[data-box][data-bg='neutral']  { background-color: var(--ix-info-bg); color: var(--ix-text); }
+[data-box][data-bg='gradient'] { background: var(--ix-gradient-bg); color: #ffffff; border-color: transparent; }
+
+// border-radius
+[data-box][data-radius='none'] { border-radius: 0; }
+[data-box][data-radius='sm']   { border-radius: var(--ix-radius); }
+[data-box][data-radius='md']   { border-radius: var(--ix-radius); }
+[data-box][data-radius='lg']   { border-radius: var(--ix-radius-lg); }
+[data-box][data-radius='full'] { border-radius: 9999px; }
+
+// shadow
+[data-box][data-shadow='none'] { box-shadow: none; }
+[data-box][data-shadow='sm']   { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); }
+[data-box][data-shadow='md']   { box-shadow: var(--ix-shadow); }
+[data-box][data-shadow='lg']   { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1); }
+
+// border option
+[data-box][data-border] {
+  border: 1px solid var(--ix-border);
+}
+
+// ─── HeaderLayout ────────────────────────────────────────────────────────────
+// Flow-based layout with top header, side navigation, and footer.
+// Usage:
+// <div data-header-layout>
+//   <header data-sticky>Header</header>
+//   <div data-body>
+//     <aside data-collapsed>Sidebar</aside>
+//     <main>Main Content</main>
+//   </div>
+//   <footer>Footer</footer>
+// </div>
+
+[data-header-layout] {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+
+  > header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--ix-space-sm) var(--ix-space-md);
+    background-color: var(--ix-surface-raised);
+    border-bottom: 1px solid var(--ix-border);
+    flex-shrink: 0;
+    
+    &[data-sticky] {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    }
+  }
+
+  > [data-body] {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: row;
+    min-height: 0;
+
+    > aside {
+      width: var(--ix-sidebar-width, 16rem);
+      background-color: var(--ix-surface-raised);
+      border-right: 1px solid var(--ix-border);
+      padding: var(--ix-space-md);
+      flex-shrink: 0;
+      transition: transform 0.2s ease, width 0.2s ease;
+      overflow-y: auto;
+
+      &[data-collapsed] {
+        width: 4.5rem;
+        padding-inline: var(--ix-space-sm);
+        
+        [data-label] {
+          display: none;
+        }
+      }
+    }
+
+    > main {
+      flex: 1 1 auto;
+      padding: var(--ix-space-lg);
+      background-color: var(--ix-surface);
+      min-width: 0;
+    }
+  }
+
+  > footer {
+    padding: var(--ix-space-md);
+    background-color: var(--ix-surface-raised);
+    border-top: 1px solid var(--ix-border);
+    text-align: center;
+    font-size: var(--ix-size-sm);
+    color: var(--ix-text-muted);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    > [data-body] {
+      flex-direction: column;
+
+      > aside {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--ix-border);
+      }
+    }
+  }
+}
+
+// ─── Section ─────────────────────────────────────────────────────────────────
+// Versatile section wrapper with consistent margins, padding, size limits.
+// Usage: <section data-section data-spacing="lg" data-size="md">...</section>
+
+[data-section] {
+  display: block;
+  width: 100%;
+  margin-inline: auto;
+  box-sizing: border-box;
+}
+
+// vertical spacing margins
+[data-section][data-spacing='xs'] { margin-block: calc(var(--ix-space-sm) / 2); }
+[data-section][data-spacing='sm'] { margin-block: var(--ix-space-sm); }
+[data-section][data-spacing='md'] { margin-block: var(--ix-space-md); }
+[data-section][data-spacing='lg'] { margin-block: var(--ix-space-lg); }
+[data-section][data-spacing='xl'] { margin-block: calc(var(--ix-space-lg) * 2); }
+
+// inner padding
+[data-section][data-padding='xs'] { padding-block: calc(var(--ix-space-sm) / 2); }
+[data-section][data-padding='sm'] { padding-block: var(--ix-space-sm); }
+[data-section][data-padding='md'] { padding-block: var(--ix-space-md); }
+[data-section][data-padding='lg'] { padding-block: var(--ix-space-lg); }
+[data-section][data-padding='xl'] { padding-block: calc(var(--ix-space-lg) * 2); }
+
+// size (max-width constraints)
+[data-section][data-size='sm']   { max-width: 40rem; }   // 640px
+[data-section][data-size='md']   { max-width: 60rem; }   // 960px
+[data-section][data-size='lg']   { max-width: 75rem; }   // 1200px
+[data-section][data-size='xl']   { max-width: 90rem; }   // 1440px
+[data-section][data-size='full'] { max-width: 100%; }
+
+// background colors
+[data-section][data-bg='surface']  { background-color: var(--ix-surface); }
+[data-section][data-bg='raised']   { background-color: var(--ix-surface-raised); }
+[data-section][data-bg='primary']  { background-color: var(--ix-primary-bg); }
+[data-section][data-bg='muted']    { background-color: var(--ix-info-bg); }
+[data-section][data-bg='gradient'] { background: var(--ix-gradient-bg); color: #ffffff; }
+
+// ─── Form Layout Elements ────────────────────────────────────────────────────
+// Layout elements specifically for forms.
+// Usage:
+// <form data-stack>
+//   <div data-form-grid="2">
+//     <label>First Name<input .../></label>
+//     <label>Last Name<input .../></label>
+//   </div>
+//   <div data-form-group>
+//     <input type="email"/><button>Subscribe</button>
+//   </div>
+// </form>
+
+[data-form-grid] {
+  display: grid;
+  gap: var(--ix-space-md);
+  width: 100%;
+}
+
+[data-form-grid='2'] {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+[data-form-grid='3'] {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+[data-form-grid='4'] {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+@media (max-width: 640px) {
+  [data-form-grid='2'],
+  [data-form-grid='3'],
+  [data-form-grid='4'] {
+    grid-template-columns: 1fr;
+  }
+}
+
+[data-form-group] {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+
+  > label {
+    flex: 1 1 auto;
+    margin: 0;
+
+    input, select, textarea {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  > input {
+    flex: 1 1 auto;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  > button, > [data-button], > a {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  // If there are multiple buttons or inputs inside:
+  > *:not(:first-child):not(:last-child) {
+    border-radius: 0;
+  }
+}
+

@@ -1,0 +1,84 @@
+{
+  "component": "appshell",
+  "version": "2.0",
+  "description": "Viewport-bound application frame using CSS Grid. Provides named layout slots: header (brand + nav + profile), aside (sidebar navigation), main (primary content), and footer. Ideal for dashboards, admin panels, and single-page apps.",
+
+  "element": "div",
+
+  "emmet": "div[data-appshell]>(header>(div[data-flex data-align=center data-gap=sm]>div{Logo}+nav>a{Home}+a{Docs})+(div[data-flex data-align=center]{User}))+(aside>nav[data-stack=xs]>a{Dashboard}+a{Reports}+a{Settings})+(main[data-stack=md]>h1{Page Title}+p{Main content area})+(footer>span{© 2026 Company})",
+
+  "props": {
+    "data-appshell": {
+      "type": "boolean",
+      "agent_hint": "Activates the full application shell grid layout. Bare attribute, no value needed."
+    },
+    "--ix-appshell-sidebar-width": {
+      "type": "string",
+      "default": "16rem",
+      "agent_hint": "CSS custom property to control the sidebar width. Set as an inline style or in your stylesheet."
+    }
+  },
+
+  "states": [],
+
+  "slots": {
+    "header": {
+      "required": false,
+      "element": ["header"],
+      "agent_hint": "Top header bar. Use data-flex children to place brand logo (left), nav links (center), and user profile avatar (right)."
+    },
+    "sidebar": {
+      "required": false,
+      "element": ["aside"],
+      "agent_hint": "Left navigation sidebar. Use data-stack=xs inside for vertical nav links. Auto-stacks below header on mobile."
+    },
+    "main": {
+      "required": true,
+      "element": ["main"],
+      "agent_hint": "Primary scrollable content area. Use data-stack=md inside for page layout."
+    },
+    "footer": {
+      "required": false,
+      "element": ["footer"],
+      "agent_hint": "Bottom footer bar spanning the full width. Typically contains copyright or secondary links."
+    }
+  },
+
+  "child_props": {},
+
+  "forbidden_props": ["class"],
+
+  "required_props": ["data-appshell"],
+
+  "required_slots": ["main"],
+
+  "required_wrapper": null,
+
+  "do": [
+    "Use header > div[data-flex] children for brand, nav, and profile slots",
+    "Use aside > nav[data-stack=xs] for vertical sidebar navigation",
+    "Use main as the primary scrollable content region",
+    "Use --ix-appshell-sidebar-width CSS variable to customize sidebar width",
+    "Set overflow: hidden on the root element when embedding in a fixed-height container"
+  ],
+
+  "dont": [
+    "Do not use class attribute",
+    "Do not manually set grid-template-areas or grid-template-columns",
+    "Do not place content directly inside data-appshell without the semantic slot elements",
+    "Do not use data-appshell for scrolling document pages — use data-header-layout instead"
+  ],
+
+  "examples": [
+    {
+      "label": "Full dashboard shell",
+      "emmet": "div[data-appshell]>(header>div[data-flex data-align=center data-gap=sm]>strong{Dashboard}+nav>a{Home}+a{Reports})+(aside>nav[data-stack=xs]>a{Overview}+a{Users}+a{Settings})+(main>h2{Welcome}+p{Content here})+(footer>span{© 2026})",
+      "html": "<div data-appshell><header><div data-flex data-align=\"center\" data-gap=\"sm\"><strong>Dashboard</strong><nav><a href=\"#\">Home</a><a href=\"#\">Reports</a></nav></div></header><aside><nav data-stack=\"xs\"><a href=\"#\">Overview</a><a href=\"#\">Users</a><a href=\"#\">Settings</a></nav></aside><main><h2>Welcome</h2><p>Content here</p></main><footer><span>© 2026</span></footer></div>"
+    },
+    {
+      "label": "Shell without sidebar",
+      "emmet": "div[data-appshell style='grid-template-areas: \"header\" \"main\" \"footer\"; grid-template-columns: 1fr']>(header>strong{App}+nav)+(main>p{Full width content})+(footer>span{Footer})",
+      "html": "<div data-appshell style=\"grid-template-areas: 'header' 'main' 'footer'; grid-template-columns: 1fr\"><header><strong>App</strong></header><main><p>Full width content</p></main><footer><span>Footer</span></footer></div>"
+    }
+  ]
+}

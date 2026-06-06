@@ -25,32 +25,32 @@ Stacks children **vertically** with a controlled gap. Use for form fields, page 
 <Tabs defaultValue="preview">
   <TabItem value="preview" label="Preview">
     <Preview style={{ display: 'block' }}>
-      <div data-stack="sm" style={{ width: '100%', marginBottom: 'var(--ix-space-lg)' }}>
-        <h4 style={{ fontFamily: 'var(--ix-font)', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--ix-text-muted)', marginBottom: 'var(--ix-space-xs)' }}>Small Gap (`data-stack="sm"`)</h4>
-        <div style={{ background: 'var(--ix-surface-raised)', border: '1px solid var(--ix-border)', padding: 'var(--ix-space-sm) var(--ix-space-md)', borderRadius: 'var(--ix-radius)', display: 'flex', alignItems: 'center', gap: 'var(--ix-space-sm)' }}>
-          <span style={{ fontSize: '1.25rem' }}>💬</span>
+      <div data-stack="sm" className="demo-layout-stack-box">
+        <h4 className="demo-layout-stack-h4">Small Gap (`data-stack="sm"`)</h4>
+        <div className="demo-layout-stack-item">
+          <span className="demo-layout-stack-emoji">💬</span>
           <div>
-            <div style={{ fontWeight: 600, color: 'var(--ix-text)', fontSize: 'var(--ix-size-sm)' }}>New Comment Received</div>
-            <div style={{ color: 'var(--ix-text-muted)', fontSize: 'var(--ix-size-xs)' }}>2 minutes ago</div>
+            <div className="demo-layout-stack-title">New Comment Received</div>
+            <div className="demo-layout-stack-desc">2 minutes ago</div>
           </div>
         </div>
-        <div style={{ background: 'var(--ix-surface-raised)', border: '1px solid var(--ix-border)', padding: 'var(--ix-space-sm) var(--ix-space-md)', borderRadius: 'var(--ix-radius)', display: 'flex', alignItems: 'center', gap: 'var(--ix-space-sm)' }}>
-          <span style={{ fontSize: '1.25rem' }}>🔁</span>
+        <div className="demo-layout-stack-item">
+          <span className="demo-layout-stack-emoji">🔁</span>
           <div>
-            <div style={{ fontWeight: 600, color: 'var(--ix-text)', fontSize: 'var(--ix-size-sm)' }}>Database Sync Completed</div>
-            <div style={{ color: 'var(--ix-text-muted)', fontSize: 'var(--ix-size-xs)' }}>1 hour ago</div>
+            <div className="demo-layout-stack-title">Database Sync Completed</div>
+            <div className="demo-layout-stack-desc">1 hour ago</div>
           </div>
         </div>
       </div>
-      <div data-stack="lg" style={{ width: '100%' }}>
-        <h4 style={{ fontFamily: 'var(--ix-font)', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--ix-text-muted)', marginBottom: 'var(--ix-space-xs)' }}>Large Gap (`data-stack="lg"`)</h4>
-        <div style={{ background: 'var(--ix-surface-raised)', border: '1px solid var(--ix-border)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius-lg)', boxShadow: 'var(--ix-shadow-sm)' }}>
-          <h3 style={{ margin: '0 0 var(--ix-space-xs)', color: 'var(--ix-text)', fontSize: 'var(--ix-size-md)', fontWeight: 700 }}>Weekly Summary Report</h3>
-          <p style={{ margin: 0, color: 'var(--ix-text-muted)', fontSize: 'var(--ix-size-sm)' }}>Your project updates are ready to view. Download the PDF for complete details.</p>
+      <div data-stack="lg" className="demo-full-width">
+        <h4 className="demo-layout-stack-h4">Large Gap (`data-stack="lg"`)</h4>
+        <div className="demo-layout-stack-card">
+          <h3 className="demo-layout-stack-card-title">Weekly Summary Report</h3>
+          <p className="demo-layout-stack-card-desc">Your project updates are ready to view. Download the PDF for complete details.</p>
         </div>
-        <div style={{ background: 'var(--ix-surface-raised)', border: '1px solid var(--ix-border)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius-lg)', boxShadow: 'var(--ix-shadow-sm)' }}>
-          <h3 style={{ margin: '0 0 var(--ix-space-xs)', color: 'var(--ix-text)', fontSize: 'var(--ix-size-md)', fontWeight: 700 }}>Invoice Payment Success</h3>
-          <p style={{ margin: 0, color: 'var(--ix-text-muted)', fontSize: 'var(--ix-size-sm)' }}>Invoice #1024 has been successfully processed and receipt has been emailed.</p>
+        <div className="demo-layout-stack-card">
+          <h3 className="demo-layout-stack-card-title">Invoice Payment Success</h3>
+          <p className="demo-layout-stack-card-desc">Invoice #1024 has been successfully processed and receipt has been emailed.</p>
         </div>
       </div>
     </Preview>
@@ -77,20 +77,20 @@ Stacks children **vertically** with a controlled gap. Use for form fields, page 
 <Tabs defaultValue="preview">
   <TabItem value="preview" label="Preview">
     <Preview style={{ display: 'block' }}>
-      <form data-stack="md" style={{ maxWidth: '380px', width: '100%', margin: '0 auto', padding: 'var(--ix-space-lg)', border: '1px solid var(--ix-border)', borderRadius: 'var(--ix-radius-lg)', background: 'var(--ix-surface-raised)', boxShadow: 'var(--ix-shadow-md)' }}>
-        <div style={{ textAlign: 'center', marginBottom: 'var(--ix-space-sm)' }}>
-          <h3 style={{ margin: 0, color: 'var(--ix-text)', fontSize: 'var(--ix-size-lg)', fontWeight: 700 }}>Create Account</h3>
-          <p style={{ margin: 0, color: 'var(--ix-text-muted)', fontSize: 'var(--ix-size-xs)' }}>Get started with your free profile in seconds</p>
+      <form data-stack="md" className="demo-layout-form">
+        <div className="demo-layout-form-header">
+          <h3 className="demo-layout-form-title">Create Account</h3>
+          <p className="demo-layout-form-desc">Get started with your free profile in seconds</p>
         </div>
-        <label style={{ display: 'flex', flexDirection: 'column', gap: 'var(--ix-space-xs)', fontWeight: 600, fontSize: 'var(--ix-size-sm)' }}>
+        <label className="demo-layout-form-label">
           Name
-          <input type="text" placeholder="Your name" style={{ padding: '0.65rem 0.8rem', border: '1px solid var(--ix-border)', borderRadius: 'var(--ix-radius)', background: 'var(--ix-surface)', color: 'var(--ix-text)' }} />
+          <input type="text" placeholder="Your name" className="demo-layout-form-input" />
         </label>
-        <label style={{ display: 'flex', flexDirection: 'column', gap: 'var(--ix-space-xs)', fontWeight: 600, fontSize: 'var(--ix-size-sm)' }}>
+        <label className="demo-layout-form-label">
           Email
-          <input type="email" placeholder="you@example.com" style={{ padding: '0.65rem 0.8rem', border: '1px solid var(--ix-border)', borderRadius: 'var(--ix-radius)', background: 'var(--ix-surface)', color: 'var(--ix-text)' }} />
+          <input type="email" placeholder="you@example.com" className="demo-layout-form-input" />
         </label>
-        <button data-intent="primary" type="submit" style={{ width: '100%', padding: '0.75rem', fontWeight: 700, borderRadius: 'var(--ix-radius)', border: 'none', cursor: 'pointer', marginTop: 'var(--ix-space-xs)' }}>Sign Up</button>
+        <button data-intent="primary" type="submit" className="demo-layout-form-btn">Sign Up</button>
       </form>
     </Preview>
   </TabItem>
@@ -116,11 +116,11 @@ Arranges children **horizontally** in a flex row. Controls gap, alignment, and j
 <Tabs defaultValue="preview">
   <TabItem value="preview" label="Preview">
     <Preview style={{ display: 'block' }}>
-      <div data-flex data-align="center" data-gap="sm" style={{ display: 'inline-flex', padding: 'var(--ix-space-sm) var(--ix-space-md)', background: 'var(--ix-surface-raised)', border: '1px solid var(--ix-border)', borderRadius: 'var(--ix-radius-lg)', boxShadow: 'var(--ix-shadow-sm)' }}>
-        <span style={{ background: 'rgba(205, 40, 40, 0.12)', color: 'var(--ix-primary)', borderRadius: '50%', width: '2.5rem', height: '2.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', fontWeight: 700 }}>★</span>
+      <div data-flex data-align="center" data-gap="sm" className="demo-layout-flex-card">
+        <span className="demo-layout-flex-badge">★</span>
         <div>
-          <div style={{ fontWeight: 600, color: 'var(--ix-text)', fontSize: 'var(--ix-size-sm)' }}>Pro Account Enabled</div>
-          <div style={{ color: 'var(--ix-text-muted)', fontSize: 'var(--ix-size-xs)' }}>Your subscription is active</div>
+          <div className="demo-layout-stack-title">Pro Account Enabled</div>
+          <div className="demo-layout-stack-desc">Your subscription is active</div>
         </div>
       </div>
     </Preview>
@@ -140,14 +140,14 @@ Arranges children **horizontally** in a flex row. Controls gap, alignment, and j
 <Tabs defaultValue="preview">
   <TabItem value="preview" label="Preview">
     <Preview style={{ display: 'block' }}>
-      <header data-flex data-align="center" data-justify="between" style={{ width: '100%', padding: '0.8rem 1.2rem', border: '1px solid var(--ix-border)', borderRadius: 'var(--ix-radius-lg)', background: 'var(--ix-surface-raised)', boxShadow: 'var(--ix-shadow-sm)' }}>
+      <header data-flex data-align="center" data-justify="between" className="demo-layout-flex-header">
         <div data-flex data-align="center" data-gap="sm">
-          <div style={{ background: 'linear-gradient(135deg, var(--ix-primary), #f43f5e)', width: '28px', height: '28px', borderRadius: '8px' }}></div>
-          <strong style={{ fontFamily: 'var(--ix-font)', color: 'var(--ix-text)', fontSize: '1.1rem', letterSpacing: '-0.02em' }}>ignix</strong>
+          <div className="demo-layout-flex-logo"></div>
+          <strong className="demo-layout-flex-title">ignix</strong>
         </div>
         <div data-cluster="sm">
-          <button data-intent="ghost" style={{ padding: '0.4rem 0.8rem', fontSize: 'var(--ix-size-sm)', cursor: 'pointer' }}>Log in</button>
-          <button data-intent="primary" style={{ padding: '0.4rem 1rem', fontSize: 'var(--ix-size-sm)', fontWeight: 600, cursor: 'pointer', borderRadius: 'var(--ix-radius)' }}>Get Started</button>
+          <button data-intent="ghost">Log in</button>
+          <button data-intent="primary">Get Started</button>
         </div>
       </header>
     </Preview>
@@ -170,14 +170,14 @@ Arranges children **horizontally** in a flex row. Controls gap, alignment, and j
 <Tabs defaultValue="preview">
   <TabItem value="preview" label="Preview">
     <Preview style={{ display: 'block' }}>
-      <div data-flex data-align="center" data-gap="sm" style={{ width: '100%', border: '1px solid var(--ix-border)', borderRadius: 'var(--ix-radius-lg)', padding: '0.6rem 1rem', background: 'var(--ix-surface-raised)', boxShadow: 'var(--ix-shadow-sm)' }}>
-        <button data-intent="ghost" style={{ padding: '0.4rem', width: '32px', height: '32px', borderRadius: '50%', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>←</button>
-        <button data-intent="ghost" style={{ padding: '0.4rem', width: '32px', height: '32px', borderRadius: '50%', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>→</button>
-        <div data-grow style={{ background: 'var(--ix-surface)', border: '1px solid var(--ix-border)', borderRadius: 'var(--ix-radius)', padding: '0.4rem 1rem', display: 'flex', alignItems: 'center', gap: '0.5rem', overflow: 'hidden' }}>
-          <span style={{ fontSize: '0.9rem' }}>🔒</span>
-          <span style={{ fontFamily: 'var(--ix-font)', fontSize: 'var(--ix-size-sm)', color: 'var(--ix-text-muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>ignix-lite.dev/docs/layout</span>
+      <div data-flex data-align="center" data-gap="sm" className="demo-layout-flex-card-base">
+        <button data-intent="ghost" className="demo-layout-flex-roundbtn">←</button>
+        <button data-intent="ghost" className="demo-layout-flex-roundbtn">→</button>
+        <div data-grow className="demo-layout-flex-url-bar">
+          <span>🔒</span>
+          <span className="demo-layout-flex-url-text">ignix-lite.dev/docs/layout</span>
         </div>
-        <button data-intent="primary" style={{ padding: '0.4rem 1rem', fontSize: 'var(--ix-size-sm)', cursor: 'pointer', borderRadius: 'var(--ix-radius)', whiteSpace: 'nowrap' }}>Reload</button>
+        <button data-intent="primary">Reload</button>
       </div>
     </Preview>
   </TabItem>
@@ -203,14 +203,14 @@ Constrains content to a **max-width** and centers it horizontally. Use on `<main
 <Tabs defaultValue="preview">
   <TabItem value="preview" label="Preview">
     <Preview style={{ display: 'block' }}>
-      <div data-stack="md" style={{ width: '100%' }}>
-        <div data-center="sm" style={{ border: '1px dashed var(--ix-primary)', background: 'var(--ix-primary-bg)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius-lg)', textAlign: 'center' }}>
-          <span style={{ fontSize: '11px', textTransform: 'uppercase', color: 'var(--ix-primary)', fontWeight: 800 }}>Small Center (max 640px)</span>
-          <p style={{ margin: 'var(--ix-space-xs) 0 0', color: 'var(--ix-text)', fontSize: 'var(--ix-size-sm)' }}>Perfect for focused reading layouts, articles, and compact login forms.</p>
+      <div data-stack="md" className="demo-full-width">
+        <div data-center="sm" className="demo-layout-center-sm">
+          <span className="demo-layout-center-title">Small Center (max 640px)</span>
+          <p className="demo-layout-center-text">Perfect for focused reading layouts, articles, and compact login forms.</p>
         </div>
-        <div data-center="md" style={{ border: '1px dashed var(--ix-success)', background: 'var(--ix-success-bg)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius-lg)', textAlign: 'center' }}>
-          <span style={{ fontSize: '11px', textTransform: 'uppercase', color: 'var(--ix-success)', fontWeight: 800 }}>Medium Center (max 960px)</span>
-          <p style={{ margin: 'var(--ix-space-xs) 0 0', color: 'var(--ix-text)', fontSize: 'var(--ix-size-sm)' }}>Ideal for landing page content sections, product features, and settings dashboards.</p>
+        <div data-center="md" className="demo-layout-center-md">
+          <span className="demo-layout-center-title success">Medium Center (max 960px)</span>
+          <p className="demo-layout-center-text">Ideal for landing page content sections, product features, and settings dashboards.</p>
         </div>
       </div>
     </Preview>
@@ -243,34 +243,34 @@ Two-column layout: a **fixed-width sidebar** + a **fluid main area**. Automatica
 <Tabs defaultValue="preview">
   <TabItem value="preview" label="Preview">
     <Preview style={{ display: 'block' }}>
-      <div data-sidebar style={{ width: '100%', minHeight: '220px', border: '1px solid var(--ix-border)', borderRadius: 'var(--ix-radius-lg)', overflow: 'hidden', background: 'var(--ix-surface)', boxShadow: 'var(--ix-shadow-sm)' }}>
-        <aside style={{ background: 'var(--ix-surface-raised)', padding: 'var(--ix-space-md)', borderRight: '1px solid var(--ix-border)', minWidth: '180px' }}>
+      <div data-sidebar className="demo-layout-sidebar-container">
+        <aside className="demo-layout-sidebar-aside">
           <div data-stack="sm">
-            <div data-flex data-align="center" data-gap="xs" style={{ marginBottom: '0.5rem' }}>
-              <div style={{ background: 'var(--ix-primary)', width: '16px', height: '16px', borderRadius: '4px' }}></div>
-              <strong style={{ color: 'var(--ix-text)', fontSize: '0.95rem' }}>Dashboard</strong>
+            <div data-flex data-align="center" data-gap="xs" className="demo-layout-sidebar-logo-group">
+              <div className="demo-layout-sidebar-logo"></div>
+              <strong className="demo-layout-sidebar-logo-text">Dashboard</strong>
             </div>
             <nav>
-              <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                <li><a href="#" aria-current="page" style={{ textDecoration: 'none', color: 'var(--ix-primary)', padding: '0.4rem 0.8rem', borderRadius: '6px', background: 'rgba(205, 40, 40, 0.08)', display: 'block', fontWeight: 600, fontSize: 'var(--ix-size-sm)' }}>Analytics</a></li>
-                <li><a href="#" style={{ textDecoration: 'none', color: 'var(--ix-text-muted)', padding: '0.4rem 0.8rem', borderRadius: '6px', display: 'block', fontSize: 'var(--ix-size-sm)' }}>Projects</a></li>
-                <li><a href="#" style={{ textDecoration: 'none', color: 'var(--ix-text-muted)', padding: '0.4rem 0.8rem', borderRadius: '6px', display: 'block', fontSize: 'var(--ix-size-sm)' }}>Settings</a></li>
+              <ul className="demo-layout-sidebar-nav">
+                <li><a href="#" aria-current="page" className="demo-layout-sidebar-link active">Analytics</a></li>
+                <li><a href="#" className="demo-layout-sidebar-link">Projects</a></li>
+                <li><a href="#" className="demo-layout-sidebar-link">Settings</a></li>
               </ul>
             </nav>
           </div>
         </aside>
-        <main style={{ padding: 'var(--ix-space-md)', flexGrow: 1 }}>
+        <main className="demo-layout-sidebar-main">
           <div data-stack="sm">
-            <h3 style={{ margin: 0, color: 'var(--ix-text)', fontSize: '1.2rem', fontWeight: 700 }}>Workspace Summary</h3>
-            <p style={{ margin: 0, color: 'var(--ix-text-muted)', fontSize: 'var(--ix-size-sm)' }}>Overview of your application stats for this month.</p>
-            <div data-switcher data-threshold="sm" data-gap="sm" style={{ marginTop: '0.5rem' }}>
-              <div style={{ background: 'var(--ix-surface-raised)', border: '1px solid var(--ix-border)', padding: 'var(--ix-space-sm) var(--ix-space-md)', borderRadius: 'var(--ix-radius)' }}>
-                <span style={{ fontSize: '10px', color: 'var(--ix-text-muted)', fontWeight: 700, textTransform: 'uppercase' }}>Active Users</span>
-                <div style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--ix-text)' }}>3,842</div>
+            <h3 className="demo-layout-sidebar-title">Workspace Summary</h3>
+            <p className="demo-layout-sidebar-desc">Overview of your application stats for this month.</p>
+            <div data-switcher data-threshold="sm" data-gap="sm" className="demo-layout-sidebar-switcher">
+              <div className="demo-layout-sidebar-statbox">
+                <span className="demo-layout-sidebar-statlabel">Active Users</span>
+                <div className="demo-layout-sidebar-statval">3,842</div>
               </div>
-              <div style={{ background: 'var(--ix-surface-raised)', border: '1px solid var(--ix-border)', padding: 'var(--ix-space-sm) var(--ix-space-md)', borderRadius: 'var(--ix-radius)' }}>
-                <span style={{ fontSize: '10px', color: 'var(--ix-text-muted)', fontWeight: 700, textTransform: 'uppercase' }}>Conversion</span>
-                <div style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--ix-text)' }}>12.4%</div>
+              <div className="demo-layout-sidebar-statbox">
+                <span className="demo-layout-sidebar-statlabel">Conversion</span>
+                <div className="demo-layout-sidebar-statval">12.4%</div>
               </div>
             </div>
           </div>
@@ -304,17 +304,17 @@ Two-column layout: a **fixed-width sidebar** + a **fluid main area**. Automatica
 <Tabs defaultValue="preview">
   <TabItem value="preview" label="Preview">
     <Preview style={{ display: 'block' }}>
-      <div data-sidebar data-sidebar-side="right" style={{ width: '100%', minHeight: '180px', border: '1px solid var(--ix-border)', borderRadius: 'var(--ix-radius-lg)', overflow: 'hidden', background: 'var(--ix-surface)' }}>
-        <main style={{ padding: 'var(--ix-space-md)', flexGrow: 1 }}>
-          <h4 style={{ margin: '0 0 var(--ix-space-xs)', color: 'var(--ix-text)', fontSize: 'var(--ix-size-md)', fontWeight: 700 }}>document_draft.md</h4>
-          <textarea placeholder="Start writing here..." style={{ width: '100%', minHeight: '90px', padding: 'var(--ix-space-sm)', border: '1px solid var(--ix-border)', borderRadius: 'var(--ix-radius)', background: 'var(--ix-surface-raised)', color: 'var(--ix-text)', resize: 'none', fontFamily: 'monospace', fontSize: 'var(--ix-size-sm)' }} defaultValue="Ignix-lite is a super-lightweight CSS layout framework designed for rapid UI iteration and full AI agent compatibility..."></textarea>
+      <div data-sidebar data-sidebar-side="right" className="demo-layout-sidebar-container right-sidebar">
+        <main className="demo-layout-sidebar-main">
+          <h4 className="demo-layout-stack-card-title">document_draft.md</h4>
+          <textarea placeholder="Start writing here..." className="demo-layout-sidebar-textarea" defaultValue="Ignix-lite is a super-lightweight CSS layout framework designed for rapid UI iteration and full AI agent compatibility..."></textarea>
         </main>
-        <aside style={{ background: 'var(--ix-surface-raised)', padding: 'var(--ix-space-md)', borderLeft: '1px solid var(--ix-border)', minWidth: '180px' }}>
+        <aside className="demo-layout-sidebar-aside">
           <div data-stack="sm">
-            <span style={{ fontSize: '10px', fontWeight: 700, color: 'var(--ix-text-muted)', textTransform: 'uppercase' }}>File Metadata</span>
-            <div style={{ fontSize: 'var(--ix-size-xs)', color: 'var(--ix-text)' }}>Words: 15</div>
-            <div style={{ fontSize: 'var(--ix-size-xs)', color: 'var(--ix-text)' }}>Size: 124 Bytes</div>
-            <button data-intent="primary" style={{ padding: '0.35rem 0.6rem', fontSize: 'var(--ix-size-xs)', width: '100%', cursor: 'pointer', borderRadius: 'var(--ix-radius)', border: 'none', fontWeight: 700 }}>Publish Post</button>
+            <span className="demo-layout-sidebar-statlabel">File Metadata</span>
+            <div className="demo-layout-stack-desc highlight">Words: 15</div>
+            <div className="demo-layout-stack-desc highlight">Size: 124 Bytes</div>
+            <button data-intent="primary" className="demo-full-width">Publish Post</button>
           </div>
         </aside>
       </div>
@@ -341,13 +341,13 @@ A **wrapping inline group** for tags, badges, chips, and button groups. Children
 <Tabs defaultValue="preview">
   <TabItem value="preview" label="Preview">
     <Preview style={{ display: 'block' }}>
-      <div style={{ width: '100%', padding: 'var(--ix-space-md)', background: 'var(--ix-surface-raised)', border: '1px solid var(--ix-border)', borderRadius: 'var(--ix-radius-lg)' }}>
+      <div className="demo-preview-card">
         <div data-cluster="sm">
-          <mark data-intent="primary" style={{ padding: '0.25rem 0.6rem', borderRadius: '6px', fontSize: 'var(--ix-size-xs)', fontWeight: 600 }}>React</mark>
-          <mark data-intent="success" style={{ padding: '0.25rem 0.6rem', borderRadius: '6px', fontSize: 'var(--ix-size-xs)', fontWeight: 600 }}>TypeScript</mark>
-          <mark data-intent="warning" style={{ padding: '0.25rem 0.6rem', borderRadius: '6px', fontSize: 'var(--ix-size-xs)', fontWeight: 600 }}>Beta Feature</mark>
-          <mark data-intent="neutral" style={{ padding: '0.25rem 0.6rem', borderRadius: '6px', fontSize: 'var(--ix-size-xs)', fontWeight: 600 }}>Vanilla CSS</mark>
-          <mark data-intent="danger" style={{ padding: '0.25rem 0.6rem', borderRadius: '6px', fontSize: 'var(--ix-size-xs)', fontWeight: 600 }}>Deprecated</mark>
+          <mark data-intent="primary" className="demo-layout-badge-chip">React</mark>
+          <mark data-intent="success" className="demo-layout-badge-chip">TypeScript</mark>
+          <mark data-intent="warning" className="demo-layout-badge-chip">Beta Feature</mark>
+          <mark data-intent="neutral" className="demo-layout-badge-chip">Vanilla CSS</mark>
+          <mark data-intent="danger" className="demo-layout-badge-chip">Deprecated</mark>
         </div>
       </div>
     </Preview>
@@ -370,11 +370,11 @@ A **wrapping inline group** for tags, badges, chips, and button groups. Children
 <Tabs defaultValue="preview">
   <TabItem value="preview" label="Preview">
     <Preview style={{ display: 'block' }}>
-      <div style={{ width: '100%', padding: 'var(--ix-space-md)', background: 'var(--ix-surface-raised)', border: '1px solid var(--ix-border)', borderRadius: 'var(--ix-radius-lg)' }}>
+      <div className="demo-preview-card">
         <div data-cluster="md">
-          <button data-intent="primary" style={{ padding: '0.5rem 1.25rem', borderRadius: 'var(--ix-radius)', border: 'none', cursor: 'pointer', fontWeight: 600 }}>Save Changes</button>
-          <button data-intent="ghost" style={{ padding: '0.5rem 1.25rem', borderRadius: 'var(--ix-radius)', cursor: 'pointer' }}>Cancel</button>
-          <button data-intent="danger" style={{ padding: '0.5rem 1.25rem', borderRadius: 'var(--ix-radius)', border: 'none', cursor: 'pointer', fontWeight: 600 }}>Delete Account</button>
+          <button data-intent="primary">Save Changes</button>
+          <button data-intent="ghost">Cancel</button>
+          <button data-intent="danger">Delete Account</button>
         </div>
       </div>
     </Preview>
@@ -401,16 +401,16 @@ Children sit **side-by-side** above a width threshold and **stack vertically** b
 <Tabs defaultValue="preview">
   <TabItem value="preview" label="Preview">
     <Preview style={{ display: 'block' }}>
-      <div data-switcher data-threshold="sm" data-gap="md" style={{ width: '100%' }}>
-        <section style={{ background: 'var(--ix-surface-raised)', border: '1px solid var(--ix-border)', padding: 'var(--ix-space-lg)', borderRadius: 'var(--ix-radius-lg)', boxShadow: 'var(--ix-shadow-sm)' }}>
-          <span style={{ fontSize: '1.5rem' }}>🚀</span>
-          <h4 style={{ margin: 'var(--ix-space-sm) 0 var(--ix-space-xs)', color: 'var(--ix-text)', fontWeight: 700 }}>Instant Deployment</h4>
-          <p style={{ margin: 0, color: 'var(--ix-text-muted)', fontSize: 'var(--ix-size-sm)' }}>Push updates live instantly with automated, CDN-optimized static bundle hosting.</p>
+      <div data-switcher data-threshold="sm" data-gap="md" className="demo-full-width">
+        <section className="demo-layout-switcher-article">
+          <span className="demo-feature-emoji">🚀</span>
+          <h4>Instant Deployment</h4>
+          <p className="demo-layout-switcher-desc">Push updates live instantly with automated, CDN-optimized static bundle hosting.</p>
         </section>
-        <section style={{ background: 'var(--ix-surface-raised)', border: '1px solid var(--ix-border)', padding: 'var(--ix-space-lg)', borderRadius: 'var(--ix-radius-lg)', boxShadow: 'var(--ix-shadow-sm)' }}>
-          <span style={{ fontSize: '1.5rem' }}>🔒</span>
-          <h4 style={{ margin: 'var(--ix-space-sm) 0 var(--ix-space-xs)', color: 'var(--ix-text)', fontWeight: 700 }}>Secure Architecture</h4>
-          <p style={{ margin: 0, color: 'var(--ix-text-muted)', fontSize: 'var(--ix-size-sm)' }}>All endpoints and servers are protected by enterprise-grade TLS encryption.</p>
+        <section className="demo-layout-switcher-article">
+          <span className="demo-feature-emoji">🔒</span>
+          <h4>Secure Architecture</h4>
+          <p className="demo-layout-switcher-desc">All endpoints and servers are protected by enterprise-grade TLS encryption.</p>
         </section>
       </div>
     </Preview>
@@ -430,24 +430,24 @@ Children sit **side-by-side** above a width threshold and **stack vertically** b
 <Tabs defaultValue="preview">
   <TabItem value="preview" label="Preview">
     <Preview style={{ display: 'block' }}>
-      <div data-switcher data-threshold="sm" data-gap="md" style={{ width: '100%' }}>
-        <article style={{ background: 'var(--ix-surface-raised)', border: '1px solid var(--ix-border)', padding: 'var(--ix-space-lg)', borderRadius: 'var(--ix-radius-lg)', textAlign: 'center' }}>
-          <span style={{ fontSize: 'var(--ix-size-xs)', fontWeight: 700, color: 'var(--ix-text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Starter</span>
-          <h3 style={{ margin: 'var(--ix-space-xs) 0', color: 'var(--ix-text)', fontSize: '1.8rem', fontWeight: 800 }}>Free</h3>
-          <p style={{ margin: '0 0 var(--ix-space-md)', color: 'var(--ix-text-muted)', fontSize: 'var(--ix-size-sm)' }}>Essential components for basic web projects.</p>
-          <button data-intent="ghost" style={{ width: '100%', padding: '0.5rem', cursor: 'pointer' }}>Get Started</button>
+      <div data-switcher data-threshold="sm" data-gap="md" className="demo-full-width">
+        <article className="demo-layout-switcher-article">
+          <span className="demo-feature-badge">Starter</span>
+          <h3>Free</h3>
+          <p className="demo-layout-switcher-desc margin-bottom">Essential components for basic web projects.</p>
+          <button data-intent="ghost">Get Started</button>
         </article>
-        <article style={{ background: 'var(--ix-surface-raised)', border: '2px solid var(--ix-primary)', padding: 'var(--ix-space-lg)', borderRadius: 'var(--ix-radius-lg)', textAlign: 'center', position: 'relative' }}>
-          <span style={{ fontSize: 'var(--ix-size-xs)', fontWeight: 700, color: 'var(--ix-primary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Professional</span>
-          <h3 style={{ margin: 'var(--ix-space-xs) 0', color: 'var(--ix-text)', fontSize: '1.8rem', fontWeight: 800 }}>$19<span style={{ fontSize: '1rem', fontWeight: 400 }}>/mo</span></h3>
-          <p style={{ margin: '0 0 var(--ix-space-md)', color: 'var(--ix-text-muted)', fontSize: 'var(--ix-size-sm)' }}>Full package including advanced MCP server capabilities.</p>
-          <button data-intent="primary" style={{ width: '100%', padding: '0.5rem', cursor: 'pointer', borderRadius: 'var(--ix-radius)', border: 'none', fontWeight: 700 }}>Upgrade Now</button>
+        <article className="demo-layout-switcher-article featured">
+          <span className="demo-feature-badge">Professional</span>
+          <h3>$19<span>/mo</span></h3>
+          <p className="demo-layout-switcher-desc margin-bottom">Full package including advanced MCP server capabilities.</p>
+          <button data-intent="primary">Upgrade Now</button>
         </article>
-        <article style={{ background: 'var(--ix-surface-raised)', border: '1px solid var(--ix-border)', padding: 'var(--ix-space-lg)', borderRadius: 'var(--ix-radius-lg)', textAlign: 'center' }}>
-          <span style={{ fontSize: 'var(--ix-size-xs)', fontWeight: 700, color: 'var(--ix-text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Enterprise</span>
-          <h3 style={{ margin: 'var(--ix-space-xs) 0', color: 'var(--ix-text)', fontSize: '1.8rem', fontWeight: 800 }}>Custom</h3>
-          <p style={{ margin: '0 0 var(--ix-space-md)', color: 'var(--ix-text-muted)', fontSize: 'var(--ix-size-sm)' }}>Custom support, dedicated hosting, and custom plugins.</p>
-          <button data-intent="ghost" style={{ width: '100%', padding: '0.5rem', cursor: 'pointer' }}>Contact Sales</button>
+        <article className="demo-layout-switcher-article">
+          <span className="demo-feature-badge">Enterprise</span>
+          <h3>Custom</h3>
+          <p className="demo-layout-switcher-desc margin-bottom">Custom support, dedicated hosting, and custom plugins.</p>
+          <button data-intent="ghost">Contact Sales</button>
         </article>
       </div>
     </Preview>
@@ -483,12 +483,12 @@ Full-height section that **centers content vertically and horizontally**. Use fo
 <Tabs defaultValue="preview">
   <TabItem value="preview" label="Preview">
     <Preview style={{ display: 'block' }}>
-      <section data-cover="contained" style={{ width: '100%', minHeight: '260px', background: 'linear-gradient(135deg, rgba(205, 40, 40, 0.08), rgba(244, 63, 94, 0.04))', border: '1px solid var(--ix-border)', borderRadius: 'var(--ix-radius-lg)', overflow: 'hidden' }}>
-        <div data-stack="md" style={{ width: '100%', padding: 'var(--ix-space-xl)', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-          <span style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: '0.2rem 0.8rem', borderRadius: '999px', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase' }}>Core Library Ready</span>
-          <h2 style={{ margin: 'var(--ix-space-xs) 0', color: 'var(--ix-text)', fontSize: '2rem', fontWeight: 800, letterSpacing: '-0.03em' }}>Welcome to ignix-lite</h2>
-          <p style={{ margin: '0 0 var(--ix-space-sm)', color: 'var(--ix-text-muted)', fontSize: 'var(--ix-size-md)', maxWidth: '420px', lineHeight: 1.5 }}>Design, validate, and ship beautiful components with zero boilerplate and full AI agent compatibility.</p>
-          <button data-intent="primary" style={{ padding: '0.6rem 1.5rem', fontWeight: 700, borderRadius: 'var(--ix-radius)', border: 'none', cursor: 'pointer' }}>Start Building</button>
+      <section data-cover="contained" className="demo-layout-cover-page">
+        <div data-stack="md" className="demo-layout-cover-inner">
+          <span className="demo-section-hero-badge">Core Library Ready</span>
+          <h2 className="demo-layout-cover-title">Welcome to ignix-lite</h2>
+          <p className="demo-layout-cover-desc">Design, validate, and ship beautiful components with zero boilerplate and full AI agent compatibility.</p>
+          <button data-intent="primary">Start Building</button>
         </div>
       </section>
     </Preview>
@@ -511,12 +511,12 @@ Full-height section that **centers content vertically and horizontally**. Use fo
 <Tabs defaultValue="preview">
   <TabItem value="preview" label="Preview">
     <Preview style={{ display: 'block' }}>
-      <section data-cover="contained" style={{ width: '100%', minHeight: '220px', border: '2px dashed var(--ix-border)', borderRadius: 'var(--ix-radius-lg)', background: 'var(--ix-surface-raised)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div data-stack="sm" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', padding: 'var(--ix-space-lg)' }}>
-          <span style={{ fontSize: '2.5rem', marginBottom: 'var(--ix-space-xs)' }}>📂</span>
-          <h4 style={{ margin: 0, color: 'var(--ix-text)', fontSize: 'var(--ix-size-md)', fontWeight: 700 }}>No project files yet</h4>
-          <p style={{ margin: '0 0 var(--ix-space-sm)', color: 'var(--ix-text-muted)', fontSize: 'var(--ix-size-sm)', maxWidth: '320px', lineHeight: 1.5 }}>Upload your configuration or index.html to generate automated design tokens and compatibility reports.</p>
-          <button data-intent="ghost" style={{ padding: '0.4rem 1rem', cursor: 'pointer', borderRadius: 'var(--ix-radius)' }}>Upload File</button>
+      <section data-cover="contained" className="demo-layout-cover-page empty-state">
+        <div data-stack="sm" className="demo-layout-cover-inner">
+          <span className="demo-empty-icon">📂</span>
+          <h4 className="demo-layout-stack-card-title">No project files yet</h4>
+          <p className="demo-layout-cover-desc">Upload your configuration or index.html to generate automated design tokens and compatibility reports.</p>
+          <button data-intent="ghost">Upload File</button>
         </div>
       </section>
     </Preview>
@@ -643,3 +643,161 @@ Layout components are designed to be **combined**. Here's a full page shell:
 |---|---|---|---|
 | `data-cover` | `string` | `screen \| contained` | `screen`=full viewport height, `contained`=fills parent |
 | `data-padding` | `string` | `sm \| md \| lg \| xl` | Inner padding of the cover |
+
+---
+
+## Form Layouts
+
+Layout elements designed specifically for composing form structures, aligning fields in grid structures, and inline groupings.
+
+### Form Grid (`data-form-grid`)
+
+Aligns multiple fields in a responsive grid layout. Use values like `2`, `3`, or `4` to configure columns on large screens. It automatically stacks inputs vertically on small screens (640px and below).
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview style={{ display: 'block' }}>
+
+<form className="demo-layout-form-grid-form" onSubmit={(e) => e.preventDefault()}>
+  <div data-stack="md">
+    <div data-form-grid="2">
+      <label>
+        First Name
+        <input type="text" placeholder="John" />
+      </label>
+      <label>
+        Last Name
+        <input type="text" placeholder="Doe" />
+      </label>
+    </div>
+
+    <div data-form-grid="3">
+      <label className="demo-layout-form-grid-span2">
+        Address
+        <input type="text" placeholder="123 Main St" />
+      </label>
+      <label>
+        Suite / Apt
+        <input type="text" placeholder="Apt 4B" />
+      </label>
+    </div>
+    
+    <button type="submit" data-intent="primary">Save Address</button>
+  </div>
+</form>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<form>
+  <div data-stack="md">
+    <!-- Two-column grid -->
+    <div data-form-grid="2">
+      <label>
+        First Name
+        <input type="text" placeholder="John" />
+      </label>
+      <label>
+        Last Name
+        <input type="text" placeholder="Doe" />
+      </label>
+    </div>
+
+    <!-- Three-column grid -->
+    <div data-form-grid="3">
+      <label style={{ gridColumn: 'span 2' }}>
+        Address
+        <input type="text" placeholder="123 Main St" />
+      </label>
+      <label>
+        Suite / Apt
+        <input type="text" placeholder="Apt 4B" />
+      </label>
+    </div>
+  </div>
+</form>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+### Form Group (`data-form-group`)
+
+Enables inline merging of form fields with interactive add-ons or buttons, ensuring borders and border-radii merge seamlessly.
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview style={{ display: 'block' }}>
+
+<div data-stack="md" className="demo-layout-form-group-form">
+  <h4 className="demo-layout-form-group-title">Email Newsletter</h4>
+  <div data-form-group className="demo-layout-form-group-container">
+    <input type="email" placeholder="you@example.com" aria-label="Email Address" />
+    <button data-intent="primary">Subscribe</button>
+  </div>
+
+  <h4 className="demo-layout-form-group-title margin-top">Domain Search</h4>
+  <div data-form-group>
+    <label aria-label="Domain Name">
+      <input type="text" placeholder="my-awesome-idea" />
+    </label>
+    <select aria-label="Domain TLD" className="demo-layout-form-select">
+      <option>.com</option>
+      <option>.org</option>
+      <option>.net</option>
+      <option>.dev</option>
+    </select>
+    <button data-intent="primary">Search</button>
+  </div>
+</div>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<!-- Input + Button Group -->
+<div data-form-group>
+  <input type="email" placeholder="you@example.com" />
+  <button data-intent="primary">Subscribe</button>
+</div>
+
+<!-- Input + Select TLD + Button Group -->
+<div data-form-group>
+  <label>
+    <input type="text" placeholder="my-awesome-idea" />
+  </label>
+  <select>
+    <option>.com</option>
+    <option>.dev</option>
+  </select>
+  <button data-intent="primary">Search</button>
+</div>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Form Attributes
+
+| Attribute | Slot / Target | Values | Description |
+|---|---|---|---|
+| `data-form-grid` | Layout Wrapper | `2 \| 3 \| 4` | Defines responsive multi-column layout for input fields |
+| `data-form-group` | Group Wrapper | — | Merges borders of child inputs, selects, and buttons horizontally |
+

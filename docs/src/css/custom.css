@@ -658,3 +658,161 @@ html[data-theme='dark'] .header--github-link::before {
   width: auto;
   word-break: normal;
 }
+
+/* ─── Premium Preview Component ───────────────────────────────────────────── */
+
+@keyframes ix-border-spin {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes ix-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.ix-preview-wrap {
+  position: relative;
+  margin-block: 1.5rem;
+  animation: ix-fade-in 0.35s ease forwards;
+}
+
+/* Animated gradient border shell */
+.ix-preview-frame {
+  position: relative;
+  border-radius: 16px;
+  padding: 2px; /* border thickness */
+  background: linear-gradient(
+    135deg,
+    oklch(0.577 0.245 27.325),
+    oklch(0.66 0.23 38),
+    oklch(0.72 0.20 52),
+    oklch(0.577 0.245 27.325)
+  );
+  background-size: 300% 300%;
+  animation: ix-border-spin 6s ease infinite;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.04),
+    0 8px 32px rgba(0,0,0,0.12),
+    0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* Label chip above the frame */
+.ix-preview-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: oklch(0.577 0.245 27.325 / 0.12);
+  color: oklch(0.577 0.245 27.325);
+  border: 1px solid oklch(0.577 0.245 27.325 / 0.25);
+}
+
+.ix-preview-label::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: oklch(0.577 0.245 27.325);
+  animation: ix-pulse 2s ease-in-out infinite;
+}
+
+@keyframes ix-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.8); }
+}
+
+/* Inner frosted-glass content area */
+.ix-preview-inner {
+  position: relative;
+  border-radius: 14px;
+  padding: 28px;
+  background: var(--ifm-background-color, #fff);
+  overflow: hidden;
+}
+
+/* Dot-grid texture overlay */
+.ix-preview-inner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: radial-gradient(circle, #888 1px, transparent 1px);
+  background-size: 20px 20px;
+  border-radius: inherit;
+}
+
+/* Subtle top shine */
+.ix-preview-inner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.06) 0%,
+    transparent 40%
+  );
+  border-radius: inherit;
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .ix-preview-frame {
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.06),
+    0 12px 40px rgba(0,0,0,0.5),
+    0 0 60px oklch(0.577 0.245 27.325 / 0.08);
+}
+
+[data-theme='dark'] .ix-preview-inner {
+  background: #0d1117;
+}
+
+[data-theme='dark'] .ix-preview-inner::before {
+  opacity: 0.06;
+  background-image: radial-gradient(circle, #666 1px, transparent 1px);
+}
+
+[data-theme='dark'] .ix-preview-inner::after {
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.03) 0%,
+    transparent 40%
+  );
+}
+
+/* Table overrides inside preview */
+.ix-preview-inner table {
+  table-layout: auto;
+}
+
+.ix-preview-inner table th,
+.ix-preview-inner table td {
+  width: auto;
+  word-break: normal;
+}
+
+/* ─── Layout doc section headers ──────────────────────────────────────────── */
+.ix-section-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  background: oklch(0.577 0.245 27.325 / 0.1);
+  color: oklch(0.577 0.245 27.325);
+  border: 1px solid oklch(0.577 0.245 27.325 / 0.2);
+}

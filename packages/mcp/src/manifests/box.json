@@ -1,0 +1,102 @@
+{
+  "component": "box",
+  "version": "2.0",
+  "description": "Flexible layout container primitive. Use for cards, content wrappers, info panels, and any block that needs configurable padding, background, border radius, border, or box shadow. Zero JavaScript required.",
+
+  "element": "div",
+
+  "emmet": "div[data-box data-padding=md data-bg=raised data-radius=md data-border]",
+
+  "props": {
+    "data-box": {
+      "type": "boolean",
+      "agent_hint": "Activates the box container. Bare attribute, no value needed."
+    },
+    "data-padding": {
+      "type": "string",
+      "values": ["xs", "sm", "md", "lg", "xl"],
+      "default": "md",
+      "agent_hint": "Internal padding. xs=4px, sm=8px, md=16px, lg=24px, xl=36px."
+    },
+    "data-bg": {
+      "type": "string",
+      "values": ["surface", "raised", "primary", "danger", "warning", "success", "neutral", "gradient"],
+      "default": "raised",
+      "agent_hint": "Background fill. Use raised for card-like containers, gradient for hero/CTA blocks, semantic colors for status areas."
+    },
+    "data-radius": {
+      "type": "string",
+      "values": ["none", "sm", "md", "lg", "full"],
+      "default": "md",
+      "agent_hint": "Border corner rounding. none=square, sm/md=standard card, lg=large panel, full=pill shape."
+    },
+    "data-shadow": {
+      "type": "string",
+      "values": ["none", "sm", "md", "lg"],
+      "default": "sm",
+      "agent_hint": "Box shadow depth. sm=subtle lift, md=standard depth, lg=floating card effect."
+    },
+    "data-border": {
+      "type": "boolean",
+      "agent_hint": "Adds a 1px solid border using the --ix-border color token. Bare attribute."
+    }
+  },
+
+  "states": [],
+
+  "slots": {
+    "content": {
+      "required": false,
+      "element": ["p", "h1", "h2", "h3", "div", "span", "strong", "form", "ul", "img"],
+      "agent_hint": "Any content that should be contained within the box. Use data-stack inside for layout."
+    }
+  },
+
+  "child_props": {},
+
+  "forbidden_props": ["class"],
+
+  "required_props": ["data-box"],
+
+  "required_slots": [],
+
+  "required_wrapper": null,
+
+  "do": [
+    "Combine data-bg=raised with data-shadow=sm and data-border for a standard card",
+    "Use data-bg=gradient for CTA or hero highlight boxes",
+    "Use data-bg=danger/success/warning for alert or status indicator panels",
+    "Use data-stack or data-flex inside for inner layout",
+    "Use data-radius=lg for prominent panel containers"
+  ],
+
+  "dont": [
+    "Do not use class attribute",
+    "Do not set background-color or padding via inline styles",
+    "Do not nest data-box inside data-box without purpose — use data-card or data-stack instead",
+    "Do not use data-radius=full for non-pill shapes"
+  ],
+
+  "examples": [
+    {
+      "label": "Standard raised card",
+      "emmet": "div[data-box data-padding=md data-bg=raised data-shadow=sm data-radius=md data-border]>strong{Card Title}+p{Description here}",
+      "html": "<div data-box data-padding=\"md\" data-bg=\"raised\" data-shadow=\"sm\" data-radius=\"md\" data-border><strong>Card Title</strong><p>Description here</p></div>"
+    },
+    {
+      "label": "Gradient CTA block",
+      "emmet": "div[data-box data-padding=lg data-bg=gradient data-radius=lg]>h2{Get Started Today}+button[data-intent=primary]{Sign Up Free}",
+      "html": "<div data-box data-padding=\"lg\" data-bg=\"gradient\" data-radius=\"lg\"><h2>Get Started Today</h2><button data-intent=\"primary\">Sign Up Free</button></div>"
+    },
+    {
+      "label": "Success status panel",
+      "emmet": "div[data-box data-padding=sm data-bg=success data-radius=sm]>strong{Payment Complete}+p{Your transaction was successful.}",
+      "html": "<div data-box data-padding=\"sm\" data-bg=\"success\" data-radius=\"sm\"><strong>Payment Complete</strong><p>Your transaction was successful.</p></div>"
+    },
+    {
+      "label": "Danger alert box",
+      "emmet": "div[data-box data-padding=sm data-bg=danger data-radius=sm data-border]>strong{Error}+p{Something went wrong. Please try again.}",
+      "html": "<div data-box data-padding=\"sm\" data-bg=\"danger\" data-radius=\"sm\" data-border><strong>Error</strong><p>Something went wrong. Please try again.</p></div>"
+    }
+  ]
+}

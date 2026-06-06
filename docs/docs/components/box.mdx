@@ -1,0 +1,286 @@
+---
+sidebar_position: 11
+title: Box
+description: Customizable container primitive with padding, background, border radius, and shadow controls.
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import Preview from '@site/src/components/preview'
+
+# Box
+
+`Box` is a flexible layout **container primitive**. Configure padding, backgrounds, border radius, borders, and shadows using data attributes.
+
+Use it for cards, info panels, alert blocks, hero areas, and any styled wrapper.
+
+---
+
+## Background Variants
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview style={{ display: 'block' }}>
+
+<div className="demo-box-grid">
+
+  <div data-box data-padding="md" data-bg="raised" data-shadow="sm" data-radius="md" data-border>
+    <div className="demo-box-emoji">📦</div>
+    <strong className="demo-box-label">Raised</strong>
+    <span className="demo-box-desc">Elevated surface with subtle shadow</span>
+  </div>
+
+  <div data-box data-padding="md" data-bg="surface" data-radius="md" data-border>
+    <div className="demo-box-emoji">🪟</div>
+    <strong className="demo-box-label">Surface</strong>
+    <span className="demo-box-desc">Default page background tone</span>
+  </div>
+
+  <div data-box data-padding="md" data-bg="primary" data-radius="md">
+    <div className="demo-box-emoji">🎨</div>
+    <strong className="demo-box-label">Primary</strong>
+    <span className="demo-box-desc">Brand accent background tint</span>
+  </div>
+
+  <div data-box data-padding="md" data-bg="success" data-radius="md">
+    <div className="demo-box-emoji">✅</div>
+    <strong className="demo-box-label">Success</strong>
+    <span className="demo-box-desc">Positive state wrapper</span>
+  </div>
+
+  <div data-box data-padding="md" data-bg="warning" data-radius="md">
+    <div className="demo-box-emoji">⚠️</div>
+    <strong className="demo-box-label">Warning</strong>
+    <span className="demo-box-desc">Caution state wrapper</span>
+  </div>
+
+  <div data-box data-padding="md" data-bg="danger" data-radius="md">
+    <div className="demo-box-emoji">🚨</div>
+    <strong className="demo-box-label">Danger</strong>
+    <span className="demo-box-desc">Error / critical container</span>
+  </div>
+
+  <div data-box data-padding="md" data-bg="gradient" data-radius="md" className="demo-box-grid-span2">
+    <div className="demo-box-emoji">🌅</div>
+    <strong className="demo-box-label-white">Gradient</strong>
+    <span className="demo-box-desc-white">Brand gradient CTA block — use for hero highlights</span>
+  </div>
+
+</div>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<div data-box data-padding="md" data-bg="raised" data-shadow="sm" data-radius="md" data-border>
+  Raised card
+</div>
+
+<div data-box data-padding="md" data-bg="success" data-radius="md">
+  Success panel
+</div>
+
+<div data-box data-padding="md" data-bg="gradient" data-radius="md">
+  Gradient hero block
+</div>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Shadow Depth
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview style={{ display: 'block' }}>
+
+<div className="demo-box-grid-3col">
+
+  <div data-box data-padding="lg" data-bg="raised" data-shadow="sm" data-radius="md" data-border className="demo-box-card-centered">
+    <div className="demo-box-card-emoji-lg">☁️</div>
+    <strong className="demo-box-label">Small</strong>
+    <code className="demo-box-card-code">data-shadow="sm"</code>
+  </div>
+
+  <div data-box data-padding="lg" data-bg="raised" data-shadow="md" data-radius="md" data-border className="demo-box-card-centered">
+    <div className="demo-box-card-emoji-lg">⛅</div>
+    <strong className="demo-box-label">Medium</strong>
+    <code className="demo-box-card-code">data-shadow="md"</code>
+  </div>
+
+  <div data-box data-padding="lg" data-bg="raised" data-shadow="lg" data-radius="md" data-border className="demo-box-card-centered">
+    <div className="demo-box-card-emoji-lg">🌩️</div>
+    <strong className="demo-box-label">Large</strong>
+    <code className="demo-box-card-code">data-shadow="lg"</code>
+  </div>
+
+</div>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<div data-box data-padding="md" data-bg="raised" data-shadow="sm" data-border>Small shadow</div>
+<div data-box data-padding="md" data-bg="raised" data-shadow="md" data-border>Medium shadow</div>
+<div data-box data-padding="md" data-bg="raised" data-shadow="lg" data-border>Large shadow</div>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Padding & Radius Sizes
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview style={{ display: 'block' }}>
+
+<div data-stack="sm" className="demo-full-width">
+
+  <div data-box data-padding="xs" data-radius="none" data-bg="raised" data-border data-flex data-align="center" data-justify="between">
+    <span className="demo-box-card-text xs">Extra Small Padding · No Radius</span>
+    <code className="demo-box-card-code">xs · none</code>
+  </div>
+
+  <div data-box data-padding="sm" data-radius="sm" data-bg="raised" data-border data-flex data-align="center" data-justify="between">
+    <span className="demo-box-card-text sm">Small Padding · Small Radius</span>
+    <code className="demo-box-card-code">sm · sm</code>
+  </div>
+
+  <div data-box data-padding="md" data-radius="md" data-bg="raised" data-border data-flex data-align="center" data-justify="between">
+    <span className="demo-box-card-text md">Medium Padding · Standard Radius</span>
+    <code className="demo-box-card-code">md · md</code>
+  </div>
+
+  <div data-box data-padding="lg" data-radius="lg" data-bg="raised" data-border data-flex data-align="center" data-justify="between">
+    <span className="demo-box-card-text lg">Large Padding · Large Radius</span>
+    <code className="demo-box-card-code">lg · lg</code>
+  </div>
+
+  <div data-box data-padding="xl" data-radius="lg" data-bg="primary" data-flex data-align="center" data-justify="between">
+    <span className="demo-box-card-text xl">Extra Large Padding</span>
+    <code className="demo-box-card-code">xl · lg</code>
+  </div>
+
+</div>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<!-- Compact flat -->
+<div data-box data-padding="xs" data-radius="none" data-bg="raised" data-border>XS padding</div>
+
+<!-- Standard card -->
+<div data-box data-padding="md" data-radius="md" data-bg="raised" data-border>MD padding</div>
+
+<!-- Spacious panel -->
+<div data-box data-padding="xl" data-radius="lg" data-bg="raised" data-border>XL padding</div>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Real-world Card Example
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview style={{ display: 'block' }}>
+
+<div className="demo-box-grid-real">
+
+  <div data-box data-padding="lg" data-bg="raised" data-shadow="md" data-radius="lg" data-border>
+    <div className="demo-box-card-header">
+      <div className="demo-box-card-icon primary">📊</div>
+      <div>
+        <div className="demo-box-card-title">Analytics</div>
+        <div className="demo-box-card-subtitle">Last 30 days</div>
+      </div>
+    </div>
+    <div className="demo-box-card-value">84.2K</div>
+    <div className="demo-box-card-change">↑ 12% from last month</div>
+  </div>
+
+  <div data-box data-padding="lg" data-bg="raised" data-shadow="md" data-radius="lg" data-border>
+    <div className="demo-box-card-header">
+      <div className="demo-box-card-icon success">💰</div>
+      <div>
+        <div className="demo-box-card-title">Revenue</div>
+        <div className="demo-box-card-subtitle">This quarter</div>
+      </div>
+    </div>
+    <div className="demo-box-card-value">$48,920</div>
+    <div className="demo-box-card-change">↑ 8.4% vs Q1</div>
+  </div>
+
+  <div data-box data-padding="lg" data-bg="gradient" data-radius="lg">
+    <div className="demo-box-emoji">🚀</div>
+    <strong className="demo-box-label-white">Upgrade to Pro</strong>
+    <p className="demo-box-desc-white">Unlock advanced analytics, unlimited exports, and priority support.</p>
+    <button className="demo-box-btn-light">Get Pro →</button>
+  </div>
+
+</div>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<!-- Stat card -->
+<div data-box data-padding="lg" data-bg="raised" data-shadow="md" data-radius="lg" data-border>
+  <strong>Analytics</strong>
+  <p>84.2K page views</p>
+</div>
+
+<!-- CTA gradient box -->
+<div data-box data-padding="lg" data-bg="gradient" data-radius="lg">
+  <strong>Upgrade to Pro</strong>
+  <p>Unlock advanced features.</p>
+  <button>Get Pro →</button>
+</div>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Attributes
+
+| Attribute | Values | Description |
+|---|---|---|
+| `data-box` | (present) | Activates the box container |
+| `data-padding` | `xs · sm · md · lg · xl` | Internal padding size |
+| `data-bg` | `surface · raised · primary · danger · warning · success · neutral · gradient` | Background fill |
+| `data-radius` | `none · sm · md · lg · full` | Border corner rounding |
+| `data-shadow` | `none · sm · md · lg` | Box shadow depth |
+| `data-border` | (present) | Adds 1px solid border |

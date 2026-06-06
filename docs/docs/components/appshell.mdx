@@ -1,0 +1,203 @@
+---
+sidebar_position: 10
+title: AppShell
+description: Viewport-bound application frame for layout composition with header, sidebar, footer, and main content slots.
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import Preview from '@site/src/components/preview'
+
+# AppShell
+
+The `AppShell` component provides a complete, responsive viewport-bound application frame using **CSS Grid**.
+
+It offers named layout regions (slots) for your brand/logo, navigation, user profile, sidebar, footer, and the main content area — making it ideal for dashboards, admin consoles, and single-page web applications.
+
+---
+
+## Full Dashboard Preview
+
+A realistic admin dashboard built entirely with `data-appshell`.
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview style={{ display: 'block', padding: 0 }}>
+
+<div data-appshell className="demo-appshell-container">
+
+  <header className="demo-appshell-header">
+    <div className="demo-appshell-brand">
+      <div className="demo-appshell-logo"></div>
+      <strong className="demo-appshell-brand-text">Ignix&nbsp;Shell</strong>
+    </div>
+    <nav className="demo-appshell-nav">
+      <span className="demo-appshell-nav-link active">Dashboard</span>
+      <span className="demo-appshell-nav-link">Analytics</span>
+      <span className="demo-appshell-nav-link">Projects</span>
+      <span className="demo-appshell-nav-link">Settings</span>
+    </nav>
+    <div data-flex data-align="center" data-gap="sm">
+      <div className="demo-appshell-status-dot"></div>
+      <div className="demo-appshell-avatar">JD</div>
+    </div>
+  </header>
+
+  <aside className="demo-appshell-sidebar">
+    <div data-stack="xs">
+      <p className="demo-appshell-menu-title">Main Menu</p>
+      <div className="demo-appshell-sidebar-link active">
+        <span>🏠</span><span>Overview</span>
+      </div>
+      <div className="demo-appshell-sidebar-link">
+        <span>📈</span><span>Reports</span>
+      </div>
+      <div className="demo-appshell-sidebar-link">
+        <span>👥</span><span>Users</span>
+      </div>
+      <div className="demo-appshell-sidebar-link">
+        <span>💳</span><span>Billing</span>
+      </div>
+      <div className="demo-appshell-sidebar-link">
+        <span>⚙️</span><span>Settings</span>
+      </div>
+    </div>
+  </aside>
+
+  <main className="demo-appshell-main">
+    <div data-stack="md">
+      <div className="demo-appshell-main-header">
+        <div>
+          <h2 className="demo-appshell-title">Welcome back, John 👋</h2>
+          <p className="demo-appshell-subtitle">Thursday, 5 June 2026 — Here's your dashboard overview</p>
+        </div>
+        <button data-intent="primary">+ New Report</button>
+      </div>
+
+      <div data-switcher data-threshold="sm" data-gap="sm">
+        <div data-box data-padding="sm" data-bg="raised" data-shadow="sm" data-border data-radius="md">
+          <div className="demo-appshell-stat-label">Monthly Revenue</div>
+          <div className="demo-appshell-stat-value">$12,450</div>
+          <div className="demo-appshell-stat-change">↑ 18.4% vs last month</div>
+        </div>
+        <div data-box data-padding="sm" data-bg="raised" data-shadow="sm" data-border data-radius="md">
+          <div className="demo-appshell-stat-label">Active Users</div>
+          <div className="demo-appshell-stat-value">1,482</div>
+          <div className="demo-appshell-stat-change">↑ 6.1% this week</div>
+        </div>
+        <div data-box data-padding="sm" data-bg="raised" data-shadow="sm" data-border data-radius="md">
+          <div className="demo-appshell-stat-label">Uptime</div>
+          <div className="demo-appshell-stat-value">99.9%</div>
+          <div className="demo-appshell-stat-change">All systems operational</div>
+        </div>
+      </div>
+
+      <div data-box data-padding="md" data-bg="raised" data-border data-radius="md">
+        <div className="demo-appshell-activity-title">Recent Activity</div>
+        <div data-stack="xs">
+          {[
+            { icon: '📦', text: 'Deploy #482 completed', time: '2m ago', statusClass: 'success' },
+            { icon: '👤', text: 'New user signed up — alice@example.com', time: '14m ago', statusClass: 'success' },
+            { icon: '⚠️', text: 'Memory usage above threshold', time: '1h ago', statusClass: 'warning' },
+          ].map((row, i) => (
+            <div key={i} className="demo-appshell-activity-row">
+              <span className="demo-appshell-activity-icon">{row.icon}</span>
+              <span className="demo-appshell-activity-text">{row.text}</span>
+              <span className="demo-appshell-activity-time">{row.time}</span>
+              <span className={`demo-appshell-activity-status ${row.statusClass}`}></span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <span>© 2026 Ignix Lite — All rights reserved.</span>
+    <span>v2.0.0</span>
+  </footer>
+
+</div>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<div data-appshell>
+  <!-- Header: brand · nav · profile -->
+  <header>
+    <div data-flex data-align="center" data-gap="sm">
+      <div data-brand>Logo</div>
+      <nav data-cluster="md">
+        <a href="#">Dashboard</a>
+        <a href="#">Analytics</a>
+      </nav>
+    </div>
+    <div data-flex data-align="center">
+      <div data-profile>JD</div>
+    </div>
+  </header>
+
+  <!-- Left sidebar -->
+  <aside>
+    <nav data-stack="xs">
+      <a href="#">🏠 Overview</a>
+      <a href="#">📈 Reports</a>
+      <a href="#">⚙️ Settings</a>
+    </nav>
+  </aside>
+
+  <!-- Main content -->
+  <main>
+    <h1>Welcome back</h1>
+    <p>Your dashboard overview.</p>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <span>© 2026 Company</span>
+  </footer>
+</div>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Attributes
+
+| Attribute | Target | Description |
+|---|---|---|
+| `data-appshell` | Root `<div>` | Activates the CSS Grid application shell |
+
+---
+
+## Slots
+
+| Slot | Required | Description |
+|---|---|---|
+| `<header>` | No | Top bar — use `data-flex` for brand · nav · profile layout |
+| `<aside>` | No | Left sidebar — use `data-stack="xs"` for vertical nav links |
+| `<main>` | **Yes** | Primary scrollable content area |
+| `<footer>` | No | Bottom bar spanning full width |
+
+---
+
+## CSS Variables
+
+| CSS Variable | Default | Description |
+|---|---|---|
+| `--ix-appshell-sidebar-width` | `16rem` | Sidebar width on desktop screens (≥ 769px) |
+
+---
+
+## Responsive Behavior
+
+On screens **≤ 768px** the layout automatically switches to a single column — the sidebar stacks below the header. No configuration needed.

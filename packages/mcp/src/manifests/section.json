@@ -1,0 +1,93 @@
+{
+  "component": "section",
+  "version": "2.0",
+  "description": "Versatile layout primitive for organizing page content into distinct horizontal blocks. Provides configurable vertical spacing (margins), inner padding, background shading, and max-width sizing constraints. Use for page sections, hero blocks, and content separators.",
+
+  "element": "section",
+
+  "emmet": "section[data-section data-spacing=lg data-padding=md]",
+
+  "props": {
+    "data-section": {
+      "type": "boolean",
+      "agent_hint": "Activates the section layout. Bare attribute, no value needed."
+    },
+    "data-spacing": {
+      "type": "string",
+      "values": ["xs", "sm", "md", "lg", "xl"],
+      "default": "md",
+      "agent_hint": "External vertical margin-block. Controls whitespace between sibling sections. lg/xl for major page breaks, sm/xs for tight groupings."
+    },
+    "data-padding": {
+      "type": "string",
+      "values": ["xs", "sm", "md", "lg", "xl"],
+      "default": "md",
+      "agent_hint": "Internal block padding (top and bottom). Controls inner breathing room."
+    },
+    "data-size": {
+      "type": "string",
+      "values": ["sm", "md", "lg", "xl", "full"],
+      "default": "full",
+      "agent_hint": "Max-width constraint. sm=640px, md=960px, lg=1200px, xl=1440px, full=100%. Centers the section inline."
+    },
+    "data-bg": {
+      "type": "string",
+      "values": ["surface", "raised", "primary", "muted", "gradient"],
+      "default": "surface",
+      "agent_hint": "Background fill. raised for card-like sections, primary for accent areas, gradient for hero sections."
+    }
+  },
+
+  "states": [],
+
+  "slots": {
+    "content": {
+      "required": false,
+      "element": ["h1", "h2", "h3", "p", "div", "ul", "form", "article"],
+      "agent_hint": "Any content block within the section. Use data-stack or data-grid for inner layout."
+    }
+  },
+
+  "child_props": {},
+
+  "forbidden_props": ["class"],
+
+  "required_props": ["data-section"],
+
+  "required_slots": [],
+
+  "required_wrapper": null,
+
+  "do": [
+    "Use data-spacing=lg between major page sections for visual breathing room",
+    "Use data-size=md or data-size=lg to constrain reading width on wide screens",
+    "Combine data-bg=gradient with a heading and CTA for hero areas",
+    "Stack multiple sections vertically for long-form page layouts",
+    "Use data-bg=raised with data-border for card-style section blocks"
+  ],
+
+  "dont": [
+    "Do not use class attribute",
+    "Do not set margin-block or padding-block via inline styles",
+    "Do not use section inside another section — use nested data-box or data-stack instead",
+    "Do not use data-section for sidebar panels — use data-box instead"
+  ],
+
+  "examples": [
+    {
+      "label": "Hero section with gradient background",
+      "emmet": "section[data-section data-spacing=xl data-padding=xl data-bg=gradient data-size=full]>h1{Build Faster}+p{A modern design system for the web}+button[data-intent=primary]{Get Started}",
+      "html": "<section data-section data-spacing=\"xl\" data-padding=\"xl\" data-bg=\"gradient\" data-size=\"full\"><h1>Build Faster</h1><p>A modern design system for the web</p><button data-intent=\"primary\">Get Started</button></section>"
+    },
+    {
+      "label": "Constrained content section",
+      "emmet": "section[data-section data-spacing=lg data-padding=md data-size=md data-bg=raised]>h2{About Us}+p{We build products that people love.}",
+      "html": "<section data-section data-spacing=\"lg\" data-padding=\"md\" data-size=\"md\" data-bg=\"raised\"><h2>About Us</h2><p>We build products that people love.</p></section>"
+    },
+    {
+      "label": "Muted info strip",
+      "emmet": "section[data-section data-spacing=sm data-padding=sm data-bg=muted]>p{📢 New features available — see the changelog}",
+      "html": "<section data-section data-spacing=\"sm\" data-padding=\"sm\" data-bg=\"muted\"><p>📢 New features available — see the changelog</p></section>"
+    }
+  ]
+}

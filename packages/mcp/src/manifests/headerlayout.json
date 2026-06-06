@@ -1,0 +1,106 @@
+{
+  "component": "headerlayout",
+  "version": "2.0",
+  "description": "Full-page layout system with a sticky-capable top header, a collapsible sidebar, a fluid main content area, and a footer. Unlike AppShell, this is flex-based and supports scrolling documents. Perfect for admin panels, dashboards, and documentation sites.",
+
+  "element": "div",
+
+  "emmet": "div[data-header-layout]>(header[data-sticky]>div[data-flex data-align=center data-gap=sm]>strong{App Name}+div[data-cluster=xs]>button[data-intent=primary]{Sign Out})+(div[data-body]>(aside>nav[data-stack=xs]>(div[data-flex data-align=center data-gap=sm]>span{🏠}+span[data-label]{Dashboard})+(div[data-flex data-align=center data-gap=sm]>span{👥}+span[data-label]{Users})+(div[data-flex data-align=center data-gap=sm]>span{⚙️}+span[data-label]{Settings}))+(main[data-stack=md]>h1{Page Title}+p{Main content here}))+(footer>small{© 2026 Dashboard})",
+
+  "props": {
+    "data-header-layout": {
+      "type": "boolean",
+      "agent_hint": "Activates the header layout flex container. Bare attribute, no value needed."
+    },
+    "data-sticky": {
+      "type": "boolean",
+      "agent_hint": "Apply to the <header> child to make it sticky at the top of the viewport. Bare attribute."
+    },
+    "data-body": {
+      "type": "boolean",
+      "agent_hint": "Required wrapper div that contains the aside and main elements. Manages horizontal flex layout."
+    },
+    "data-collapsed": {
+      "type": "boolean",
+      "agent_hint": "Apply to <aside> to collapse the sidebar to icon-only width (4.5rem). Hides all [data-label] text children."
+    },
+    "data-label": {
+      "type": "boolean",
+      "agent_hint": "Apply to text labels inside aside nav items. Hidden automatically when aside has data-collapsed."
+    },
+    "--ix-sidebar-width": {
+      "type": "string",
+      "default": "16rem",
+      "agent_hint": "CSS custom property controlling the sidebar width when expanded. Override in your stylesheet."
+    }
+  },
+
+  "states": ["data-collapsed"],
+
+  "slots": {
+    "header": {
+      "required": false,
+      "element": ["header"],
+      "agent_hint": "Top navigation bar. Add data-sticky to pin it. Use data-flex inside for brand/nav/action layout."
+    },
+    "body": {
+      "required": true,
+      "element": ["div"],
+      "agent_hint": "Required wrapper with data-body attribute. Must contain the aside and main children."
+    },
+    "sidebar": {
+      "required": false,
+      "element": ["aside"],
+      "agent_hint": "Left sidebar inside data-body. Add data-collapsed to reduce to icon-only mode. Tag labels with data-label."
+    },
+    "main": {
+      "required": true,
+      "element": ["main"],
+      "agent_hint": "Fluid main content area inside data-body. Grows to fill remaining horizontal space."
+    },
+    "footer": {
+      "required": false,
+      "element": ["footer"],
+      "agent_hint": "Bottom footer bar below the body. Centered text and muted color by default."
+    }
+  },
+
+  "child_props": {},
+
+  "forbidden_props": ["class"],
+
+  "required_props": ["data-header-layout"],
+
+  "required_slots": ["body", "main"],
+
+  "required_wrapper": null,
+
+  "do": [
+    "Always wrap aside and main inside a div[data-body]",
+    "Add data-sticky to header for pinned top navigation",
+    "Tag sidebar link labels with data-label so they hide on data-collapsed",
+    "Use data-stack=xs inside aside for vertical navigation items",
+    "Use data-flex inside sidebar items to align icon + label",
+    "Use --ix-sidebar-width to control expanded sidebar width"
+  ],
+
+  "dont": [
+    "Do not use class attribute",
+    "Do not place aside or main directly under data-header-layout without data-body wrapper",
+    "Do not use data-header-layout for fixed-height viewport apps — use data-appshell instead",
+    "Do not manually set width on aside — use data-collapsed or --ix-sidebar-width"
+  ],
+
+  "examples": [
+    {
+      "label": "Full header layout with sticky header and sidebar",
+      "emmet": "div[data-header-layout]>(header[data-sticky]>strong{Admin}+button[data-intent=primary]{Sign Out})+(div[data-body]>(aside>nav[data-stack=xs]>(a[href=#]>span{🏠}+span[data-label]{Dashboard})+(a[href=#]>span{👥}+span[data-label]{Users}))+(main>h2{Dashboard}+p{Content here}))+(footer>small{© 2026})",
+      "html": "<div data-header-layout><header data-sticky><strong>Admin</strong><button data-intent=\"primary\">Sign Out</button></header><div data-body><aside><nav data-stack=\"xs\"><a href=\"#\"><span>🏠</span><span data-label>Dashboard</span></a><a href=\"#\"><span>👥</span><span data-label>Users</span></a></nav></aside><main><h2>Dashboard</h2><p>Content here</p></main></div><footer><small>© 2026</small></footer></div>"
+    },
+    {
+      "label": "Collapsed icon-only sidebar",
+      "emmet": "div[data-header-layout]>(header>strong{App})+(div[data-body]>(aside[data-collapsed]>nav[data-stack=xs]>(a>span{📊}+span[data-label]{Reports})+(a>span{⚙️}+span[data-label]{Settings}))+(main>p{Body content}))+(footer>small{Footer})",
+      "html": "<div data-header-layout><header><strong>App</strong></header><div data-body><aside data-collapsed><nav data-stack=\"xs\"><a><span>📊</span><span data-label>Reports</span></a><a><span>⚙️</span><span data-label>Settings</span></a></nav></aside><main><p>Body content</p></main></div><footer><small>Footer</small></footer></div>"
+    }
+  ]
+}

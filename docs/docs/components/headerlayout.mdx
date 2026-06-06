@@ -1,0 +1,267 @@
+---
+sidebar_position: 12
+title: HeaderLayout
+description: Complete page layout template featuring a sticky header, collapsible sidebar, main content body, and footer.
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import Preview from '@site/src/components/preview'
+
+# HeaderLayout
+
+The `HeaderLayout` component provides a full flex-based page layout system. Unlike `AppShell` (which is viewport-bound), `HeaderLayout` is designed for **scrolling document pages**.
+
+It supports sticky headers, collapsible icon-only sidebars, and responsive stacking.
+
+---
+
+## Full Layout Preview
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview style={{ display: 'block', padding: 0 }}>
+
+<div data-header-layout className="demo-hl-container">
+
+  <header className="demo-hl-header">
+    <div data-flex data-align="center" data-gap="sm">
+      <div className="demo-hl-logo"></div>
+      <strong className="demo-hl-logo-text">Admin&nbsp;Panel</strong>
+    </div>
+    <div data-cluster="sm">
+      <button className="demo-hl-header-btn">Docs</button>
+      <button className="demo-hl-header-btn-primary">Sign Out</button>
+    </div>
+  </header>
+
+  <div data-body>
+    <aside className="demo-hl-sidebar">
+      <div data-stack="xs">
+        <p className="demo-appshell-menu-title">Navigation</p>
+
+        <div className="demo-appshell-sidebar-link active">
+          <span>📊</span><span data-label>Dashboard</span>
+        </div>
+        <div className="demo-appshell-sidebar-link">
+          <span>👥</span><span data-label>Customers</span>
+        </div>
+        <div className="demo-appshell-sidebar-link">
+          <span>💳</span><span data-label>Payments</span>
+        </div>
+        <div className="demo-appshell-sidebar-link">
+          <span>📦</span><span data-label>Products</span>
+        </div>
+        <div className="demo-appshell-sidebar-link">
+          <span>⚙️</span><span data-label>Settings</span>
+        </div>
+
+        <div className="demo-hl-storage-card">
+          <div className="demo-hl-storage-title">Storage</div>
+          <div className="demo-hl-storage-progress-bg">
+            <div className="demo-hl-storage-progress-bar"></div>
+          </div>
+          <div className="demo-hl-storage-text">62 GB of 100 GB</div>
+        </div>
+      </div>
+    </aside>
+
+    <main className="demo-hl-main">
+      <div data-stack="md">
+        <div data-flex data-align="center" data-justify="between">
+          <div>
+            <h2 className="demo-hl-main-title">Analytics Overview</h2>
+            <p className="demo-hl-main-subtitle">Showing data for June 2026</p>
+          </div>
+          <div data-cluster="xs">
+            <button className="demo-hl-btn">Export</button>
+            <button className="demo-hl-btn-primary">+ Add Widget</button>
+          </div>
+        </div>
+
+        <div data-switcher data-threshold="sm" data-gap="sm">
+          {[
+            { label: 'Total Revenue', value: '$48,920', change: '+8.4%', icon: '💰' },
+            { label: 'New Users', value: '1,284', change: '+14.2%', icon: '👤' },
+            { label: 'Churn Rate', value: '2.3%', change: '-0.4%', icon: '📉' },
+          ].map((item, i) => (
+            <div key={i} data-box data-padding="md" data-bg="raised" data-shadow="sm" data-border data-radius="md">
+              <div className="demo-hl-stat-header">
+                <span className="demo-hl-stat-label">{item.label}</span>
+                <span className="demo-hl-stat-icon">{item.icon}</span>
+              </div>
+              <div className="demo-hl-stat-value">{item.value}</div>
+              <div className="demo-hl-stat-change">{item.change} this month</div>
+            </div>
+          ))}
+        </div>
+
+        <div data-box data-padding="md" data-bg="raised" data-border data-radius="md">
+          <div className="demo-appshell-activity-title">Recent Transactions</div>
+          <div data-stack="xs">
+            {[
+              { name: 'Alice Johnson', amount: '+$240.00', status: 'Completed', time: 'Just now', ok: true },
+              { name: 'Bob Martinez', amount: '+$89.50', status: 'Pending', time: '5m ago', ok: false },
+              { name: 'Carol White', amount: '-$12.00', status: 'Refunded', time: '1h ago', ok: false, refunded: true },
+            ].map((tx, i) => (
+              <div key={i} className="demo-appshell-activity-row">
+                <div className="demo-appshell-avatar">{tx.name[0]}</div>
+                <div className="demo-grow">
+                  <div className="demo-appshell-activity-text">{tx.name}</div>
+                  <div className="demo-appshell-subtitle">{tx.time} · {tx.status}</div>
+                </div>
+                <div className={`demo-appshell-activity-time ${tx.refunded ? 'refunded' : (tx.amount.startsWith('+') ? 'positive' : 'neutral')}`}>{tx.amount}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <footer className="demo-hl-footer">
+    <small>© 2026 Admin Console — All rights reserved</small>
+    <small>Build 2.0.0</small>
+  </footer>
+
+</div>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<div data-header-layout>
+  <!-- Sticky header -->
+  <header data-sticky>
+    <strong>Admin Panel</strong>
+    <button data-intent="primary">Sign Out</button>
+  </header>
+
+  <!-- Body: sidebar + main -->
+  <div data-body>
+    <aside>
+      <nav data-stack="xs">
+        <a href="#"><span>📊</span><span data-label>Dashboard</span></a>
+        <a href="#"><span>👥</span><span data-label>Customers</span></a>
+        <a href="#"><span>⚙️</span><span data-label>Settings</span></a>
+      </nav>
+    </aside>
+
+    <main>
+      <h2>Analytics Overview</h2>
+      <p>Your content goes here.</p>
+    </main>
+  </div>
+
+  <footer>
+    <small>© 2026 Admin Console</small>
+  </footer>
+</div>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Collapsed Sidebar
+
+Add `data-collapsed` to `<aside>` to reduce it to icon-only width. All `[data-label]` elements are automatically hidden.
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview style={{ display: 'block', padding: 0 }}>
+
+<div data-header-layout className="demo-hl-collapsed-container">
+  <header className="demo-hl-mini-header">
+    <strong>Mini Sidebar View</strong>
+    <span>data-collapsed on aside →</span>
+  </header>
+
+  <div data-body>
+    <aside data-collapsed>
+      <div data-stack="xs" className="demo-full-width">
+        {['📊', '👥', '💳', '⚙️'].map((icon, i) => (
+          <div key={i} className={`demo-hl-collapsed-link ${i === 0 ? 'active' : ''}`}>
+            <span>{icon}</span>
+            <span data-label>{['Dashboard','Customers','Payments','Settings'][i]}</span>
+          </div>
+        ))}
+      </div>
+    </aside>
+
+    <main className="demo-hl-collapsed-main">
+      <div data-box data-padding="md" data-bg="raised" data-border data-radius="md">
+        <strong>Sidebar is collapsed</strong>
+        <p>
+          Adding <code>data-collapsed</code> on the <code>&lt;aside&gt;</code> shrinks it to <code>4.5rem</code> and hides all <code>[data-label]</code> text — showing icons only.
+        </p>
+      </div>
+    </main>
+  </div>
+</div>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<div data-header-layout>
+  <header><strong>App</strong></header>
+
+  <div data-body>
+    <!-- data-collapsed = icon-only sidebar -->
+    <aside data-collapsed>
+      <nav data-stack="xs">
+        <a href="#"><span>📊</span><span data-label>Dashboard</span></a>
+        <a href="#"><span>👥</span><span data-label>Users</span></a>
+        <a href="#"><span>⚙️</span><span data-label>Settings</span></a>
+      </nav>
+    </aside>
+
+    <main>
+      <p>Content here…</p>
+    </main>
+  </div>
+</div>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Attributes
+
+| Attribute | Target | Value | Description |
+|---|---|---|---|
+| `data-header-layout` | Root `<div>` | (present) | Activates the flex column page layout |
+| `data-sticky` | `<header>` | (present) | Pins header to top of viewport |
+| `data-body` | `<div>` | (required) | Wrapper for sidebar + main |
+| `data-collapsed` | `<aside>` | (present) | Shrinks sidebar to `4.5rem` icon-only mode |
+| `data-label` | Inside `<aside>` items | (present) | Text hidden when sidebar is collapsed |
+
+---
+
+## CSS Variables
+
+| CSS Variable | Default | Description |
+|---|---|---|
+| `--ix-sidebar-width` | `16rem` | Expanded sidebar width — override in your stylesheet |
+
+---
+
+## Responsive Behavior
+
+On screens **≤ 768px**, `[data-body]` stacks vertically — sidebar moves above `<main>` with a bottom border replacing the right border.

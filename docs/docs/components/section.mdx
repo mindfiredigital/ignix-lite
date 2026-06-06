@@ -1,0 +1,310 @@
+---
+sidebar_position: 13
+title: Section
+description: Content blocking layout wrapper with vertical spacing, padding, background colors, and max-width constraints.
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import Preview from '@site/src/components/preview'
+
+# Section
+
+The `Section` component is a versatile layout primitive that organizes page content into distinct **horizontal blocks**.
+
+It provides vertical spacing (margins), inner padding, background shading, and max-width constraints — giving your pages consistent visual rhythm and structure.
+
+---
+
+## Content Rhythm & Spacing
+
+Use `data-spacing` to control how much vertical whitespace separates sections from surrounding content.
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview style={{ display: 'block' }}>
+
+<div className="demo-section-spacing-container">
+  <p className="demo-section-label-top">↑ Page content above</p>
+
+  <section data-section data-spacing="xs" data-padding="sm" data-bg="raised" data-radius="md" className="demo-section-center-box">
+    <span className="demo-preview-badge">SPACING XS</span>
+    <h4 className="demo-section-title">Extra Small Margin</h4>
+    <p className="demo-section-desc">Tight vertical spacing — good for compact information rows.</p>
+  </section>
+
+  <section data-section data-spacing="md" data-padding="md" data-bg="primary" data-radius="md" className="demo-section-center-box">
+    <span className="demo-preview-badge-primary">SPACING MD</span>
+    <h4 className="demo-section-title">Medium Margin</h4>
+    <p className="demo-section-desc">Standard page flow — ideal for most content sections.</p>
+  </section>
+
+  <section data-section data-spacing="xl" data-padding="lg" data-bg="gradient" data-radius="md" className="demo-section-center-box">
+    <span className="demo-preview-badge-white">SPACING XL</span>
+    <h4 className="demo-section-title-white">Extra Large Margin</h4>
+    <p className="demo-section-desc-white">Wide breathing room — use for hero sections and major visual breaks.</p>
+  </section>
+
+  <p className="demo-section-label-bottom">↓ Page content below</p>
+</div>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<!-- Tight spacing for compact areas -->
+<section data-section data-spacing="xs" data-padding="sm" data-bg="raised">
+  <h3>Compact Section</h3>
+</section>
+
+<!-- Standard spacing for most content -->
+<section data-section data-spacing="md" data-padding="md" data-bg="primary">
+  <h3>Standard Section</h3>
+</section>
+
+<!-- Wide spacing for hero/marketing areas -->
+<section data-section data-spacing="xl" data-padding="lg" data-bg="gradient">
+  <h3>Hero Section</h3>
+</section>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Background Variants
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview style={{ display: 'block' }}>
+
+<div data-stack="sm" className="demo-full-width">
+
+  <section data-section data-padding="md" data-bg="surface" className="demo-section-flex-row">
+    <div>
+      <strong className="demo-section-item-title">Surface</strong>
+      <p className="demo-section-item-desc">data-bg="surface" — matches the page background</p>
+    </div>
+    <code className="demo-section-code-badge">surface</code>
+  </section>
+
+  <section data-section data-padding="md" data-bg="raised" className="demo-section-flex-row">
+    <div>
+      <strong className="demo-section-item-title">Raised</strong>
+      <p className="demo-section-item-desc">data-bg="raised" — elevated card-like surface</p>
+    </div>
+    <code className="demo-section-code-badge">raised</code>
+  </section>
+
+  <section data-section data-padding="md" data-bg="primary" className="demo-section-flex-row">
+    <div>
+      <strong className="demo-section-item-title">Primary</strong>
+      <p className="demo-section-item-desc">data-bg="primary" — brand accent background</p>
+    </div>
+    <code className="demo-section-code-badge">primary</code>
+  </section>
+
+  <section data-section data-padding="md" data-bg="muted" className="demo-section-flex-row">
+    <div>
+      <strong className="demo-section-item-title">Muted</strong>
+      <p className="demo-section-item-desc">data-bg="muted" — subtle neutral tint</p>
+    </div>
+    <code className="demo-section-code-badge">muted</code>
+  </section>
+
+  <section data-section data-padding="md" data-bg="gradient" className="demo-section-flex-row">
+    <div>
+      <strong className="demo-section-item-title">Gradient</strong>
+      <p className="demo-section-item-desc">data-bg="gradient" — brand gradient for hero areas</p>
+    </div>
+    <code className="demo-section-code-badge">gradient</code>
+  </section>
+
+</div>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<section data-section data-padding="md" data-bg="surface">Surface section</section>
+<section data-section data-padding="md" data-bg="raised">Raised section</section>
+<section data-section data-padding="md" data-bg="primary">Primary tint</section>
+<section data-section data-padding="md" data-bg="muted">Muted neutral</section>
+<section data-section data-padding="md" data-bg="gradient">Gradient hero</section>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Max Width Constraints
+
+Use `data-size` to cap content width and center the section inline — great for keeping text readable on wide screens.
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview style={{ display: 'block' }}>
+
+<div data-stack="md" className="demo-full-width">
+
+  <section data-section data-size="sm" data-bg="raised" data-padding="md" className="demo-section-line-wrapper demo-section-center-box">
+    <div className="demo-section-indicator-row">
+      <div className="demo-section-indicator-line sm"></div>
+      <span className="demo-section-indicator-text sm">SM — 640px max</span>
+      <div className="demo-section-indicator-line sm"></div>
+    </div>
+    <p className="demo-section-desc">Narrow reading column — good for articles, login forms, and modals.</p>
+  </section>
+
+  <section data-section data-size="md" data-bg="raised" data-padding="md" className="demo-section-line-wrapper demo-section-center-box">
+    <div className="demo-section-indicator-row">
+      <div className="demo-section-indicator-line md"></div>
+      <span className="demo-section-indicator-text md">MD — 960px max</span>
+      <div className="demo-section-indicator-line md"></div>
+    </div>
+    <p className="demo-section-desc">Standard dashboard width — features, pricing, and settings pages.</p>
+  </section>
+
+  <section data-section data-size="lg" data-bg="raised" data-padding="md" className="demo-section-line-wrapper demo-section-center-box">
+    <div className="demo-section-indicator-row">
+      <div className="demo-section-indicator-line lg"></div>
+      <span className="demo-section-indicator-text lg">LG — 1200px max</span>
+      <div className="demo-section-indicator-line lg"></div>
+    </div>
+    <p className="demo-section-desc">Wide page sections — tables, data grids, and complex layouts.</p>
+  </section>
+
+</div>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<!-- Narrow reading column (640px) -->
+<section data-section data-size="sm" data-bg="raised" data-padding="md">
+  <h2>Article Title</h2>
+  <p>Constrained for comfortable reading.</p>
+</section>
+
+<!-- Standard dashboard width (960px) -->
+<section data-section data-size="md" data-bg="raised" data-padding="md">
+  <h2>Dashboard Section</h2>
+</section>
+
+<!-- Wide section (1200px) -->
+<section data-section data-size="lg" data-bg="surface" data-padding="lg">
+  <h2>Full Data Table</h2>
+</section>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Real-world Page Layout
+
+A typical landing page using multiple chained sections:
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview style={{ display: 'block' }}>
+
+<div className="demo-section-page-container">
+
+  <section data-section data-padding="lg" data-bg="gradient" className="demo-section-center-box">
+    <span className="demo-section-hero-badge-white">New Release</span>
+    <h2 className="demo-section-hero-title-white">Ship faster with Ignix Lite</h2>
+    <p className="demo-section-hero-desc-white">Zero-class, agent-ready components. No boilerplate needed.</p>
+    <div data-cluster="sm" className="demo-section-hero-btn-container">
+      <button className="demo-section-hero-btn-white">Get Started</button>
+      <button className="demo-section-hero-btn-translucent">View Docs</button>
+    </div>
+  </section>
+
+  <section data-section data-padding="md" data-bg="raised" className="demo-section-features-row">
+    {[
+      { icon: '⚡', title: 'Lightning Fast', desc: 'Under 8KB total bundle' },
+      { icon: '🤖', title: 'Agent Ready', desc: 'Built-in MCP server' },
+      { icon: '♿', title: 'Accessible', desc: 'WCAG 2.2 AA compliant' },
+    ].map((f, i) => (
+      <div key={i} className="demo-section-feature-col">
+        <div className="demo-section-feature-icon">{f.icon}</div>
+        <div className="demo-section-feature-title">{f.title}</div>
+        <div className="demo-section-feature-desc">{f.desc}</div>
+      </div>
+    ))}
+  </section>
+
+  <section data-section data-padding="sm" data-bg="muted" className="demo-section-announcement">
+    <span className="demo-section-announcement-text">📢 Version 2.0 now available — </span>
+    <a href="#" className="demo-section-announcement-link">See changelog →</a>
+  </section>
+
+</div>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<!-- Hero gradient section -->
+<section data-section data-padding="xl" data-bg="gradient">
+  <h1>Ship faster with Ignix Lite</h1>
+  <button>Get Started</button>
+</section>
+
+<!-- Features strip -->
+<section data-section data-padding="lg" data-bg="raised">
+  <div data-switcher data-threshold="sm" data-gap="md">
+    <article>⚡ Fast</article>
+    <article>🤖 Agent Ready</article>
+    <article>♿ Accessible</article>
+  </div>
+</section>
+
+<!-- Announcement strip -->
+<section data-section data-padding="sm" data-bg="muted">
+  <p>📢 Version 2.0 now available</p>
+</section>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Attributes
+
+| Attribute | Values | Description |
+|---|---|---|
+| `data-section` | (present) | Activates section layout. Required |
+| `data-spacing` | `xs · sm · md · lg · xl` | External vertical margin (margin-block) |
+| `data-padding` | `xs · sm · md · lg · xl` | Internal top/bottom padding |
+| `data-size` | `sm · md · lg · xl · full` | Max-width constraint — centered inline |
+| `data-bg` | `surface · raised · primary · muted · gradient` | Background color variant |
