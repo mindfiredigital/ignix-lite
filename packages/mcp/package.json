@@ -3,7 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "main": "index.js",
+  "main": "./dist/server.js",
+  "bin": {
+    "ignix-lite-mcp": "./dist/server.js"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "test": "vitest run",
     "dev": "tsup src/server.ts --watch --format esm --no-clean --onSuccess \"copyfiles -u 2 src/manifests/*.json dist/manifests\"",

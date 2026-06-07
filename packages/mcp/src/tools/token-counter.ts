@@ -38,7 +38,8 @@ export function getTokenSummary(
           session_id: sessionId,
           calls,
           total_tokens_used: totalTokensUsed,
-          estimated_context_pct: pct
+          estimated_context_pct: pct,
+          tokens_used: 20
         })
       }
     ]
