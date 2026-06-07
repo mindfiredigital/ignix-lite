@@ -82,6 +82,17 @@ export async function preview(args: PreviewArgs): Promise<MCPResponse> {
       args: ['--no-sandbox', '--disable-setuid-sandbox']
     })
     const page = await browser.newPage()
+    await page.setJavaScriptEnabled(false)
+    await page.setRequestInterception(true)
+    page.on('request', (req) => {
+      const url = req.url()
+      if (url.startsWith('data:') || url === 'about:blank') {
+        req.continue()
+      } else {
+        req.abort()
+      }
+    })
+
     if (theme === 'dark' || theme === 'light') {
       await page.emulateMediaFeatures([
         { name: 'prefers-color-scheme', value: theme }
@@ -99,6 +110,7 @@ export async function preview(args: PreviewArgs): Promise<MCPResponse> {
       <html>
         <head>
           <meta charset="utf-8">
+          <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src data:;">
           <style>
             body {
               margin: 0;

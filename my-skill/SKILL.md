@@ -24,7 +24,7 @@ Ignix-Lite is a **native HTML + ~8 KB CSS** design system.
 - **No JS required (95%).** Five custom elements and one customized built-in use minimal JS. Everything else is pure CSS.
 - **Semantic-first.** Every component maps to a native HTML element.
 - **Accessible by default.** ARIA roles, states, and keyboard navigation are built-in.
-- **MCP-powered.** 7 MCP tools let AI agents generate, validate, and theme Ignix-Lite UI.
+- **MCP-powered.** 11 MCP tools let AI agents generate, validate, and theme Ignix-Lite UI.
 
 ---
 
@@ -303,7 +303,7 @@ Full token catalogue: [`assets/design-tokens.json`](assets/design-tokens.json)
 
 ---
 
-## 11. MCP Tools (7)
+## 11. MCP Tools (11)
 
 Use tools in this order of preference:
 
@@ -315,6 +315,10 @@ List all components              → list_components()
 Validate generated HTML          → validate({ html })
 WCAG 2.2 accessibility check     → check_a11y({ html })
 Generate a colour theme          → generate_theme({ prompt })
+Headless visual preview          → preview({ input, options })
+Token cost summary               → get_token_summary()
+Create layout handoff            → create_handoff({ rendered_html, metadata })
+Apply layout handoff changes     → apply_handoff({ handoff_id, changes })
 ```
 
 ### Tool Signatures
@@ -348,6 +352,18 @@ Prompt keywords: `dark` `night` `midnight` `cyberpunk` `dim` (dark mode) · `sha
 Returns `{ score, passes, issues }`.
 Score formula: `max(0, 100 − errors × 10 − warnings × 3)`.
 Checks 16 WCAG AA rules: alt text, form labels, empty labels, button names, link purpose, ARIA states, duplicate IDs, tabindex, heading hierarchy, table structure, dialog accessibility, ARIA roles, autocomplete, focus style, language of page.
+
+#### `preview({ input, options })`
+Renders Emmet shorthand or HTML to a base64 PNG data URL.
+
+#### `get_token_summary()`
+Returns a summary of token consumption for the current session.
+
+#### `create_handoff({ rendered_html, metadata })`
+Creates a state snapshot envelope for multi-agent layout exchange.
+
+#### `apply_handoff({ handoff_id, changes })`
+Patches an existing handoff snapshot with partial component changes.
 
 ---
 

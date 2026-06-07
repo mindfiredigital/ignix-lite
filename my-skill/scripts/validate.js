@@ -105,7 +105,11 @@ if (guide) {
     'validate',
     'how_to_build',
     'generate_theme',
-    'check_a11y'
+    'check_a11y',
+    'preview',
+    'get_token_summary',
+    'create_handoff',
+    'apply_handoff'
   ]
   for (const tool of tools) {
     if (guide.includes(tool)) {
@@ -127,7 +131,11 @@ if (examples) {
     'validate',
     'how_to_build',
     'generate_theme',
-    'check_a11y'
+    'check_a11y',
+    'preview',
+    'get_token_summary',
+    'create_handoff',
+    'apply_handoff'
   ]
   for (const tool of tools) {
     if (examples.includes(tool)) {

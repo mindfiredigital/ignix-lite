@@ -11,12 +11,11 @@
   ✗ Never use >4 attributes on a single element (PROP_EXPLOSION)
 
   CUSTOM ELEMENTS (used when no native element exists):
-    ix-alert  ix-toast  ix-avatar  ix-tab  ix-tooltip
-    ix-skeleton  ix-codeblock  ix-combobox
+    ix-tabs  ix-dropdown  ix-combobox  ix-tooltip  ix-toast
 
   NATIVE ELEMENTS (preferred):
     button  input  select  textarea  dialog  details  progress  meter
-    form  nav  table  hr  mark  span[role=status]
+    form  nav  table  hr  mark  span[role=status]  aside  article  pre
 ─────────────────────────────────────────────────────────────────────────── -->
 <!DOCTYPE html>
 <html lang="en">
@@ -199,12 +198,12 @@
     </details>
 
     <!-- ── Tabs ──────────────────────────────────────────────────────────── -->
-    <ix-tab>
+    <ix-tabs>
       <button slot="tab" aria-selected="true">Tab One</button>
       <button slot="tab">Tab Two</button>
       <div slot="panel">Content for tab one.</div>
       <div slot="panel">Content for tab two.</div>
-    </ix-tab>
+    </ix-tabs>
 
     <!-- ── Badge / Mark ──────────────────────────────────────────────────── -->
     <!-- Inline highlight -->

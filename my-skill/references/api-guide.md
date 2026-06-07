@@ -207,6 +207,77 @@ Checks HTML against 16 WCAG AA accessibility rules.
 
 ---
 
+### 8. `preview`
+
+Renders Emmet shorthand or HTML to a base64 PNG data URL.
+
+**Input:** `{ "input": "<emmet-or-html>", "options": { "width": 400, "theme": "dark", "scale": 2 } }`
+
+**Returns:**
+```json
+{
+  "png": "data:image/png;base64,...",
+  "width": 400,
+  "render_ms": 150
+}
+```
+
+---
+
+### 9. `get_token_summary`
+
+Returns a summary of token consumption for the current session.
+
+**Input:** `{ "context_window": 128000 }` *(optional arguments)*
+
+**Returns:**
+```json
+{
+  "session_id": "...",
+  "calls": [
+    { "tool": "validate", "tokens_used": 15, "timestamp": 1745000000000 }
+  ],
+  "total_tokens_used": 15,
+  "estimated_context_pct": 0.0117
+}
+```
+
+---
+
+### 10. `create_handoff`
+
+Creates a state snapshot envelope for multi-agent layout exchange.
+
+**Input:** `{ "rendered_html": "<html string>", "metadata": {} }`
+
+**Returns:**
+```json
+{
+  "handoff_id": "hndff_...",
+  "snapshot": { ... }
+}
+```
+
+---
+
+### 11. `apply_handoff`
+
+Patches an existing handoff snapshot with partial component changes.
+
+**Input:** `{ "handoff_id": "hndff_...", "changes": [ { "selector": "#card", "action": "update", "emmet": "button[data-intent=danger]" } ] }`
+
+**Returns:**
+```json
+{
+  "updated_html": "...",
+  "diff_tokens": 4,
+  "full_tokens": 16,
+  "savings_pct": 75
+}
+```
+
+---
+
 ## Core Design Rules
 
 > Ignix-Lite is a **zero class-name, zero JS (95%)** design system.
