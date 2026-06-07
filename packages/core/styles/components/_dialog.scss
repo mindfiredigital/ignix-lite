@@ -11,8 +11,8 @@ dialog {
 
   box-shadow: var(--ix-shadow);
 
-  max-width: 36rem;
-  min-width: 24rem;
+  max-width: 28rem;
+  min-width: 18rem;
   width: revert;
   height: revert;
 
@@ -27,6 +27,7 @@ dialog {
     margin: 0 0 var(--ix-space-sm);
     font-size: var(--ix-size-lg);
     color: var(--ix-text);
+    width: 100%;
   }
 
   p {
@@ -35,8 +36,9 @@ dialog {
     opacity: 0.75;
     font-size: var(--ix-size-sm);
     line-height: var(--ix-line-height);
+    width: 100%;
 
-    & + p {
+    &+p {
       margin-top: var(--ix-space-sm);
     }
   }
@@ -44,11 +46,14 @@ dialog {
   [data-actions] {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     gap: var(--ix-space-sm);
     margin-top: var(--ix-space-lg);
+    width: 100%;
   }
 
-  [data-actions] button {
+  [data-actions] button,
+  &>button {
     all: unset;
 
     display: inline-flex;
@@ -75,25 +80,33 @@ dialog {
     }
   }
 
-  [data-actions] button[data-intent='danger'] {
+  &>button {
+    margin-top: var(--ix-space-lg);
+  }
+
+  [data-actions] button[data-intent='danger'],
+  &>button[data-intent='danger'] {
     background: var(--ix-danger);
     color: var(--ix-on-danger);
     border-color: transparent;
   }
 
-  [data-actions] button[data-intent='warning'] {
+  [data-actions] button[data-intent='warning'],
+  &>button[data-intent='warning'] {
     background: var(--ix-warning);
     color: var(--ix-on-warning);
     border-color: transparent;
   }
 
-  [data-actions] button[data-intent='primary'] {
+  [data-actions] button[data-intent='primary'],
+  &>button[data-intent='primary'] {
     background: var(--ix-primary);
     color: var(--ix-on-primary);
     border-color: transparent;
   }
 
-  [data-actions] button[data-intent='success'] {
+  [data-actions] button[data-intent='success'],
+  &>button[data-intent='success'] {
     background: var(--ix-success);
     color: var(--ix-on-success);
     border-color: transparent;
@@ -137,6 +150,7 @@ dialog {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -144,6 +158,9 @@ dialog {
 
 dialog[open] {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--ix-space-sm);
   animation: ix-dialog-fade-in 0.2s ease forwards;
 }
