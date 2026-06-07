@@ -1,8 +1,8 @@
 # @mindfiredigital/ignix-lite-mcp
 
-An agent-optimized, Model Context Protocol (MCP) server for **Ignix-Lite**—the browser-native, classless, accessible CSS component library.
+An agent-optimized, Model Context Protocol (MCP) server for **Ignix-Lite**-the browser-native, classless, accessible CSS component library.
 
-This MCP server equips AI coding agents (such as Cursor, Claude Desktop, Copilot, and Windsurf) with the runtime capabilities to discover, construct, validate, theme, and visually audit Ignix-Lite markup.
+This MCP server equips AI coding agents with the runtime capabilities to discover, construct, validate, theme, and visually audit Ignix-Lite markup.
 
 ---
 
@@ -38,7 +38,7 @@ npx @mindfiredigital/ignix-lite-mcp
 
 Add the server to your editor or client settings.
 
-### Claude Desktop / Cursor / Windsurf
+### Claude Desktop / Antigravity
 
 Add this configuration to your local MCP settings file (e.g., `claude_desktop_config.json`):
 
