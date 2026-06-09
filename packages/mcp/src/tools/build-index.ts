@@ -1,4 +1,5 @@
 import { readdirSync, readFileSync, writeFileSync } from 'fs'
+
 import { embedText } from './embedder.js'
 
 type Example = {
@@ -7,25 +8,12 @@ type Example = {
   html?: string
 }
 
-interface Manifest {
-  component?: string
-  description?: string
-  element?: string
-  emmet?: string
-  states?: string[]
-  do?: string[]
-  dont?: string[]
-  examples?: Example[]
-}
-
 const files = readdirSync('src/manifests')
 
 const index = files
   .filter((file) => file.endsWith('.json'))
   .map((file) => {
-    const manifest: Manifest = JSON.parse(
-      readFileSync(`src/manifests/${file}`, 'utf8')
-    )
+    const manifest = JSON.parse(readFileSync(`src/manifests/${file}`, 'utf8'))
 
     const searchable = [
       manifest.component ?? '',

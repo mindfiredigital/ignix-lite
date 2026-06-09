@@ -49,7 +49,9 @@ export function validate(html: string): MCPResponse {
     'tr',
     'td',
     'th',
-    'summary'
+    'summary',
+    'strong',
+    'code',
   ]
 
   const nativeAttributes = new Set([
@@ -143,6 +145,21 @@ export function validate(html: string): MCPResponse {
     // card
     if (tag === 'article' && el.querySelector('[slot]')) {
       manifestKey = 'card'
+    }
+
+    // aside -> alert
+    if (tag === 'aside') {
+      manifestKey = 'alert'
+    }
+
+    // details -> accordion
+    if (tag === 'details') {
+      manifestKey = 'accordion'
+    }
+
+    // hr -> divider
+    if (tag === 'hr') {
+      manifestKey = 'divider'
     }
 
     let manifest = manifests[manifestKey]

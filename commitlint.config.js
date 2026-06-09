@@ -19,7 +19,8 @@ export default {
         'release',
         'deps',
         'test',
-        'stories'
+        'stories',
+        'cli'
       ],
     ],
     'scope-empty': [2, 'never'],

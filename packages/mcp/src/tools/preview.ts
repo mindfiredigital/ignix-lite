@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import puppeteer from 'puppeteer'
+import { chromium, webkit } from 'playwright'
 import { readFileSync, existsSync } from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -25,7 +25,7 @@ export async function preview(args: PreviewArgs): Promise<MCPResponse> {
   const { input, options = {} } = args
   const { width = 400, scale = 2, theme } = options
 
-  // Sanitize width and scale to prevent Chromium emulation protocol crashes on non-positive values
+  // Sanitize width and scale to prevent emulation protocol crashes on non-positive values
   const sanitizedWidth = typeof width === 'number' && width > 0 ? width : 400
   const sanitizedScale = typeof scale === 'number' && scale > 0 ? scale : 2
 
@@ -77,31 +77,31 @@ export async function preview(args: PreviewArgs): Promise<MCPResponse> {
 
   let browser
   try {
-    browser = await puppeteer.launch({
-      headless: true,
-      args: ['--no-sandbox', '--disable-setuid-sandbox']
-    })
-    const page = await browser.newPage()
-    await page.setJavaScriptEnabled(false)
-    await page.setRequestInterception(true)
-    page.on('request', (req) => {
-      const url = req.url()
-      if (url.startsWith('data:') || url === 'about:blank') {
-        req.continue()
-      } else {
-        req.abort()
-      }
+    browser = await webkit.launch({
+      headless: true
     })
 
-    if (theme === 'dark' || theme === 'light') {
-      await page.emulateMediaFeatures([
-        { name: 'prefers-color-scheme', value: theme }
-      ])
-    }
-    await page.setViewport({
-      width: sanitizedWidth,
-      height: 600,
-      deviceScaleFactor: sanitizedScale
+    const context = await browser.newContext({
+      javaScriptEnabled: false,
+      viewport: {
+        width: sanitizedWidth,
+        height: 600
+      },
+      deviceScaleFactor: sanitizedScale,
+      colorScheme: (theme === 'dark' || theme === 'light') ? theme : undefined
+    })
+
+    const page = await context.newPage()
+
+    // Route interception (SSRF Mitigation & Sandbox Hardening)
+    // Only allow data URIs and about:blank. Block all outgoing HTTP/HTTPS traffic.
+    await page.route('**/*', (route) => {
+      const url = route.request().url()
+      if (url.startsWith('data:') || url === 'about:blank') {
+        route.continue()
+      } else {
+        route.abort()
+      }
     })
 
     // Set page content with Ignix-Lite styles injected
@@ -138,19 +138,15 @@ export async function preview(args: PreviewArgs): Promise<MCPResponse> {
     await page.setContent(pageContent, { waitUntil: 'load' })
 
     // Take screenshot of container
-    const container = await page.$('#preview-container')
+    const container = page.locator('#preview-container')
     let base64Png = ''
-    if (container) {
-      try {
-        base64Png = (await container.screenshot({
-          encoding: 'base64'
-        })) as string
-      } catch (error) {
-        // Fallback to taking a full page screenshot if container has 0 size or fails
-        base64Png = (await page.screenshot({ encoding: 'base64' })) as string
-      }
-    } else {
-      base64Png = (await page.screenshot({ encoding: 'base64' })) as string
+    try {
+      const buffer = await container.screenshot()
+      base64Png = buffer.toString('base64')
+    } catch (error) {
+      // Fallback to taking a full page screenshot if container has 0 size or fails
+      const buffer = await page.screenshot()
+      base64Png = buffer.toString('base64')
     }
 
     const duration = Date.now() - start

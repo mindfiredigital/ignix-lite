@@ -11,7 +11,6 @@ import {
 import type { IntentEntry } from '../utils/intent-parser.js'
 import type { MCPResponse } from '../types.js'
 
-// ─── Layer 1: api-full.txt INTENTS lookup ───────────────────────────────────
 
 type IntentMatch = {
   name: string
@@ -113,7 +112,6 @@ function searchIntentTable(description: string): IntentMatch | null {
   return bestSingle
 }
 
-// ─── Layer 2: vector-index fallback ─────────────────────────────────────────
 
 function searchVectorLayer(description: string): IntentMatch | null {
   const results = searchIndex(description)
@@ -127,7 +125,6 @@ function searchVectorLayer(description: string): IntentMatch | null {
   }
 }
 
-// ─── Public: howToBuild ──────────────────────────────────────────────────────
 
 export async function howToBuild(description: string): Promise<MCPResponse> {
   let cleanDesc = description.trim()
@@ -144,10 +141,10 @@ export async function howToBuild(description: string): Promise<MCPResponse> {
     }
   }
 
-  // Layer 1 — fast, deterministic, hand-crafted intent table
+  // Layer 1 - fast, deterministic, hand-crafted intent table
   let match = searchIntentTable(cleanDesc)
 
-  // Layer 2 — vector index fallback for novel / unknown queries
+  // Layer 2 - vector index fallback for novel / unknown queries
   if (!match) {
     match = searchVectorLayer(cleanDesc)
   }
