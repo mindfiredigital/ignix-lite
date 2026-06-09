@@ -59,11 +59,11 @@ export function ShowcaseSection() {
   const strength = getPasswordStrength(password)
 
   const alertMessages: Record<Intent, string> = {
-    primary: 'Ignix Lite alerts are lightweight, semantic, and inherit variables.',
-    success: 'Success! Your layout modifications have been successfully compiled.',
-    warning: 'Caution: Bundle exceeds 4KB limit. Check framework imports.',
-    danger: 'Error: Connection to MCP tool server failed. Retrying...',
-    neutral: 'Information: Standard system logs are writing to local console.'
+    primary: '  Ignix Lite alerts are lightweight, semantic, and inherit variables.',
+    success: '  Success! Your layout modifications have been successfully compiled.',
+    warning: '  Caution: Bundle exceeds 4KB limit. Check framework imports.',
+    danger: '  Error: Connection to MCP tool server failed. Retrying...',
+    neutral: '  Information: Standard system logs are writing to local console.'
   }
 
   return (

@@ -595,3 +595,66 @@ html[data-theme='dark'] .header--github-link::before {
 .change-color:hover {
   text-decoration: none;
 }
+
+.markdown table,
+.theme-doc-markdown table {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  word-wrap: break-word;
+}
+
+.markdown table th,
+.markdown table td,
+.theme-doc-markdown table th,
+.theme-doc-markdown table td {
+  word-break: break-word;
+  white-space: normal;
+  vertical-align: top;
+}
+
+/* 3-column tables (Attribute / Property / Slot | Type / Default | Description) */
+.markdown table th:first-child:nth-last-child(3),
+.markdown table td:first-child:nth-last-child(3),
+.theme-doc-markdown table th:first-child:nth-last-child(3),
+.theme-doc-markdown table td:first-child:nth-last-child(3) {
+  width: 25%;
+}
+
+.markdown table th:first-child:nth-last-child(3)+th,
+.markdown table td:first-child:nth-last-child(3)+td,
+.theme-doc-markdown table th:first-child:nth-last-child(3)+th,
+.theme-doc-markdown table td:first-child:nth-last-child(3)+td {
+  width: 30%;
+}
+
+.markdown table th:first-child:nth-last-child(3)+th+th,
+.markdown table td:first-child:nth-last-child(3)+td+td,
+.theme-doc-markdown table th:first-child:nth-last-child(3)+th+th,
+.theme-doc-markdown table td:first-child:nth-last-child(3)+td+td {
+  width: 45%;
+}
+
+.markdown table th:first-child:nth-last-child(2),
+.markdown table td:first-child:nth-last-child(2),
+.theme-doc-markdown table th:first-child:nth-last-child(2),
+.theme-doc-markdown table td:first-child:nth-last-child(2) {
+  width: 30%;
+}
+
+.markdown table th:first-child:nth-last-child(2)+th,
+.markdown table td:first-child:nth-last-child(2)+td,
+.theme-doc-markdown table th:first-child:nth-last-child(2)+th,
+.theme-doc-markdown table td:first-child:nth-last-child(2)+td {
+  width: 70%;
+}
+
+.preview-container table {
+  table-layout: auto;
+}
+
+.preview-container table th,
+.preview-container table td {
+  width: auto;
+  word-break: normal;
+}

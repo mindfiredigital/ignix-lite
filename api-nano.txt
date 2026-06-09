@@ -7,6 +7,7 @@ details>summary+p
 aside[role=alert]
 mark[data-intent]
 article>(slot=avatar|title|body)
+div[data-stack]|div[data-flex]|main[data-center]|div[data-sidebar]|div[data-cluster]|div[data-switcher]|section[data-cover]
 
 WEB:ix-tabs|ix-dropdown|ix-combobox|ix-tooltip|ix-toast
 

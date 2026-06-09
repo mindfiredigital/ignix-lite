@@ -1,0 +1,85 @@
+{
+  "version": "2.0.0",
+  "description": "Ignix-Lite design token catalogue. All tokens are CSS custom properties on :root, prefixed with --ix-.",
+
+  "color": {
+    "--ix-primary":           "Resolved from generate_theme prompt (e.g. #3b82f6 for blue)",
+    "--ix-primary-hover":     "Auto-derived: color-mix(in srgb, var(--ix-primary) 85%, black)",
+    "--ix-primary-contrast":  "Auto-derived contrast (#fff or #000)",
+    "--ix-primary-bg":        "Tinted background: color-mix(in srgb, var(--ix-primary) 15%, white)",
+
+    "--ix-danger":            "#ef4444",
+    "--ix-danger-text":       "#ef4444  (dark: #f87171)",
+    "--ix-danger-bg":         "#fee2e2  (dark: #3f1d1d)",
+
+    "--ix-warning":           "#f59e0b  (dark: #fbbf24)",
+    "--ix-warning-bg":        "#fef3c7  (dark: #3f2e05)",
+
+    "--ix-success":           "#22c55e",
+    "--ix-success-bg":        "#dcfce7  (dark: #052e16)",
+
+    "--ix-info-bg":           "#f3f4f6  (dark: #1e293b)",
+    "--ix-neutral":           "#6b7280  (dark: #9ca3af)",
+    "--ix-ghost":             "transparent",
+
+    "--ix-on-danger":         "#ffffff",
+    "--ix-on-warning":        "#000000",
+    "--ix-on-success":        "#ffffff",
+    "--ix-on-primary":        "Resolved contrast",
+
+    "--ix-divider":           "#9ca3af  (dark: #475569)",
+    "--ix-surface":           "#f9fafb  (dark: #0f172a)",
+    "--ix-surface-raised":    "#ffffff  (dark: #1e293b)",
+
+    "--ix-text":              "#111827  (dark: #f9fafb)",
+    "--ix-text-muted":        "#6b7280  (dark: #94a3b8)",
+    "--ix-border":            "#e5e7eb  (dark: #334155)",
+    "--ix-focus":             "2px solid var(--ix-primary)"
+  },
+
+  "typography": {
+    "--ix-font":       "'Segoe UI Variable', 'Segoe UI', 'Roboto', 'Noto Sans', system-ui, sans-serif",
+    "--ix-font-mono":  "'JetBrains Mono', 'SFMono-Regular', Consolas, monospace",
+
+    "--ix-size-xs":    "0.75rem",
+    "--ix-size-sm":    "0.875rem",
+    "--ix-size-md":    "1rem",
+    "--ix-size-lg":    "1.125rem",
+    "--ix-size-xl":    "1.25rem",
+    "--ix-line-height": "1.5"
+  },
+
+  "spacing": {
+    "--ix-space-sm": "0.5rem",
+    "--ix-space-md": "1rem",
+    "--ix-space-lg": "1.5rem"
+  },
+
+  "shape": {
+    "--ix-radius":       "0.375rem  (sharp: 0px | round/pill/soft: 0.75rem)",
+    "--ix-radius-lg":    "0.5rem    (sharp: 0px | round/pill/soft: 1rem)",
+    "--ix-badge-radius": "999px",
+    "--ix-shadow":       "0 1px 3px rgba(0, 0, 0, 0.1)"
+  },
+
+  "gradient": {
+    "--ix-gradient":    "linear-gradient(to right, <primary>, #fffbd5)",
+    "--ix-gradient-bg": "linear-gradient(to right, <primary>, <gradientBgEnd>)"
+  },
+
+  "skeleton": {
+    "--ix-skeleton-bg":      "#e5e7eb  (dark: #1e293b)",
+    "--ix-skeleton-shimmer": "rgba(255,255,255,0.6)  (dark: rgba(255,255,255,0.1))"
+  },
+
+  "generate_theme_keywords": {
+    "dark_mode":  ["dark", "night", "midnight", "cyberpunk", "dim"],
+    "sharp_mode": ["sharp", "flat", "square"],
+    "round_mode": ["round", "pill", "soft"],
+    "color_names": [
+      "blue", "red", "green", "purple", "orange", "teal", "pink",
+      "indigo", "amber", "cyan", "emerald", "rose", "violet",
+      "sky", "lime", "yellow", "slate", "zinc", "stone", "neutral"
+    ]
+  }
+}

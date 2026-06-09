@@ -149,12 +149,12 @@ ix-dropdown {
   &[data-intent='gradient'] {
     > [slot='trigger'] {
       background: var(--ix-gradient);
-      color: var(--ix-on-text);
+      color: #ffffff;
     }
 
     [slot='menu'] button:hover {
       background: var(--ix-gradient);
-      color: var(--ix-text);
+      color: #ffffff;
     }
   }
   & > [slot='trigger']:focus-visible {
