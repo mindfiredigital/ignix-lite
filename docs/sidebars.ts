@@ -31,7 +31,6 @@ const sidebars = {
         "components/dropdown",
         "components/form",
         "components/grid",
-        "components/layout",
         "components/input",
         "components/meter",
         "components/progress",
