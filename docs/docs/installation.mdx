@@ -1,85 +1,150 @@
 ---
 sidebar_position: 2
+title: Installation
+description: Learn how to install and setup ignix-lite in your project via npm, local package imports, or CDN links.
 ---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
 
 # Installation
 
-Get started with Ignix Lite in a few simple steps.
+Get started with **ignix-lite** in just a few simple steps. 
 
-Ignix Lite is a lightweight semantic UI toolkit built with
-native HTML, CSS variables.
-
----
-
-# Install Package
-
-```bash
-# npm
-npm install @mindfiredigital/ignix-lite
-
-```
+Ignix Lite is a browser-native, zero-dependency semantic UI library designed to work out of the box with native HTML tags, CSS variables, and native web components.
 
 ---
 
+## 1. Install Package
 
-# Basic Usage
+Install the library package locally to your project dependencies:
 
-Use semantic HTML with Ignix Lite styles.
+<Tabs defaultValue="npm">
+  <TabItem value="npm" label="npm">
+    ```bash
+    npm install @mindfiredigital/ignix-lite
+    ```
+  </TabItem>
+  <TabItem value="pnpm" label="pnpm">
+    ```bash
+    pnpm add @mindfiredigital/ignix-lite
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+## 2. Import Stylesheet
+
+To load the semantic design styles, you must import the CSS stylesheet in your project. You can do this by referencing the file from your local `node_modules` folder or via a CDN link.
+
+<Tabs defaultValue="html">
+  
+  <TabItem value="html" label="HTML (Local node_modules)">
+    If you are building a static website, link directly to the file inside `node_modules`:
+    ```html
+    <link rel="stylesheet" href="./node_modules/@mindfiredigital/ignix-lite/dist/ignix-lite.min.css" />
+    ```
+  </TabItem>
+  <TabItem value="cdn" label="CDN Link">
+    Include the global stylesheet directly in your HTML `<head>` tag:
+    ```html
+    <link rel="stylesheet" href="https://unpkg.com/@mindfiredigital/ignix-lite/dist/ignix-lite.min.css" />
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+## 3. Import JavaScript (Required for Interaction)
+
+Some components rely on lightweight, native web components or event listeners to handle interactive behavior (such as toggling menus, sorting tables, or displaying toast notifications).
+
+:::important
+The JavaScript library file (`ignix-lite.min.js`) is required **only** if you are using any of the following interactive components:
+- **Table** (sorting & filtering)
+- **Dropdown** (menu toggle & overlay click)
+- **Combobox** (filtering list options)
+- **Toast** (notification spawning & automatic dismissal)
+- **Tooltip** (hover-popover layout alignment)
+- **Tabs** (switching tab panels)
+:::
+
+You can import the JavaScript bundle using one of the following methods:
+
+<Tabs defaultValue="html">
+  <TabItem value="html" label="HTML (Local node_modules)">
+    Add the script to your HTML (preferably at the bottom of the `<body>` or using the `defer` attribute):
+    ```html
+    <script src="./node_modules/@mindfiredigital/ignix-lite/dist/ignix-lite.min.js" defer></script>
+    ```
+  </TabItem>
+  <TabItem value="cdn" label="CDN Link">
+    Include the script directly in your HTML `<head>` or `<body>`:
+    ```html
+    <script src="https://unpkg.com/@mindfiredigital/ignix-lite/dist/ignix-lite.min.js" defer></script>
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+## Basic HTML Template
+
+Here is a full basic template for static HTML projects using local `node_modules` dependencies:
 
 ```html
-<button data-intent="primary">
-  Primary Button
-</button>
-
-<button data-intent="danger">
-  Delete
-</button>
-
-<input
-  type="text"
-  placeholder="Enter text"
-/>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ignix Lite Application</title>
+  
+  <!-- 1. Link Stylesheet from node_modules -->
+  <link rel="stylesheet" href="./node_modules/@mindfiredigital/ignix-lite/dist/ignix-lite.min.css" />
+  
+  <!-- 2. Defer JavaScript for interactive components (dropdown, toast, tabs, etc.) -->
+  <script src="./node_modules/@mindfiredigital/ignix-lite/dist/ignix-lite.min.js" defer></script>
+</head>
+<body>
+  <h1>My First App</h1>
+  <button data-intent="primary">Get Started</button>
+  <p>Start styling your application using classless semantic markup!</p>
+</body>
+</html>
 ```
 
 ---
 
-# Features
+## Next Steps
 
-- Lightweight bundle size
-- Semantic HTML first
-- CSS variable powered
-- Accessible components
-- Dark mode support
-- Minimal setup
-- Tiny runtime overhead
-
----
-
-# Next Steps
-
-Explore available components:
+Explore the individual component guidelines to see examples, markup structures, and supported attributes:
 
 - [Accordion](/docs/components/accordion)
+- [Alert](/docs/components/alert)
+- [Avatar](/docs/components/avatar)
 - [Badge](/docs/components/badge)
+- [Breadcrumb](/docs/components/breadcrumb)
 - [Button](/docs/components/button)
 - [Card](/docs/components/card)
 - [Checkbox](/docs/components/checkbox)
+- [Code Block](/docs/components/codeblock)
+- [Combobox](/docs/components/combobox)
 - [Dialog](/docs/components/dialog)
+- [Divider](/docs/components/divider)
 - [Dropdown](/docs/components/dropdown)
+- [Form](/docs/components/form)
+- [Grid](/docs/components/grid)
 - [Input](/docs/components/input)
+- [Meter](/docs/components/meter)
+- [Navigation](/docs/components/navigation)
 - [Progress](/docs/components/progress)
 - [Radio](/docs/components/radio)
 - [Select](/docs/components/select)
 - [Skeleton](/docs/components/skeleton)
-- [Table](/docs/components/table)
 - [Tabs](/docs/components/tab)
+- [Table](/docs/components/table)
 - [Textarea](/docs/components/textarea)
 - [Toast](/docs/components/toast)
 - [Tooltip](/docs/components/tooltip)
-
----
-
-# Documentation
-
-Visit the full documentation to explore examples,
-styling options and component APIs.

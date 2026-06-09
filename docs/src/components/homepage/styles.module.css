@@ -232,7 +232,9 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  display: block;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  display: inline-block;
   min-height: 1.2em;
   animation: shimmerGradient 5s linear infinite;
 }
@@ -471,7 +473,7 @@
   flex-direction: column;
   align-items: center;
   gap: 0.3rem;
-  padding: 1.5rem 2.5rem;
+  padding: 1.5rem 1.5rem;
   position: relative;
   transition: background var(--transition);
 }
@@ -503,6 +505,7 @@
   color: var(--muted);
   text-transform: uppercase;
   letter-spacing: 0.08em;
+  white-space: nowrap;
 }
 
 .sectionHeading {

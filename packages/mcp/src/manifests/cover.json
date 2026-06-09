@@ -1,0 +1,70 @@
+{
+  "component": "cover",
+  "version": "2.0",
+  "description": "Full-height section that centers content vertically and horizontally. Use for hero sections, landing pages, empty states, and splash screens.",
+
+  "element": "section",
+
+  "emmet": "section[data-cover]>(h1{Hero Title}+p{Subtitle})",
+
+  "props": {
+    "data-cover": {
+      "type": "string",
+      "values": ["screen", "contained"],
+      "default": "screen",
+      "agent_hint": "screen=min-height:100svh (full viewport), contained=min-height:100% (fills parent)."
+    },
+    "data-padding": {
+      "type": "string",
+      "values": ["sm", "md", "lg", "xl"],
+      "default": "lg",
+      "agent_hint": "Controls padding inside the cover section."
+    }
+  },
+
+  "states": [],
+
+  "slots": {
+    "content": {
+      "required": false,
+      "element": ["h1", "p", "div", "section", "form", "button"],
+      "agent_hint": "Content to be centered within the cover. Typically a heading + CTA."
+    }
+  },
+
+  "child_props": {},
+
+  "forbidden_props": ["class"],
+
+  "required_props": ["data-cover"],
+
+  "required_slots": [],
+
+  "required_wrapper": null,
+
+  "do": [
+    "Use section or header as the cover element",
+    "Use for hero sections, 404 pages, empty states",
+    "Stack content inside with data-stack for headline + subtitle + CTA",
+    "Combine with data-center for a width-capped hero"
+  ],
+
+  "dont": [
+    "Do not use class attribute",
+    "Do not manually set min-height or flex properties via inline styles",
+    "Do not put large amounts of scrollable content inside — cover is for focus areas"
+  ],
+
+  "examples": [
+    {
+      "label": "Full-page hero",
+      "emmet": "section[data-cover]>(h1{Welcome})+(p{Subtitle})+(button[data-intent=primary]{Get Started})",
+      "html": "<section data-cover><h1>Welcome</h1><p>Subtitle</p><button data-intent=\"primary\">Get Started</button></section>"
+    },
+    {
+      "label": "Empty state panel",
+      "emmet": "section[data-cover=contained]>(h2{No results})+(p{Try adjusting your search})+(button[data-intent=ghost]{Clear})",
+      "html": "<section data-cover=\"contained\"><h2>No results</h2><p>Try adjusting your search</p><button data-intent=\"ghost\">Clear</button></section>"
+    }
+  ]
+}

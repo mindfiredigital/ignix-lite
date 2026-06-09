@@ -6,8 +6,8 @@ export function FeatureSection() {
     <section className={styles.featureSection}>
       <div className={styles.container}>
         <div className={styles.sectionHeading}>
-          <h2>Why Choose <span className={styles.gradientText}>Ignix Lite</span></h2>
-          <p>Built for developers who want simplicity, performance and flexibility.</p>
+          <h2>Why Choose <span className={styles.gradientText}>Ignix Lite ?</span></h2>
+          <p>Built for agents and developers who want simplicity, performance and flexibility.</p>
         </div>
         <div className={styles.featureGrid}>
           {[

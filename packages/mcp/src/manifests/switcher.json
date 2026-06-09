@@ -1,0 +1,74 @@
+{
+  "component": "switcher",
+  "version": "2.0",
+  "description": "Responsive layout that places children side-by-side above a width threshold and stacks them vertically below it. No media query breakpoints needed — layout switches based on container width intrinsically.",
+
+  "element": "div",
+
+  "emmet": "div[data-switcher][data-threshold=md]>div*2",
+
+  "props": {
+    "data-switcher": {
+      "type": "boolean",
+      "agent_hint": "Activates the switcher layout. Bare attribute."
+    },
+    "data-threshold": {
+      "type": "string",
+      "values": ["sm", "md", "lg"],
+      "default": "md",
+      "agent_hint": "The min-width of each child before they stack: sm=192px, md=320px, lg=480px."
+    },
+    "data-gap": {
+      "type": "string",
+      "values": ["xs", "sm", "md", "lg", "xl"],
+      "default": "md",
+      "agent_hint": "Controls gap between children."
+    }
+  },
+
+  "states": [],
+
+  "slots": {
+    "item": {
+      "required": false,
+      "element": ["div", "section", "article", "aside"],
+      "agent_hint": "Block children that will switch between horizontal and vertical layout."
+    }
+  },
+
+  "child_props": {},
+
+  "forbidden_props": ["class"],
+
+  "required_props": ["data-switcher"],
+
+  "required_slots": [],
+
+  "required_wrapper": null,
+
+  "do": [
+    "Use for feature comparison blocks, step-by-step sections",
+    "Use data-threshold=sm for tighter side-by-side content",
+    "Use data-threshold=lg for content that needs more width before going side-by-side",
+    "Let items grow equally to fill space"
+  ],
+
+  "dont": [
+    "Do not use class attribute",
+    "Do not rely on viewport media queries — this is container-intrinsic",
+    "Do not mix items of very different heights without data-align"
+  ],
+
+  "examples": [
+    {
+      "label": "Two equal panels",
+      "emmet": "div[data-switcher]>(section{Panel A})+(section{Panel B})",
+      "html": "<div data-switcher><section>Panel A</section><section>Panel B</section></div>"
+    },
+    {
+      "label": "Three feature blocks",
+      "emmet": "div[data-switcher][data-threshold=sm][data-gap=lg]>article*3",
+      "html": "<div data-switcher data-threshold=\"sm\" data-gap=\"lg\"><article>Feature 1</article><article>Feature 2</article><article>Feature 3</article></div>"
+    }
+  ]
+}
