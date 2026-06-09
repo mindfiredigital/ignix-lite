@@ -12,8 +12,14 @@ aside[data-intent] {
   font-size: var(--ix-size-sm);
   line-height: var(--ix-line-height);
 
-  & + aside[data-intent] {
+  &+aside[data-intent] {
     margin-top: var(--ix-space-md);
+  }
+
+  &[data-intent='primary'] {
+    background: var(--ix-primary-bg);
+    border-color: var(--ix-primary);
+    color: var(--ix-text);
   }
 
   &[data-intent='danger'] {
