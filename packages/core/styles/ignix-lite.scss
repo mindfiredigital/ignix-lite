@@ -103,8 +103,8 @@ html {
   --ix-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
   /* Gradient */
-  --ix-gradient: linear-gradient(to right, #b20a2c, #fffbd5);
-  --ix-gradient-bg: linear-gradient(to right, #e32d51, #d7d4bc);
+  --ix-gradient: linear-gradient(135deg, oklch(0.577 0.245 27.325) 0%, oklch(0.66 0.23 38) 50%, oklch(0.72 0.20 52) 100%);
+  --ix-gradient-bg: linear-gradient(135deg, oklch(0.577 0.245 27.325) 0%, oklch(0.67 0.22 42) 100%);
 
   --ix-skeleton-bg: #e5e7eb;
   --ix-skeleton-shimmer: rgba(255, 255, 255, 0.6);
@@ -136,7 +136,7 @@ html {
     --ix-success-bg: #052e16;
     --ix-info-bg: #1e293b;
 
-    --ix-gradient-bg: linear-gradient(to right, #e32d51, #aba67a);
+    --ix-gradient-bg: linear-gradient(135deg, oklch(0.53 0.23 27.325) 0%, oklch(0.62 0.21 40) 100%);
 
     --ix-skeleton-bg: #1e293b;
     --ix-skeleton-shimmer: rgba(255, 255, 255, 0.1);

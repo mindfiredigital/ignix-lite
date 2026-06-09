@@ -117,6 +117,12 @@ function HeroSection() {
             <strong>A11y</strong>
             <span>Accessible</span>
           </div>
+
+          <div className={styles.statItem}>
+            <strong>Agent First</strong>
+            <span>MCP Powered</span>
+          </div>
+
         </div>
 
         <div className={styles.buttons}>
@@ -145,7 +151,7 @@ function HeroSection() {
         </div>
 
       </div>
-    </section>
+    </section >
   )
 }
 

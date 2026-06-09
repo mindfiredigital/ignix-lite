@@ -135,17 +135,16 @@ ix-toast {
     border-left: 3px solid var(--ix-border);
   }
 
-    > aside[data-intent="gradient"] {
-
-    border-left: 3px solid var(--ix-gradient);
+    > aside[data-intent='gradient'] {
+    border: 1px solid #ffffff;
+    border-left: 3px solid #ffffff;
  
-    background: var(--ix-gradient-bg);
-
+     background: var(--ix-gradient-bg);
   
-    strong, span {
-      color: var(--ix-text);
-    }
-  }
+     strong, span {
+       color: #ffffff;
+     }
+   }
 
  
   > aside[data-variant="slide"] {

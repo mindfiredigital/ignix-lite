@@ -41,7 +41,7 @@ ix-toast {
     top: auto;
   }
 
-  > aside {
+  >aside {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -89,7 +89,7 @@ ix-toast {
     }
   }
 
-  > aside[data-variant='action'] button {
+  >aside[data-variant='action'] button {
     display: inline-flex;
 
     align-self: flex-end;
@@ -111,55 +111,56 @@ ix-toast {
     }
   }
 
-  > aside[data-intent='primary'] {
+  >aside[data-intent='primary'] {
     border-left: 3px solid var(--ix-primary);
     background: var(--ix-primary-bg);
   }
 
-  > aside[data-intent='success'] {
+  >aside[data-intent='success'] {
     border-left: 3px solid var(--ix-success);
     background: var(--ix-success-bg);
   }
 
-  > aside[data-intent='warning'] {
+  >aside[data-intent='warning'] {
     border-left: 3px solid var(--ix-warning);
     background: var(--ix-warning-bg);
   }
 
-  > aside[data-intent='danger'] {
+  >aside[data-intent='danger'] {
     border-left: 3px solid var(--ix-danger);
     background: var(--ix-danger-bg);
   }
 
-  > aside[data-intent='neutral'] {
+  >aside[data-intent='neutral'] {
     border-left: 3px solid var(--ix-border);
   }
 
-  > aside[data-intent='gradient'] {
-    border-left: 3px solid var(--ix-gradient);
+  >aside[data-intent='gradient'] {
+    border: 1px solid #ffffff;
+    border-left: 3px solid #ffffff;
 
     background: var(--ix-gradient-bg);
 
     strong,
     span {
-      color: var(--ix-text);
+      color: #ffffff;
     }
   }
 
   /* variants */
-  > aside[data-variant='slide'] {
+  >aside[data-variant='slide'] {
     transform: translateX(16px);
   }
 
-  > aside[data-variant='slide'][data-open='true'] {
+  >aside[data-variant='slide'][data-open='true'] {
     transform: translateX(0);
   }
 
-  > aside[data-variant='pop'] {
+  >aside[data-variant='pop'] {
     transform: scale(0.92);
   }
 
-  > aside[data-variant='pop'][data-open='true'] {
+  >aside[data-variant='pop'][data-open='true'] {
     transform: scale(1);
   }
 }

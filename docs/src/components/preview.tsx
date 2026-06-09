@@ -1,7 +1,8 @@
 import React from "react"
-export default function Preview({ children }: { children: React.ReactNode }) {
+export default function Preview({ children, style }: { children: React.ReactNode, style?: React.CSSProperties }) {
   return (
     <div
+      className="preview-container"
       style={{
         border: "1px solid var(--ifm-color-emphasis-300)",
         borderRadius: "12px",
@@ -15,7 +16,9 @@ export default function Preview({ children }: { children: React.ReactNode }) {
           display: "flex",
           gap: "12px",
           alignItems: "center",
-          flexWrap: "wrap"
+          flexWrap: "wrap",
+          width: "100%",
+          ...style
         }}
       >
         {children}
