@@ -1,6 +1,6 @@
-<!-- ─────────────────────────────────────────────────────────────────────────
+<!-- 
   Ignix-Lite v2.0 Component HTML Template
-  ──────────────────────────────────────────────────────────────────────────
+  
   This template shows the canonical structure for a complete Ignix-Lite page.
 
   RULES (enforced by the `validate` MCP tool):
@@ -16,8 +16,7 @@
 
   NATIVE ELEMENTS (preferred):
     button  input  select  textarea  dialog  details  progress  meter
-    form  nav  table  hr  mark  span[role=status]
-─────────────────────────────────────────────────────────────────────────── -->
+    form  nav  table  hr  mark  span[role=status]  -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -92,23 +91,19 @@
 
 <body>
 
-  <!-- ── Navigation ──────────────────────────────────────────────────────── -->
   <nav data-intent="topbar" aria-label="Main navigation">
     <a href="/" aria-current="page">Home</a>
     <a href="/about">About</a>
     <a href="/contact">Contact</a>
   </nav>
 
-  <!-- ── Main Content ────────────────────────────────────────────────────── -->
   <main>
 
-    <!-- ── Alerts ────────────────────────────────────────────────────────── -->
     <aside data-intent="info">Informational message</aside>
     <aside data-intent="success">Operation completed successfully.</aside>
     <aside data-intent="warning">Please review before proceeding.</aside>
     <aside data-intent="danger">Something went wrong.</aside>
 
-    <!-- ── Buttons ───────────────────────────────────────────────────────── -->
     <button data-intent="primary">Save</button>
     <button data-intent="danger">Delete</button>
     <button data-intent="warning">Archive</button>
@@ -122,7 +117,6 @@
     <!-- Loading state (native attr) -->
     <button data-intent="primary" aria-busy="true">Saving...</button>
 
-    <!-- ── Form ──────────────────────────────────────────────────────────── -->
     <form data-intent="default">
       <label>
         Email
@@ -163,7 +157,6 @@
       <button data-intent="ghost" type="reset">Reset</button>
     </form>
 
-    <!-- ── Card ──────────────────────────────────────────────────────────── -->
     <article data-intent="default">
       <header slot="header">
         <h2>Card Title</h2>
@@ -175,7 +168,6 @@
       </footer>
     </article>
 
-    <!-- ── Dialog ────────────────────────────────────────────────────────── -->
     <dialog data-intent="danger">
       <h2>Confirm Deletion</h2>
       <p>This action is permanent and cannot be undone.</p>
@@ -183,7 +175,7 @@
       <button data-intent="ghost">Cancel</button>
     </dialog>
 
-    <!-- ── Dropdown (native disclosure) ─────────────────────────────────── -->
+    
     <details data-intent="menu">
       <summary>Options</summary>
       <ul>
@@ -192,13 +184,13 @@
       </ul>
     </details>
 
-    <!-- ── Accordion ─────────────────────────────────────────────────────── -->
+    
     <details data-intent="default">
       <summary>Section Title</summary>
       <p>Accordion content here.</p>
     </details>
 
-    <!-- ── Tabs ──────────────────────────────────────────────────────────── -->
+   
     <ix-tab>
       <button slot="tab" aria-selected="true">Tab One</button>
       <button slot="tab">Tab Two</button>
@@ -206,42 +198,34 @@
       <div slot="panel">Content for tab two.</div>
     </ix-tab>
 
-    <!-- ── Badge / Mark ──────────────────────────────────────────────────── -->
     <!-- Inline highlight -->
     <p>Status: <mark data-intent="success">Active</mark></p>
     <!-- Chip badge -->
     <span role="status" data-intent="danger">3 Errors</span>
 
-    <!-- ── Avatar ────────────────────────────────────────────────────────── -->
     <ix-avatar data-intent="image" data-shape="circle">
       <img src="{{AVATAR_URL}}" alt="User avatar">
     </ix-avatar>
     <ix-avatar data-intent="initials" data-shape="circle">JD</ix-avatar>
 
-    <!-- ── Progress ──────────────────────────────────────────────────────── -->
     <progress value="60" max="100" data-intent="default"></progress>
     <progress value="100" max="100" data-intent="success"></progress>
     <progress value="20" max="100" data-intent="danger"></progress>
 
-    <!-- ── Meter ─────────────────────────────────────────────────────────── -->
     <meter value="0.7" min="0" max="1" low="0.25" high="0.75" optimum="1"></meter>
 
-    <!-- ── Skeleton ──────────────────────────────────────────────────────── -->
     <ix-skeleton data-variant="card"></ix-skeleton>
     <ix-skeleton data-variant="text"></ix-skeleton>
 
-    <!-- ── Tooltip ───────────────────────────────────────────────────────── -->
     <ix-tooltip data-position="top">
       <button data-intent="neutral" slot="trigger">Hover me</button>
       <span slot="content">Helpful tooltip text</span>
     </ix-tooltip>
 
-    <!-- ── Toast ─────────────────────────────────────────────────────────── -->
     <ix-toast data-intent="success" aria-live="polite">
       Changes saved successfully.
     </ix-toast>
 
-    <!-- ── Grid ──────────────────────────────────────────────────────────── -->
     <div data-grid="3" data-gap="md" data-align="stretch">
       <article data-intent="default">
         <p slot="body">Grid item 1</p>
@@ -254,7 +238,6 @@
       </article>
     </div>
 
-    <!-- ── Table ─────────────────────────────────────────────────────────── -->
     <!-- Wrap in <section> for responsive horizontal scroll (section:has(table)) -->
     <section>
       <table is="ix-table">
@@ -281,7 +264,6 @@
       </table>
     </section>
 
-    <!-- ── Breadcrumb ────────────────────────────────────────────────────── -->
     <nav aria-label="Breadcrumb">
       <ol>
         <li><a href="/">Home</a></li>
@@ -290,10 +272,10 @@
       </ol>
     </nav>
 
-    <!-- ── Divider ───────────────────────────────────────────────────────── -->
+    
     <hr data-intent="horizontal">
 
-    <!-- ── Code Block ────────────────────────────────────────────────────── -->
+    
     <ix-codeblock>
       <code slot="code">const x = 42</code>
     </ix-codeblock>
