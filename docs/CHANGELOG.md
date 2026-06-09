@@ -1,5 +1,12 @@
 # docs
 
+## 0.0.5
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @mindfiredigital/ignix-lite@1.2.3
+
 ## 0.0.4
 
 ### Patch Changes
