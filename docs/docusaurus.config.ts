@@ -9,7 +9,7 @@ const config: Config = {
 
 
   url: 'https://mindfiredigital.github.io',
-  baseUrl: '/ignix-lite/', 
+  baseUrl: '/ignix-lite/',
 
 
   organizationName: 'mindfiredigital',

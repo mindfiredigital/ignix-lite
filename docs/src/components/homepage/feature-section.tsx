@@ -11,9 +11,10 @@ export function FeatureSection() {
         </div>
         <div className={styles.featureGrid}>
           {[
-            { icon: '⚡', title: 'Tiny Bundle Size',   desc: 'Lightweight architecture with minimal runtime overhead. Ships only what you use - nothing more.' },
-            { icon: '🧩', title: 'Framework Agnostic', desc: 'Works with React, js or plain HTML. No lock-in, ever.' },
-            { icon: '🎨', title: 'CSS First',          desc: 'Semantic components powered entirely through CSS variables. Style once, use everywhere.' },
+            { icon: '⚡', title: 'Tiny Bundle Size', desc: 'Under 4KB gzipped. Zero external dependencies. Ships only the absolute minimum runtime overhead.' },
+            { icon: '🧩', title: 'Framework Agnostic', desc: 'Deploy seamlessly on React, Vue, Svelte, or vanilla HTML. No lock-in or compiler restrictions.' },
+            { icon: '🎨', title: 'CSS-First Architecture', desc: 'Semantic layout properties powered entirely by CSS custom variables. Style once, inherit everywhere.' },
+            { icon: '🤖', title: 'AI-Native Workflow', desc: 'Built-in Model Context Protocol (MCP) server integration lets AI agents theme, build, and audit your code.' },
           ].map(f => (
             <div key={f.title} className={styles.featureCard}>
               <div className={styles.featureIcon}>{f.icon}</div>

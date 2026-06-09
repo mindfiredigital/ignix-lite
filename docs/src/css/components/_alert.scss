@@ -16,6 +16,12 @@ aside[data-intent] {
     margin-top: var(--ix-space-md);
   }
 
+  &[data-intent='primary'] {
+    background: var(--ix-primary-bg);
+    border-color: var(--ix-primary);
+    color: var(--ix-text);
+  }
+
   &[data-intent='danger'] {
     background: var(--ix-danger-bg);
     border-color: var(--ix-danger);

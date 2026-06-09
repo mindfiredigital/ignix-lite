@@ -41,3 +41,48 @@ meter::-moz-meter-bar {
   background: var(--ix-primary);
   border-radius: 999px;
 }
+
+meter[data-intent='primary']::-webkit-meter-optimum-value,
+meter[data-intent='primary']::-webkit-meter-suboptimum-value,
+meter[data-intent='primary']::-webkit-meter-even-less-good-value {
+  background: var(--ix-primary);
+}
+meter[data-intent='primary']::-moz-meter-bar {
+  background: var(--ix-primary);
+}
+
+meter[data-intent='success']::-webkit-meter-optimum-value,
+meter[data-intent='success']::-webkit-meter-suboptimum-value,
+meter[data-intent='success']::-webkit-meter-even-less-good-value {
+  background: var(--ix-success);
+}
+meter[data-intent='success']::-moz-meter-bar {
+  background: var(--ix-success);
+}
+
+meter[data-intent='warning']::-webkit-meter-optimum-value,
+meter[data-intent='warning']::-webkit-meter-suboptimum-value,
+meter[data-intent='warning']::-webkit-meter-even-less-good-value {
+  background: var(--ix-warning);
+}
+meter[data-intent='warning']::-moz-meter-bar {
+  background: var(--ix-warning);
+}
+
+meter[data-intent='danger']::-webkit-meter-optimum-value,
+meter[data-intent='danger']::-webkit-meter-suboptimum-value,
+meter[data-intent='danger']::-webkit-meter-even-less-good-value {
+  background: var(--ix-danger);
+}
+meter[data-intent='danger']::-moz-meter-bar {
+  background: var(--ix-danger);
+}
+
+meter[data-intent='neutral']::-webkit-meter-optimum-value,
+meter[data-intent='neutral']::-webkit-meter-suboptimum-value,
+meter[data-intent='neutral']::-webkit-meter-even-less-good-value {
+  background: var(--ix-neutral);
+}
+meter[data-intent='neutral']::-moz-meter-bar {
+  background: var(--ix-neutral);
+}
