@@ -1,5 +1,11 @@
 # @mindfiredigital/ignix-lite
 
+## 1.2.2
+
+### Patch Changes
+
+- documentation update
+
 ## 1.2.1
 
 ### Patch Changes
