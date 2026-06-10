@@ -29,7 +29,7 @@ console.log(
 )
 
 // Valid scopes for release
-const validScopes = ['core', 'react', 'vue', 'svelte', 'mcp']
+const validScopes = ['core', 'react', 'vue', 'svelte', 'mcp', 'engine', 'cli']
 
 // Regex patterns (with ! support)
 const commitPatterns = {
@@ -43,7 +43,7 @@ const isBreaking =
   commitMessage.includes('BREAKING CHANGE')
 
 // Identify type, package, and description
-let packageScope = null
+let matchedScopesStr = null
 let changeType = null
 let description = null
 
@@ -58,10 +58,9 @@ if (isBreaking) {
       /^fix\(([^)]+)\)!?: (.+)/
     )
 
-  if (match && validScopes.includes(match[1])) {
-
+  if (match) {
+    matchedScopesStr = match[1]
     changeType = 'major'
-    packageScope = match[1]
     description = match[2]
   }
 }
@@ -74,12 +73,9 @@ else if (
   const match =
     commitMessage.match(commitPatterns.minor)
 
-  if (validScopes.includes(match[1])) {
-
-    changeType = 'minor'
-    packageScope = match[1]
-    description = match[2]
-  }
+  matchedScopesStr = match[1]
+  changeType = 'minor'
+  description = match[2]
 }
 
 // PATCH
@@ -90,18 +86,22 @@ else if (
   const match =
     commitMessage.match(commitPatterns.patch)
 
-  if (validScopes.includes(match[1])) {
-
-    changeType = 'patch'
-    packageScope = match[1]
-    description = match[2]
-  }
+  matchedScopesStr = match[1]
+  changeType = 'patch'
+  description = match[2]
 }
 
 // Generate changeset
-if (packageScope) {
+if (matchedScopesStr) {
 
-  packageScope = packageScope.trim()
+  const rawScopes = matchedScopesStr.split(',').map(s => s.trim())
+  const scopes = rawScopes.filter(s => validScopes.includes(s))
+
+  if (scopes.length === 0) {
+    console.log('No valid scopes matched')
+    process.exit(0)
+  }
+
   description =
     description?.trim() || 'No description provided.'
 
@@ -112,18 +112,16 @@ if (packageScope) {
     vue: '@mindfiredigital/ignix-lite-vue',
     svelte: '@mindfiredigital/ignix-lite-svelte',
     mcp: '@mindfiredigital/ignix-lite-mcp',
+    engine: '@mindfiredigital/ignix-lite-engine',
+    cli: '@mindfiredigital/ignix-lite-cli',
   }
 
-  const packageName = scopeToPackage[packageScope]
-
-  if (!packageName) {
-
-    console.log('Invalid package mapping')
-    process.exit(0)
-  }
+  const frontmatter = scopes
+    .map(scope => `'${scopeToPackage[scope]}': ${changeType}`)
+    .join('\n')
 
   const changesetContent = `---
-'${packageName}': ${changeType}
+${frontmatter}
 ---
 ${description}
 `
@@ -134,7 +132,7 @@ ${description}
   )
 
   console.log(
-    `Changeset created → ${packageName} (${changeType})`
+    `Changeset created for: ${scopes.join(', ')} (${changeType})`
   )
 
 } else {

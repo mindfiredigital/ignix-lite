@@ -1,26 +1,7 @@
 import { readFileSync, existsSync } from 'fs'
 import path from 'path'
-import { parse } from 'node-html-parser'
 import pc from 'picocolors'
-
-// Reuse the pre-written rules from packages/mcp/src/utils/a11y-rules
-import {
-  checkImages,
-  checkFormLabels,
-  checkEmptyLabels,
-  checkButtons,
-  checkLinks,
-  checkAriaStates,
-  checkDuplicateIds,
-  checkTabIndex,
-  checkHeadings,
-  checkTables,
-  checkDialogs,
-  checkRoles,
-  checkAutocomplete,
-  checkFocusStyle,
-  checkLang
-} from '../../../mcp/src/utils/a11y-rules.js'
+import { auditA11y } from '@mindfiredigital/ignix-lite-engine'
 
 export async function checkA11yCommand(filePath: string) {
   const absolutePath = path.resolve(process.cwd(), filePath)
@@ -31,46 +12,48 @@ export async function checkA11yCommand(filePath: string) {
   }
 
   const html = readFileSync(absolutePath, 'utf8')
-  const root = parse(html)
+  const result = auditA11y(html)
 
-  const results = [
-    checkImages(root),
-    checkFormLabels(root),
-    checkEmptyLabels(root),
-    checkButtons(root),
-    checkLinks(root),
-    checkAriaStates(root),
-    checkDuplicateIds(root),
-    checkTabIndex(root),
-    checkHeadings(root),
-    checkTables(root),
-    checkDialogs(root),
-    checkRoles(root),
-    checkAutocomplete(root),
-    checkFocusStyle(root),
-    checkLang(root)
-  ]
+  console.log(pc.bold(pc.cyan(`\n♿ Accessibility Audit Report`)))
+  console.log(pc.gray('═'.repeat(60)))
+  console.log(`${pc.bold('File:')}       ${pc.blue(filePath)}`)
+  console.log(`${pc.bold('Standards:')}  WCAG 2.2 ${pc.bold(result.wcag)}`)
+  console.log(
+    `${pc.bold('Summary:')}    Passed ${result.passes.length} rules, Found ${result.issues.length} issue(s)`
+  )
 
-  const issues = results.flatMap((r) => r.issues)
-  const passes = results.filter((r) => r.issues.length === 0).map((r) => r.ruleName)
-  const errors = issues.filter((i) => i.type === 'error')
-  const warnings = issues.filter((i) => i.type === 'warning')
-  const score = Math.max(0, 100 - errors.length * 10 - warnings.length * 3)
-
-  console.log(pc.cyan(`\nAccessibility Report for: ${filePath}`))
-  console.log(pc.cyan(`======================================`))
-  console.log(`Score: ${score}/100 (WCAG 2.2 AA)`)
-  console.log(`Passes: ${passes.length} rules, Issues: ${issues.length}\n`)
-
-  if (issues.length === 0) {
-    console.log(pc.green(`✔ No accessibility issues found!`))
+  if (result.issues.length === 0) {
+    console.log(
+      pc.bold(
+        pc.green(`\n✔ PASS: No accessibility issues found! Score: 100/100`)
+      )
+    )
   } else {
-    issues.forEach((issue) => {
-      const color = issue.type === 'error' ? pc.red : pc.yellow
-      console.log(color(`[${issue.type.toUpperCase()}] ${issue.rule}`))
-      console.log(`  Message: ${issue.message}`)
-      console.log(`  Element: ${issue.element}`)
-      if (issue.fix) console.log(pc.green(`  Fix: ${issue.fix}`))
+    console.log(
+      pc.bold(
+        pc.red(
+          `\n✘ FAIL: Accessibility check failed. Score: ${result.score}/100\n`
+        )
+      )
+    )
+
+    result.issues.forEach((issue, idx) => {
+      const isError = issue.type === 'error'
+      const labelColor = isError ? pc.red : pc.yellow
+      const borderChar = isError ? '✘' : '⚠'
+
+      console.log(
+        pc.bold(
+          labelColor(
+            `[Issue ${idx + 1}] ${borderChar} ${issue.rule} (${issue.type.toUpperCase()})`
+          )
+        )
+      )
+      console.log(`  ${pc.bold('Element:')} ${issue.element}`)
+      console.log(`  ${pc.bold('Message:')} ${issue.message}`)
+      if (issue.fix) {
+        console.log(`  ${pc.bold('Fix:')}     ${pc.green(issue.fix)}`)
+      }
       console.log()
     })
   }

@@ -1,61 +1,89 @@
 import fs from 'fs'
+import path from 'path'
 import pc from 'picocolors'
 import ora from 'ora'
+import { resolveTokens, buildCss } from '@mindfiredigital/ignix-lite-engine'
 
-function generateThemeVars(primaryHex: string): string {
+export async function themeCommand(
+  prompt?: string,
+  options: { primary?: string; styleFile?: string } = {}
+) {
+  const spinner = ora('Generating theme tokens...').start()
 
-    const hex = primaryHex.startsWith('#') ? primaryHex : `#${primaryHex}`
+  let stylePath = options.styleFile
 
-    return `/* Ignix-Lite Custom Theme Variables */
-
-    :root {
-        --ix-primary: ${hex};
-        --ix-primary-hover: ${hex}d0;
-        --ix-primary-contrast: #ffffff;
-        --ix-primary-bg: ${hex}1a;
-    }`
-}
-
-export async function themeCommand(options: { primary?: string }) {
-    const primaryColor = options.primary
-    if (!primaryColor) {
-        console.log(pc.yellow('Please provide a primary color , e.g.: igix-lite theme -p #10b981'))
-        return
-    }
-
-    const spinner = ora('Generating theme....').start()
-
+  if (!stylePath) {
     const configPath = 'ignix.config.json'
     if (!fs.existsSync(configPath)) {
-        spinner.fail(pc.red('ignix.config.json not found. Run "ignix-lite init" first.'))
-        return
+      spinner.fail(
+        pc.red(
+          'ignix.config.json not found. Run "ignix-lite init" first or specify --style-file.'
+        )
+      )
+      return
     }
 
-    const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'))
-    const stylePath = config.style
-    if (!stylePath) {
-        spinner.fail(pc.red('Style path no configured in ignix-config.json.'))
-        return
+    try {
+      const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'))
+      stylePath = config.style
+    } catch {
+      spinner.fail(pc.red('Failed to read ignix.config.json.'))
+      return
+    }
+  }
+
+  if (!stylePath) {
+    spinner.fail(
+      pc.red('Style path not configured. Specify -s or --style-file option.')
+    )
+    return
+  }
+
+  const queryParts = [prompt || '', options.primary || ''].filter(Boolean)
+  const query = queryParts.join(' ').trim()
+
+  if (!query) {
+    spinner.fail(
+      pc.yellow(
+        'Please provide a prompt or primary color, e.g.: ignix-lite theme "dark round blue"'
+      )
+    )
+    return
+  }
+
+  try {
+    const tokens = resolveTokens(query)
+    const cssBlock = buildCss(tokens)
+
+    const absoluteStylePath = path.resolve(process.cwd(), stylePath)
+    const cssDir = path.dirname(absoluteStylePath)
+
+    if (!fs.existsSync(cssDir)) {
+      fs.mkdirSync(cssDir, { recursive: true })
     }
 
-    const themeVars = generateThemeVars(primaryColor)
-    if (fs.existsSync(stylePath)) {
-        let content = fs.readFileSync(stylePath, 'utf-8')
+    const themeRegex =
+      /\/\* Ignix-Lite Custom Theme Variables \*\/[\s\S]*?\}\n?/
 
-        const themeRegex = /\/\* Ignix-Lite Custom Theme Variables \*\/[\s\S]*?\}\n/
-
-        if (themeRegex.test(content)) {
-            content = content.replace(themeRegex, themeVars)
-        }
-        else {
-            content = themeVars + '\n' + content
-        }
-        fs.writeFileSync(stylePath, content)
-    }
-    else {
-        fs.writeFileSync(stylePath, themeVars)
+    if (fs.existsSync(absoluteStylePath)) {
+      let content = fs.readFileSync(absoluteStylePath, 'utf-8')
+      if (themeRegex.test(content)) {
+        content = content.replace(themeRegex, cssBlock + '\n')
+      } else {
+        content = cssBlock + '\n\n' + content
+      }
+      fs.writeFileSync(absoluteStylePath, content)
+    } else {
+      fs.writeFileSync(absoluteStylePath, cssBlock)
     }
 
-    spinner.succeed(pc.green(`Theme successfully updated in ${pc.blue(stylePath)}`))
-
+    spinner.succeed(
+      pc.green(`Theme successfully updated in ${pc.blue(stylePath)}`)
+    )
+    console.log(pc.gray(`Resolved primary color: ${tokens.resolvedPrimary}`))
+    console.log(pc.gray(`Mode: ${tokens.isDark ? 'Dark' : 'Light'}\n`))
+  } catch (error) {
+    const msg = error instanceof Error ? error.message : String(error)
+    spinner.fail(pc.red(`Failed to generate theme: ${msg}`))
+  }
 }
