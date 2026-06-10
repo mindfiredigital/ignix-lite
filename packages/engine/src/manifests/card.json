@@ -1,0 +1,91 @@
+{
+  "component": "card",
+  "version": "2.0",
+  "description": "Displays structured content using semantic slots for avatar, title, metadata, body, actions, and footer. Renders as native article element.",
+
+  "element": "article",
+
+  "emmet": "article>(img[slot=avatar])+(span[slot=title])+(p[slot=body])",
+  
+
+  "props": {},
+
+  "states": [],
+
+  "slots": {
+    "avatar": {
+      "required": false,
+
+      "element": ["img", "span"],
+
+      "agent_hint": "Avatar image or visual content."
+    },
+
+    "title": {
+      "required": true,
+
+      "element": ["span", "h1", "h2", "h3"],
+
+      "agent_hint": "Primary card heading."
+    },
+
+    "meta": {
+      "required": false,
+
+      "element": ["span", "small"],
+
+      "agent_hint": "Subtitle or metadata."
+    },
+
+    "body": {
+      "required": true,
+
+      "element": ["p"],
+
+      "agent_hint": "Main content area."
+    },
+
+    "action": {
+      "required": false,
+
+      "element": ["button", "a"],
+
+      "agent_hint": "Primary action area."
+    },
+
+    "footer": {
+      "required": false,
+
+      "element": ["span", "small"],
+
+      "agent_hint": "Footer metadata."
+    }
+  },
+
+  "forbidden_props": [
+    "title",
+    "subtitle",
+    "avatar",
+    "image",
+    "body",
+    "footer",
+    "actionLabel",
+    "class"
+  ],
+
+  "required_props": [],
+
+  "required_slots": ["title", "body"],
+
+  "do": [
+    "Use slot attributes for content placement",
+    "Use article as card container",
+    "Place actions inside slot='action'"
+  ],
+
+  "dont": [
+    "Do not pass title or body as props",
+    "Do not replace slots with attributes",
+    "Do not use class attribute"
+  ]
+}

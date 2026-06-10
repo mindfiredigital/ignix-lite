@@ -1,0 +1,87 @@
+{
+  "component": "breadcrumb",
+  "version": "2.0",
+  "description": "Displays hierarchical navigation path using native nav > ol > li > a structure.",
+
+  "element": "nav",
+
+  "emmet": "nav[aria-label=Breadcrumb]>ol>(li>a[href=?])*3",
+
+  "props": {
+    "data-style": {
+      "type": "enum",
+
+      "values": ["chevron", "slash", "guillemet", "arrow", "thread", "pipe"],
+
+      "default": "chevron",
+      "native": false,
+      "agent_hint": "Controls breadcrumb separator style."
+    },
+
+    "data-intent": {
+      "type": "enum",
+
+      "values": ["primary", "success", "warning", "danger", "gradient"],
+
+      "default": "primary",
+      "native": false,
+      "agent_hint": "Controls active breadcrumb color intent."
+    },
+
+    "aria-label": {
+      "type": "string",
+      "native": true,
+      "required": true,
+      "agent_hint": "Use aria-label='Breadcrumb' for accessibility."
+    }
+  },
+
+  "states": [],
+  "slots": {},
+
+  "forbidden_props": [
+    "variant",
+    "color",
+    "appearance",
+    "separator",
+    "items",
+    "activeItem",
+    "class"
+  ],
+
+  "required_props": ["aria-label"],
+
+  "required_slots": [],
+
+  "do": [
+    "Use nav as breadcrumb container",
+    "Use ordered list structure",
+    "Mark current page using aria-current='page'"
+  ],
+
+  "dont": [
+    "Do not use class attribute",
+    "Do not replace nav with div",
+    "Do not pass breadcrumb items as props"
+  ],
+
+  "examples": [
+    {
+      "label": "Default breadcrumb",
+      "emmet": "nav[aria-label=Breadcrumb]>ol>(li>a[href=?])*3",
+      "html": "<nav aria-label=\"Breadcrumb\"><ol><li><a href=\"#\">Home</a></li><li><a href=\"#\">Docs</a></li><li><a aria-current=\"page\">Breadcrumb</a></li></ol></nav>"
+    },
+
+    {
+      "label": "Slash style",
+      "emmet": "nav[aria-label=Breadcrumb data-style=slash]>ol>(li>a[href=?])*3",
+      "html": "<nav aria-label=\"Breadcrumb\" data-style=\"slash\"></nav>"
+    },
+
+    {
+      "label": "Danger intent",
+      "emmet": "nav[aria-label=Breadcrumb data-intent=danger]>ol>(li>a[href=?])*3",
+      "html": "<nav aria-label=\"Breadcrumb\" data-intent=\"danger\"></nav>"
+    }
+  ]
+}
