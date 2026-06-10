@@ -20,7 +20,8 @@ export default {
         'deps',
         'test',
         'stories',
-        'cli'
+        'cli',
+        'engine'
       ],
     ],
     'scope-empty': [2, 'never'],

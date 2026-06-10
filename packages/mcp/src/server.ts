@@ -6,17 +6,21 @@ import {
 } from '@modelcontextprotocol/sdk/types.js'
 
 import type { MCPResponse } from './types.js'
-import { listComponents } from './tools/list-components.js'
-import { getManifest } from './tools/get-manifests.js'
-import { getEmmet } from './tools/get-emmet.js'
-import { validate } from './tools/validator.js'
-import { howToBuild } from './tools/intent-engine.js'
 import { apiContext } from './context/api-context.js'
-import { generateTheme } from './tools/generate-theme.js'
-import { checkA11y } from './tools/check-a11y.js'
-import { preview } from './tools/preview.js'
-import { getTokenSummary, recordCall } from './tools/token-counter.js'
-import { createHandoff, applyHandoff } from './tools/handoff.js'
+import {
+  listComponents,
+  getManifest,
+  getEmmet,
+  validateHtml,
+  howToBuild,
+  generateTheme,
+  auditA11y,
+  preview,
+  getTokenSummary,
+  recordCall,
+  createHandoff,
+  applyHandoff
+} from '@mindfiredigital/ignix-lite-engine'
 
 type ValidateArgs = {
   html?: string
@@ -268,7 +272,18 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
     case 'validate': {
       const validateArgs = args as ValidateArgs
-      response = validate(validateArgs.html ?? '')
+      const result = validateHtml(validateArgs.html ?? '')
+      response = {
+        content: [
+          {
+            type: 'text',
+            text: JSON.stringify({
+              ...result,
+              tokens_used: 50
+            })
+          }
+        ]
+      }
       break
     }
 
@@ -284,7 +299,18 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
     case 'check_a11y': {
       const a11yArgs = args as A11yArgs
-      response = checkA11y(a11yArgs.html ?? '')
+      const result = auditA11y(a11yArgs.html ?? '')
+      response = {
+        content: [
+          {
+            type: 'text',
+            text: JSON.stringify({
+              ...result,
+              tokens_used: Math.min(60, 20 + result.issues.length * 3)
+            })
+          }
+        ]
+      }
       break
     }
 
