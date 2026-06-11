@@ -307,7 +307,7 @@ Created by `ignix-lite init`. Most commands read this file automatically.
 
 ```json
 {
-  "framework": "react",
+  "framework": "vanilla",
   "style": "src/index.css",
   "theme": {
     "primary": "#6366f1"
