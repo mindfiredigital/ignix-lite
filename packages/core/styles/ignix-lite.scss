@@ -38,10 +38,9 @@ html {
 }
 
 :root {
-  /* INTENT COLORS */
-  --ix-primary: #6366f1;
-  --ix-primary-hover: #4f46e5;
-  --ix-primary-contrast: #e0e7ff;
+  --ix-primary: oklch(0.577 0.245 27.325);
+  --ix-primary-hover: oklch(0.51 0.23 27.325);
+  --ix-primary-contrast: #ffffff;
 
   --ix-danger: #ef4444;
   --ix-danger-text: #ef4444;
@@ -51,7 +50,7 @@ html {
   --ix-neutral: #6b7280;
   --ix-ghost: transparent;
 
-  --ix-primary-bg: #c7d2fe;
+  --ix-primary-bg: oklch(0.96 0.02 27.325);
   --ix-danger-bg: #fee2e2;
   --ix-warning-bg: #fef3c7;
   --ix-success-bg: #dcfce7;
@@ -104,8 +103,8 @@ html {
   --ix-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
   /* Gradient */
-  --ix-gradient: linear-gradient(to right, #b20a2c, #fffbd5);
-  --ix-gradient-bg: linear-gradient(to right, #e32d51, #d7d4bc);
+  --ix-gradient: linear-gradient(135deg, oklch(0.577 0.245 27.325) 0%, oklch(0.66 0.23 38) 50%, oklch(0.72 0.20 52) 100%);
+  --ix-gradient-bg: linear-gradient(135deg, oklch(0.577 0.245 27.325) 0%, oklch(0.67 0.22 42) 100%);
 
   --ix-skeleton-bg: #e5e7eb;
   --ix-skeleton-shimmer: rgba(255, 255, 255, 0.6);
@@ -121,8 +120,8 @@ html {
 
     --ix-border: #334155;
 
-    --ix-primary: hsl(234, 89%, 74%);
-    --ix-primary-hover: #6366f1;
+    --ix-primary: oklch(0.62 0.24 27.325);
+    --ix-primary-hover: oklch(0.577 0.245 27.325);
 
     --ix-danger: #ef4444;
     --ix-danger-text: #f87171;
@@ -131,13 +130,13 @@ html {
     --ix-success: #22c55e;
     --ix-neutral: #9ca3af;
 
-    --ix-primary-bg: #1e1b4b;
+    --ix-primary-bg: oklch(0.18 0.05 27.325);
     --ix-danger-bg: #3f1d1d;
     --ix-warning-bg: #3f2e05;
     --ix-success-bg: #052e16;
     --ix-info-bg: #1e293b;
 
-    --ix-gradient-bg: linear-gradient(to right, #e32d51, #aba67a);
+    --ix-gradient-bg: linear-gradient(135deg, oklch(0.53 0.23 27.325) 0%, oklch(0.62 0.21 40) 100%);
 
     --ix-skeleton-bg: #1e293b;
     --ix-skeleton-shimmer: rgba(255, 255, 255, 0.1);
