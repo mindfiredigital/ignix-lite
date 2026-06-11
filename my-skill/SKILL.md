@@ -369,7 +369,7 @@ Patches an existing handoff snapshot with partial component changes.
 
 ## 12. Typical AI Workflow
 
-```
+```javascript
 1. how_to_build({ description: "a danger confirmation dialog" })
    → emmet, html, components_used, confidence
 

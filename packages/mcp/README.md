@@ -41,12 +41,12 @@ ignix-lite mcp setup cursor        # Cursor editor
 
 The CLI writes directly to your editor's config file. After running:
 
-| Client | Next Step |
-|--------|-----------|
-| `claude` / `claude-desktop` | Restart Claude Desktop |
-| `claude-code` | Open any project with `claude` |
-| `gemini` | Start a new `gemini` session |
-| `cursor` | Reload Cursor (`Ctrl+Shift+P` → Reload Window) |
+| Client                      | Next Step                                      |
+| --------------------------- | ---------------------------------------------- |
+| `claude` / `claude-desktop` | Restart Claude Desktop                         |
+| `claude-code`               | Open any project with `claude`                 |
+| `gemini`                    | Start a new `gemini` session                   |
+| `cursor`                    | Reload Cursor (`Ctrl+Shift+P` → Reload Window) |
 
 **Or start the server manually** (for testing or custom integrations):
 

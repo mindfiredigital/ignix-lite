@@ -17,7 +17,7 @@ const COMPONENT_TEMPLATES: Record<string, string> = {
                         <li><a href="/docs" aria-current="page">Docs</a></li>
                     </ol>
                 </nav>`,
-  button: `<button data-inten="primary">Save</button>`,
+  button: `<button data-intent="primary">Save</button>`,
   card: `<article>
             <h2 slot="title">Card Title</h2>
             <p slot="body">
@@ -58,7 +58,7 @@ const COMPONENT_TEMPLATES: Record<string, string> = {
                 Name
                 <input type="text" required />
             </label>
-            <button type="submot" data-intent="primary">Submit</button>
+            <button type="submit" data-intent="primary">Submit</button>
             </form>`,
   grid: `<section data-grid="3">
             <section>Column 1</section>
@@ -135,7 +135,7 @@ export async function addCommand(component: string) {
 
     console.log(
       pc.yellow(
-        `Available compoents : ${Object.keys(COMPONENT_TEMPLATES).join(', ')}`
+        `Available components : ${Object.keys(COMPONENT_TEMPLATES).join(', ')}`
       )
     )
     return

@@ -32,7 +32,13 @@ export async function initCommand() {
       type: 'text',
       name: 'primaryColor',
       message: 'Default primary theme color (hex):',
-      initial: '#6366f1'
+      initial: '#6366f1',
+      validate: (value: string) => {
+        const hexRegex = /^#([A-Fa-f0-9]{3}|[A-Fa-f0-9]{6})$/
+        return hexRegex.test(value)
+          ? true
+          : 'Please enter a valid hex color code (e.g. #6366f1 or #fff)'
+      }
     }
   ])
 

@@ -17,7 +17,7 @@
 - **Audit** your markup for WCAG 2.2 accessibility issues
 - **Theme** your project by describing the look you want
 - **Preview** any HTML/Emmet file as a rendered PNG image
-- **Connect** your editor (Claude, Cursor, VS Code) to the Ignix-Lite MCP server
+- **Connect** your editor (Claude Desktop, Claude Code, Gemini CLI, Cursor) to the Ignix-Lite MCP server
 
 ---
 

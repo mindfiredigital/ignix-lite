@@ -218,7 +218,10 @@ export function validateHtml(html: string): { valid: boolean, score: number, err
             })
         }
 
-        if (Object.keys(attrs).length > 4) {
+        const nonFreeAttrs = Object.keys(attrs).filter(
+            (key) => key !== 'id' && key !== 'role' && !key.startsWith('aria-')
+        )
+        if (nonFreeAttrs.length > 4) {
             errors.push({
                 element: tag,
                 prop: 'multiple',

@@ -20,7 +20,9 @@ export async function validateCommand(filePath: string) {
 
   if (result.valid) {
     console.log(
-      pc.bold(pc.green(`\n✔ PASS: All checks passed! Score: 100/100`))
+      pc.bold(
+        pc.green(`\n✔ PASS: All checks passed! Score: ${result.score ?? 100}/100`)
+      )
     )
   } else {
     console.log(

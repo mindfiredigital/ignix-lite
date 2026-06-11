@@ -38,10 +38,26 @@ export async function previewCommand(
       return
     }
 
-    const result = JSON.parse(response.content[0].text)
+    let result: {
+      error?: string
+      png?: string
+    }
+    try {
+      result = JSON.parse(response.content[0].text)
+    } catch {
+      spinner.fail(pc.red('Render failed: Invalid JSON response from preview engine.'))
+      return
+    }
 
     if (result.error) {
       spinner.fail(pc.red(`Render failed: ${result.error}`))
+      return
+    }
+
+    if (!result.png || typeof result.png !== 'string') {
+      spinner.fail(
+        pc.red('Render failed: Preview engine did not return base64 PNG data.')
+      )
       return
     }
 

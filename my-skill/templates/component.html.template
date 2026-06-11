@@ -203,10 +203,8 @@
     <!-- Chip badge -->
     <span role="status" data-intent="danger">3 Errors</span>
 
-    <ix-avatar data-intent="image" data-shape="circle">
-      <img src="{{AVATAR_URL}}" alt="User avatar">
-    </ix-avatar>
-    <ix-avatar data-intent="initials" data-shape="circle">JD</ix-avatar>
+    <img src="{{AVATAR_URL}}" alt="User avatar" data-size="md">
+    <span data-size="md">JD</span>
 
     <progress value="60" max="100" data-intent="default"></progress>
     <progress value="100" max="100" data-intent="success"></progress>
@@ -214,8 +212,8 @@
 
     <meter value="0.7" min="0" max="1" low="0.25" high="0.75" optimum="1"></meter>
 
-    <ix-skeleton data-variant="card"></ix-skeleton>
-    <ix-skeleton data-variant="text"></ix-skeleton>
+    <span role="status" aria-busy="true" data-shape="rect"></span>
+    <span role="status" aria-busy="true" data-shape="text"></span>
 
     <ix-tooltip data-position="top">
       <button data-intent="neutral" slot="trigger">Hover me</button>

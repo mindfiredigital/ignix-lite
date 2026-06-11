@@ -56,6 +56,13 @@ export async function themeCommand(
     const cssBlock = buildCss(tokens)
 
     const absoluteStylePath = path.resolve(process.cwd(), stylePath)
+    if (!absoluteStylePath.startsWith(process.cwd())) {
+      spinner.fail(
+        pc.red('Error: Style file path must be within the project workspace.')
+      )
+      return
+    }
+
     const cssDir = path.dirname(absoluteStylePath)
 
     if (!fs.existsSync(cssDir)) {
@@ -63,7 +70,7 @@ export async function themeCommand(
     }
 
     const themeRegex =
-      /\/\* Ignix-Lite Custom Theme Variables \*\/[\s\S]*?\}\n?/
+      /\/\* Ignix-Lite Custom Theme Variables \*\/[\s\S]*?\}\n?/g
 
     if (fs.existsSync(absoluteStylePath)) {
       let content = fs.readFileSync(absoluteStylePath, 'utf-8')

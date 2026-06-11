@@ -79,7 +79,7 @@ const mcp = program
 mcp
   .command('setup [client]')
   .description(
-    'Configure the MCP server for an editor/client (claude, cursor, vscode, windsurf)'
+    'Configure the MCP server for an editor/client (claude, cursor, gemini)'
   )
   .action(mcpSetupCommand)
 

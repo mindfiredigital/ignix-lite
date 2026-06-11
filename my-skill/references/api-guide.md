@@ -286,5 +286,5 @@ Patches an existing handoff snapshot with partial component changes.
 1. **Never** use `class=`, `variant=`, `color=`, `isDisabled=`, `isLoading=` or any React-style prop.
 2. **Always** use native HTML elements (`button`, `input`, `dialog`, `details`, `progress`, `meter`).
 3. **State** is expressed with native attributes: `disabled`, `aria-busy`, `aria-invalid`, `open`, `checked`, `required`, `aria-hidden`, `aria-expanded`, `aria-selected`.
-4. Custom elements (`ix-*`) are used only where no native element exists (e.g. `ix-alert`, `ix-toast`, `ix-avatar`, `ix-tab`, `ix-tooltip`, `ix-skeleton`, `ix-codeblock`, `ix-combobox`).
+4. Custom elements (`ix-*`) are used only where no native element exists (e.g. `ix-tabs`, `ix-dropdown`, `ix-combobox`, `ix-toast`, `ix-tooltip`).
 5. **Never** add inline `style=` for theming — use `generate_theme` to get a `:root` CSS block.

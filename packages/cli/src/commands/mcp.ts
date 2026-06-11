@@ -10,7 +10,8 @@ function resolveMcpServerPath(): string {
     const resolvedUrl = import.meta.resolve('@mindfiredigital/ignix-lite-mcp')
     return fileURLToPath(resolvedUrl)
   } catch {
-    return path.resolve(process.cwd(), 'packages/mcp/dist/server.js')
+    const thisDir = path.dirname(fileURLToPath(import.meta.url))
+    return path.resolve(thisDir, '../../mcp/dist/server.js')
   }
 }
 
@@ -219,6 +220,10 @@ export function mcpStartCommand(): void {
   console.log(`Running: ${pc.green('node ' + serverPath)}\n`)
 
   const child = spawn('node', [serverPath], { stdio: 'inherit' })
+
+  child.on('error', (err) => {
+    console.log(pc.red(`\nFailed to start MCP Server: ${err.message}`))
+  })
 
   child.on('close', (code) => {
     if (code !== 0) {

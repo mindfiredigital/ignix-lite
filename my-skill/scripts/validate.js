@@ -16,6 +16,20 @@ import { fileURLToPath } from 'url'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = resolve(__dirname, '../../')
 
+const REQUIRED_TOOLS = [
+  'list_components',
+  'get_manifest',
+  'get_emmet',
+  'validate',
+  'how_to_build',
+  'generate_theme',
+  'check_a11y',
+  'preview',
+  'get_token_summary',
+  'create_handoff',
+  'apply_handoff'
+]
+
 let failures = 0
 
 function pass(msg) {
@@ -69,7 +83,7 @@ if (tokens) {
 // ─── Check 2: intents.json lists same components as manifests/index.ts ───────
 console.log('\n── Check 2: intents.json vs manifests/index.ts ─────')
 const intents = readJSON('my-skill/assets/intents.json')
-const indexSrc = readText('packages/mcp/src/manifests/index.ts')
+const indexSrc = readText('packages/engine/src/manifests/index.ts')
 
 if (intents && indexSrc) {
   // Extract component names registered in index.ts
@@ -94,24 +108,11 @@ if (intents && indexSrc) {
   }
 }
 
-// ─── Check 3: api-guide.md mentions all 7 tools ──────────────────────────────
+// ─── Check 3: api-guide.md completeness ──────────────────────────────
 console.log('\n── Check 3: api-guide.md completeness ──────────────')
 const guide = readText('my-skill/references/api-guide.md')
 if (guide) {
-  const tools = [
-    'list_components',
-    'get_manifest',
-    'get_emmet',
-    'validate',
-    'how_to_build',
-    'generate_theme',
-    'check_a11y',
-    'preview',
-    'get_token_summary',
-    'create_handoff',
-    'apply_handoff'
-  ]
-  for (const tool of tools) {
+  for (const tool of REQUIRED_TOOLS) {
     if (guide.includes(tool)) {
       pass(`api-guide.md documents: ${tool}`)
     } else {
@@ -120,24 +121,11 @@ if (guide) {
   }
 }
 
-// ─── Check 4: examples.md mentions all 7 tools ───────────────────────────────
+// ─── Check 4: examples.md completeness ───────────────────────────────
 console.log('\n── Check 4: examples.md completeness ───────────────')
 const examples = readText('my-skill/references/examples.md')
 if (examples) {
-  const tools = [
-    'list_components',
-    'get_manifest',
-    'get_emmet',
-    'validate',
-    'how_to_build',
-    'generate_theme',
-    'check_a11y',
-    'preview',
-    'get_token_summary',
-    'create_handoff',
-    'apply_handoff'
-  ]
-  for (const tool of tools) {
+  for (const tool of REQUIRED_TOOLS) {
     if (examples.includes(tool)) {
       pass(`examples.md has example for: ${tool}`)
     } else {
@@ -170,7 +158,7 @@ if (template !== null) {
 
 // ─── Check 7: check-a11y.ts has no hardcoded 0.98/0.75 raw mapping ──────────
 console.log('\n── Check 7: check-a11y.ts uses RULE_CONFIDENCES map ─')
-const a11ySrc = readText('packages/mcp/src/tools/check-a11y.ts')
+const a11ySrc = readText('packages/engine/src/tools/check-a11y.ts')
 if (a11ySrc) {
   if (a11ySrc.includes('RULE_CONFIDENCES')) {
     pass('RULE_CONFIDENCES map is present')
