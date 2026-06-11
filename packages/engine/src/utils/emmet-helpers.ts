@@ -89,64 +89,147 @@ export function extractComponents(emmetStr: string): string[] {
 
 // Customizes standard Emmet shorthand by dynamically replacing text strings and visual intent attributes based on the user prompt description.
 
+function injectAttribute(emmetStr: string, attr: string, value: string): string {
+  if (emmetStr.includes(attr)) return emmetStr
+  const match = emmetStr.match(/^([a-z][a-z0-9-]*)(?:\[([^\]]*)\])?/i)
+  if (!match) return emmetStr
+  const tag = match[1]
+  const attrs = match[2] ? `${attr}=${value} ${match[2]}` : `${attr}=${value}`
+  return emmetStr.replace(/^([a-z][a-z0-9-]*)(?:\[[^\]]*\])?/i, `${tag}[${attrs}]`)
+}
+
 export function interpolateEmmet(
   emmetStr: string,
   description: string
 ): string {
   let result = emmetStr
-
-  // 1. Color/Intent overrides based on keywords in description
   const descLower = description.toLowerCase()
+
+  let intent = 'primary'
   if (/\b(red|danger|delete|remove|destroy)\b/.test(descLower)) {
-    // replace any data-intent of primary/neutral/ghost with danger
-    result = result.replace(
-      /data-intent=(?:primary|neutral|ghost)/g,
-      'data-intent=danger'
-    )
+    intent = 'danger'
   } else if (/\b(green|success|work|done)\b/.test(descLower)) {
-    result = result.replace(
-      /data-intent=(?:primary|neutral|ghost)/g,
-      'data-intent=success'
-    )
+    intent = 'success'
   } else if (/\b(yellow|orange|warning|risky)\b/.test(descLower)) {
+    intent = 'warning'
+  } else if (/\b(ghost|secondary)\b/.test(descLower)) {
+    intent = 'ghost'
+  } else if (/\b(neutral|gray|grey)\b/.test(descLower)) {
+    intent = 'neutral'
+  }
+  result = result.replace(/data-intent=\?/g, `data-intent=${intent}`)
+
+  // Only override data-intent on semantic elements, not wrappers like label
+  const INTENT_ELEMENTS = /^(button|aside|mark|dialog|ix-tooltip|ix-toast)/
+  if (intent !== 'primary') {
     result = result.replace(
-      /data-intent=(?:primary|neutral|ghost)/g,
-      'data-intent=warning'
+      /data-intent=(?:primary|neutral|ghost|success|warning|danger)/g,
+      (match, offset) => {
+        // Walk backwards to find the tag name to avoid injecting on label
+        const before = result.slice(0, offset)
+        const tagMatch = before.match(/([a-z][a-z0-9-]*)\[[^\]]*$/i)
+        if (tagMatch && !INTENT_ELEMENTS.test(tagMatch[1])) {
+          return match // leave unchanged
+        }
+        return `data-intent=${intent}`
+      }
     )
   }
 
-  // 2. Extract quoted strings for label/text overrides
+  let size = 'md'
+  if (/\b(large|lg|big)\b/.test(descLower)) {
+    size = 'lg'
+  } else if (/\b(small|sm|tiny)\b/.test(descLower)) {
+    size = 'sm'
+  }
+  result = result.replace(/data-size=\?/g, `data-size=${size}`)
+
+  let variant = 'solid'
+  if (/\b(outline|ghost|link)\b/.test(descLower)) {
+    variant = 'outline'
+  }
+  result = result.replace(/data-variant=\?/g, `data-variant=${variant}`)
+
+  // Recognize shape keywords: rectangular → rect, circle/round → circle
+  if (/\b(rect|rectangular|rectangle)\b/.test(descLower)) {
+    result = result.replace(/data-shape=(?:text|circle|\?)/g, 'data-shape=rect')
+  } else if (/\b(circle|round|circular)\b/.test(descLower)) {
+    result = result.replace(/data-shape=(?:text|rect|\?)/g, 'data-shape=circle')
+  }
+
+  if (/\b(loading|spinner|busy)\b/.test(descLower)) {
+    result = injectAttribute(result, 'aria-busy', 'true')
+  }
+  if (/\b(disabled|inactive)\b/.test(descLower)) {
+    result = injectAttribute(result, 'disabled', 'true')
+  }
+
   const matches = [...description.matchAll(/['"]([^'"]+)['"]/g)]
   const quotedStrings = matches
     .map((m) => m[1].trim())
     .filter((s) => s.length > 0)
 
   if (quotedStrings.length > 0) {
+    let quoteIndex = 0
+
+    result = result.replace(/content(=\?|=""|=''|(?=[\]\s]|$))/g, () => {
+      if (quoteIndex < quotedStrings.length) {
+        return `content="${quotedStrings[quoteIndex++]}"`
+      }
+      return 'content=""'
+    })
+
+    result = result.replace(/title(=\?|=""|=''|(?=[\]\s]|$))/g, () => {
+      if (quoteIndex < quotedStrings.length) {
+        return `title="${quotedStrings[quoteIndex++]}"`
+      }
+      return 'title=""'
+    })
+
+    result = result.replace(/label(=\?|=""|=''|(?=[\]\s]|$))/g, () => {
+      if (quoteIndex < quotedStrings.length) {
+        return `label="${quotedStrings[quoteIndex++]}"`
+      }
+      return 'label=""'
+    })
+
     const hasButtonMention = /\b(button|says|labeled|action|click)\b/i.test(
       description
     )
 
-
+    // Don't replace button labels when the only quoted string was already consumed as content=
+    const remainingQuotes = quotedStrings.slice(quoteIndex)
+    // Also skip if the emmet already has a populated content= attribute (e.g. from tooltip template)
+    // — in that case the quoted string belongs to content, not the button label
+    const hasPopulatedContent = /content="[^"]+"/i.test(result)
     const shouldReplaceButton =
-      quotedStrings.length >= 2 ||
-      (quotedStrings.length === 1 && hasButtonMention)
+      !hasPopulatedContent &&
+      (remainingQuotes.length >= 2 ||
+        (remainingQuotes.length === 1 && hasButtonMention))
 
     if (shouldReplaceButton) {
       const buttonRegex = /(button[^}]*)\{([^}]+)\}/g
       const buttonMatches = [...result.matchAll(buttonRegex)]
 
       if (buttonMatches.length > 0) {
-        const buttonLabel = quotedStrings[quotedStrings.length - 1]
+        const buttonLabel = remainingQuotes[remainingQuotes.length - 1]
         result = result.replace(buttonRegex, (match, p1) => {
           return `${p1}{${buttonLabel}}`
         })
-        quotedStrings.pop()
       }
     }
 
-    // Replace label text in order with the remaining quoted strings
+
+
+    const textPlaceholderRegex = /\{(label|message|title|text)\}/gi
+    result = result.replace(textPlaceholderRegex, (match) => {
+      if (quoteIndex < quotedStrings.length) {
+        return `{${quotedStrings[quoteIndex++]}}`
+      }
+      return match
+    })
+
     const labelRegex = /label\{([^}]+)\}/g
-    let quoteIndex = 0
     result = result.replace(labelRegex, (match) => {
       if (quoteIndex < quotedStrings.length) {
         return `label{${quotedStrings[quoteIndex++]}}`
@@ -154,11 +237,47 @@ export function interpolateEmmet(
       return match
     })
 
-    // Auto-adapt input type: if label contains "username", change type=email to type=text
     if (/label\{username\}/i.test(result)) {
       result = result.replace(/type=email/g, 'type=text')
     }
+  } else {
+    const labelMap: Record<string, string> = {
+      delete: 'Delete',
+      remove: 'Remove',
+      destroy: 'Destroy',
+      danger: 'Delete',
+      save: 'Save',
+      submit: 'Submit',
+      cancel: 'Cancel',
+      confirm: 'Confirm',
+      search: 'Search',
+      download: 'Download',
+      upload: 'Upload',
+      edit: 'Edit',
+      add: 'Add',
+      create: 'Create',
+      update: 'Update'
+    }
+    let extractedLabel = ''
+    for (const [key, val] of Object.entries(labelMap)) {
+      if (descLower.includes(key)) {
+        extractedLabel = val
+        break
+      }
+    }
+    if (!extractedLabel) {
+      const components = extractComponents(emmetStr)
+      if (components.length > 0) {
+        extractedLabel = components[0].charAt(0).toUpperCase() + components[0].slice(1)
+      } else {
+        extractedLabel = 'Button'
+      }
+    }
+    result = result.replace(/\{(label|Label|message|Message|title|Title|text|Text)\}/g, `{${extractedLabel}}`)
   }
+
+  result = result.replace(/alt=\?/g, 'alt="User"')
+  result = result.replace(/src=\?/g, 'src="?"')
 
   return result
 }
