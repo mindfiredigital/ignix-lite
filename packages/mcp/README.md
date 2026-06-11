@@ -20,37 +20,38 @@ This MCP server equips AI coding agents with the runtime capabilities to discove
 
 ## 📦 Installation
 
-To run the MCP server locally or configure it in your editor:
-
 ```bash
-npm install -g @mindfiredigital/ignix-lite-mcp
+npm install -g @mindfiredigital/ignix-lite-cli
 ```
 
-Or run it directly using `npx`:
-
-```bash
-npx @mindfiredigital/ignix-lite-mcp
-```
+> The MCP server is bundled with the CLI. You do **not** need to install the MCP package separately.
 
 ---
 
-## ⚙️ Configuration
+## ⚙️ Configuration — Zero Manual Steps
 
-Add the server to your editor or client settings.
+Use the CLI to auto-configure your editor in one command:
 
-### Claude Desktop / Antigravity
+```bash
+ignix-lite mcp setup claude        # Claude Desktop
+ignix-lite mcp setup claude-code   # Claude Code CLI
+ignix-lite mcp setup gemini        # Gemini CLI
+ignix-lite mcp setup cursor        # Cursor editor
+```
 
-Add this configuration to your local MCP settings file (e.g., `claude_desktop_config.json`):
+The CLI writes directly to your editor's config file. After running:
 
-```json
-{
-  "mcpServers": {
-    "ignix-lite": {
-      "command": "npx",
-      "args": ["-y", "@mindfiredigital/ignix-lite-mcp"]
-    }
-  }
-}
+| Client | Next Step |
+|--------|-----------|
+| `claude` / `claude-desktop` | Restart Claude Desktop |
+| `claude-code` | Open any project with `claude` |
+| `gemini` | Start a new `gemini` session |
+| `cursor` | Reload Cursor (`Ctrl+Shift+P` → Reload Window) |
+
+**Or start the server manually** (for testing or custom integrations):
+
+```bash
+ignix-lite mcp start
 ```
 
 ---
