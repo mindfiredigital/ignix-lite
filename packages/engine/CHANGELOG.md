@@ -1,5 +1,11 @@
 # @mindfiredigital/ignix-lite-engine
 
+## 1.4.1
+
+### Patch Changes
+
+- resolve package dependency issue
+
 ## 1.4.0
 
 ### Minor Changes
