@@ -1,6 +1,6 @@
 {
   "name": "@mindfiredigital/ignix-lite-cli",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "CLI tool for Ignix-Lite project scaffolding, validation, and theming",
   "type": "module",
   "main": "dist/index.js",

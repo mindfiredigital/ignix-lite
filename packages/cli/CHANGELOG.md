@@ -1,5 +1,17 @@
 # @mindfiredigital/ignix-lite-cli
 
+## 1.4.0
+
+### Minor Changes
+
+- resolve package dependencies workspace protocol and release update
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @mindfiredigital/ignix-lite-mcp@1.6.0
+  - @mindfiredigital/ignix-lite-engine@1.4.0
+
 ## 1.3.0
 
 ### Minor Changes
