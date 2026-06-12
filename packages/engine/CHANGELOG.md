@@ -1,5 +1,11 @@
 # @mindfiredigital/ignix-lite-engine
 
+## 1.3.0
+
+### Minor Changes
+
+- resolve package dependencies workspace protocol and release update
+
 ## 1.2.0
 
 ### Minor Changes
