@@ -3,14 +3,20 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "main": "index.js",
+  "main": "./dist/server.js",
+  "bin": {
+    "ignix-lite-mcp": "./dist/server.js"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "test": "vitest run",
-    "dev": "tsup src/server.ts --watch --format esm --no-clean --onSuccess \"copyfiles -u 2 src/manifests/*.json dist/manifests\"",
+    "dev": "tsup src/server.ts --watch --format esm --no-clean",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "build": "tsup && copyfiles -u 2 src/manifests/*.json dist/manifests && pnpm build:index",
-    "build:index": "tsx src/tools/build-index.ts"
+    "build": "tsup"
   },
   "keywords": [],
   "author": "",
@@ -30,10 +36,11 @@
     "vitest": "^4.1.4"
   },
   "dependencies": {
+    "@mindfiredigital/ignix-lite-engine": "workspace:*",
     "@modelcontextprotocol/sdk": "^1.29.0",
     "emmet": "^2.4.11",
     "node-html-parser": "^7.1.0",
-    "puppeteer": "^25.1.0",
+    "playwright": "^1.60.0",
     "zod": "^4.4.3"
   }
 }

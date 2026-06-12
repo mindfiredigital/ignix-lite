@@ -3,6 +3,7 @@ import { readFileSync, existsSync } from 'fs'
 import { fileURLToPath } from 'url'
 import { embedText } from './embedder.js'
 import { cosineSimilarity } from '../utils/cosine.js'
+import { STOP_WORDS } from '../utils/intent-helpers.js'
 
 type IndexItem = {
   name: string
@@ -18,7 +19,18 @@ let _index: IndexItem[] | null = null
 
 function loadIndex(): IndexItem[] {
   if (_index) return _index
-  const indexPath = path.resolve(__dirname, '../../dist/vector-index.json')
+  const paths = [
+    path.resolve(__dirname, '../../dist/vector-index.json'),
+    path.resolve(__dirname, './vector-index.json'),
+    path.resolve(__dirname, '../vector-index.json')
+  ]
+  let indexPath = paths[0]
+  for (const p of paths) {
+    if (existsSync(p)) {
+      indexPath = p
+      break
+    }
+  }
   if (!existsSync(indexPath)) {
     console.warn(
       `[search-index] dist/vector-index.json not found at: ${indexPath} - run pnpm build:index`
@@ -47,6 +59,9 @@ export function searchIndex(description: string) {
       const searchable = item.searchable.toLowerCase()
 
       words.forEach((word) => {
+        if (STOP_WORDS.has(word) || word.length < 3) {
+          return
+        }
         if (item.name.toLowerCase() === word) {
           boost += 2
         } else if (item.name.toLowerCase().includes(word)) {
@@ -64,3 +79,4 @@ export function searchIndex(description: string) {
     .sort((a, b) => b.score - a.score)
   return ranked.slice(0, 3)
 }
+

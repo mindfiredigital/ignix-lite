@@ -9,5 +9,8 @@ export default defineConfig({
   clean: true,
   sourcemap: true,
   bundle: true,
-  external: ['tiktoken']
+  external: ['tiktoken'],
+  banner: {
+    js: '#!/usr/bin/env node'
+  }
 })

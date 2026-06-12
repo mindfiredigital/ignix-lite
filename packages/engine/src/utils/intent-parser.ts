@@ -4,22 +4,13 @@ import { fileURLToPath } from 'url'
 import { tokenise, isSimilar } from './intent-helpers.js'
 
 export type IntentEntry = {
-  name: string // the caveman phrase (first line)
-  phrases: string[] // all tokenised words from the phrase
-  emmet: string // the emmet pattern from the "- ..." line
-  category: string // section header e.g. "DESTROY / DANGER"
+  name: string
+  phrases: string[]
+  emmet: string
+  category: string
 }
 
-/**
- * Parse the INTENTS block out of api-full.txt.
- *
- * Format expected:
- *   --- CATEGORY NAME ---
- *   caveman phrase description
- *   - emmet[pattern]{here}
- *   (blank line)
- *   ...
- */
+
 function parseIntents(raw: string): IntentEntry[] {
   const entries: IntentEntry[] = []
 
@@ -120,10 +111,8 @@ export type ScoreResult = {
   density: number
 }
 
-/**
- * Score a single IntentEntry against the query, tolerating minor typos.
- * Returns { score, density } for tie-breaking.
- */
+// Score a single IntentEntry against the query, tolerating minor typos. eturns { score, density } for tie-breaking.
+
 export function scoreEntry(
   entry: IntentEntry,
   queryWords: string[]

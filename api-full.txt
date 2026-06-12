@@ -20,13 +20,6 @@ nav>ul>(li>a[href][aria-current=page])*
 nav[aria-label=Breadcrumb][data-style=chevron|slash|guillemet|arrow|thread|pipe][data-intent]>ol>(li>a)*
 form#id[action][method=get|post][aria-busy][data-loading]
 section[data-grid=1|2|3|4|5|6|auto|fill][data-gap][data-align][data-justify][data-dense]>article[data-col][data-row]*
-div[data-stack=xs|sm|md|lg|xl]>*
-div[data-flex][data-gap=xs|sm|md|lg|xl][data-align=start|center|end|stretch|baseline][data-justify=start|center|end|between|around|evenly][data-wrap=wrap|nowrap]>([data-grow]|[data-shrink])*
-main[data-center=sm|md|lg|xl|full]
-div[data-sidebar][data-sidebar-width=sm|md|lg][data-sidebar-side=left|right]>(aside|nav)+(main|section)
-div[data-cluster=xs|sm|md|lg|xl]>(mark|span|button)*
-div[data-switcher][data-threshold=sm|md|lg][data-gap]>div*
-section[data-cover=screen|contained][data-padding=sm|md|lg|xl]
 hr[data-orientation=horizontal|vertical]
 pre>code[data-lang=js|ts|python|bash|html|css|json]
 table[is=ix-table]>thead>tr+tbody ; th[data-sortable][aria-sort=ascending|descending|none]
@@ -57,8 +50,27 @@ list_components|get_manifest|validate|how_to_build|get_emmet|check_a11y|generate
 INTENTS:
 [caveman prompt -> emmet. match closest.]
 
+--- BUTTONS ---
+primary button / action button / main button / call to action
+- button[data-intent=primary]{Label}
+
+secondary button / cancel button / back button
+- button[data-intent=secondary]{Cancel}
+
+small button / tiny button
+- button[data-intent=primary data-size=sm]{Label}
+
+large button / big button
+- button[data-intent=primary data-size=lg]{Label}
+
+disabled button / inactive button
+- button[data-intent=primary disabled]{Label}
+
+loading button / spinner button / busy button
+- button[data-intent=primary aria-busy=true]{Saving…}
+
 --- DESTROY / DANGER ---
-user want delete thing
+danger button / delete button / destructive button
 - button[data-intent=danger]{Delete}
 
 user want remove item from list
@@ -74,7 +86,7 @@ user need confirm before destroy
 user about to do risky thing
 - dialog#warn[data-intent=warning]>(h2{Warning})+p{This will affect all users.}+(button{Cancel})+(button[data-intent=warning]{Continue})
 
-show yellow warning banner
+show yellow warning banner / warning alert / warning message / session warning
 - aside[data-intent=warning]{Your session will expire soon.}
 
 --- TELL USER SUCCESS ---
@@ -105,8 +117,11 @@ button doing async work right now
 whole form submitting
 - form#f[aria-busy=true]>(label{Email}+input[type=email])+button[type=submit aria-busy=true]{Submitting…}
 
-page section loading
+page section loading / loading skeleton / rectangular skeleton / rect skeleton / skeleton rectangle
 - span[role=status aria-busy=true data-shape=rect]
+
+avatar with skeleton / avatar and loading / profile image with skeleton
+- img[src=? alt="User" data-size=md]+span[role=status aria-busy=true data-shape=rect]
 
 show skeleton card while data loads
 - article>(span[slot=avatar aria-busy data-shape=circle])+(span[slot=title aria-busy data-shape=text])+(p[slot=body aria-busy data-shape=text])
@@ -136,6 +151,9 @@ user pick date
 user search / filter list
 - label{Search}+input[type=search]
 
+search bar with button / search input and button / search with submit
+- label{Search}+input[type=search]+button[type=submit data-intent=primary]{Search}
+
 user upload file
 - label{Upload}+input[type=file]
 
@@ -149,7 +167,7 @@ user pick one from dropdown list
 user pick one with radio buttons
 - (label>(input[type=radio name=g value=a]+{Option A}))+(label>(input[type=radio name=g value=b]+{Option B}))
 
-user toggle yes/no with checkbox
+user toggle yes/no with checkbox / checkbox input / accept terms / agree terms
 - label>(input[type=checkbox]+{I agree to terms})
 
 user pick many items / multi-select chips
@@ -159,7 +177,7 @@ user pick many items / multi-select chips
 basic form with submit
 - form#f[method=post]>(label{Name}+input[type=text required])+button[type=submit data-intent=primary]{Submit}
 
-login form
+login form / sign in form / email password form / form with email and password
 - form#login>(label{Email}+input[type=email required])+(label{Password}+input[type=password required])+button[type=submit data-intent=primary]{Sign In}
 
 login form with avatar / login with profile picture
@@ -195,10 +213,10 @@ user avatar menu / profile menu
 - ix-dropdown>(button[slot=trigger aria-haspopup=menu aria-expanded=false]{Profile ▾})+ul[slot=menu]>(li>a[href=/profile]{My Profile})+(li>a[href=/settings]{Settings})+(li>button[data-intent=danger]{Sign Out})
 
 --- TOOLTIP / HINT ---
-show hint on hover
+show hint on hover / tooltip / hover hint
 - ix-tooltip[content="More info here" data-position=top]>button{?}
 
-show danger warning on hover
+show danger warning on hover / tooltip on delete button / danger tooltip
 - ix-tooltip[content="This will delete everything" data-intent=danger data-position=top]>button[data-intent=danger]{Delete}
 
 --- BADGE / LABEL / TAG ---

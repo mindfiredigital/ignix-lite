@@ -13,21 +13,33 @@ const sessionId = Math.random().toString(36).substring(2, 15)
 const MAX_CALL_HISTORY = 1000
 
 export function recordCall(toolName: string, tokensUsed: number): void {
+  const parsedTokens = Number(tokensUsed)
+  const validTokens =
+    isNaN(parsedTokens) || parsedTokens < 0 || !isFinite(parsedTokens)
+      ? 0
+      : parsedTokens
+
   if (calls.length >= MAX_CALL_HISTORY) {
     calls.shift()
   }
   calls.push({
     tool: toolName,
-    tokens_used: tokensUsed,
+    tokens_used: validTokens,
     timestamp: Date.now()
   })
-  totalTokensUsed += tokensUsed
+  totalTokensUsed += validTokens
 }
 
 export function getTokenSummary(
   args: { context_window?: number } = {}
 ): MCPResponse {
-  const contextWindow = args.context_window || 128000
+  const contextWindowInput = args.context_window || 128000
+  const parsedWindow = Number(contextWindowInput)
+  const contextWindow =
+    isNaN(parsedWindow) || parsedWindow <= 0 || !isFinite(parsedWindow)
+      ? 128000
+      : parsedWindow
+
   const pct = Number(((totalTokensUsed / contextWindow) * 100).toFixed(4))
 
   return {
@@ -38,7 +50,8 @@ export function getTokenSummary(
           session_id: sessionId,
           calls,
           total_tokens_used: totalTokensUsed,
-          estimated_context_pct: pct
+          estimated_context_pct: pct,
+          tokens_used: 20
         })
       }
     ]

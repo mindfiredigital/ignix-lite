@@ -40,7 +40,16 @@ function generateHandoffId(): string {
 
 function extractState(element: HTMLElement): Record<string, string> {
   const state: Record<string, string> = {}
-  const attrs = ['data-intent', 'disabled', 'checked', 'open', 'aria-busy', 'aria-invalid', 'aria-selected', 'aria-expanded']
+  const attrs = [
+    'data-intent',
+    'disabled',
+    'checked',
+    'open',
+    'aria-busy',
+    'aria-invalid',
+    'aria-selected',
+    'aria-expanded'
+  ]
   for (const attr of attrs) {
     const val = element.getAttribute(attr)
     if (val !== undefined && val !== null) {
@@ -50,7 +59,42 @@ function extractState(element: HTMLElement): Record<string, string> {
   return state
 }
 
-export function createHandoff(args: { rendered_html: string, metadata?: Record<string, unknown> }): MCPResponse {
+function getElementSelector(el: HTMLElement, root: HTMLElement): string {
+  const elementId = el.getAttribute('id')
+  if (elementId) {
+    return `#${elementId}`
+  }
+
+  const tag = el.tagName.toLowerCase()
+  const parent = el.parentNode as HTMLElement | null
+
+  if (!parent || parent === root || !parent.tagName) {
+    const siblings = (root.childNodes || []).filter(
+      (node): node is HTMLElement => node.nodeType === 1
+    )
+    const sameTagSiblings = siblings.filter(
+      (node) => node.tagName && node.tagName.toLowerCase() === tag
+    )
+    const index = Math.max(1, sameTagSiblings.indexOf(el) + 1)
+    return `${tag}:nth-of-type(${index})`
+  }
+
+  const siblings = (parent.childNodes || []).filter(
+    (node): node is HTMLElement => node.nodeType === 1
+  )
+  const sameTagSiblings = siblings.filter(
+    (node) => node.tagName && node.tagName.toLowerCase() === tag
+  )
+  const index = Math.max(1, sameTagSiblings.indexOf(el) + 1)
+
+  const parentSelector = getElementSelector(parent, root)
+  return `${parentSelector} > ${tag}:nth-of-type(${index})`
+}
+
+export function createHandoff(args: {
+  rendered_html: string
+  metadata?: Record<string, unknown>
+}): MCPResponse {
   const { rendered_html, metadata } = args
   const root = parse(rendered_html)
 
@@ -59,17 +103,33 @@ export function createHandoff(args: { rendered_html: string, metadata?: Record<s
   const components: HandoffComponent[] = []
 
   const componentTags = [
-    'button', 'input', 'textarea', 'select', 'aside', 'mark', 'article',
-    'dialog', 'details', 'progress', 'meter', 'nav', 'hr', 'pre', 'table',
-    'ix-tabs', 'ix-dropdown', 'ix-combobox', 'ix-tooltip', 'ix-toast'
+    'button',
+    'input',
+    'textarea',
+    'select',
+    'aside',
+    'mark',
+    'article',
+    'dialog',
+    'details',
+    'progress',
+    'meter',
+    'nav',
+    'hr',
+    'pre',
+    'table',
+    'ix-tabs',
+    'ix-dropdown',
+    'ix-combobox',
+    'ix-tooltip',
+    'ix-toast'
   ]
 
   const elements = root.querySelectorAll('*')
   for (const el of elements) {
     const tag = el.tagName.toLowerCase()
     if (componentTags.includes(tag) || el.getAttribute('data-intent')) {
-      const elementId = el.getAttribute('id')
-      const selector = elementId ? `#${elementId}` : tag
+      const selector = getElementSelector(el, root)
 
       const outerHtml = el.outerHTML
       const tokens = getTokenCount(outerHtml)
@@ -108,7 +168,7 @@ export function createHandoff(args: { rendered_html: string, metadata?: Record<s
             version: envelope.version,
             id: envelope.id,
             timestamp: envelope.timestamp,
-            components: envelope.components.map(c => ({
+            components: envelope.components.map((c) => ({
               selector: c.selector,
               emmet: c.emmet,
               state: c.state,
@@ -131,7 +191,10 @@ export interface HandoffChange {
   html?: string
 }
 
-export function applyHandoff(args: { handoff_id: string, changes: HandoffChange[] }): MCPResponse {
+export function applyHandoff(args: {
+  handoff_id: string
+  changes: HandoffChange[]
+}): MCPResponse {
   const { handoff_id, changes } = args
   const envelope = handoffs.get(handoff_id)
 
@@ -149,6 +212,27 @@ export function applyHandoff(args: { handoff_id: string, changes: HandoffChange[
     }
   }
 
+  // Assert that change.html or change.emmet is present for add and update actions
+  for (const change of changes) {
+    if (change.action === 'update' || change.action === 'add') {
+      const hasHtml = change.html !== undefined && change.html !== null && change.html.trim() !== ''
+      const hasEmmet = change.emmet !== undefined && change.emmet !== null && change.emmet.trim() !== ''
+      if (!hasHtml && !hasEmmet) {
+        return {
+          content: [
+            {
+              type: 'text',
+              text: JSON.stringify({
+                error: `Validation error: change for selector "${change.selector}" with action "${change.action}" must provide a non-empty "html" or "emmet" payload.`,
+                tokens_used: 5
+              })
+            }
+          ]
+        }
+      }
+    }
+  }
+
   const root = parse(envelope.html)
   let diffTokens = 0
   const failedSelectors: string[] = []
@@ -161,14 +245,15 @@ export function applyHandoff(args: { handoff_id: string, changes: HandoffChange[
   })
 
   for (const change of sortedChanges) {
-    const target = root.querySelector(change.selector)
-    if (!target) {
-      failedSelectors.push(change.selector)
-      continue
-    }
-
     try {
-      const changeContent = change.html || (change.emmet ? expandEmmet(change.emmet) : '')
+      const target = root.querySelector(change.selector)
+      if (!target) {
+        failedSelectors.push(change.selector)
+        continue
+      }
+
+      const changeContent =
+        change.html || (change.emmet ? expandEmmet(change.emmet) : '')
       diffTokens += getTokenCount(changeContent || change.selector)
 
       if (change.action === 'update') {
@@ -182,13 +267,16 @@ export function applyHandoff(args: { handoff_id: string, changes: HandoffChange[
       }
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : String(err)
-      errors.push(`Failed to apply change on selector "${change.selector}": ${message}`)
+      errors.push(
+        `Failed to apply change on selector "${change.selector}": ${message}`
+      )
     }
   }
 
   const updatedHtml = root.toString()
   const fullTokens = getTokenCount(updatedHtml)
-  const savingsPct = fullTokens > 0 ? Math.round((1 - diffTokens / fullTokens) * 100) : 0
+  const savingsPct =
+    fullTokens > 0 ? Math.round((1 - diffTokens / fullTokens) * 100) : 0
 
   envelope.html = updatedHtml
   envelope.total_tokens = fullTokens
@@ -203,7 +291,8 @@ export function applyHandoff(args: { handoff_id: string, changes: HandoffChange[
           diff_tokens: diffTokens,
           full_tokens: fullTokens,
           savings_pct: Math.max(0, savingsPct),
-          failed_selectors: failedSelectors.length > 0 ? failedSelectors : undefined,
+          failed_selectors:
+            failedSelectors.length > 0 ? failedSelectors : undefined,
           errors: errors.length > 0 ? errors : undefined,
           tokens_used: 15
         })

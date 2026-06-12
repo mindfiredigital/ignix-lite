@@ -11,7 +11,6 @@ import {
 import type { IntentEntry } from '../utils/intent-parser.js'
 import type { MCPResponse } from '../types.js'
 
-// Layer 1: api-full.txt INTENTS lookup 
 
 type IntentMatch = {
   name: string
@@ -20,15 +19,17 @@ type IntentMatch = {
   source: 'intent-table' | 'vector-index'
 }
 
-const LAYER1_THRESHOLD = 8 // minimum score to trust an intent-table hit
+const LAYER1_THRESHOLD = 15 // minimum score to trust an intent-table hit
 
 function searchIntentTable(description: string): IntentMatch | null {
   const entries = getIntentEntries()
   if (entries.length === 0) return null
 
+  const isStitchRequested =
+    /\b(and|plus|\+)\b/i.test(description) || description.includes(',')
+
   const queryWords = tokenise(description)
 
-  // Find all matches meeting the threshold
   const candidates: {
     entry: IntentEntry
     score: number
@@ -59,25 +60,19 @@ function searchIntentTable(description: string): IntentMatch | null {
     }
   }
 
-  // If a single template matches with exceptionally high score, trust it directly
   if (bestSingle && bestSingle.score >= 18) {
-    return bestSingle
+    if (!isStitchRequested || bestSingle.score >= 25) {
+      return bestSingle
+    }
   }
 
-  // Check if the user explicitly requested stitching using conjunction words (and, plus, +, comma)
-  const isStitchRequested =
-    /\b(and|plus|\+)\b/i.test(description) || description.includes(',')
-
-  // Otherwise, check if we can stitch multiple distinct components together (synthesis)
   if (isStitchRequested && candidates.length >= 2) {
-    // Sort candidates by score (descending)
     candidates.sort((a, b) => b.score - a.score || b.density - a.density)
 
     const selected: typeof candidates = []
     const usedComponents = new Set<string>()
 
     for (const c of candidates) {
-      // Check if this candidate is disjoint from the already selected components
       const hasOverlap = c.components.some((comp) => usedComponents.has(comp))
       if (!hasOverlap) {
         selected.push(c)
@@ -85,9 +80,7 @@ function searchIntentTable(description: string): IntentMatch | null {
       }
     }
 
-    // If we gathered at least 2 distinct templates, stitch them!
     if (selected.length >= 2) {
-      // Re-sort selected in the order they appear in the user description to look natural
       selected.sort((a, b) => {
         const indexA = description
           .toLowerCase()
@@ -110,13 +103,39 @@ function searchIntentTable(description: string): IntentMatch | null {
     }
   }
 
-  return bestSingle
+  if (bestSingle && bestSingle.score >= 18) {
+    if (!isStitchRequested || bestSingle.score >= 25) {
+      return bestSingle
+    }
+  }
+  return null
 }
 
-//  Layer 2: vector-index fallback 
+
 function searchVectorLayer(description: string): IntentMatch | null {
   const results = searchIndex(description)
   if (results.length === 0) return null
+
+  const isStitchRequested =
+    /\b(and|plus|\+)\b/i.test(description) || description.includes(',')
+
+  if (isStitchRequested && results.length >= 2) {
+    const top = results[0]
+    const second = results[1]
+    if (top.name !== second.name && top.score >= 2.0 && second.score >= 2.0) {
+      const indexA = description.toLowerCase().indexOf(top.name.toLowerCase())
+      const indexB = description.toLowerCase().indexOf(second.name.toLowerCase())
+      const firstItem = indexA < indexB ? top : second
+      const secondItem = indexA < indexB ? second : top
+      return {
+        name: `${firstItem.name} and ${secondItem.name}`,
+        emmet: `${firstItem.emmet}+${secondItem.emmet}`,
+        score: (top.score + second.score) / 2,
+        source: 'vector-index'
+      }
+    }
+  }
+
   const top = results[0]
   return {
     name: top.name,
@@ -126,7 +145,6 @@ function searchVectorLayer(description: string): IntentMatch | null {
   }
 }
 
-// Public: howToBuild 
 
 export async function howToBuild(description: string): Promise<MCPResponse> {
   let cleanDesc = description.trim()
@@ -143,10 +161,10 @@ export async function howToBuild(description: string): Promise<MCPResponse> {
     }
   }
 
-  // Layer 1 — fast, deterministic, hand-crafted intent table
+  // Layer 1 - fast, deterministic, hand-crafted intent table
   let match = searchIntentTable(cleanDesc)
 
-  // Layer 2 — vector index fallback for novel / unknown queries
+  // Layer 2 - vector index fallback for novel / unknown queries
   if (!match) {
     match = searchVectorLayer(cleanDesc)
   }

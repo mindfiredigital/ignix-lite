@@ -377,3 +377,110 @@ A hands-on reference of real MCP tool calls and their responses.
 > **Note:** `data-sortable` goes on each `<th>` header, NOT on the `<table>` wrapper.
 > Wrap in `<section>` to activate the responsive horizontal scroll rule.
 
+---
+
+## `preview` — Headless rendering of components
+
+**Call:**
+```json
+{ "tool": "preview", "arguments": { "input": "button[data-intent=primary]{Click Me}", "options": { "width": 300, "theme": "light" } } }
+```
+
+**Response:**
+```json
+{
+  "png": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA...",
+  "width": 300,
+  "render_ms": 120,
+  "tokens_used": 5
+}
+```
+
+---
+
+## `get_token_summary` — Get session token usage
+
+**Call:**
+```json
+{ "tool": "get_token_summary", "arguments": { "context_window": 128000 } }
+```
+
+**Response:**
+```json
+{
+  "session_id": "session_abc123",
+  "calls": [
+    { "tool": "list_components", "tokens_used": 8, "timestamp": 1745000000000 },
+    { "tool": "validate", "tokens_used": 12, "timestamp": 1745000010000 }
+  ],
+  "total_tokens_used": 20,
+  "estimated_context_pct": 0.0156,
+  "tokens_used": 20
+}
+```
+
+---
+
+## `create_handoff` — Initialize agent state snapshot
+
+**Call:**
+```json
+{ "tool": "create_handoff", "arguments": { "rendered_html": "<button data-intent=\"primary\">Click Me</button>", "metadata": { "user_id": 123 } } }
+```
+
+**Response:**
+```json
+{
+  "handoff_id": "hndff_xyz789",
+  "snapshot": {
+    "schema": "ignix-lite-handoff",
+    "version": "1.0",
+    "id": "hndff_xyz789",
+    "timestamp": 1745000000000,
+    "components": [
+      {
+        "selector": "button",
+        "emmet": "button[data-intent=primary]{Click Me}",
+        "state": { "data-intent": "primary" },
+        "tokens": 4
+      }
+    ],
+    "total_tokens": 4
+  },
+  "tokens_used": 10
+}
+```
+
+---
+
+## `apply_handoff` — Patch state snapshot
+
+**Call:**
+```json
+{
+  "tool": "apply_handoff",
+  "arguments": {
+    "handoff_id": "hndff_xyz789",
+    "changes": [
+      {
+        "selector": "button",
+        "action": "update",
+        "emmet": "button[data-intent=danger]{Delete}"
+      }
+    ]
+  }
+}
+```
+
+**Response:**
+```json
+{
+  "updated_html": "<button data-intent=\"danger\">Delete</button>",
+  "diff_tokens": 4,
+  "full_tokens": 4,
+  "savings_pct": 0,
+  "tokens_used": 15
+}
+```
+
+
