@@ -11,12 +11,12 @@
   ✗ Never use >4 attributes on a single element (PROP_EXPLOSION)
 
   CUSTOM ELEMENTS (used when no native element exists):
-    ix-alert  ix-toast  ix-avatar  ix-tab  ix-tooltip
-    ix-skeleton  ix-codeblock  ix-combobox
+    ix-tabs  ix-dropdown  ix-combobox  ix-tooltip  ix-toast
 
   NATIVE ELEMENTS (preferred):
     button  input  select  textarea  dialog  details  progress  meter
-    form  nav  table  hr  mark  span[role=status]  -->
+    form  nav  table  hr  mark  span[role=status]  aside  article  pre
+─────────────────────────────────────────────────────────────────────────── -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -190,23 +190,21 @@
       <p>Accordion content here.</p>
     </details>
 
-   
-    <ix-tab>
+    <!-- ── Tabs ──────────────────────────────────────────────────────────── -->
+    <ix-tabs>
       <button slot="tab" aria-selected="true">Tab One</button>
       <button slot="tab">Tab Two</button>
       <div slot="panel">Content for tab one.</div>
       <div slot="panel">Content for tab two.</div>
-    </ix-tab>
+    </ix-tabs>
 
     <!-- Inline highlight -->
     <p>Status: <mark data-intent="success">Active</mark></p>
     <!-- Chip badge -->
     <span role="status" data-intent="danger">3 Errors</span>
 
-    <ix-avatar data-intent="image" data-shape="circle">
-      <img src="{{AVATAR_URL}}" alt="User avatar">
-    </ix-avatar>
-    <ix-avatar data-intent="initials" data-shape="circle">JD</ix-avatar>
+    <img src="{{AVATAR_URL}}" alt="User avatar" data-size="md">
+    <span data-size="md">JD</span>
 
     <progress value="60" max="100" data-intent="default"></progress>
     <progress value="100" max="100" data-intent="success"></progress>
@@ -214,8 +212,8 @@
 
     <meter value="0.7" min="0" max="1" low="0.25" high="0.75" optimum="1"></meter>
 
-    <ix-skeleton data-variant="card"></ix-skeleton>
-    <ix-skeleton data-variant="text"></ix-skeleton>
+    <span role="status" aria-busy="true" data-shape="rect"></span>
+    <span role="status" aria-busy="true" data-shape="text"></span>
 
     <ix-tooltip data-position="top">
       <button data-intent="neutral" slot="trigger">Hover me</button>
