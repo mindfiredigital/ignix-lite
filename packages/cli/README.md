@@ -272,10 +272,10 @@ ignix-lite preview component.html --output screenshot.png --width 800 --theme da
 Automatically configure the Ignix-Lite MCP server for your AI editor. **Zero manual steps** — the CLI writes directly to the editor's config file.
 
 ```bash
-ignix-lite mcp setup claude        # Claude Desktop
-ignix-lite mcp setup claude-code   # Claude Code CLI
-ignix-lite mcp setup gemini        # Gemini CLI
-ignix-lite mcp setup cursor        # Cursor editor
+ignix-lite mcp setup claude       
+ignix-lite mcp setup claude-code   
+ignix-lite mcp setup gemini        
+ignix-lite mcp setup cursor        
 ```
 
 **All clients are fully auto-configured.** After running the command:
