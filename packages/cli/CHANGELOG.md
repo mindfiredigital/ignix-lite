@@ -1,6 +1,6 @@
-# @mindfiredigital/ignix-lite-mcp
+# @mindfiredigital/ignix-lite-cli
 
-## 1.3.0
+## 1.1.0
 
 ### Minor Changes
 
@@ -9,10 +9,5 @@
 ### Patch Changes
 
 - Updated dependencies []:
+  - @mindfiredigital/ignix-lite-mcp@1.3.0
   - @mindfiredigital/ignix-lite-engine@1.1.0
-
-## 1.2.0
-
-### Minor Changes
-
-- Ignix-Lite v2 Agentic Layer
