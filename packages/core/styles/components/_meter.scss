@@ -36,7 +36,6 @@ meter {
   }
 
   &[data-intent='primary'] {
-
     &::-webkit-meter-optimum-value,
     &::-webkit-meter-suboptimum-value,
     &::-webkit-meter-even-less-good-value {
@@ -49,7 +48,6 @@ meter {
   }
 
   &[data-intent='success'] {
-
     &::-webkit-meter-optimum-value,
     &::-webkit-meter-suboptimum-value,
     &::-webkit-meter-even-less-good-value {
@@ -62,7 +60,6 @@ meter {
   }
 
   &[data-intent='warning'] {
-
     &::-webkit-meter-optimum-value,
     &::-webkit-meter-suboptimum-value,
     &::-webkit-meter-even-less-good-value {
@@ -75,7 +72,6 @@ meter {
   }
 
   &[data-intent='danger'] {
-
     &::-webkit-meter-optimum-value,
     &::-webkit-meter-suboptimum-value,
     &::-webkit-meter-even-less-good-value {
@@ -88,7 +84,6 @@ meter {
   }
 
   &[data-intent='neutral'] {
-
     &::-webkit-meter-optimum-value,
     &::-webkit-meter-suboptimum-value,
     &::-webkit-meter-even-less-good-value {

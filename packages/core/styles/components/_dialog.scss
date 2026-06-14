@@ -38,7 +38,7 @@ dialog {
     line-height: var(--ix-line-height);
     width: 100%;
 
-    &+p {
+    & + p {
       margin-top: var(--ix-space-sm);
     }
   }
@@ -53,7 +53,7 @@ dialog {
   }
 
   [data-actions] button,
-  &>button {
+  & > button {
     all: unset;
 
     display: inline-flex;
@@ -80,33 +80,33 @@ dialog {
     }
   }
 
-  &>button {
+  & > button {
     margin-top: var(--ix-space-lg);
   }
 
   [data-actions] button[data-intent='danger'],
-  &>button[data-intent='danger'] {
+  & > button[data-intent='danger'] {
     background: var(--ix-danger);
     color: var(--ix-on-danger);
     border-color: transparent;
   }
 
   [data-actions] button[data-intent='warning'],
-  &>button[data-intent='warning'] {
+  & > button[data-intent='warning'] {
     background: var(--ix-warning);
     color: var(--ix-on-warning);
     border-color: transparent;
   }
 
   [data-actions] button[data-intent='primary'],
-  &>button[data-intent='primary'] {
+  & > button[data-intent='primary'] {
     background: var(--ix-primary);
     color: var(--ix-on-primary);
     border-color: transparent;
   }
 
   [data-actions] button[data-intent='success'],
-  &>button[data-intent='success'] {
+  & > button[data-intent='success'] {
     background: var(--ix-success);
     color: var(--ix-on-success);
     border-color: transparent;

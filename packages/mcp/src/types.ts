@@ -16,7 +16,6 @@ export type MCPResponse = {
   content: {
     type: 'text'
     text: string
-
   }[]
 }
 
@@ -59,5 +58,4 @@ export type Manifest = {
   dont?: string[]
   examples?: ManifestExample[]
   extends?: string
-  
 }
