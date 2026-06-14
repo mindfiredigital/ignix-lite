@@ -1,5 +1,15 @@
 # @mindfiredigital/ignix-lite-cli
 
+## 1.4.3
+
+### Patch Changes
+
+- resolve package dependency issues
+
+- Updated dependencies []:
+  - @mindfiredigital/ignix-lite-engine@1.4.2
+  - @mindfiredigital/ignix-lite-mcp@1.6.3
+
 ## 1.4.1
 
 ### Patch Changes
