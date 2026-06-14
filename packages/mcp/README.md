@@ -28,7 +28,7 @@ npm install -g @mindfiredigital/ignix-lite-cli
 
 ---
 
-## ⚙️ Configuration — Zero Manual Steps
+## ⚙️ Configuration - Zero Manual Steps
 
 Use the CLI to auto-configure your editor in one command:
 
