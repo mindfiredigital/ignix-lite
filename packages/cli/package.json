@@ -1,6 +1,6 @@
 {
   "name": "@mindfiredigital/ignix-lite-cli",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "CLI tool for Ignix-Lite project scaffolding, validation, and theming",
   "type": "module",
   "main": "dist/index.js",
@@ -14,8 +14,8 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@mindfiredigital/ignix-lite-engine": "workspace:*",
-    "@mindfiredigital/ignix-lite-mcp": "workspace:*",
+    "@mindfiredigital/ignix-lite-engine": "^1.4.1",
+    "@mindfiredigital/ignix-lite-mcp": "^1.6.2",
     "commander": "^13.1.0",
     "node-html-parser": "^7.1.0",
     "ora": "^9.4.0",
