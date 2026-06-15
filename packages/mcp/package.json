@@ -1,6 +1,6 @@
 {
   "name": "@mindfiredigital/ignix-lite-mcp",
-  "version": "1.6.3",
+  "version": "1.6.4",
   "description": "",
   "type": "module",
   "main": "./dist/server.js",
