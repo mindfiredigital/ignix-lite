@@ -68,18 +68,20 @@ function parseIntents(raw: string): IntentEntry[] {
   return entries
 }
 
-// ---- Resolve the api-full.txt path relative to this package root ----
 function loadIntents(): IntentEntry[] {
   try {
     const currentDir = path.dirname(fileURLToPath(import.meta.url))
 
     // Try relative paths from current file structure (packages/mcp/src/utils/ or dist/utils/)
+    const pathDist = path.resolve(currentDir, './api-full.txt')
     const path1 = path.resolve(currentDir, '../../../api-full.txt')
     const path2 = path.resolve(currentDir, '../../api-full.txt')
     const path3 = path.resolve(currentDir, '../../../../api-full.txt')
 
-    let txtPath = path1
-    if (existsSync(path1)) {
+    let txtPath = pathDist
+    if (existsSync(pathDist)) {
+      txtPath = pathDist
+    } else if (existsSync(path1)) {
       txtPath = path1
     } else if (existsSync(path2)) {
       txtPath = path2
