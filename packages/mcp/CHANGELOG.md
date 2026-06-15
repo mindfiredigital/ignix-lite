@@ -1,5 +1,14 @@
 # @mindfiredigital/ignix-lite-mcp
 
+## 1.6.4
+
+### Patch Changes
+
+- resolve filesystem launch crash
+
+- Updated dependencies []:
+  - @mindfiredigital/ignix-lite-engine@1.4.3
+
 ## 1.6.3
 
 ### Patch Changes

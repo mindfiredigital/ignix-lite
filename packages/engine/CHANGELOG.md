@@ -1,5 +1,11 @@
 # @mindfiredigital/ignix-lite-engine
 
+## 1.4.3
+
+### Patch Changes
+
+- resolve filesystem launch crash
+
 ## 1.4.2
 
 ### Patch Changes
