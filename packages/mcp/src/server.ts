@@ -6,7 +6,6 @@ import {
 } from '@modelcontextprotocol/sdk/types.js'
 
 import type { MCPResponse } from './types.js'
-import { apiContext } from './context/api-context.js'
 import {
   listComponents,
   getManifest,
@@ -374,7 +373,6 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
 async function start() {
   console.error('API loaded')
-  console.error(apiContext.length)
   const transport = new StdioServerTransport()
   await server.connect(transport)
   console.error('Ignix MCP started')
