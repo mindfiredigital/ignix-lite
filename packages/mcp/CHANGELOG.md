@@ -1,5 +1,14 @@
 # @mindfiredigital/ignix-lite-mcp
 
+## 1.6.5
+
+### Patch Changes
+
+- resolve workspace issue
+
+- Updated dependencies []:
+  - @mindfiredigital/ignix-lite-engine@1.4.4
+
 ## 1.6.4
 
 ### Patch Changes
