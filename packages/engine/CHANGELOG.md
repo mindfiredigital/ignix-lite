@@ -1,5 +1,11 @@
 # @mindfiredigital/ignix-lite-engine
 
+## 1.4.5
+
+### Patch Changes
+
+- add release script
+
 ## 1.4.4
 
 ### Patch Changes
