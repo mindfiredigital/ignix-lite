@@ -58,7 +58,7 @@ jobs:
           commit: "chore(release): version packages"
           title: "chore(release): version packages"
           version: node .github/changeset-version.mjs
-          publish: node scripts/resolve-workspace-deps.mjs && pnpm changeset publish
+          publish: node scripts/resolve-workspace-deps.mjs && pnpm changeset publish --no-git-checks
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
