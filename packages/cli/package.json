@@ -7,6 +7,10 @@
   "bin": {
     "ignix-lite": "./dist/index.js"
   },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
