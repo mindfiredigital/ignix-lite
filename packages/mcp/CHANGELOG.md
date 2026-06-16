@@ -1,5 +1,14 @@
 # @mindfiredigital/ignix-lite-mcp
 
+## 1.6.7
+
+### Patch Changes
+
+- update release workflow
+
+- Updated dependencies []:
+  - @mindfiredigital/ignix-lite-engine@1.4.6
+
 ## 1.6.6
 
 ### Patch Changes

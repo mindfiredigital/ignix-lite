@@ -1,5 +1,11 @@
 # @mindfiredigital/ignix-lite-engine
 
+## 1.4.6
+
+### Patch Changes
+
+- update release workflow
+
 ## 1.4.5
 
 ### Patch Changes
