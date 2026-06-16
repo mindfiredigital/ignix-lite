@@ -69,6 +69,11 @@ const config: Config = {
           label: 'Documentation',
         },
         {
+          href: 'pathname:///ignix-lite/llms.txt',
+          label: 'llms.txt',
+          position: 'left',
+        },
+        {
           href: 'https://github.com/mindfiredigital/ignix-lite',
           className: 'header--github-link',
           'aria-label': 'GitHub repository',
