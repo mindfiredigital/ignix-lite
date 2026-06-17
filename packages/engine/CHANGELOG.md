@@ -1,5 +1,11 @@
 # @mindfiredigital/ignix-lite-engine
 
+## 1.4.5
+
+### Patch Changes
+
+- use workspace protocol for internal monorepo deps
+
 ## 1.4.8
 
 ### Patch Changes

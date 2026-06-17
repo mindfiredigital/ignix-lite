@@ -1,5 +1,14 @@
 # @mindfiredigital/ignix-lite-mcp
 
+## 1.6.6
+
+### Patch Changes
+
+- use workspace protocol for internal monorepo deps
+
+- Updated dependencies []:
+  - @mindfiredigital/ignix-lite-engine@1.4.5
+
 ## 1.6.9
 
 ### Patch Changes
