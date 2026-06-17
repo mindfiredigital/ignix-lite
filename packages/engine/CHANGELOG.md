@@ -1,5 +1,11 @@
 # @mindfiredigital/ignix-lite-engine
 
+## 1.4.8
+
+### Patch Changes
+
+- fix the release.yml workflow for release of the package
+
 ## 1.4.7
 
 ### Patch Changes
