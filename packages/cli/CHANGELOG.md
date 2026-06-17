@@ -1,60 +1,10 @@
 # @mindfiredigital/ignix-lite-cli
 
-## 1.6.7
+## 1.6.6
 
 ### Patch Changes
 
 - change package version
-
-## 1.6.6
-
-### Patch Changes
-
-- use workspace protocol for internal monorepo deps
-
-- Updated dependencies []:
-  - @mindfiredigital/ignix-lite-mcp@1.6.6
-  - @mindfiredigital/ignix-lite-engine@1.4.5
-
-## 1.6.9
-
-### Patch Changes
-
-- fix the release.yml workflow for release of the package
-
-- Updated dependencies []:
-  - @mindfiredigital/ignix-lite-mcp@1.6.9
-  - @mindfiredigital/ignix-lite-engine@1.4.8
-
-## 1.6.8
-
-### Patch Changes
-
-- publish npm-safe workspace dependencies
-
-- Updated dependencies []:
-  - @mindfiredigital/ignix-lite-engine@1.4.7
-  - @mindfiredigital/ignix-lite-mcp@1.6.8
-
-## 1.6.7
-
-### Patch Changes
-
-- update release workflow
-
-- Updated dependencies []:
-  - @mindfiredigital/ignix-lite-engine@1.4.6
-  - @mindfiredigital/ignix-lite-mcp@1.6.7
-
-## 1.6.6
-
-### Patch Changes
-
-- add release script
-
-- Updated dependencies []:
-  - @mindfiredigital/ignix-lite-mcp@1.6.6
-  - @mindfiredigital/ignix-lite-engine@1.4.5
 
 ## 1.6.5
 
