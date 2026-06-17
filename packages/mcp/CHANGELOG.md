@@ -1,5 +1,14 @@
 # @mindfiredigital/ignix-lite-mcp
 
+## 1.6.9
+
+### Patch Changes
+
+- fix the release.yml workflow for release of the package
+
+- Updated dependencies []:
+  - @mindfiredigital/ignix-lite-engine@1.4.8
+
 ## 1.6.8
 
 ### Patch Changes
