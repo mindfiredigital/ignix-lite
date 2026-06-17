@@ -1,5 +1,11 @@
 # @mindfiredigital/ignix-lite-engine
 
+## 1.4.7
+
+### Patch Changes
+
+- publish npm-safe workspace dependencies
+
 ## 1.4.6
 
 ### Patch Changes
