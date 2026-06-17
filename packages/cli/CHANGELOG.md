@@ -1,5 +1,15 @@
 # @mindfiredigital/ignix-lite-cli
 
+## 1.6.8
+
+### Patch Changes
+
+- publish npm-safe workspace dependencies
+
+- Updated dependencies []:
+  - @mindfiredigital/ignix-lite-engine@1.4.7
+  - @mindfiredigital/ignix-lite-mcp@1.6.8
+
 ## 1.6.7
 
 ### Patch Changes
