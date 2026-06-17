@@ -18,8 +18,8 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@mindfiredigital/ignix-lite-engine": "^1.4.1",
-    "@mindfiredigital/ignix-lite-mcp": "^1.6.2",
+    "@mindfiredigital/ignix-lite-engine": "workspace:^",
+    "@mindfiredigital/ignix-lite-mcp": "workspace:^",
     "commander": "^13.1.0",
     "node-html-parser": "^7.1.0",
     "ora": "^9.4.0",
