@@ -24,7 +24,12 @@ for (const dir of pkgDirs) {
     if (!pkg[depType]) continue;
     for (const [dep, ver] of Object.entries(pkg[depType])) {
       if (ver.startsWith('workspace:') && versions[dep]) {
-        pkg[depType][dep] = versions[dep];
+        const modifier = ver.slice('workspace:'.length); // '*', '^', '~', or exact version
+        const resolvedVersion =
+          modifier === '*' || modifier === ''
+            ? versions[dep]
+            : `${modifier}${versions[dep]}`;
+        pkg[depType][dep] = resolvedVersion;
         changed = true;
       }
     }
