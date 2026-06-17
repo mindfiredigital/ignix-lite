@@ -1,5 +1,16 @@
 # @mindfiredigital/ignix-lite-mcp
 
+## 1.7.0
+
+### Minor Changes
+
+- [#168](https://github.com/mindfiredigital/ignix-lite/pull/168) [`597f039`](https://github.com/mindfiredigital/ignix-lite/commit/597f039b3dec0af869c75145ac18692d88be015d) Thanks [@Rituparna158](https://github.com/Rituparna158)! - Add MCP server with 11 AI tools (list_components, get_manifest, get_emmet, how_to_build, validate, check_a11y, generate_theme, preview, get_token_summary, create_handoff, apply_handoff). Add CLI mcp setup command supporting Cursor, Gemini CLI, Claude Desktop, and Claude Code auto-configuration.
+
+### Patch Changes
+
+- Updated dependencies [[`597f039`](https://github.com/mindfiredigital/ignix-lite/commit/597f039b3dec0af869c75145ac18692d88be015d)]:
+  - @mindfiredigital/ignix-lite-engine@1.7.0
+
 ## 1.6.6
 
 ### Patch Changes
