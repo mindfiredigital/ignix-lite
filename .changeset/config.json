@@ -17,7 +17,8 @@
       "@mindfiredigital/ignix-lite-vue",
       "@mindfiredigital/ignix-lite-svelte",
       "@mindfiredigital/ignix-lite-mcp",
-      "@mindfiredigital/ignix-lite-cli"
+      "@mindfiredigital/ignix-lite-cli",
+      "@mindfiredigital/ignix-lite-engine"
     ]
   ]
 }
