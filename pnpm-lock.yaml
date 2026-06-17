@@ -255,8 +255,8 @@ importers:
   packages/mcp:
     dependencies:
       '@mindfiredigital/ignix-lite-engine':
-        specifier: ^1.4.1
-        version: 1.4.4
+        specifier: workspace:^
+        version: link:../engine
       '@modelcontextprotocol/sdk':
         specifier: ^1.29.0
         version: 1.29.0(zod@4.4.3)
@@ -2491,9 +2491,6 @@ packages:
     peerDependencies:
       '@types/react': '>=16'
       react: '>=16'
-
-  '@mindfiredigital/ignix-lite-engine@1.4.4':
-    resolution: {integrity: sha512-gUlliQswF+JonyAywu3zIp9sZkrvwDd5en2SljM0eok/wti4QzouJFSNLrX+DC/fwILRqr86YG7XGs1WBjW/AQ==}
 
   '@modelcontextprotocol/sdk@1.29.0':
     resolution: {integrity: sha512-zo37mZA9hJWpULgkRpowewez1y6ML5GsXJPY8FI0tBBCd77HEvza4jDqRKOXgHNn867PVGCyTdzqpz0izu5ZjQ==}
@@ -11874,14 +11871,6 @@ snapshots:
       '@types/mdx': 2.0.13
       '@types/react': 19.2.14
       react: 19.2.5
-
-  '@mindfiredigital/ignix-lite-engine@1.4.4':
-    dependencies:
-      emmet: 2.4.11
-      node-html-parser: 7.1.0
-      playwright: 1.60.0
-      tiktoken: 1.0.22
-      zod: 4.4.3
 
   '@modelcontextprotocol/sdk@1.29.0(zod@4.4.3)':
     dependencies:
