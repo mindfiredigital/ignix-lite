@@ -1,11 +1,5 @@
 # @mindfiredigital/ignix-lite-engine
 
-## 1.4.6
-
-### Patch Changes
-
-- downgrade version
-
 ## 1.4.5
 
 ### Patch Changes
