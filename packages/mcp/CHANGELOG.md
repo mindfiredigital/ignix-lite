@@ -1,5 +1,59 @@
 # @mindfiredigital/ignix-lite-mcp
 
+## 1.6.8
+
+### Patch Changes
+
+- publish npm-safe workspace dependencies
+
+- Updated dependencies []:
+  - @mindfiredigital/ignix-lite-engine@1.4.7
+
+## 1.6.7
+
+### Patch Changes
+
+- update release workflow
+
+- Updated dependencies []:
+  - @mindfiredigital/ignix-lite-engine@1.4.6
+
+## 1.6.6
+
+### Patch Changes
+
+- add release script
+
+- Updated dependencies []:
+  - @mindfiredigital/ignix-lite-engine@1.4.5
+
+## 1.6.5
+
+### Patch Changes
+
+- resolve workspace issue
+
+- Updated dependencies []:
+  - @mindfiredigital/ignix-lite-engine@1.4.4
+
+## 1.6.4
+
+### Patch Changes
+
+- resolve filesystem launch crash
+
+- Updated dependencies []:
+  - @mindfiredigital/ignix-lite-engine@1.4.3
+
+## 1.6.3
+
+### Patch Changes
+
+- resolve package dependency issues
+
+- Updated dependencies []:
+  - @mindfiredigital/ignix-lite-engine@1.4.2
+
 ## 1.6.1
 
 ### Patch Changes

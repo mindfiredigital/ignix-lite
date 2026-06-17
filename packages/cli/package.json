@@ -1,12 +1,16 @@
 {
   "name": "@mindfiredigital/ignix-lite-cli",
-  "version": "1.4.2",
+  "version": "1.6.8",
   "description": "CLI tool for Ignix-Lite project scaffolding, validation, and theming",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
     "ignix-lite": "./dist/index.js"
   },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",

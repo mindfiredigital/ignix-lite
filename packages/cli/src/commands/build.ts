@@ -35,13 +35,19 @@ export async function buildCommand(
 
   if (!data || data.source === 'no-match') {
     console.log(pc.red(`\nCould not synthesize UI for: "${prompt}"`))
-    console.log(pc.yellow(`Suggestion: ${data?.suggestion || 'Try clarifying your request.'}\n`))
+    console.log(
+      pc.yellow(
+        `Suggestion: ${data?.suggestion || 'Try clarifying your request.'}\n`
+      )
+    )
     return
   }
 
   const outputContent = options.emmetOnly ? data.emmet : data.html
   if (!outputContent) {
-    console.log(pc.red('Error: Response does not contain any synthesized code.'))
+    console.log(
+      pc.red('Error: Response does not contain any synthesized code.')
+    )
     return
   }
 
@@ -54,9 +60,7 @@ export async function buildCommand(
       )
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : String(err)
-      console.log(
-        pc.red(`Error: Failed to write output to file. ${msg}`)
-      )
+      console.log(pc.red(`Error: Failed to write output to file. ${msg}`))
     }
   } else {
     console.log(pc.cyan('\nSynthesized Output:'))

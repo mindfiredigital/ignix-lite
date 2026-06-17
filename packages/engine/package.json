@@ -1,6 +1,6 @@
 {
     "name": "@mindfiredigital/ignix-lite-engine",
-    "version": "1.4.1",
+    "version": "1.4.7",
     "description": "Core rules engine, validator, theming, and preview rendering for Ignix-Lite",
     "type": "module",
     "main": "./dist/index.js",
@@ -12,9 +12,9 @@
         }
     },
     "scripts": {
-        "build": "tsup && copyfiles -u 2 src/manifests/*.json dist/manifests && pnpm build:index",
+        "build": "tsup && copyfiles -u 2 src/manifests/*.json dist/manifests && copyfiles -f ../../api-full.txt dist && pnpm build:index",
         "build:index": "tsx src/tools/build-index.ts",
-        "dev": "tsup --watch --onSuccess \"copyfiles -u 2 src/manifests/*.json dist/manifests && pnpm build:index\""
+        "dev": "tsup --watch --onSuccess \"copyfiles -u 2 src/manifests/*.json dist/manifests && copyfiles -f ../../api-full.txt dist && pnpm build:index\""
     },
     "dependencies": {
         "emmet": "^2.4.11",
