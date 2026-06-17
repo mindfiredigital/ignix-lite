@@ -1,6 +1,6 @@
 {
     "name": "@mindfiredigital/ignix-lite-engine",
-    "version": "1.4.8",
+    "version": "1.4.5",
     "description": "Core rules engine, validator, theming, and preview rendering for Ignix-Lite",
     "type": "module",
     "main": "./dist/index.js",
