@@ -1,15 +1,5 @@
 # @mindfiredigital/ignix-lite-cli
 
-## 1.6.7
-
-### Patch Changes
-
-- downgrade version
-
-- Updated dependencies []:
-  - @mindfiredigital/ignix-lite-mcp@1.6.7
-  - @mindfiredigital/ignix-lite-engine@1.4.6
-
 ## 1.6.6
 
 ### Patch Changes
