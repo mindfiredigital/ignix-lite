@@ -1,5 +1,11 @@
 # @mindfiredigital/ignix-lite-cli
 
+## 1.6.7
+
+### Patch Changes
+
+- change package version
+
 ## 1.6.6
 
 ### Patch Changes
