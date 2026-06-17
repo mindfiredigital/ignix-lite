@@ -1,54 +1,22 @@
 # @mindfiredigital/ignix-lite-cli
 
-## 1.6.6
+## 1.7.0
+
+### Minor Changes
+
+- [#168](https://github.com/mindfiredigital/ignix-lite/pull/168) [`597f039`](https://github.com/mindfiredigital/ignix-lite/commit/597f039b3dec0af869c75145ac18692d88be015d) Thanks [@Rituparna158](https://github.com/Rituparna158)! - Add MCP server with 11 AI tools (list_components, get_manifest, get_emmet, how_to_build, validate, check_a11y, generate_theme, preview, get_token_summary, create_handoff, apply_handoff). Add CLI mcp setup command supporting Cursor, Gemini CLI, Claude Desktop, and Claude Code auto-configuration.
 
 ### Patch Changes
 
-- use workspace protocol for internal monorepo deps
-
-- Updated dependencies []:
-  - @mindfiredigital/ignix-lite-mcp@1.6.6
-  - @mindfiredigital/ignix-lite-engine@1.4.5
-
-## 1.6.9
-
-### Patch Changes
-
-- fix the release.yml workflow for release of the package
-
-- Updated dependencies []:
-  - @mindfiredigital/ignix-lite-mcp@1.6.9
-  - @mindfiredigital/ignix-lite-engine@1.4.8
-
-## 1.6.8
-
-### Patch Changes
-
-- publish npm-safe workspace dependencies
-
-- Updated dependencies []:
-  - @mindfiredigital/ignix-lite-engine@1.4.7
-  - @mindfiredigital/ignix-lite-mcp@1.6.8
-
-## 1.6.7
-
-### Patch Changes
-
-- update release workflow
-
-- Updated dependencies []:
-  - @mindfiredigital/ignix-lite-engine@1.4.6
-  - @mindfiredigital/ignix-lite-mcp@1.6.7
+- Updated dependencies [[`597f039`](https://github.com/mindfiredigital/ignix-lite/commit/597f039b3dec0af869c75145ac18692d88be015d)]:
+  - @mindfiredigital/ignix-lite-mcp@1.7.0
+  - @mindfiredigital/ignix-lite-engine@1.7.0
 
 ## 1.6.6
 
 ### Patch Changes
 
-- add release script
-
-- Updated dependencies []:
-  - @mindfiredigital/ignix-lite-mcp@1.6.6
-  - @mindfiredigital/ignix-lite-engine@1.4.5
+- change package version
 
 ## 1.6.5
 
