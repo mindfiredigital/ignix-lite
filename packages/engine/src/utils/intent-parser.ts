@@ -173,7 +173,7 @@ export function scoreEntry(
   if (queryWords.some(w => ['section', 'card', 'box', 'container'].includes(w)) && (entry.emmet.includes('section') || entry.emmet.includes('article'))) {
     score += 10
   }
-  if (queryWords.some(w => ['alert', 'banner', 'message', 'notification', 'warning'].includes(w)) && entry.emmet.includes('aside')) {
+  if (queryWords.some(w => ['alert', 'banner', 'notification', 'warning'].includes(w)) && entry.emmet.includes('aside')) {
     score += 10
   }
   if (queryWords.some(w => ['dialog', 'modal', 'popup', 'confirm', 'window'].includes(w)) && entry.emmet.includes('dialog')) {
