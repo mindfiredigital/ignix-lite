@@ -63,6 +63,8 @@
   grid-template-columns: var(--ix-sidebar-width, 16rem) minmax(0, 1fr);
   grid-template-rows: auto minmax(0, 1fr) auto;
   min-height: var(--ix-shell-h, 100vh);
+  max-height: var(--ix-shell-h, 100vh);
+  overflow: hidden;
 }
 
 [data-layout='app-shell'][data-side='right'] {
@@ -75,18 +77,38 @@
 
 [data-region='header'] {
   grid-area: header;
+  padding: var(--ix-space-sm) var(--ix-space-md);
+  border-bottom: 1px solid var(--ix-border);
+  background: var(--ix-surface-raised);
 }
 
 [data-region='sidebar'] {
   grid-area: sidebar;
+  overflow-y: auto;
+  padding: var(--ix-space-md);
+  border-right: 1px solid var(--ix-border);
+  background: var(--ix-surface-raised);
+}
+
+[data-layout='app-shell'][data-side='right'] [data-region='sidebar'] {
+  border-right: none;
+  border-left: 1px solid var(--ix-border);
 }
 
 [data-region='main'] {
   grid-area: main;
+  overflow-y: auto;
+  padding: var(--ix-space-md);
+  background: var(--ix-surface);
 }
 
 [data-region='footer'] {
   grid-area: footer;
+  padding: var(--ix-space-sm) var(--ix-space-md);
+  border-top: 1px solid var(--ix-border);
+  background: var(--ix-surface-raised);
+  font-size: var(--ix-size-sm);
+  color: var(--ix-text-muted);
 }
 
 /* Box */
@@ -227,6 +249,7 @@
 [data-layout='center'] {
   display: grid;
   place-items: center;
+  padding: var(--ix-space-md);
 }
 
 [data-layout='center'][data-height='screen'] {
@@ -308,7 +331,10 @@
 [data-layout='auto-grid'] {
   display: grid;
   gap: var(--ix-space-md);
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--ix-min-column, 16rem)), 1fr));
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, var(--ix-min-column, 16rem)), 1fr)
+  );
 }
 
 [data-layout='auto-grid'][data-min='sm'] {
@@ -356,9 +382,7 @@
   overflow: hidden;
 }
 
-[data-layout='aspect'] > img,
-[data-layout='aspect'] > video,
-[data-layout='aspect'] > iframe {
+[data-layout='aspect'] > * {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -660,6 +684,14 @@ ol[data-flex] {
       'main'
       'footer';
     grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto 1fr auto;
+    max-height: var(--ix-shell-h, 100vh);
+  }
+
+  [data-layout='app-shell'] [data-region='sidebar'] {
+    border-right: none;
+    border-left: none;
+    border-bottom: 1px solid var(--ix-border);
   }
 
   [data-layout='sidebar'] > :first-child,
