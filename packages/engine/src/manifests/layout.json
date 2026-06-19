@@ -1,0 +1,191 @@
+{
+  "component": "layout",
+  "version": "2.1",
+  "description": "Attribute-first layout primitives for app shells, boxes, containers, sections, headers, stacks, inline groups, clusters, split regions, sidebars, responsive grids, auto-grids, masonry, aspect ratios, spacers, pinned helpers, and form grouping.",
+
+  "element": "div",
+
+  "emmet": "main[data-layout=container data-size=lg]>section[data-layout=stack data-gap=lg]",
+
+  "props": {
+    "data-layout": {
+      "type": "string",
+      "values": ["app-shell", "box", "container", "section", "header", "stack", "inline", "cluster", "split", "center", "sidebar", "grid", "auto-grid", "masonry", "aspect", "spacer", "field-group", "form"],
+      "default": "stack",
+      "agent_hint": "Selects the layout primitive. Use app-shell for full app frames, box for local sizing/padding, container for readable page width, section for page regions, header/split for title-actions rows, stack for vertical flow, cluster for wrapping actions, sidebar for nav plus content, grid/auto-grid/masonry for collections, aspect for media, spacer for rhythm, and field-group/form for forms."
+    },
+    "data-region": {
+      "type": "string",
+      "values": ["header", "sidebar", "main", "footer"],
+      "agent_hint": "Places children inside data-layout=app-shell."
+    },
+    "data-size": {
+      "type": "string",
+      "values": ["xs", "sm", "md", "lg", "xl", "full"],
+      "agent_hint": "Sets container width, section padding, or spacer height depending on layout."
+    },
+    "data-width": {
+      "type": "string",
+      "values": ["xs", "sm", "md", "lg", "fit", "full"],
+      "agent_hint": "Sets width for data-layout=box."
+    },
+    "data-pad": {
+      "type": "string",
+      "values": ["none", "xs", "sm", "md", "lg", "xl"],
+      "agent_hint": "Sets padding for data-layout=box."
+    },
+    "data-gap": {
+      "type": "string",
+      "values": ["none", "xs", "sm", "md", "lg", "xl"],
+      "default": "md",
+      "agent_hint": "Controls spacing between layout children."
+    },
+    "data-align": {
+      "type": "string",
+      "values": ["start", "center", "end", "stretch", "baseline"],
+      "agent_hint": "Controls cross-axis alignment for flex-based layouts."
+    },
+    "data-justify": {
+      "type": "string",
+      "values": ["start", "center", "end", "between", "around", "evenly"],
+      "agent_hint": "Controls main-axis alignment for flex-based layouts."
+    },
+    "data-cols": {
+      "type": "string",
+      "values": ["1", "2", "3", "4", "5", "6", "auto", "fill"],
+      "agent_hint": "Sets responsive columns for grid and masonry layouts."
+    },
+    "data-min": {
+      "type": "string",
+      "values": ["sm", "md", "lg", "xl"],
+      "agent_hint": "Sets the minimum column width for data-layout=auto-grid."
+    },
+    "data-wrap": {
+      "type": "boolean",
+      "agent_hint": "Allows inline layout children to wrap."
+    },
+    "data-dense": {
+      "type": "boolean",
+      "agent_hint": "Enables dense packing for data-layout=grid."
+    },
+    "data-side": {
+      "type": "string",
+      "values": ["left", "right"],
+      "default": "left",
+      "agent_hint": "Controls which side contains the sidebar."
+    },
+    "data-height": {
+      "type": "string",
+      "values": ["screen", "content"],
+      "agent_hint": "Sets minimum height for centered layouts."
+    },
+    "data-stack": {
+      "type": "string",
+      "values": ["sm", "md"],
+      "agent_hint": "Stacks split, header, inline, or sidebar layouts at the selected breakpoint."
+    },
+    "data-ratio": {
+      "type": "string",
+      "values": ["square", "video", "wide", "portrait"],
+      "agent_hint": "Sets aspect ratio for data-layout=aspect."
+    },
+    "data-pin": {
+      "type": "string",
+      "values": ["absolute", "fixed"],
+      "agent_hint": "Pins an element using absolute or fixed positioning. Pair with data-position."
+    },
+    "data-position": {
+      "type": "string",
+      "values": ["top-left", "top-right", "bottom-left", "bottom-right"],
+      "agent_hint": "Sets pinned position."
+    },
+    "data-hide": {
+      "type": "string",
+      "values": ["always", "md", "sm"],
+      "agent_hint": "Hides an element at a breakpoint."
+    }
+  },
+
+  "states": [],
+
+  "slots": {
+    "item": {
+      "required": false,
+      "element": ["article", "section", "div", "aside", "main", "header", "footer", "nav", "form", "label", "button", "span"],
+      "agent_hint": "Layout child. Use semantic elements that match the content."
+    }
+  },
+
+  "child_props": {
+    "data-grow": {
+      "type": "string",
+      "values": ["0", "1", "2"],
+      "agent_hint": "Flex grow factor for the child."
+    },
+    "data-shrink": {
+      "type": "string",
+      "values": ["0", "1"],
+      "agent_hint": "Flex shrink factor for the child."
+    },
+    "data-basis": {
+      "type": "string",
+      "values": ["0", "auto", "full"],
+      "agent_hint": "Flex basis for the child."
+    },
+    "data-span": {
+      "type": "string",
+      "values": ["1", "2", "3", "4", "full"],
+      "agent_hint": "Grid column span for the child."
+    }
+  },
+
+  "forbidden_props": ["class"],
+
+  "required_props": ["data-layout"],
+
+  "required_slots": [],
+
+  "required_wrapper": null,
+
+  "do": [
+    "Use data-layout for page and component structure",
+    "Use data-gap, data-pad, and data-size for layout spacing instead of inline styles",
+    "Use semantic child elements such as header, main, aside, section, article, nav, form, and label",
+    "Use data-region only inside app-shell layouts",
+    "Use data-span, data-grow, data-shrink, and data-basis for item behavior"
+  ],
+
+  "dont": [
+    "Do not use class attribute",
+    "Do not use layout-specific inline styles when a data attribute exists",
+    "Do not use data-layout for visual decoration beyond optional box surface, border, and radius helpers"
+  ],
+
+  "examples": [
+    {
+      "label": "App shell",
+      "emmet": "div[data-layout=app-shell]>(header[data-region=header])+(aside[data-region=sidebar])+(main[data-region=main])+(footer[data-region=footer])",
+      "html": "<div data-layout=\"app-shell\"><header data-region=\"header\">Header</header><aside data-region=\"sidebar\">Sidebar</aside><main data-region=\"main\">Content</main><footer data-region=\"footer\">Footer</footer></div>"
+    },
+    {
+      "label": "Box",
+      "emmet": "section[data-layout=box data-width=md data-pad=lg data-surface data-border data-radius]",
+      "html": "<section data-layout=\"box\" data-width=\"md\" data-pad=\"lg\" data-surface data-border data-radius>Content</section>"
+    },
+    {
+      "label": "Responsive card grid",
+      "emmet": "section[data-layout=auto-grid data-min=md data-gap=md]>article*6",
+      "html": "<section data-layout=\"auto-grid\" data-min=\"md\" data-gap=\"md\"><article>Card</article><article>Card</article></section>"
+    },
+    {
+      "label": "Aspect ratio media",
+      "emmet": "figure[data-layout=aspect data-ratio=video]>img[src=? alt=Preview]",
+      "html": "<figure data-layout=\"aspect\" data-ratio=\"video\"><img src=\"?\" alt=\"Preview\"></figure>"
+    },
+    {
+      "label": "Form layout",
+      "emmet": "form[data-layout=form]>(label[data-layout=field-group]{Email}+button[type=submit data-intent=primary]{Submit})",
+      "html": "<form data-layout=\"form\"><label data-layout=\"field-group\">Email<input type=\"email\"></label><button type=\"submit\" data-intent=\"primary\">Submit</button></form>"
+    }
+  ]
+}

@@ -35,6 +35,7 @@ export const manifests: Record<string, Manifest> = {
   form: loadManifest('form.json'),
   grid: loadManifest('grid.json'),
   input: loadManifest('input.json'),
+  layout: loadManifest('layout.json'),
   meter: loadManifest('meter.json'),
   navigation: loadManifest('navigation.json'),
   progress: loadManifest('progress.json'),
