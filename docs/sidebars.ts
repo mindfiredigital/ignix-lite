@@ -12,7 +12,6 @@ const sidebars = {
       ]
     },
 
-
     {
       type: "category",
       label: "Components",
@@ -34,6 +33,7 @@ const sidebars = {
         "components/form",
         "components/grid",
         "components/input",
+        "components/layout",
         "components/meter",
         "components/progress",
         "components/radio",
