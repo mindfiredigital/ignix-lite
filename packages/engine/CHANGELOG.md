@@ -1,5 +1,11 @@
 # @mindfiredigital/ignix-lite-engine
 
+## 1.7.2
+
+### Patch Changes
+
+- Merge pull request [#173](https://github.com/mindfiredigital/ignix-lite/issues/173) from mindfiredigital/development
+
 ## 1.7.1
 
 ### Patch Changes
