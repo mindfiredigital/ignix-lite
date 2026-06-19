@@ -169,6 +169,20 @@ export function scoreEntry(
     }
   }
 
+  // Simple synonym boosting for structural elements
+  if (queryWords.some(w => ['section', 'card', 'box', 'container'].includes(w)) && (entry.emmet.includes('section') || entry.emmet.includes('article'))) {
+    score += 10
+  }
+  if (queryWords.some(w => ['alert', 'banner', 'notification', 'warning'].includes(w)) && entry.emmet.includes('aside')) {
+    score += 10
+  }
+  if (queryWords.some(w => ['dialog', 'modal', 'popup', 'confirm', 'window'].includes(w)) && entry.emmet.includes('dialog')) {
+    score += 10
+  }
+  if (queryWords.some(w => ['tooltip', 'hint', 'hover', 'tip'].includes(w)) && entry.emmet.includes('tooltip')) {
+    score += 10
+  }
+
   // Density = portion of the entry's phrases that were matched by the query
   const density =
     entry.phrases.length > 0 ? matchedCount / entry.phrases.length : 0
