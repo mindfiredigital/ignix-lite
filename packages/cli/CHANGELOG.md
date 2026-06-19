@@ -1,5 +1,15 @@
 # @mindfiredigital/ignix-lite-cli
 
+## 1.7.2
+
+### Patch Changes
+
+- Merge pull request [#173](https://github.com/mindfiredigital/ignix-lite/issues/173) from mindfiredigital/development
+
+- Updated dependencies []:
+  - @mindfiredigital/ignix-lite-mcp@1.7.2
+  - @mindfiredigital/ignix-lite-engine@1.7.2
+
 ## 1.7.1
 
 ### Patch Changes
