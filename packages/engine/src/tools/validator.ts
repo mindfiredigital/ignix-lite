@@ -115,6 +115,29 @@ export function validateHtml(html: string): { valid: boolean, score: number, err
         'data-col',
         'data-row',
         'data-dense',
+        'data-flex',
+        'data-layout',
+        'data-region',
+        'data-size',
+        'data-width',
+        'data-pad',
+        'data-surface',
+        'data-border',
+        'data-radius',
+        'data-cols',
+        'data-min',
+        'data-side',
+        'data-height',
+        'data-stack',
+        'data-wrap',
+        'data-ratio',
+        'data-pin',
+        'data-debug',
+        'data-hide',
+        'data-grow',
+        'data-shrink',
+        'data-basis',
+        'data-span',
         'data-ix-manifest'
     ])
 
@@ -126,6 +149,10 @@ export function validateHtml(html: string): { valid: boolean, score: number, err
 
         const dataIxManifest = el.getAttribute('data-ix-manifest')
         let manifestKey = dataIxManifest || (tag.startsWith('ix-') ? tag.slice(3) : tag)
+
+        if (el.getAttribute('data-flex') !== undefined || el.getAttribute('data-layout') !== undefined) {
+            manifestKey = 'layout'
+        }
 
         if (tag === 'table' && attrs.is === 'ix-table') {
             manifestKey = 'table'
