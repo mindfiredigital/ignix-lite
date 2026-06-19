@@ -76,8 +76,8 @@ danger button / delete button / destructive button
 user want remove item from list
 - button[data-intent=danger]{Remove}
 
-user want cancel account / danger zone
-- section>(h2{Danger Zone})+p{Cannot undo.}+button[data-intent=danger]{Delete Account}
+user want cancel account / danger zone / danger zone section with a delete button / destructive card
+- article>(h2[slot=title]{Danger Zone})+(p[slot=body]{This action is irreversible.})+(button[slot=action data-intent=danger]{Delete Account})
 
 user need confirm before destroy
 - dialog#confirm[data-intent=danger]>(h2{Are you sure?})+p{This cannot be undone.}+(button{Cancel})+(button[data-intent=danger]{Delete})

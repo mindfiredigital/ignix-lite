@@ -7,9 +7,11 @@ const sidebars = {
       collapsed: false,
       items: [
         "introduction",
-        "installation"
+        "installation",
+        "mcp-server"
       ]
     },
+
 
     {
       type: "category",
