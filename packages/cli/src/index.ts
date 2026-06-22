@@ -7,6 +7,7 @@ import { checkA11yCommand } from './commands/check-a11y.js'
 import { listCommand } from './commands/list.js'
 import { infoCommand } from './commands/info.js'
 import { buildCommand } from './commands/build.js'
+import { buildValidatedCommand } from './commands/build-validated.js'
 import { previewCommand } from './commands/preview.js'
 import { mcpSetupCommand, mcpStartCommand } from './commands/mcp.js'
 
@@ -63,6 +64,18 @@ program
   .option('-o, --output <file>', 'Path to write the synthesized HTML output')
   .option('-e, --emmet-only', 'Output the compiled Emmet shorthand only')
   .action(buildCommand)
+
+program
+  .command('build-validated <prompt>')
+  .description(
+    'Generate, validate, and audit accessibility of an Ignix-Lite UI in one command'
+  )
+  .option('-o, --output <file>', 'Path to write the clean HTML output file')
+  .option('-p, --preview', 'Generate a visual PNG preview image')
+  .option('-t, --theme <light|dark>', 'Emulated theme for preview', 'light')
+  .option('-w, --width <pixels>', 'Viewport width for preview', '400')
+  .option('-s, --scale <factor>', 'Device scale factor for preview', '2')
+  .action(buildValidatedCommand)
 
 program
   .command('preview <file>')

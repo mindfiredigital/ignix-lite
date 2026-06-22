@@ -59,5 +59,11 @@ export type Manifest = {
   dont?: string[]
   examples?: ManifestExample[]
   extends?: string
-  
+}
+
+export type SuggestedPatch = {
+  selector: string
+  action: 'setAttribute' | 'removeAttribute' | 'replaceOuterHTML'
+  attribute?: string
+  value?: string
 }
