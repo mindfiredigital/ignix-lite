@@ -1,6 +1,7 @@
 import { parse } from 'node-html-parser'
 import { manifests } from '../manifests/index.js'
-import type { ManifestSlot } from '../types.js'
+import type { ManifestSlot, SuggestedPatch } from '../types.js'
+import { getElementSelector } from './handoff.js'
 
 type ErrorType =
     | 'UNKNOWN_ATTRIBUTE'
@@ -22,6 +23,7 @@ export type ValidationError = {
     fix: string
     confidence: number
     line: number
+    suggestedPatch?: SuggestedPatch
 }
 
 function getLineNumber(html: string, index: number): number {
@@ -197,7 +199,12 @@ export function validateHtml(html: string): { valid: boolean, score: number, err
                 message: `<${tag}> is not a valid ignix-lite component`,
                 fix: `<button>Fix me</button>`,
                 confidence: 0.7,
-                line
+                line,
+                suggestedPatch: {
+                    selector: getElementSelector(el, root),
+                    action: 'replaceOuterHTML',
+                    value: `<button>Fix me</button>`
+                }
             })
             continue
         }
@@ -216,7 +223,12 @@ export function validateHtml(html: string): { valid: boolean, score: number, err
                     message: `<${tag}> must be inside <${manifest.required_wrapper}>`,
                     fix: `<${manifest.required_wrapper}><${elementName}></${elementName}></${manifest.required_wrapper}>`,
                     confidence: 0.95,
-                    line
+                    line,
+                    suggestedPatch: {
+                        selector: getElementSelector(el, root),
+                        action: 'replaceOuterHTML',
+                        value: `<${manifest.required_wrapper}>${el.outerHTML}</${manifest.required_wrapper}>`
+                    }
                 })
             }
         }
@@ -229,7 +241,13 @@ export function validateHtml(html: string): { valid: boolean, score: number, err
                 message: 'span badge must have role=status',
                 fix: `<span role="status">${el.innerText}</span>`,
                 confidence: 0.9,
-                line
+                line,
+                suggestedPatch: {
+                    selector: getElementSelector(el, root),
+                    action: 'setAttribute',
+                    attribute: 'role',
+                    value: 'status'
+                }
             })
         }
 
@@ -241,7 +259,12 @@ export function validateHtml(html: string): { valid: boolean, score: number, err
                 message: 'class attribute not allowed',
                 fix: `<${elementName}>${el.innerText}</${elementName}>`,
                 confidence: 0.99,
-                line
+                line,
+                suggestedPatch: {
+                    selector: getElementSelector(el, root),
+                    action: 'removeAttribute',
+                    attribute: 'class'
+                }
             })
         }
 
@@ -256,7 +279,12 @@ export function validateHtml(html: string): { valid: boolean, score: number, err
                 message: 'Too many props',
                 fix: `<${elementName}></${elementName}>`,
                 confidence: 0.85,
-                line
+                line,
+                suggestedPatch: {
+                    selector: getElementSelector(el, root),
+                    action: 'replaceOuterHTML',
+                    value: `<${elementName}></${elementName}>`
+                }
             })
         }
 
@@ -269,7 +297,12 @@ export function validateHtml(html: string): { valid: boolean, score: number, err
                     message: 'JS handlers forbidden',
                     fix: `<${elementName}></${elementName}>`,
                     confidence: 0.95,
-                    line
+                    line,
+                    suggestedPatch: {
+                        selector: getElementSelector(el, root),
+                        action: 'removeAttribute',
+                        attribute: attr
+                    }
                 })
             }
         }
@@ -283,7 +316,12 @@ export function validateHtml(html: string): { valid: boolean, score: number, err
                     message: `'${attr}' forbidden`,
                     fix: `<${elementName}></${elementName}>`,
                     confidence: 0.98,
-                    line
+                    line,
+                    suggestedPatch: {
+                        selector: getElementSelector(el, root),
+                        action: 'removeAttribute',
+                        attribute: attr
+                    }
                 })
                 continue
             }
@@ -296,7 +334,12 @@ export function validateHtml(html: string): { valid: boolean, score: number, err
                     message: `'${attr}' invalid`,
                     fix: `<${elementName}></${elementName}>`,
                     confidence: 0.95,
-                    line
+                    line,
+                    suggestedPatch: {
+                        selector: getElementSelector(el, root),
+                        action: 'removeAttribute',
+                        attribute: attr
+                    }
                 })
             }
         }
@@ -314,7 +357,13 @@ export function validateHtml(html: string): { valid: boolean, score: number, err
                         valid_values: def.values,
                         fix: `<${elementName} ${attr}="${def.values[0]}"></${elementName}>`,
                         confidence: 0.97,
-                        line
+                        line,
+                        suggestedPatch: {
+                            selector: getElementSelector(el, root),
+                            action: 'setAttribute',
+                            attribute: attr,
+                            value: def.values[0]
+                        }
                     })
                 }
             }
@@ -329,7 +378,13 @@ export function validateHtml(html: string): { valid: boolean, score: number, err
                     message: `Missing ${req}`,
                     fix: `<${elementName} ${req}=""></${elementName}>`,
                     confidence: 0.9,
-                    line
+                    line,
+                    suggestedPatch: {
+                        selector: getElementSelector(el, root),
+                        action: 'setAttribute',
+                        attribute: req,
+                        value: ''
+                    }
                 })
             }
         }
@@ -340,6 +395,11 @@ export function validateHtml(html: string): { valid: boolean, score: number, err
             const child = el.querySelector(`[slot="${slotName}"]`)
 
             if (slotDef.required && !child) {
+                let replacementHtml = el.outerHTML
+                const closingTag = `</${tag}>`
+                if (replacementHtml.endsWith(closingTag)) {
+                    replacementHtml = replacementHtml.slice(0, -closingTag.length) + `<span slot="${slotName}"></span>` + closingTag
+                }
                 errors.push({
                     element: tag,
                     prop: slotName,
@@ -347,7 +407,12 @@ export function validateHtml(html: string): { valid: boolean, score: number, err
                     message: `Missing slot ${slotName}`,
                     fix: `<${elementName}><span slot="${slotName}"></span></${elementName}>`,
                     confidence: 0.95,
-                    line
+                    line,
+                    suggestedPatch: {
+                        selector: getElementSelector(el, root),
+                        action: 'replaceOuterHTML',
+                        value: replacementHtml
+                    }
                 })
             }
 
@@ -362,7 +427,12 @@ export function validateHtml(html: string): { valid: boolean, score: number, err
                         valid_values: slotDef.element,
                         fix: `<${slotDef.element[0]} slot="${slotName}"></${slotDef.element[0]}>`,
                         confidence: 0.95,
-                        line
+                        line,
+                        suggestedPatch: {
+                            selector: getElementSelector(child as any, root),
+                            action: 'replaceOuterHTML',
+                            value: `<${slotDef.element[0]} slot="${slotName}">${child.innerHTML}</${slotDef.element[0]}>`
+                        }
                     })
                 }
             }

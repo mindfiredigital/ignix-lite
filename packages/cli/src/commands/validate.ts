@@ -44,6 +44,17 @@ export async function validateCommand(filePath: string) {
       if (err.fix) {
         console.log(`  ${pc.bold('Fix:')}     ${pc.green(err.fix)}`)
       }
+      if (err.suggestedPatch) {
+        const patch = err.suggestedPatch
+        const details = patch.attribute
+          ? ` [${pc.yellow(patch.attribute)}=${pc.magenta(JSON.stringify(patch.value))}]`
+          : patch.value !== undefined
+            ? ` with value ${pc.magenta(JSON.stringify(patch.value))}`
+            : ''
+        console.log(
+          `  ${pc.bold('Patch:')}   ${pc.cyan(patch.action)} on "${pc.blue(patch.selector)}"${details}`
+        )
+      }
       console.log()
     })
   }

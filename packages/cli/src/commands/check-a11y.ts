@@ -54,6 +54,17 @@ export async function checkA11yCommand(filePath: string) {
       if (issue.fix) {
         console.log(`  ${pc.bold('Fix:')}     ${pc.green(issue.fix)}`)
       }
+      if (issue.suggestedPatch) {
+        const patch = issue.suggestedPatch
+        const details = patch.attribute
+          ? ` [${pc.yellow(patch.attribute)}=${pc.magenta(JSON.stringify(patch.value))}]`
+          : patch.value !== undefined
+            ? ` with value ${pc.magenta(JSON.stringify(patch.value))}`
+            : ''
+        console.log(
+          `  ${pc.bold('Patch:')}   ${pc.cyan(patch.action)} on "${pc.blue(patch.selector)}"${details}`
+        )
+      }
       console.log()
     })
   }

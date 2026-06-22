@@ -1,3 +1,5 @@
+import type { SuggestedPatch } from '../types.js'
+
 export type IssueType = 'error' | 'warning'
 
 export interface A11yIssue {
@@ -7,7 +9,9 @@ export interface A11yIssue {
   message: string
   fix: string
   confidence?: number
+  suggestedPatch?: SuggestedPatch
 }
+
 
 export interface RuleResult {
   ruleName: string
