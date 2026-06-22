@@ -4,7 +4,130 @@ import { readFileSync, existsSync } from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { expandEmmet } from '../utils/emmet-helpers.js'
+import { parse } from 'node-html-parser'
 import type { MCPResponse } from '../types.js'
+
+function htmlToSvg(html: string, width: number): string {
+  const root = parse(html)
+  let currentY = 20
+  const svgElements: string[] = []
+  
+  const drawElement = (node: any, indent: number, xOffset: number, parentWidth: number) => {
+    if (node.nodeType !== 1) return
+    const tagName = node.tagName?.toLowerCase()
+    
+    const intent = node.getAttribute('data-intent') || 'primary'
+    const intentColors: Record<string, { bg: string, border: string, text: string }> = {
+      primary: { bg: '#2563eb', border: '#1d4ed8', text: '#ffffff' },
+      danger: { bg: '#dc2626', border: '#b91c1c', text: '#ffffff' },
+      warning: { bg: '#f59e0b', border: '#d97706', text: '#ffffff' },
+      success: { bg: '#10b981', border: '#047857', text: '#ffffff' },
+      neutral: { bg: '#f3f4f6', border: '#e5e7eb', text: '#374151' },
+      ghost: { bg: 'transparent', border: 'transparent', text: '#4b5563' }
+    }
+    
+    const colors = intentColors[intent] || intentColors.primary
+    
+    if (tagName === 'button') {
+      const textContent = node.text?.trim() || 'Button'
+      svgElements.push(
+        `<g transform="translate(${xOffset}, ${currentY})">`,
+        `  <rect width="100" height="36" rx="6" fill="${colors.bg}" stroke="${colors.border}" stroke-width="1" />`,
+        `  <text x="50" y="22" font-size="12" font-family="sans-serif" font-weight="bold" fill="${colors.text}" text-anchor="middle">${textContent}</text>`,
+        `</g>`
+      )
+      currentY += 46
+    } else if (tagName === 'aside') {
+      const textContent = node.text?.trim() || 'Alert message'
+      const alertColors = intent === 'danger' ? { bg: '#fee2e2', border: '#fca5a5', text: '#991b1b' } :
+                          intent === 'warning' ? { bg: '#fef3c7', border: '#fcd34d', text: '#92400e' } :
+                          intent === 'success' ? { bg: '#d1fae5', border: '#6ee7b7', text: '#065f46' } :
+                                                 { bg: '#dbeafe', border: '#93c5fd', text: '#1e40af' }
+      svgElements.push(
+        `<g transform="translate(${xOffset}, ${currentY})">`,
+        `  <rect width="${parentWidth - 40}" height="48" rx="6" fill="${alertColors.bg}" stroke="${alertColors.border}" stroke-width="1" />`,
+        `  <text x="16" y="28" font-size="12" font-family="sans-serif" fill="${alertColors.text}">${textContent}</text>`,
+        `</g>`
+      )
+      currentY += 58
+    } else if (tagName === 'details') {
+      const summary = node.querySelector('summary')?.text?.trim() || 'Accordion Title'
+      const content = node.querySelector('p')?.text?.trim() || node.text?.replace(summary, '').trim() || 'Accordion Content'
+      const open = node.hasAttribute('open')
+      
+      svgElements.push(
+        `<g transform="translate(${xOffset}, ${currentY})">`,
+        `  <rect width="${parentWidth - 40}" height="${open ? 80 : 36}" rx="6" fill="#ffffff" stroke="#e5e7eb" stroke-width="1" />`,
+        `  <text x="16" y="22" font-size="12" font-family="sans-serif" font-weight="bold" fill="#111827">${open ? '▼' : '►'} ${summary}</text>`
+      )
+      if (open) {
+        svgElements.push(
+          `  <line x1="0" y1="36" x2="${parentWidth - 40}" y2="36" stroke="#e5e7eb" stroke-width="1" />`,
+          `  <text x="16" y="58" font-size="12" font-family="sans-serif" fill="#4b5563">${content}</text>`
+        )
+      }
+      svgElements.push(`</g>`)
+      currentY += open ? 90 : 46
+    } else if (tagName === 'article') {
+      const title = node.querySelector('[slot=title]')?.text?.trim() || 'Card Title'
+      const body = node.querySelector('[slot=body]')?.text?.trim() || 'Card Body text content'
+      svgElements.push(
+        `<g transform="translate(${xOffset}, ${currentY})">`,
+        `  <rect width="${parentWidth - 40}" height="120" rx="8" fill="#ffffff" stroke="#e5e7eb" stroke-width="1" />`,
+        `  <text x="20" y="32" font-size="14" font-family="sans-serif" font-weight="bold" fill="#111827">${title}</text>`,
+        `  <text x="20" y="60" font-size="12" font-family="sans-serif" fill="#4b5563">${body}</text>`,
+        `</g>`
+      )
+      currentY += 132
+    } else if (tagName === 'mark') {
+      const textContent = node.text?.trim() || 'Badge'
+      svgElements.push(
+        `<g transform="translate(${xOffset}, ${currentY})">`,
+        `  <rect width="60" height="20" rx="10" fill="${colors.bg}" stroke="${colors.border}" stroke-width="1" />`,
+        `  <text x="30" y="14" font-size="10" font-family="sans-serif" font-weight="bold" fill="${colors.text}" text-anchor="middle">${textContent}</text>`,
+        `</g>`
+      )
+      currentY += 30
+    } else if (tagName === 'nav') {
+      svgElements.push(
+        `<g transform="translate(${xOffset}, ${currentY})">`,
+        `  <rect width="${parentWidth - 40}" height="32" rx="4" fill="#f3f4f6" />`,
+        `  <text x="16" y="20" font-size="12" font-family="sans-serif" fill="#4b5563">Navigation: ${node.text?.trim().replace(/\s+/g, ' ')}</text>`,
+        `</g>`
+      )
+      currentY += 42
+    } else if (tagName === 'input') {
+      const placeholder = node.getAttribute('placeholder') || 'Enter text...'
+      svgElements.push(
+        `<g transform="translate(${xOffset}, ${currentY})">`,
+        `  <rect width="${parentWidth - 40}" height="36" rx="6" fill="#ffffff" stroke="#d1d5db" stroke-width="1" />`,
+        `  <text x="12" y="22" font-size="12" font-family="sans-serif" fill="#9ca3af">${placeholder}</text>`,
+        `</g>`
+      )
+      currentY += 46
+    } else {
+      for (const child of node.childNodes) {
+        drawElement(child, indent + 1, xOffset, parentWidth)
+      }
+    }
+  }
+
+  for (const child of root.childNodes) {
+    drawElement(child, 0, 20, width)
+  }
+
+  const height = Math.max(150, currentY + 20)
+
+  return [
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" width="${width}" height="${height}" style="background-color:#f9fafb; font-family:system-ui, -apple-system, sans-serif;">`,
+    `  <rect width="100%" height="100%" fill="#f9fafb" />`,
+    `  <text x="20" y="25" font-size="10" fill="#9ca3af" font-weight="bold" letter-spacing="1">IGNIX-LITE FALLBACK PREVIEW</text>`,
+    `  <g transform="translate(0, 20)">`,
+    ...svgElements.map(line => '    ' + line),
+    `  </g>`,
+    `</svg>`
+  ].join('\n')
+}
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -166,17 +289,38 @@ export async function preview(args: PreviewArgs): Promise<MCPResponse> {
     }
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error)
-    console.error('[preview] Render failed:', error)
-    return {
-      content: [
-        {
-          type: 'text',
-          text: JSON.stringify({
-            error: `Preview render failed: ${errorMessage}`,
-            tokens_used: 5
-          })
-        }
-      ]
+    console.warn('[preview] Headless render failed, falling back to static SVG preview:', errorMessage)
+    
+    try {
+      const svgString = htmlToSvg(html, sanitizedWidth)
+      const base64Svg = Buffer.from(svgString).toString('base64')
+      return {
+        content: [
+          {
+            type: 'text',
+            text: JSON.stringify({
+              png: `data:image/svg+xml;base64,${base64Svg}`,
+              svg: svgString,
+              width: sanitizedWidth,
+              render_ms: Date.now() - start,
+              fallback: true,
+              tokens_used: 3
+            })
+          }
+        ]
+      }
+    } catch (fallbackError) {
+      return {
+        content: [
+          {
+            type: 'text',
+            text: JSON.stringify({
+              error: `Preview render and SVG fallback both failed. Render error: ${errorMessage}. Fallback error: ${String(fallbackError)}`,
+              tokens_used: 5
+            })
+          }
+        ]
+      }
     }
   } finally {
     if (browser) {
