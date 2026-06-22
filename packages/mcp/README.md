@@ -15,6 +15,7 @@ This MCP server equips AI coding agents with the runtime capabilities to discove
 - **Headless Visual Preview (`preview`):** Generates high-quality PNG screenshots of rendered components on-the-fly.
 - **Token Receipt System (`get_token_summary`):** Provides token consumption receipts for every tool call to track agent context budget.
 - **Multi-Agent Handoff Protocol (`create_handoff` / `apply_handoff`):** Allows multiple agents to exchange, modify, and patch layouts using lightweight selector diffs.
+- **Bundled Resource (`manifests://all`):** Exposes all component manifests in a single JSON payload to avoid sequential discovery calls.
 
 ---
 
@@ -71,6 +72,16 @@ ignix-lite mcp start
 | `get_token_summary` | `context_window?: number`                  | Returns session stats showing total tokens used by the MCP server.                               |
 | `create_handoff`    | `rendered_html: string, metadata?: object` | Creates a state snapshot envelope for multi-agent layout exchange.                               |
 | `apply_handoff`     | `handoff_id: string, changes: array`       | Patches an existing handoff snapshot with partial component changes.                             |
+
+---
+
+## 📂 MCP Resources
+
+The MCP server exposes the following resource:
+
+| Resource URI      | Name                    | Description                                                                                                                                                  |
+| ----------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `manifests://all` | All Component Manifests | Returns a single JSON object mapping every component to its complete manifest, including Emmet patterns, properties, forbidden configurations, and examples. |
 
 ---
 
