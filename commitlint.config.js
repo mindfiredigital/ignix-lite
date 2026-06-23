@@ -21,7 +21,8 @@ export default {
         'test',
         'stories',
         'cli',
-        'engine'
+        'engine',
+        'a2ui-demo',
       ],
     ],
     'scope-empty': [2, 'never'],
