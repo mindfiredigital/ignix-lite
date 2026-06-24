@@ -29,7 +29,7 @@ console.log(
 )
 
 // Valid scopes for release
-const validScopes = ['core', 'react', 'vue', 'svelte', 'mcp', 'engine', 'cli']
+const validScopes = ['core', 'mcp', 'engine', 'cli', 'skill']
 
 // Regex patterns (with ! support)
 const commitPatterns = {
@@ -105,15 +105,13 @@ if (matchedScopesStr) {
   description =
     description?.trim() || 'No description provided.'
 
-  // Scope → npm package mapping
+  // Scope -> npm package mapping
   const scopeToPackage = {
     core: '@mindfiredigital/ignix-lite',
-    react: '@mindfiredigital/ignix-lite-react',
-    vue: '@mindfiredigital/ignix-lite-vue',
-    svelte: '@mindfiredigital/ignix-lite-svelte',
     mcp: '@mindfiredigital/ignix-lite-mcp',
     engine: '@mindfiredigital/ignix-lite-engine',
     cli: '@mindfiredigital/ignix-lite-cli',
+    skill: '@mindfiredigital/ignix-lite-skill',
   }
 
   const frontmatter = scopes
