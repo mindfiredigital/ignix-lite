@@ -1,4 +1,4 @@
-# @mindfiredigital/ignix-lite-cli
+# Ignix-Lite CLI
 
 > The official command-line tool for [Ignix-Lite](https://github.com/mindfiredigital/ignix-lite) — a zero-JS, CSS-only UI component framework driven entirely by semantic HTML and `data-*` attributes.
 
@@ -115,6 +115,26 @@ ignix-lite build "a search bar with a submit button" --emmet-only
 ```html
 <button data-intent="primary">Save Changes</button>
 ```
+
+---
+
+### `ignix-lite build-validated <prompt>`
+
+Generate, validate, and audit the accessibility of an Ignix-Lite UI component in a single command, running an auto-correct loop to fix any violations.
+
+```bash
+ignix-lite build-validated "a primary button saying Save"
+```
+
+**Options:**
+
+| Flag                   | Default | Description                                         |
+| ---------------------- | ------- | --------------------------------------------------- | ---------------------------------------- |
+| `-o, --output <file>`  | -       | Path to write the clean, validated HTML output file |
+| `-p, --preview`        | `false` | Generate a visual PNG preview image                 |
+| `-t, --theme <light    | dark>`  | `light`                                             | Emulated theme for rendering the preview |
+| `-w, --width <pixels>` | `400`   | Viewport width for the preview                      |
+| `-s, --scale <factor>` | `2`     | Device scale factor for the preview                 |
 
 ---
 
