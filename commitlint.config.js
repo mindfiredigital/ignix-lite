@@ -11,9 +11,6 @@ export default {
       'always',
       [
         'core',
-        'react',
-        'vue',
-        'svelte',
         'mcp',
         'docs',
         'release',
@@ -23,6 +20,7 @@ export default {
         'cli',
         'engine',
         'a2ui-demo',
+        'skill',
       ],
     ],
     'scope-empty': [2, 'never'],
