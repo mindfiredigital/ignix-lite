@@ -1,4 +1,4 @@
-# @mindfiredigital/ignix-lite-engine
+# Ignix-Lite Rules Engine
 
 > The core rules engine powering [Ignix-Lite](https://github.com/mindfiredigital/ignix-lite) — intent resolution, HTML validation, accessibility auditing, theming, component manifests, and visual preview rendering.
 
