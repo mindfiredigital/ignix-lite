@@ -68,7 +68,8 @@
   },
   "pnpm": {
     "onlyBuiltDependencies": [
-      "puppeteer"
+      "puppeteer",
+      "cypress"
     ]
   }
 }
