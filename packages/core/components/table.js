@@ -7,8 +7,11 @@ class IxTable extends HTMLTableElement {
     })
 
     this._tableClickListener = (event) => {
+      console.log('Table click event target:', event.target)
       const header = event.target.closest('th[data-sortable]')
+      console.log('Closest sortable header:', header)
       if (header && this.contains(header)) {
+        console.log('Sorting column...')
         this.sortColumn(header)
       }
     }
