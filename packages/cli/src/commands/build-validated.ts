@@ -105,7 +105,7 @@ export async function buildValidatedCommand(
     return
   }
 
-  // 1. Output generated HTML / Emmet
+  // Output generated HTML / Emmet
   console.log(pc.bold(pc.cyan('\n🔨 Synthesized UI Assets')))
   console.log(pc.gray('═'.repeat(60)))
   console.log(`${pc.bold('Emmet Shorthand:')} ${pc.green(data.emmet || '')}`)
@@ -117,7 +117,7 @@ export async function buildValidatedCommand(
   console.log(data.html || '')
   console.log(pc.gray('─'.repeat(40)))
 
-  // 2. Validation Report
+  // Validation Report
   const val = data.validation
   console.log(pc.bold(pc.cyan(`\n🔍 Design Compliance Validation`)))
   console.log(pc.gray('═'.repeat(60)))
@@ -160,7 +160,7 @@ export async function buildValidatedCommand(
     }
   }
 
-  // 3. Accessibility Report
+  // Accessibility Report
   const a11y = data.accessibility
   console.log(pc.bold(pc.cyan(`\n♿ Accessibility Audit Report`)))
   console.log(pc.gray('═'.repeat(60)))
@@ -218,7 +218,7 @@ export async function buildValidatedCommand(
     }
   }
 
-  // 4. Handle Output HTML File
+  // Handle Output HTML File
   if (options.output && data.html) {
     try {
       const absolutePath = path.resolve(process.cwd(), options.output)
@@ -234,7 +234,7 @@ export async function buildValidatedCommand(
     }
   }
 
-  // 5. Handle Visual Preview File
+  // Handle Visual Preview File
   if (options.preview && data.preview) {
     if (data.preview.error) {
       console.log(

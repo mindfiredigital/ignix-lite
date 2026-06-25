@@ -1,6 +1,6 @@
 # Ignix-Lite Rules Engine
 
-> The core rules engine powering [Ignix-Lite](https://github.com/mindfiredigital/ignix-lite) — intent resolution, HTML validation, accessibility auditing, theming, component manifests, and visual preview rendering.
+> The core rules engine powering [Ignix-Lite](https://github.com/mindfiredigital/ignix-lite) - intent resolution, HTML validation, accessibility auditing, theming, component manifests, and visual preview rendering.
 
 [![npm version](https://img.shields.io/npm/v/@mindfiredigital/ignix-lite-engine)](https://www.npmjs.com/package/@mindfiredigital/ignix-lite-engine)
 [![license](https://img.shields.io/npm/l/@mindfiredigital/ignix-lite-engine)](LICENSE)
@@ -11,7 +11,7 @@
 
 `@mindfiredigital/ignix-lite-engine` is the shared logic layer consumed by both the **CLI** and the **MCP server**. It exposes a set of standalone async functions that you can also use directly in your own tooling, scripts, or Node.js applications.
 
-It requires **no external AI API** — all intelligence is local and deterministic.
+It requires **no external AI API** - all intelligence is local and deterministic.
 
 ---
 
@@ -27,7 +27,7 @@ npm install @mindfiredigital/ignix-lite-engine
 
 ### `howToBuild(description: string)`
 
-Converts a plain English description into the best-fit Ignix-Lite Emmet shorthand and full HTML. Uses a two-layer intent engine — a hand-crafted pattern table (fast, deterministic) with a vector-index fallback for novel descriptions.
+Converts a plain English description into the best-fit Ignix-Lite Emmet shorthand and full HTML. Uses a two-layer intent engine - a hand-crafted pattern table (fast, deterministic) with a vector-index fallback for novel descriptions.
 
 ```ts
 import { howToBuild } from '@mindfiredigital/ignix-lite-engine'
@@ -169,7 +169,7 @@ const result = await listComponents()
 
 ### `getManifest(name: string)`
 
-Returns the full JSON manifest for a component — props, slots, do/don't rules, and Emmet pattern.
+Returns the full JSON manifest for a component - props, slots, do/don't rules, and Emmet pattern.
 
 ```ts
 import { getManifest } from '@mindfiredigital/ignix-lite-engine'
@@ -211,7 +211,7 @@ const patched = await applyHandoff(handoff_id, [
 
 ### `getTokenSummary(context_window?: number)`
 
-Returns token consumption stats for the current session — useful for tracking agent context budget.
+Returns token consumption stats for the current session - useful for tracking agent context budget.
 
 ```ts
 import { getTokenSummary } from '@mindfiredigital/ignix-lite-engine'
@@ -273,7 +273,7 @@ description (text)
 
 | Package | Description |
 |---------|-------------|
-| [`@mindfiredigital/ignix-lite-cli`](../cli) | CLI tool — init, build, validate, theme, preview, mcp |
+| [`@mindfiredigital/ignix-lite-cli`](../cli) | CLI tool - init, build, validate, theme, preview, mcp |
 | [`@mindfiredigital/ignix-lite-mcp`](../mcp) | MCP server exposing all engine tools to AI editors |
 
 ---

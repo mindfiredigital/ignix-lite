@@ -1,8 +1,3 @@
-#!/usr/bin/env bash
-# test-mcp.sh  — Manual smoke-test of Ignix-Lite MCP over stdio
-# Usage: bash packages/skill/scripts/test-mcp.sh
-# Requires: node >= 18, pnpm workspace built (pnpm build from repo root)
-
 set -euo pipefail
 
 MCP_SERVER="node packages/mcp/dist/server.js"
