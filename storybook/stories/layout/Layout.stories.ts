@@ -4,6 +4,33 @@ const meta = {
 
 export default meta
 
+export const Default = {
+  render: () => `
+    <div data-layout="container" data-size="lg">
+      <div data-layout="section" data-size="md">
+        <div data-layout="split">
+          <h2>Default Layout</h2>
+          <mark data-intent="primary">Active</mark>
+        </div>
+        <div data-layout="grid" data-cols="3" data-gap="md">
+          <div data-layout="box" data-surface data-border data-radius data-pad="md">
+            <h3>Box 1</h3>
+            <p>This is a default layout demo using container, section, grid, and box.</p>
+          </div>
+          <div data-layout="box" data-surface data-border data-radius data-pad="md">
+            <h3>Box 2</h3>
+            <p>This is a default layout demo using container, section, grid, and box.</p>
+          </div>
+          <div data-layout="box" data-surface data-border data-radius data-pad="md">
+            <h3>Box 3</h3>
+            <p>This is a default layout demo using container, section, grid, and box.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  `
+}
+
 export const AppShell = {
   render: () => `
     <div data-layout="app-shell" style="--ix-shell-h:420px;">
