@@ -77,14 +77,15 @@ Write standard, semantic markup, and use `data-intent` to apply predefined seman
 
 ## Component Registry
 
-Ignix-Lite includes 28+ semantic, browser-native UI components:
+Ignix-Lite includes 28 semantic, browser-native UI components:
 
 | Category | Components |
 | :--- | :--- |
-| **Actions & Triggers** | Button, Dialog, Dropdown, Tabs, Tooltip |
+| **Actions & Triggers** | Accordion, Button, Dialog, Dropdown, Tabs, Tooltip |
 | **Forms & Input** | Input, Checkbox, Radio, Select, Textarea, Form, Combobox |
 | **Feedback & Status** | Alert, Badge, Progress, Meter, Skeleton, Toast |
 | **Data & Content** | Table, Avatar, Card, Codeblock, Divider |
+| **Layout & Navigation** | Layout, Grid, Breadcrumb, Navigation |
 
 ---
 
