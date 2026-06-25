@@ -56,6 +56,7 @@ type CreateHandoffArgs = {
 
 type ApplyHandoffArgs = {
   handoff_id: string
+  version?: string
   changes: Array<{
     selector: string
     action: 'update' | 'add' | 'remove'
@@ -230,6 +231,10 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
         properties: {
           handoff_id: {
             type: 'string'
+          },
+          version: {
+            type: 'string',
+            description: 'The expected schema version of the handoff snapshot'
           },
           changes: {
             type: 'array',
