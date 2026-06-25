@@ -31,7 +31,7 @@ Ignix-Lite is a **native HTML + ~8 KB CSS** design system.
 ## 2. The ONE Rule
 
 ```
-Style -> data-intent="primary|danger|warning|success|neutral|ghost"
+Style -> data-intent="primary|danger|warning|success|neutral|ghost|gradient"
 State -> native HTML: disabled / aria-busy / aria-invalid / open / checked
 ```
 
@@ -304,11 +304,12 @@ Full token catalogue: [`assets/design-tokens.json`](assets/design-tokens.json)
 
 ---
 
-## 11. MCP Tools (11)
+## 11. MCP Tools (13)
 
 Use tools in this order of preference:
 
 ```
+Build, validate & preview layout -> build_validated({ description, options })
 Describe UI in plain English     -> how_to_build({ description })
 Need full component props/slots  -> get_manifest({ name })
 Just the Emmet snippet           -> get_emmet({ name })
@@ -318,6 +319,7 @@ WCAG 2.2 accessibility check     -> check_a11y({ html })
 Generate a colour theme          -> generate_theme({ prompt })
 Headless visual preview          -> preview({ input, options })
 Token cost summary               -> get_token_summary()
+Compare layout token footprint   -> get_token_cost({ html })
 Create layout handoff            -> create_handoff({ rendered_html, metadata })
 Apply layout handoff changes     -> apply_handoff({ handoff_id, changes })
 ```
@@ -344,6 +346,10 @@ Returns `{ emmet, html, components_used, confidence, tokens, source }`.
 - `confidence` 0–1. If < 0.3, call `list_components()` to refine.
 - `source`: `"intent-table"` (fast) or `"vector-index"` (semantic fallback).
 
+#### `build_validated({ description, options })`
+Generates HTML, validates it, and audits accessibility in a single round-trip.
+Returns `{ emmet, html, components_used, validation, accessibility, preview }`.
+
 #### `generate_theme({ prompt })`
 Returns `{ primary, isDark, css }`. The `css` field is a ready-to-paste `:root { ... }` block.
 
@@ -360,6 +366,10 @@ Renders Emmet shorthand or HTML to a base64 PNG data URL.
 #### `get_token_summary()`
 Returns a summary of token consumption for the current session.
 
+#### `get_token_cost({ html })`
+Estimates and compares the token size footprint of an Ignix-Lite component snippet with an equivalent Tailwind CSS layout estimate.
+Returns `{ ignix_html, ignix_tokens, tailwind_html_estimate, tailwind_tokens, savings_pct }`.
+
 #### `create_handoff({ rendered_html, metadata })`
 Creates a state snapshot envelope for multi-agent layout exchange.
 
@@ -370,6 +380,16 @@ Patches an existing handoff snapshot with partial component changes.
 
 ## 12. Typical AI Workflow
 
+### Composite Flow (All-in-One)
+```javascript
+1. build_validated({
+     description: "a danger confirmation dialog",
+     options: { preview: true }
+   })
+   -> { emmet, html, components_used, validation, accessibility, preview }
+```
+
+### Multi-Call Flow (Step-by-Step)
 ```javascript
 1. how_to_build({ description: "a danger confirmation dialog" })
    -> emmet, html, components_used, confidence
