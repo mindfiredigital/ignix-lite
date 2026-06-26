@@ -1,117 +1,147 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, beforeAll, afterEach } from 'vitest'
+import fs from 'fs'
+import path from 'path'
 
 describe('Layout Component', () => {
+  beforeAll(() => {
+    const cssPath = path.resolve(process.cwd(), 'packages/core/ignix-lite.min.css')
+    const css = fs.readFileSync(cssPath, 'utf8')
+    const style = document.createElement('style')
+    style.textContent = css
+    document.head.appendChild(style)
+  })
+
+  afterEach(() => {
+    document.body.innerHTML = ''
+  })
 
   it('supports data-layout primitives', () => {
-    const el = document.createElement('section')
+    const el = document.createElement('div')
+    document.body.appendChild(el)
 
-    for (const layout of [
-      'app-shell',
-      'box',
-      'container',
-      'section',
-      'header',
-      'stack',
-      'inline',
-      'cluster',
-      'split',
-      'center',
-      'sidebar',
-      'grid',
-      'auto-grid',
-      'masonry',
-      'aspect',
-      'spacer',
-      'field-group',
-      'form'
-    ]) {
-      el.setAttribute('data-layout', layout)
-      expect(el.getAttribute('data-layout')).toBe(layout)
-    }
+    // Stack layout
+    el.setAttribute('data-layout', 'stack')
+    let styles = window.getComputedStyle(el)
+    expect(styles.display).toBe('flex')
+    expect(styles.flexDirection).toBe('column')
+
+    // Inline layout
+    el.setAttribute('data-layout', 'inline')
+    styles = window.getComputedStyle(el)
+    expect(styles.display).toBe('flex')
+    expect(styles.flexDirection).toBe('row')
+
+    // Center layout
+    el.setAttribute('data-layout', 'center')
+    styles = window.getComputedStyle(el)
+    expect(styles.display).toBe('grid')
+    expect(styles.getPropertyValue('place-items') || styles.placeItems || styles.alignItems).toBe('center')
+
+    // Split layout
+    el.setAttribute('data-layout', 'split')
+    styles = window.getComputedStyle(el)
+    expect(styles.display).toBe('flex')
+    expect(styles.justifyContent).toBe('space-between')
+
+    // Grid layout
+    el.setAttribute('data-layout', 'grid')
+    styles = window.getComputedStyle(el)
+    expect(styles.display).toBe('grid')
   })
 
   it('supports responsive grid attributes', () => {
-    const el = document.createElement('section')
+    const el = document.createElement('div')
     el.setAttribute('data-layout', 'grid')
     el.setAttribute('data-cols', '3')
     el.setAttribute('data-gap', 'md')
     el.setAttribute('data-dense', '')
+    document.body.appendChild(el)
 
-    expect(el.getAttribute('data-layout')).toBe('grid')
-    expect(el.getAttribute('data-cols')).toBe('3')
-    expect(el.getAttribute('data-gap')).toBe('md')
-    expect(el.hasAttribute('data-dense')).toBe(true)
+    const styles = window.getComputedStyle(el)
+    expect(styles.display).toBe('grid')
+    expect(styles.getPropertyValue('--ix-grid-columns')).toBe('3')
+    expect(styles.getPropertyValue('gap') || styles.gap).toContain('var(--ix-space-md)')
+    expect(styles.getPropertyValue('grid-auto-flow') || styles.gridAutoFlow).toBe('dense')
   })
 
   it('supports alignment and responsive stacking', () => {
-    const el = document.createElement('header')
+    const el = document.createElement('div')
     el.setAttribute('data-layout', 'split')
     el.setAttribute('data-align', 'center')
     el.setAttribute('data-justify', 'between')
-    el.setAttribute('data-stack', 'sm')
+    document.body.appendChild(el)
 
-    expect(el.getAttribute('data-align')).toBe('center')
-    expect(el.getAttribute('data-justify')).toBe('between')
-    expect(el.getAttribute('data-stack')).toBe('sm')
+    const styles = window.getComputedStyle(el)
+    expect(styles.display).toBe('flex')
+    expect(styles.alignItems).toBe('center')
+    expect(styles.justifyContent).toBe('space-between')
   })
 
   it('supports child sizing attributes', () => {
-    const child = document.createElement('article')
+    const parent = document.createElement('div')
+    parent.setAttribute('data-layout', 'stack')
+    const child = document.createElement('div')
     child.setAttribute('data-grow', '1')
     child.setAttribute('data-shrink', '0')
-    child.setAttribute('data-basis', '0')
-    child.setAttribute('data-span', 'full')
+    parent.appendChild(child)
+    document.body.appendChild(parent)
 
-    expect(child.getAttribute('data-grow')).toBe('1')
-    expect(child.getAttribute('data-shrink')).toBe('0')
-    expect(child.getAttribute('data-basis')).toBe('0')
-    expect(child.getAttribute('data-span')).toBe('full')
+    const styles = window.getComputedStyle(child)
+    expect(styles.getPropertyValue('flex-grow') || styles.flexGrow).toBe('1')
+    expect(styles.getPropertyValue('flex-shrink') || styles.flexShrink).toBe('0')
   })
 
   it('supports app shell regions and box sizing attributes', () => {
     const shell = document.createElement('div')
-    const header = document.createElement('header')
     shell.setAttribute('data-layout', 'app-shell')
+    const header = document.createElement('header')
     header.setAttribute('data-region', 'header')
+    shell.appendChild(header)
+    document.body.appendChild(shell)
 
-    const box = document.createElement('section')
+    let styles = window.getComputedStyle(shell)
+    expect(styles.display).toBe('grid')
+    expect(styles.gridTemplateAreas).toContain('header')
+
+    const box = document.createElement('div')
     box.setAttribute('data-layout', 'box')
     box.setAttribute('data-width', 'md')
     box.setAttribute('data-pad', 'lg')
     box.setAttribute('data-surface', '')
     box.setAttribute('data-border', '')
     box.setAttribute('data-radius', '')
+    document.body.appendChild(box)
 
-    expect(shell.getAttribute('data-layout')).toBe('app-shell')
-    expect(header.getAttribute('data-region')).toBe('header')
-    expect(box.getAttribute('data-width')).toBe('md')
-    expect(box.getAttribute('data-pad')).toBe('lg')
-    expect(box.hasAttribute('data-surface')).toBe(true)
-    expect(box.hasAttribute('data-border')).toBe(true)
-    expect(box.hasAttribute('data-radius')).toBe(true)
+    styles = window.getComputedStyle(box)
+    expect(styles.getPropertyValue('--ix-box-width')).toBe('32rem')
+    expect(styles.getPropertyValue('--ix-box-padding')).toBe('var(--ix-space-lg)')
   })
 
   it('supports media, pin, and responsive helper attributes', () => {
-    const media = document.createElement('figure')
+    const media = document.createElement('div')
     media.setAttribute('data-layout', 'aspect')
     media.setAttribute('data-ratio', 'video')
+    document.body.appendChild(media)
 
-    const pinned = document.createElement('button')
+    let styles = window.getComputedStyle(media)
+    expect(styles.getPropertyValue('--ix-aspect-ratio')).toBe('16/9')
+
+    const pinned = document.createElement('div')
     pinned.setAttribute('data-pin', 'fixed')
     pinned.setAttribute('data-position', 'bottom-right')
-    pinned.setAttribute('data-hide', 'sm')
+    document.body.appendChild(pinned)
 
-    expect(media.getAttribute('data-ratio')).toBe('video')
-    expect(pinned.getAttribute('data-pin')).toBe('fixed')
-    expect(pinned.getAttribute('data-position')).toBe('bottom-right')
-    expect(pinned.getAttribute('data-hide')).toBe('sm')
+    styles = window.getComputedStyle(pinned)
+    expect(styles.position).toBe('fixed')
   })
 
   it('keeps data-flex as a legacy alias', () => {
     const el = document.createElement('div')
     el.setAttribute('data-flex', 'row')
+    document.body.appendChild(el)
 
-    expect(el.getAttribute('data-flex')).toBe('row')
+    const styles = window.getComputedStyle(el)
+    expect(styles.display).toBe('flex')
+    expect(styles.flexDirection).toBe('row')
   })
-
 })
