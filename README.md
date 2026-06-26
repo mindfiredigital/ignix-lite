@@ -32,7 +32,7 @@ Ignix-Lite is designed as a modular monorepo containing the following packages:
 | [`@mindfiredigital/ignix-lite-engine`](/packages/engine) | **Rules Engine** - Core validation, intent parsing, accessibility auditing, and vector search. | [![npm](https://img.shields.io/npm/v/@mindfiredigital/ignix-lite-engine)](https://www.npmjs.com/package/@mindfiredigital/ignix-lite-engine) |
 | [`@mindfiredigital/ignix-lite-cli`](/packages/cli) | **Developer CLI** - Scaffolding, editor setup, themes, and headless component previewing. | [![npm](https://img.shields.io/npm/v/@mindfiredigital/ignix-lite-cli)](https://www.npmjs.com/package/@mindfiredigital/ignix-lite-cli) |
 | [`@mindfiredigital/ignix-lite-mcp`](/packages/mcp) | **MCP Server** - Integrates Ignix-Lite with Claude Desktop, Gemini CLI, Cursor, and other AI systems. | [![npm](https://img.shields.io/npm/v/@mindfiredigital/ignix-lite-mcp)](https://www.npmjs.com/package/@mindfiredigital/ignix-lite-mcp) |
-| [`@mindfiredigital/ignix-lite-skill`](/packages/skill) | **LLM Skill** - Prompts, intents, reference templates, and guidelines for AI code generation. | [![npm](https://img.shields.io/npm/v/@mindfiredigital/ignix-lite-skill)](https://www.npmjs.com/package/@mindfiredigital/ignix-lite-skill) |
+| [`@mindfiredigital/ignix-lite-skill`](/skills/ignix-lite) | **LLM Skill** - Prompts, intents, reference templates, and guidelines for AI code generation. | [![npm](https://img.shields.io/npm/v/@mindfiredigital/ignix-lite-skill)](https://www.npmjs.com/package/@mindfiredigital/ignix-lite-skill) |
 
 ---
 
@@ -131,7 +131,7 @@ pnpm build
 ### Verification & Validation
 ```bash
 # Run the skill check and schema validator
-node packages/skill/scripts/validate.js
+node skills/ignix-lite/scripts/validate.js
 ```
 
 ---
