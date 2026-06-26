@@ -1,3 +1,4 @@
+# Requires: jq (https://jqlang.github.io/jq/) and node >= 18
 set -euo pipefail
 
 MCP_SERVER="node packages/mcp/dist/server.js"
@@ -15,7 +16,10 @@ run_tool() {
   local response
   response=$(echo "$payload" | $MCP_SERVER 2>/dev/null)
 
-  if echo "$response" | grep -q '"error"'; then
+  local json_line
+  json_line=$(echo "$response" | grep '^[{]' || true)
+
+  if [ -n "$json_line" ] && echo "$json_line" | jq -e '.error' >/dev/null 2>&1; then
     echo "  ✗ FAIL  [$tool] $description"
     echo "    Response: $response"
     FAIL=$((FAIL + 1))
