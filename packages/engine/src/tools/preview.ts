@@ -7,6 +7,19 @@ import { expandEmmet } from '../utils/emmet-helpers.js'
 import { parse } from 'node-html-parser'
 import type { MCPResponse } from '../types.js'
 
+function escapeXml(unsafe: string): string {
+  return unsafe.replace(/[<>&'"]/g, (c) => {
+    switch (c) {
+      case '<': return '&lt;'
+      case '>': return '&gt;'
+      case '&': return '&amp;'
+      case '\'': return '&apos;'
+      case '"': return '&quot;'
+      default: return c
+    }
+  })
+}
+
 function htmlToSvg(html: string, width: number): string {
   const root = parse(html)
   let currentY = 20
@@ -29,7 +42,7 @@ function htmlToSvg(html: string, width: number): string {
     const colors = intentColors[intent] || intentColors.primary
     
     if (tagName === 'button') {
-      const textContent = node.text?.trim() || 'Button'
+      const textContent = escapeXml(node.text?.trim() || 'Button')
       svgElements.push(
         `<g transform="translate(${xOffset}, ${currentY})">`,
         `  <rect width="100" height="36" rx="6" fill="${colors.bg}" stroke="${colors.border}" stroke-width="1" />`,
@@ -38,7 +51,7 @@ function htmlToSvg(html: string, width: number): string {
       )
       currentY += 46
     } else if (tagName === 'aside') {
-      const textContent = node.text?.trim() || 'Alert message'
+      const textContent = escapeXml(node.text?.trim() || 'Alert message')
       const alertColors = intent === 'danger' ? { bg: '#fee2e2', border: '#fca5a5', text: '#991b1b' } :
                           intent === 'warning' ? { bg: '#fef3c7', border: '#fcd34d', text: '#92400e' } :
                           intent === 'success' ? { bg: '#d1fae5', border: '#6ee7b7', text: '#065f46' } :
@@ -51,8 +64,10 @@ function htmlToSvg(html: string, width: number): string {
       )
       currentY += 58
     } else if (tagName === 'details') {
-      const summary = node.querySelector('summary')?.text?.trim() || 'Accordion Title'
-      const content = node.querySelector('p')?.text?.trim() || node.text?.replace(summary, '').trim() || 'Accordion Content'
+      const rawSummary = node.querySelector('summary')?.text?.trim() || 'Accordion Title'
+      const rawContent = node.querySelector('p')?.text?.trim() || node.text?.replace(rawSummary, '').trim() || 'Accordion Content'
+      const summary = escapeXml(rawSummary)
+      const content = escapeXml(rawContent)
       const open = node.hasAttribute('open')
       
       svgElements.push(
@@ -69,8 +84,8 @@ function htmlToSvg(html: string, width: number): string {
       svgElements.push(`</g>`)
       currentY += open ? 90 : 46
     } else if (tagName === 'article') {
-      const title = node.querySelector('[slot=title]')?.text?.trim() || 'Card Title'
-      const body = node.querySelector('[slot=body]')?.text?.trim() || 'Card Body text content'
+      const title = escapeXml(node.querySelector('[slot=title]')?.text?.trim() || 'Card Title')
+      const body = escapeXml(node.querySelector('[slot=body]')?.text?.trim() || 'Card Body text content')
       svgElements.push(
         `<g transform="translate(${xOffset}, ${currentY})">`,
         `  <rect width="${parentWidth - 40}" height="120" rx="8" fill="#ffffff" stroke="#e5e7eb" stroke-width="1" />`,
@@ -80,7 +95,7 @@ function htmlToSvg(html: string, width: number): string {
       )
       currentY += 132
     } else if (tagName === 'mark') {
-      const textContent = node.text?.trim() || 'Badge'
+      const textContent = escapeXml(node.text?.trim() || 'Badge')
       svgElements.push(
         `<g transform="translate(${xOffset}, ${currentY})">`,
         `  <rect width="60" height="20" rx="10" fill="${colors.bg}" stroke="${colors.border}" stroke-width="1" />`,
@@ -89,15 +104,16 @@ function htmlToSvg(html: string, width: number): string {
       )
       currentY += 30
     } else if (tagName === 'nav') {
+      const navText = escapeXml(node.text?.trim().replace(/\s+/g, ' ') || '')
       svgElements.push(
         `<g transform="translate(${xOffset}, ${currentY})">`,
         `  <rect width="${parentWidth - 40}" height="32" rx="4" fill="#f3f4f6" />`,
-        `  <text x="16" y="20" font-size="12" font-family="sans-serif" fill="#4b5563">Navigation: ${node.text?.trim().replace(/\s+/g, ' ')}</text>`,
+        `  <text x="16" y="20" font-size="12" font-family="sans-serif" fill="#4b5563">Navigation: ${navText}</text>`,
         `</g>`
       )
       currentY += 42
     } else if (tagName === 'input') {
-      const placeholder = node.getAttribute('placeholder') || 'Enter text...'
+      const placeholder = escapeXml(node.getAttribute('placeholder') || 'Enter text...')
       svgElements.push(
         `<g transform="translate(${xOffset}, ${currentY})">`,
         `  <rect width="${parentWidth - 40}" height="36" rx="6" fill="#ffffff" stroke="#d1d5db" stroke-width="1" />`,
