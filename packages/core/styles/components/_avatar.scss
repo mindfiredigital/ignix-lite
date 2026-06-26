@@ -76,7 +76,9 @@ img[data-size] {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .avatar-skeleton::after {
+
+  .avatar-skeleton::after,
+  [data-avatar-skeleton]::after {
     animation: none;
   }
 }
