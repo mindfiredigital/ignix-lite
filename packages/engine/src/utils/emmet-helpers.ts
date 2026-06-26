@@ -1,12 +1,12 @@
 import emmet from 'emmet'
-import { parse } from 'node-html-parser'
+import { parse, type HTMLElement } from 'node-html-parser'
 
 export function stabilizeHtml(html: string): string {
   try {
     const root = parse(html)
-    const traverse = (node: any) => {
+    const traverse = (node: HTMLElement) => {
       if (node.nodeType === 1) {
-        const attrs = { ...node.rawAttributes }
+        const attrs = { ...node.attributes }
         const sortedKeys = Object.keys(attrs).sort()
         for (const key of Object.keys(attrs)) {
           node.removeAttribute(key)
@@ -17,10 +17,10 @@ export function stabilizeHtml(html: string): string {
         }
       }
       for (const child of node.childNodes) {
-        traverse(child)
+        traverse(child as HTMLElement)
       }
     }
-    traverse(root)
+    traverse(root as HTMLElement)
     return root.toString()
   } catch {
     return html

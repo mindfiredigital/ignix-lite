@@ -1,14 +1,14 @@
-import { parse } from 'node-html-parser'
+import { parse, type HTMLElement } from 'node-html-parser'
 import { getTokenCount } from '../utils/tokenizer.js'
 import type { MCPResponse } from '../types.js'
 
 function estimateTailwindEquivalent(html: string): string {
   const root = parse(html)
 
-  const traverse = (node: any) => {
+  const traverse = (node: HTMLElement) => {
     if (node.nodeType !== 1) return
 
-    let twClasses: string[] = []
+    const twClasses: string[] = []
     const tagName = node.tagName?.toLowerCase()
 
     if (node.hasAttribute('data-layout')) {
@@ -132,7 +132,7 @@ function estimateTailwindEquivalent(html: string): string {
     }
 
     for (const child of node.childNodes) {
-      traverse(child)
+      traverse(child as HTMLElement)
     }
   }
 
