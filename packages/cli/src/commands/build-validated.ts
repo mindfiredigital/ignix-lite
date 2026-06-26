@@ -2,13 +2,7 @@ import { writeFileSync } from 'fs'
 import path from 'path'
 import pc from 'picocolors'
 import { buildValidated } from '@mindfiredigital/ignix-lite-engine'
-
-interface SuggestedPatch {
-  selector: string
-  action: 'setAttribute' | 'removeAttribute' | 'replaceOuterHTML' | string
-  attribute?: string
-  value?: unknown
-}
+import { logSuggestedPatch, type SuggestedPatch } from '../utils/patch.js'
 
 interface ValidationError {
   line: number | string
@@ -145,15 +139,7 @@ export async function buildValidatedCommand(
           console.log(`  ${pc.bold('Fix:')}     ${pc.green(err.fix)}`)
         }
         if (err.suggestedPatch) {
-          const patch = err.suggestedPatch
-          const details = patch.attribute
-            ? ` [${pc.yellow(patch.attribute)}=${pc.magenta(JSON.stringify(patch.value))}]`
-            : patch.value !== undefined
-              ? ` with value ${pc.magenta(JSON.stringify(patch.value))}`
-              : ''
-          console.log(
-            `  ${pc.bold('Patch:')}   ${pc.cyan(patch.action)} on "${pc.blue(patch.selector)}"${details}`
-          )
+          logSuggestedPatch(err.suggestedPatch)
         }
         console.log()
       })
@@ -203,15 +189,7 @@ export async function buildValidatedCommand(
           console.log(`  ${pc.bold('Fix:')}     ${pc.green(issue.fix)}`)
         }
         if (issue.suggestedPatch) {
-          const patch = issue.suggestedPatch
-          const details = patch.attribute
-            ? ` [${pc.yellow(patch.attribute)}=${pc.magenta(JSON.stringify(patch.value))}]`
-            : patch.value !== undefined
-              ? ` with value ${pc.magenta(JSON.stringify(patch.value))}`
-              : ''
-          console.log(
-            `  ${pc.bold('Patch:')}   ${pc.cyan(patch.action)} on "${pc.blue(patch.selector)}"${details}`
-          )
+          logSuggestedPatch(issue.suggestedPatch)
         }
         console.log()
       })

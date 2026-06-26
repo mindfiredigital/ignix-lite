@@ -2,6 +2,7 @@ import { readFileSync, existsSync } from 'fs'
 import path from 'path'
 import pc from 'picocolors'
 import { auditA11y } from '@mindfiredigital/ignix-lite-engine'
+import { logSuggestedPatch } from '../utils/patch.js'
 
 export async function checkA11yCommand(filePath: string) {
   const absolutePath = path.resolve(process.cwd(), filePath)
@@ -55,15 +56,7 @@ export async function checkA11yCommand(filePath: string) {
         console.log(`  ${pc.bold('Fix:')}     ${pc.green(issue.fix)}`)
       }
       if (issue.suggestedPatch) {
-        const patch = issue.suggestedPatch
-        const details = patch.attribute
-          ? ` [${pc.yellow(patch.attribute)}=${pc.magenta(JSON.stringify(patch.value))}]`
-          : patch.value !== undefined
-            ? ` with value ${pc.magenta(JSON.stringify(patch.value))}`
-            : ''
-        console.log(
-          `  ${pc.bold('Patch:')}   ${pc.cyan(patch.action)} on "${pc.blue(patch.selector)}"${details}`
-        )
+        logSuggestedPatch(issue.suggestedPatch)
       }
       console.log()
     })
