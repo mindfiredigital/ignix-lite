@@ -429,7 +429,7 @@ export function validateHtml(html: string): { valid: boolean, score: number, err
                         confidence: 0.95,
                         line,
                         suggestedPatch: {
-                            selector: getElementSelector(child as any, root),
+                            selector: getElementSelector(child, root),
                             action: 'replaceOuterHTML',
                             value: `<${slotDef.element[0]} slot="${slotName}">${child.innerHTML}</${slotDef.element[0]}>`
                         }
