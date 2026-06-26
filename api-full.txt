@@ -243,11 +243,14 @@ simple content card / info card
 - article>(h3[slot=title]{Card Title})+(p[slot=body]{Card body content goes here.})+(button[slot=action data-intent=ghost]{Learn More})
 
 --- ACCORDION / FAQ ---
-expandable section / FAQ item
+details accordion / expandable details section / FAQ item / details tag
 - details>summary{Question goes here?}+p{Answer goes here.}
 
-multiple FAQ items
+multiple details accordions / multiple FAQ items
 - (details>summary{Question 1}+p{Answer 1})+(details>summary{Question 2}+p{Answer 2})+(details>summary{Question 3}+p{Answer 3})
+
+details accordion with buttons / accordion with primary button and danger button
+- details>summary{Question goes here?}+p{Answer goes here.}+button{Confirm}+button[data-intent=danger]{Delete}
 
 default open accordion
 - details[open]>summary{Already Open}+p{This is visible by default.}
