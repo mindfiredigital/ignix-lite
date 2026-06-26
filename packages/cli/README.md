@@ -128,13 +128,13 @@ ignix-lite build-validated "a primary button saying Save"
 
 **Options:**
 
-| Flag                   | Default | Description                                         |
-| ---------------------- | ------- | --------------------------------------------------- |
-| `-o, --output <file>`  | -       | Path to write the clean, validated HTML output file |
-| `-p, --preview`        | `false` | Generate a visual PNG preview image                 |
+| Flag                        | Default | Description                                         |
+| --------------------------- | ------- | --------------------------------------------------- |
+| `-o, --output <file>`       | -       | Path to write the clean, validated HTML output file |
+| `-p, --preview`             | `false` | Generate a visual PNG preview image                 |
 | `-t, --theme <light\|dark>` | `light` | Emulated theme for rendering the preview            |
-| `-w, --width <pixels>` | `400`   | Viewport width for the preview                      |
-| `-s, --scale <factor>` | `2`     | Device scale factor for the preview                 |
+| `-w, --width <pixels>`      | `400`   | Viewport width for the preview                      |
+| `-s, --scale <factor>`      | `2`     | Device scale factor for the preview                 |
 
 ---
 
