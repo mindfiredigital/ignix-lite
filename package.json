@@ -13,6 +13,7 @@
     "lint": "turbo run lint",
     "test": "vitest",
     "format": "turbo run format",
+    "a2ui-demo": "pnpm --filter @mindfiredigital/ignix-lite-a2ui-demo dev",
     "prepare": "husky",
     "typecheck": "tsc -b",
     "size": "node scripts/size.js",
@@ -27,7 +28,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "packageManager": "pnpm@10.33.0",
   "devDependencies": {
     "@babel/core": "^7.29.0",
@@ -67,7 +68,8 @@
   },
   "pnpm": {
     "onlyBuiltDependencies": [
-      "puppeteer"
+      "puppeteer",
+      "cypress"
     ]
   }
 }

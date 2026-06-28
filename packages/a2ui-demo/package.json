@@ -1,0 +1,22 @@
+{
+  "name": "@mindfiredigital/ignix-lite-a2ui-demo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@a2ui/lit": "^0.9.0",
+    "@a2ui/web_core": "^0.9.0",
+    "lit": "^3.1.2",
+    "zod": "^3.22.4",
+    "@mindfiredigital/ignix-lite": "workspace:^"
+  },
+  "devDependencies": {
+    "vite": "^8.0.10",
+    "typescript": "^5.4.5"
+  }
+}

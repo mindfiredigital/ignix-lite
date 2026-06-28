@@ -1,0 +1,800 @@
+{
+  "version": "2.0.0",
+  "description": "All data-intent, data-variant, data-size, and other attribute values per Ignix-Lite component. Zero class names - styling is driven exclusively by attributes and native HTML state attributes.",
+  "global_rule": "Never use class=, variant=, color=, or any framework-style prop. Use data-intent + native HTML attributes or specific custom attributes only.",
+  "components": {
+    "accordion": {
+      "element": "details",
+      "data-intent": [],
+      "state_attrs": [
+        "open"
+      ],
+      "forbidden": [
+        "class",
+        "variant",
+        "color",
+        "style",
+        "onclick",
+        "isOpen"
+      ],
+      "notes": "Use summary as the disclosure trigger."
+    },
+    "alert": {
+      "element": "aside",
+      "data-intent": [
+        "primary",
+        "info",
+        "success",
+        "warning",
+        "danger"
+      ],
+      "default": "info",
+      "state_attrs": [],
+      "forbidden": [
+        "class",
+        "variant",
+        "color",
+        "style",
+        "onclick",
+        "type"
+      ],
+      "notes": "Use native <aside> element. Style with data-intent only. Never use ix-alert or div."
+    },
+    "avatar": {
+      "element": "img | span",
+      "data-size": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default_size": "md",
+      "state_attrs": [],
+      "forbidden": [
+        "size",
+        "variant",
+        "shape",
+        "rounded",
+        "class"
+      ],
+      "notes": "Use img for avatar images. Use span for text fallbacks (e.g., initials). Styled when data-size is present."
+    },
+    "badge": {
+      "element": "mark | span[role=status]",
+      "data-intent": [
+        "success",
+        "danger",
+        "warning",
+        "neutral"
+      ],
+      "default": "neutral",
+      "state_attrs": [],
+      "forbidden": [
+        "class",
+        "variant",
+        "color",
+        "style",
+        "onclick"
+      ],
+      "notes": "Use <mark> for inline highlighted text. Use <span role=status> for badge chips (role=status is required)."
+    },
+    "breadcrumb": {
+      "element": "nav[aria-label=Breadcrumb]",
+      "data-style": [
+        "chevron",
+        "slash",
+        "guillemet",
+        "arrow",
+        "thread",
+        "pipe"
+      ],
+      "data-intent": [
+        "primary",
+        "success",
+        "warning",
+        "danger",
+        "gradient"
+      ],
+      "state_attrs": [
+        "aria-current"
+      ],
+      "forbidden": [
+        "variant",
+        "color",
+        "appearance",
+        "separator",
+        "items",
+        "activeItem",
+        "class",
+        "active"
+      ],
+      "notes": "Wrap breadcrumb structure in nav > ol > li > a. Mark the current page link with aria-current='page'."
+    },
+    "button": {
+      "element": "button",
+      "data-intent": [
+        "primary",
+        "danger",
+        "warning",
+        "success",
+        "gradient",
+        "neutral",
+        "ghost"
+      ],
+      "default": "primary",
+      "state_attrs": [
+        "disabled",
+        "aria-busy"
+      ],
+      "forbidden": [
+        "class",
+        "variant",
+        "color",
+        "isLoading",
+        "isDisabled",
+        "size",
+        "appearance",
+        "colorScheme"
+      ],
+      "notes": "Use danger for destructive actions. Use ghost for low-emphasis secondary actions. Use aria-busy for loading spinner."
+    },
+    "card": {
+      "element": "article",
+      "data-intent": [],
+      "slots": [
+        "avatar",
+        "title",
+        "meta",
+        "body",
+        "action",
+        "footer"
+      ],
+      "state_attrs": [],
+      "forbidden": [
+        "title",
+        "subtitle",
+        "avatar",
+        "image",
+        "body",
+        "footer",
+        "actionLabel",
+        "class",
+        "variant"
+      ],
+      "notes": "Use slot attributes for content placement on children. Renders as native article."
+    },
+    "checkbox": {
+      "element": "input[type=checkbox]",
+      "data-intent": [
+        "success",
+        "danger",
+        "warning",
+        "neutral"
+      ],
+      "data-size": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "state_attrs": [
+        "disabled",
+        "required",
+        "checked",
+        "aria-invalid"
+      ],
+      "forbidden": [
+        "class",
+        "variant",
+        "color",
+        "style",
+        "onclick"
+      ],
+      "notes": "Must be wrapped inside a label element. data-intent and data-size are applied on the label wrapper, not on the input."
+    },
+    "codeblock": {
+      "element": "pre > code",
+      "data-lang": [
+        "js",
+        "ts",
+        "python",
+        "bash",
+        "html",
+        "css",
+        "json",
+        "text"
+      ],
+      "default": "text",
+      "state_attrs": [],
+      "forbidden": [
+        "language",
+        "variant",
+        "theme",
+        "class"
+      ],
+      "notes": "Wrap code inside pre element. Use data-lang to indicate language metadata."
+    },
+    "combobox": {
+      "element": "ix-combobox",
+      "data-intent": [
+        "primary",
+        "success",
+        "warning",
+        "danger",
+        "gradient"
+      ],
+      "state_attrs": [
+        "disabled"
+      ],
+      "forbidden": [
+        "class",
+        "variant"
+      ],
+      "notes": "Uses ix-combobox custom element. Render search chips inside [data-chips], and input, button[data-clear], and result lists in ul > li."
+    },
+    "dialog": {
+      "element": "dialog",
+      "data-intent": [
+        "danger",
+        "warning",
+        "info"
+      ],
+      "default": "info",
+      "state_attrs": [
+        "open"
+      ],
+      "forbidden": [
+        "class",
+        "variant",
+        "color",
+        "style",
+        "isOpen"
+      ],
+      "notes": "Include h2 heading, p description, and action buttons inside [data-actions]. Open via JS showModal()."
+    },
+    "divider": {
+      "element": "hr",
+      "data-orientation": [
+        "horizontal",
+        "vertical"
+      ],
+      "default": "horizontal",
+      "state_attrs": [],
+      "forbidden": [
+        "class"
+      ],
+      "notes": "Use native hr element. Use data-orientation for vertical separators."
+    },
+    "dropdown": {
+      "element": "ix-dropdown",
+      "data-intent": [
+        "primary",
+        "success",
+        "warning",
+        "danger",
+        "ghost",
+        "gradient",
+        "neutral"
+      ],
+      "default": "neutral",
+      "state_attrs": [
+        "open",
+        "aria-expanded"
+      ],
+      "forbidden": [
+        "variant",
+        "theme",
+        "size",
+        "class"
+      ],
+      "notes": "Requires trigger slot (button) and menu slot (ul). Trigger has slot='trigger' and menu has slot='menu'."
+    },
+    "form": {
+      "element": "form",
+      "data-intent": [],
+      "state_attrs": [
+        "aria-busy",
+        "data-loading"
+      ],
+      "forbidden": [
+        "class",
+        "variant",
+        "color",
+        "style"
+      ],
+      "notes": "Use aria-busy or data-loading for loading state."
+    },
+    "grid": {
+      "element": "section",
+      "data-grid": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "auto",
+        "fill"
+      ],
+      "data-gap": [
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ],
+      "data-align": [
+        "start",
+        "center",
+        "end",
+        "stretch",
+        "baseline"
+      ],
+      "data-justify": [
+        "start",
+        "center",
+        "end",
+        "stretch"
+      ],
+      "data-dense": "boolean",
+      "child_props": {
+        "data-col": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "full"
+        ],
+        "data-row": [
+          "2",
+          "3"
+        ]
+      },
+      "state_attrs": [],
+      "forbidden": [
+        "class"
+      ],
+      "notes": "Use section as the grid container with data-grid attribute."
+    },
+    "input": {
+      "element": "input",
+      "data-intent": [
+        "primary",
+        "danger",
+        "warning",
+        "success",
+        "neutral"
+      ],
+      "default": "neutral",
+      "state_attrs": [
+        "disabled",
+        "required",
+        "readonly",
+        "aria-invalid"
+      ],
+      "forbidden": [
+        "variant",
+        "color",
+        "appearance",
+        "size",
+        "class",
+        "isInvalid"
+      ],
+      "notes": "Always wrap input inside label for accessibility. Use aria-invalid for error state."
+    },
+    "layout": {
+      "element": "div | section | aside | main | header | footer | nav | form | label | article | figure | span",
+      "data-layout": [
+        "app-shell",
+        "box",
+        "container",
+        "section",
+        "header",
+        "stack",
+        "inline",
+        "cluster",
+        "split",
+        "center",
+        "sidebar",
+        "grid",
+        "auto-grid",
+        "masonry",
+        "aspect",
+        "spacer",
+        "field-group",
+        "form"
+      ],
+      "data-size": [
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl",
+        "full"
+      ],
+      "data-width": [
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "fit",
+        "full"
+      ],
+      "data-pad": [
+        "none",
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ],
+      "data-gap": [
+        "none",
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ],
+      "data-align": [
+        "start",
+        "center",
+        "end",
+        "stretch",
+        "baseline"
+      ],
+      "data-justify": [
+        "start",
+        "center",
+        "end",
+        "between",
+        "around",
+        "evenly"
+      ],
+      "data-cols": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "auto",
+        "fill"
+      ],
+      "data-min": [
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ],
+      "data-side": [
+        "left",
+        "right"
+      ],
+      "data-height": [
+        "screen",
+        "content"
+      ],
+      "data-stack": [
+        "sm",
+        "md"
+      ],
+      "data-ratio": [
+        "square",
+        "video",
+        "wide",
+        "portrait"
+      ],
+      "data-pin": [
+        "absolute",
+        "fixed"
+      ],
+      "data-position": [
+        "top-left",
+        "top-right",
+        "bottom-left",
+        "bottom-right"
+      ],
+      "data-hide": [
+        "always",
+        "md",
+        "sm"
+      ],
+      "child_props": {
+        "data-grow": [
+          "0",
+          "1",
+          "2"
+        ],
+        "data-shrink": [
+          "0",
+          "1"
+        ],
+        "data-basis": [
+          "0",
+          "auto",
+          "full"
+        ],
+        "data-span": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "full"
+        ]
+      },
+      "state_attrs": [],
+      "forbidden": [
+        "class",
+        "variant",
+        "style"
+      ],
+      "notes": "Attribute-first layout primitives. Use data-layout to specify the layout, and other helper attributes to configure spacing, alignment, width, padding, columns, grid spans, etc."
+    },
+    "meter": {
+      "element": "meter",
+      "data-intent": [],
+      "state_attrs": [
+        "value",
+        "min",
+        "max",
+        "low",
+        "high",
+        "optimum"
+      ],
+      "forbidden": [
+        "variant",
+        "intent",
+        "color",
+        "percentage",
+        "progress",
+        "class"
+      ],
+      "notes": "Use native meter element attributes."
+    },
+    "navigation": {
+      "element": "nav",
+      "data-intent": [],
+      "state_attrs": [
+        "aria-current"
+      ],
+      "forbidden": [
+        "variant",
+        "intent",
+        "theme",
+        "class",
+        "size"
+      ],
+      "notes": "Use aria-current='page' to highlight the active link in the navigation menu."
+    },
+    "progress": {
+      "element": "progress",
+      "data-intent": [],
+      "state_attrs": [
+        "value",
+        "max"
+      ],
+      "forbidden": [
+        "variant",
+        "intent",
+        "appearance",
+        "percentage",
+        "color",
+        "colorScheme",
+        "meter",
+        "class",
+        "percent"
+      ],
+      "notes": "Use native progress element with value and max."
+    },
+    "radio": {
+      "element": "input[type=radio]",
+      "data-intent": [
+        "success",
+        "danger",
+        "warning",
+        "neutral"
+      ],
+      "data-size": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "state_attrs": [
+        "disabled",
+        "required",
+        "checked"
+      ],
+      "forbidden": [
+        "class",
+        "variant",
+        "color",
+        "style",
+        "onclick"
+      ],
+      "notes": "Must be wrapped inside a label element. data-intent and data-size are applied on the label wrapper, not on the input."
+    },
+    "select": {
+      "element": "select",
+      "data-intent": [
+        "primary",
+        "danger",
+        "warning",
+        "success",
+        "neutral"
+      ],
+      "default": "neutral",
+      "state_attrs": [
+        "disabled",
+        "required",
+        "multiple"
+      ],
+      "forbidden": [
+        "variant",
+        "color",
+        "appearance",
+        "colorScheme",
+        "size",
+        "isDisabled",
+        "class"
+      ],
+      "notes": "Always wrap select inside a label element. Use multiple for multi-select dropdown."
+    },
+    "skeleton": {
+      "element": "span",
+      "data-shape": [
+        "text",
+        "circle",
+        "rect"
+      ],
+      "data-lines": "number",
+      "state_attrs": [
+        "aria-busy"
+      ],
+      "forbidden": [
+        "variant",
+        "intent",
+        "color",
+        "appearance",
+        "size",
+        "isLoading",
+        "class",
+        "type",
+        "loading"
+      ],
+      "notes": "Renders as a span with aria-busy='true'. shape circle is for avatars, rect is for cards/banners, text is for lines. Can have data-lines."
+    },
+    "tab": {
+      "element": "ix-tabs",
+      "data-variant": [
+        "default",
+        "underline",
+        "pill",
+        "gradient"
+      ],
+      "default": "default",
+      "state_attrs": [
+        "aria-selected",
+        "hidden"
+      ],
+      "forbidden": [
+        "variant",
+        "color",
+        "size",
+        "appearance",
+        "class",
+        "activeTab",
+        "active",
+        "isSelected"
+      ],
+      "notes": "Uses ix-tabs custom element. Tab buttons must have slot='tab' and panels must have slot='panel'."
+    },
+    "table": {
+      "element": "table",
+      "data-sortable": "boolean",
+      "state_attrs": [
+        "aria-sort"
+      ],
+      "forbidden": [
+        "sortable",
+        "variant",
+        "theme",
+        "direction",
+        "class",
+        "striped",
+        "bordered"
+      ],
+      "notes": "Use table element. For sortable headers, use table[is=ix-table] with data-sortable on th."
+    },
+    "textarea": {
+      "element": "textarea",
+      "data-intent": [
+        "primary",
+        "danger",
+        "warning",
+        "success",
+        "neutral"
+      ],
+      "default": "neutral",
+      "state_attrs": [
+        "disabled",
+        "required",
+        "readonly",
+        "aria-invalid"
+      ],
+      "forbidden": [
+        "variant",
+        "color",
+        "appearance",
+        "colorScheme",
+        "size",
+        "isDisabled",
+        "class"
+      ],
+      "notes": "Always wrap textarea inside a label element. Default has no resize limits, but resize/fixed can be applied."
+    },
+    "toast": {
+      "element": "ix-toast",
+      "data-intent": [
+        "neutral",
+        "primary",
+        "success",
+        "warning",
+        "danger",
+        "gradient"
+      ],
+      "data-variant": [
+        "fade",
+        "slide",
+        "pop",
+        "action"
+      ],
+      "data-position": [
+        "top-left",
+        "top-right",
+        "bottom-left",
+        "bottom-right",
+        "bottom-center"
+      ],
+      "default": "neutral",
+      "state_attrs": [
+        "aria-live"
+      ],
+      "forbidden": [
+        "variant",
+        "position",
+        "theme",
+        "class",
+        "animation",
+        "placement",
+        "type"
+      ],
+      "notes": "Mount ix-toast container once. Trigger toasts via JS show({ ... })."
+    },
+    "tooltip": {
+      "element": "ix-tooltip",
+      "data-position": [
+        "top",
+        "bottom",
+        "left",
+        "right"
+      ],
+      "data-intent": [
+        "success",
+        "danger",
+        "warning"
+      ],
+      "default_position": "top",
+      "state_attrs": [],
+      "forbidden": [
+        "variant",
+        "placement",
+        "color",
+        "theme",
+        "position",
+        "class"
+      ],
+      "notes": "Uses ix-tooltip element. content attribute is required."
+    }
+  }
+}

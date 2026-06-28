@@ -8,11 +8,28 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 function loadManifest(file: string): Manifest {
-  let manifestsDir = path.resolve(__dirname, 'manifests')
-  if (!existsSync(manifestsDir) && existsSync(path.resolve(__dirname, file))) {
-    manifestsDir = __dirname
+  const locations = [
+    path.resolve(__dirname, 'manifests', file),
+    path.resolve(__dirname, file),
+    path.resolve(__dirname, '..', 'src', 'manifests', file),
+    path.resolve(__dirname, '..', 'manifests', file),
+    path.resolve(process.cwd(), 'packages', 'engine', 'src', 'manifests', file),
+    path.resolve(process.cwd(), 'packages', 'engine', 'dist', 'manifests', file),
+    path.resolve(process.cwd(), 'node_modules', '@mindfiredigital', 'ignix-lite-engine', 'dist', 'manifests', file)
+  ]
+
+  let manifestPath = ''
+  for (const loc of locations) {
+    if (existsSync(loc)) {
+      manifestPath = loc
+      break
+    }
   }
-  const manifestPath = path.resolve(manifestsDir, file)
+
+  if (!manifestPath) {
+    manifestPath = path.resolve(__dirname, 'manifests', file)
+  }
+
   const manifest = JSON.parse(readFileSync(manifestPath, 'utf8')) as Manifest
   manifest.tokens = getTokenCount(manifest.emmet)
   return manifest
@@ -35,6 +52,7 @@ export const manifests: Record<string, Manifest> = {
   form: loadManifest('form.json'),
   grid: loadManifest('grid.json'),
   input: loadManifest('input.json'),
+  layout: loadManifest('layout.json'),
   meter: loadManifest('meter.json'),
   navigation: loadManifest('navigation.json'),
   progress: loadManifest('progress.json'),

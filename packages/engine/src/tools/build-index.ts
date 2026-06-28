@@ -11,7 +11,7 @@ type Example = {
 const files = readdirSync('src/manifests')
 
 const index = files
-  .filter((file) => file.endsWith('.json'))
+  .filter((file) => file.endsWith('.json') && file !== 'manifests.json')
   .map((file) => {
     const manifest = JSON.parse(readFileSync(`src/manifests/${file}`, 'utf8'))
 

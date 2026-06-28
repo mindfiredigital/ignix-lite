@@ -161,12 +161,18 @@ export async function howToBuild(description: string): Promise<MCPResponse> {
     }
   }
 
+  // Remove common framework and metadata noise words to enable robust fuzzy matching
+  let matchedDesc = cleanDesc.replace(/\b(react|vue|svelte|angular|component|components|library|ui|framework|html|tag|tags|element|elements)\b/gi, '').trim()
+  if (!matchedDesc) {
+    matchedDesc = cleanDesc
+  }
+
   // Layer 1 - fast, deterministic, hand-crafted intent table
-  let match = searchIntentTable(cleanDesc)
+  let match = searchIntentTable(matchedDesc)
 
   // Layer 2 - vector index fallback for novel / unknown queries
   if (!match) {
-    match = searchVectorLayer(cleanDesc)
+    match = searchVectorLayer(matchedDesc)
   }
 
   if (!match) {

@@ -7,7 +7,7 @@ description: Use the Ignix-Lite MCP server to build semantic HTML, validate mark
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-The **Ignix-Lite MCP Server** connects your AI assistant directly to the Ignix-Lite engine. It exposes **11 precision tools** that let AI agents write, validate, audit, theme, and preview classless semantic HTML without hallucination.
+The **Ignix-Lite MCP Server** connects your AI assistant directly to the Ignix-Lite engine. It exposes **13 precision tools** that let AI agents write, validate, audit, theme, and preview classless semantic HTML without hallucination.
 
 :::tip What is MCP?
 [Model Context Protocol (MCP)](https://modelcontextprotocol.io) is an open standard that allows AI assistants to securely call external tools and data sources.
@@ -84,11 +84,11 @@ Run `claude` in your project to start using the tools.
 
 ## Available Tools
 
-The Ignix-Lite MCP server exposes **11 precision tools** to help you build, validate, audit, and preview interfaces using natural language:
+The Ignix-Lite MCP server exposes **13 precision tools** to help you build, validate, audit, and preview interfaces using natural language:
 
 | Tool Name | Category | Inputs | Description | Example Prompt |
 | :--- | :--- | :--- | :--- | :--- |
-| `list_components` | Discovery | None | Lists all 27 available Ignix-Lite components. | `"List all available Ignix-Lite components"` |
+| `list_components` | Discovery | None | Lists all 28 available Ignix-Lite components. | `"List all available Ignix-Lite components"` |
 | `get_manifest` | Discovery | `name` (required) | Returns spec (allowed attributes, rules, examples) for a component. | `"What attributes does the toast component support?"` |
 | `get_emmet` | Discovery | `name` (required) | Returns the standard Emmet shorthand pattern for a component. | `"Give me the Emmet shorthand for a dropdown menu"` |
 | `how_to_build` | Build | `description` (required) | Converts plain English UI descriptions into HTML and Emmet. | `"Create a danger zone section with a delete button"` |
@@ -99,6 +99,8 @@ The Ignix-Lite MCP server exposes **11 precision tools** to help you build, vali
 | `get_token_summary`| Session | `context_window` | Returns token usage statistics for the current session. | `"How many tokens have I used in this session?"` |
 | `create_handoff` | Session | `rendered_html` (required), `metadata` | Saves a state snapshot to pass context between agents/sessions. | `"Save the current dashboard HTML as a snapshot"` |
 | `apply_handoff` | Session | `handoff_id` (required), `changes` (required) | Patches an existing handoff snapshot with CSS selectors. | `"Update the submit button in handoff hndff_123 to loading"` |
+| `build_validated` | Build | `description` (required), `options` | Build, validate, and audit the accessibility of a layout in a single round-trip. | `"Build and validate a contact form with a submit button"` |
+| `get_token_cost` | Audit | `html` (required) | Estimate and compare the token size of Ignix-Lite vs Tailwind CSS layout. | `"Compare the token cost of this checkout page HTML"` |
 
 :::caution Validation Rules
 Using standard CSS framework classes (e.g. `class="..."` or `variant="..."`) will fail validation. Always use `data-intent` and native HTML attributes instead.
@@ -106,7 +108,8 @@ Using standard CSS framework classes (e.g. `class="..."` or `variant="..."`) wil
 
 ## AI Workflow Guide
 
-* **Build a UI:** Use `how_to_build` to generate, `validate` and `check_a11y` to audit, and `preview` for visual checking.
+* **Build a UI (Step-by-Step):** Use `how_to_build` to generate, `validate` and `check_a11y` to audit, and `preview` for visual checking.
+* **Build a UI (All-in-One):** Use the **`build_validated`** tool to generate, validate, and audit accessibility in a single command, then use `preview` to check visually.
 * **Validate HTML:** Use `validate` and `check_a11y` on any existing file content.
 * **Multi-agent Hand-off:** Save current state with `create_handoff` and modify with `apply_handoff`.
 
