@@ -1,4 +1,5 @@
 {
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "target": "ES2022",
     "module": "NodeNext",
@@ -9,7 +10,12 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "composite": true
   },
+  "references": [
+    { "path": "../engine" },
+    { "path": "../mcp" }
+  ],
   "include": ["src/**/*"]
 }

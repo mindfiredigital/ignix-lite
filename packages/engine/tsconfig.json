@@ -8,7 +8,8 @@
         "esModuleInterop": true,
         "strict": true,
         "outDir": "./dist",
-        "composite": false
+        "rootDir": "./src",
+        "composite": true
     },
     "include": [
         "src/**/*",

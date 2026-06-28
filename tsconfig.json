@@ -1,8 +1,9 @@
 {
   "files": [],
   "references": [
-    {
-      "path": "./packages/mcp"
-    },
+    { "path": "./packages/engine" },
+    { "path": "./packages/mcp" },
+    { "path": "./packages/cli" },
+    { "path": "./packages/a2ui-demo" }
   ]
 }
