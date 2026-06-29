@@ -1,0 +1,207 @@
+---
+sidebar_position: 3
+title: MCP Server
+description: Use the Ignix-Lite MCP server to build semantic HTML, validate markup, audit accessibility, generate themes, and preview components via natural language in your AI editor.
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+The **Ignix-Lite MCP Server** connects your AI assistant directly to the Ignix-Lite engine. It exposes **13 precision tools** that let AI agents write, validate, audit, theme, and preview classless semantic HTML without hallucination.
+
+:::tip What is MCP?
+[Model Context Protocol (MCP)](https://modelcontextprotocol.io) is an open standard that allows AI assistants to securely call external tools and data sources.
+:::
+
+---
+
+## Quick Start
+
+Install the CLI globally and configure your MCP client:
+
+```bash
+npm install -g @mindfiredigital/ignix-lite-cli
+```
+
+Then run the auto-setup command for your AI client:
+
+<Tabs>
+<TabItem value="Cursor" label="Cursor" default>
+
+```bash
+ignix-lite mcp setup cursor
+```
+
+Reload Cursor (`Ctrl+Shift+P → Reload Window`) to activate.
+
+**Try prompts like:**
+- `Build a login form using Ignix-Lite`
+- `Validate my HTML index page against Ignix-Lite rules`
+
+</TabItem>
+<TabItem value="Gemini CLI" label="Gemini CLI">
+
+```bash
+ignix-lite mcp setup gemini
+```
+
+Start a new Gemini CLI session to activate.
+
+**Try prompts like:**
+- `List all available Ignix-Lite components`
+- `Check accessibility of my HTML file`
+
+</TabItem>
+<TabItem value="Claude Desktop" label="Claude Desktop">
+
+```bash
+ignix-lite mcp setup claude
+```
+
+Restart Claude Desktop to apply the configuration.
+
+**Try prompts like:**
+- `Show me all Ignix-Lite components`
+- `Preview my component as a PNG screenshot`
+
+</TabItem>
+<TabItem value="Claude Code" label="Claude Code">
+
+```bash
+ignix-lite mcp setup claude-code
+```
+
+Run `claude` in your project to start using the tools.
+
+**Try prompts like:**
+- `Build a signup form with validation states`
+- `Audit my HTML for WCAG 2.2 accessibility violations`
+
+</TabItem>
+</Tabs>
+
+---
+
+## Available Tools
+
+The Ignix-Lite MCP server exposes **13 precision tools** to help you build, validate, audit, and preview interfaces using natural language:
+
+| Tool Name | Category | Inputs | Description | Example Prompt |
+| :--- | :--- | :--- | :--- | :--- |
+| `list_components` | Discovery | None | Lists all 28 available Ignix-Lite components. | `"List all available Ignix-Lite components"` |
+| `get_manifest` | Discovery | `name` (required) | Returns spec (allowed attributes, rules, examples) for a component. | `"What attributes does the toast component support?"` |
+| `get_emmet` | Discovery | `name` (required) | Returns the standard Emmet shorthand pattern for a component. | `"Give me the Emmet shorthand for a dropdown menu"` |
+| `how_to_build` | Build | `description` (required) | Converts plain English UI descriptions into HTML and Emmet. | `"Create a danger zone section with a delete button"` |
+| `generate_theme` | Build | `prompt` (required) | Generates a custom CSS `:root` theme from natural language. | `"Generate a dark ocean blue theme"` |
+| `validate` | Validation | `html` (required) | Validates HTML against the classless ruleset. | `"Validate this HTML: <button class='btn'>Click</button>"` |
+| `check_a11y` | Validation | `html` (required) | Audits HTML for WCAG 2.2 AA accessibility violations. | `"Check if my HTML is accessible"` |
+| `preview` | Preview | `input` (required), `options` | Renders HTML/Emmet as a PNG screenshot. | `"Preview my form as a dark mode screenshot at 800px"` |
+| `get_token_summary`| Session | `context_window` | Returns token usage statistics for the current session. | `"How many tokens have I used in this session?"` |
+| `create_handoff` | Session | `rendered_html` (required), `metadata` | Saves a state snapshot to pass context between agents/sessions. | `"Save the current dashboard HTML as a snapshot"` |
+| `apply_handoff` | Session | `handoff_id` (required), `changes` (required) | Patches an existing handoff snapshot with CSS selectors. | `"Update the submit button in handoff hndff_123 to loading"` |
+| `build_validated` | Build | `description` (required), `options` | Build, validate, and audit the accessibility of a layout in a single round-trip. | `"Build and validate a contact form with a submit button"` |
+| `get_token_cost` | Audit | `html` (required) | Estimate and compare the token size of Ignix-Lite vs Tailwind CSS layout. | `"Compare the token cost of this checkout page HTML"` |
+
+:::caution Validation Rules
+Using standard CSS framework classes (e.g. `class="..."` or `variant="..."`) will fail validation. Always use `data-intent` and native HTML attributes instead.
+:::
+
+## AI Workflow Guide
+
+* **Build a UI (Step-by-Step):** Use `how_to_build` to generate, `validate` and `check_a11y` to audit, and `preview` for visual checking.
+* **Build a UI (All-in-One):** Use the **`build_validated`** tool to generate, validate, and audit accessibility in a single command, then use `preview` to check visually.
+* **Validate HTML:** Use `validate` and `check_a11y` on any existing file content.
+* **Multi-agent Hand-off:** Save current state with `create_handoff` and modify with `apply_handoff`.
+
+---
+
+## Manual Configuration
+
+If you prefer configuring your client manually:
+
+<Tabs>
+<TabItem value="Cursor" label="Cursor" default>
+
+Edit `~/.cursor/mcp.json`:
+```json title="~/.cursor/mcp.json"
+{
+  "mcpServers": {
+    "ignix-lite": {
+      "command": "node",
+      "args": ["/path/to/node_modules/@mindfiredigital/ignix-lite-mcp/dist/server.js"]
+    }
+  }
+}
+```
+
+</TabItem>
+<TabItem value="Gemini CLI" label="Gemini CLI">
+
+Edit `~/.gemini/settings.json`:
+```json title="~/.gemini/settings.json"
+{
+  "mcpServers": {
+    "ignix-lite": {
+      "command": "node",
+      "args": ["/path/to/node_modules/@mindfiredigital/ignix-lite-mcp/dist/server.js"]
+    }
+  }
+}
+```
+
+</TabItem>
+<TabItem value="Claude Desktop" label="Claude Desktop">
+
+**Windows:** `%APPDATA%\Claude\claude_desktop_config.json`  
+**macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
+```json
+{
+  "mcpServers": {
+    "ignix-lite": {
+      "command": "node",
+      "args": ["/path/to/node_modules/@mindfiredigital/ignix-lite-mcp/dist/server.js"]
+    }
+  }
+}
+```
+
+</TabItem>
+<TabItem value="Claude Code" label="Claude Code">
+
+Edit `~/.claude.json`:
+```json title="~/.claude.json"
+{
+  "mcpServers": {
+    "ignix-lite": {
+      "command": "node",
+      "args": ["/path/to/node_modules/@mindfiredigital/ignix-lite-mcp/dist/server.js"]
+    }
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+## Core Rules Enforced
+
+The MCP server checks these absolute rules during validation:
+
+| Avoid | Use Instead |
+|-------|-------------|
+| `class="..."` | `data-intent="primary|danger|success|warning|neutral|ghost"` |
+| `variant="..."` / `color="..."` | `data-intent="..."` |
+| `isLoading={true}` | `aria-busy="true"` |
+| `isDisabled={true}` | Native `disabled` attribute |
+| `<div>` wrapper | Semantic tags like `<aside>`, `<article>`, `<nav>` |
+
+---
+
+## Troubleshooting
+
+* **Server not showing:** Run the setup command again, verify Node.js `v18+` is installed, and fully restart your editor.
+* **`how_to_build` returns `no-match`:** Avoid framework terms (e.g., use `primary button` instead of `React button component`).
+* **`validate` fails:** Replace classes with `data-intent`, wrap inputs in `label`, and use semantic structural tags.
+* **`preview` times out:** Ensure Playwright is installed via `npx playwright install chromium`.

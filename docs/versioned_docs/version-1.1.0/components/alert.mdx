@@ -1,0 +1,106 @@
+---
+sidebar_position: 2
+title: Alert
+description: Lightweight semantic alert component for ignix-lite with intent variants.
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import Preview from '@site/src/components/preview'
+
+# Alert
+
+The Alert component provides lightweight semantic feedback messages using the native HTML `aside` element.
+
+Ignix Lite alerts support semantic intent variants for warnings, errors, success messages, and informational updates.
+
+---
+
+## Intent Variants
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<aside data-intent="danger">
+  Something went wrong.
+</aside>
+
+<aside data-intent="warning">
+  Your session will expire soon.
+</aside>
+
+<aside data-intent="success">
+  Saved successfully.
+</aside>
+
+<aside data-intent="info">
+  New updates are available.
+</aside>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<aside data-intent="danger">
+  Something went wrong.
+</aside>
+
+<aside data-intent="warning">
+  Your session will expire soon.
+</aside>
+
+<aside data-intent="success">
+  Saved successfully.
+</aside>
+
+<aside data-intent="info">
+  New updates are available.
+</aside>
+```
+
+</TabItem>
+
+</Tabs>
+
+
+## Usage
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<aside data-intent="warning">
+  Unsaved changes detected. Save your work before leaving.
+</aside>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<aside data-intent="warning">
+  Unsaved changes detected. Save your work before leaving.
+</aside>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Attributes
+
+| Attribute | Type | Description |
+|---|---|---|
+| `data-intent` | `'danger' \| 'warning' \| 'success' \| 'info'` | Applies semantic alert styling |

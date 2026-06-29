@@ -1,0 +1,347 @@
+---
+sidebar_position: 9
+title: Dialog
+description: Lightweight semantic dialog component for ignix-lite with intent variants and accessible modal interactions.
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import Preview from '@site/src/components/preview'
+
+# Dialog
+
+The Dialog component provides a lightweight and semantic way to display modal content using the native HTML `<dialog>` element.
+
+Ignix Lite dialogs support intent variants, accessible focus management, and clean modal interactions without requiring JavaScript frameworks or external dependencies.
+
+---
+
+## Preview
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<section
+  style={{
+    display: 'flex',
+    gap: '1rem',
+    flexWrap: 'wrap',
+  }}
+>
+
+<button
+  data-intent="danger"
+  onClick={() => {
+    const dialog = document.querySelector('#danger-dialog')
+
+    if (dialog instanceof HTMLDialogElement) {
+      dialog.showModal()
+    }
+  }}
+>
+  Delete Item
+</button>
+
+<button
+  data-intent="warning"
+  onClick={() => {
+    const dialog = document.querySelector('#warning-dialog')
+
+    if (dialog instanceof HTMLDialogElement) {
+      dialog.showModal()
+    }
+  }}
+>
+  Open Warning
+</button>
+
+<button
+  onClick={() => {
+    const dialog = document.querySelector('#info-dialog')
+
+    if (dialog instanceof HTMLDialogElement) {
+      dialog.showModal()
+    }
+  }}
+>
+  Open Info
+</button>
+
+</section>
+
+<dialog id="danger-dialog" data-intent="danger">
+
+  <h2>Confirm Delete</h2>
+
+  <p>Are you sure you want to delete this item?</p>
+
+  <p>This action cannot be undone.</p>
+
+  <footer data-actions>
+
+    <button
+      onClick={() => {
+        const dialog = document.querySelector('#danger-dialog')
+
+        if (dialog instanceof HTMLDialogElement) {
+          dialog.close()
+        }
+      }}
+    >
+      Cancel
+    </button>
+
+    <button
+      data-intent="danger"
+      onClick={() => {
+        const dialog = document.querySelector('#danger-dialog')
+
+        if (dialog instanceof HTMLDialogElement) {
+          dialog.close()
+        }
+      }}
+    >
+      Delete
+    </button>
+
+  </footer>
+
+</dialog>
+
+<dialog id="warning-dialog" data-intent="warning">
+
+  <h2>Unsaved Changes</h2>
+
+  <p>You have unsaved changes.</p>
+
+  <p>Leaving now may result in data loss.</p>
+
+  <footer data-actions>
+
+    <button
+      onClick={() => {
+        const dialog = document.querySelector('#warning-dialog')
+
+        if (dialog instanceof HTMLDialogElement) {
+          dialog.close()
+        }
+      }}
+    >
+      Stay
+    </button>
+
+    <button
+      data-intent="warning"
+      onClick={() => {
+        const dialog = document.querySelector('#warning-dialog')
+
+        if (dialog instanceof HTMLDialogElement) {
+          dialog.close()
+        }
+      }}
+    >
+      Continue
+    </button>
+
+  </footer>
+
+</dialog>
+
+<dialog id="info-dialog" data-intent="info">
+
+  <h2>Session Expiring</h2>
+
+  <p>Your session will expire in 2 minutes.</p>
+
+  <p>Save your work before continuing.</p>
+
+  <footer data-actions>
+
+    <button
+      onClick={() => {
+        const dialog = document.querySelector('#info-dialog')
+
+        if (dialog instanceof HTMLDialogElement) {
+          dialog.close()
+        }
+      }}
+    >
+      Close
+    </button>
+
+    <button
+      data-intent="primary"
+      onClick={() => {
+        const dialog = document.querySelector('#info-dialog')
+
+        if (dialog instanceof HTMLDialogElement) {
+          dialog.close()
+        }
+      }}
+    >
+      Save Work
+    </button>
+
+  </footer>
+
+</dialog>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<button onclick="document.querySelector('#confirmDialog').showModal()">
+  Delete Item
+</button>
+
+<dialog id="confirmDialog" data-intent="danger">
+
+  <h2>Confirm Delete</h2>
+
+  <p>Are you sure you want to delete this item?</p>
+
+  <p>This action cannot be undone.</p>
+
+  <footer data-actions>
+
+    <button onclick="document.querySelector('#confirmDialog').close()">
+      Cancel
+    </button>
+
+    <button
+      data-intent="danger"
+      onclick="document.querySelector('#confirmDialog').close()"
+    >
+      Delete
+    </button>
+
+  </footer>
+
+</dialog>
+```
+
+</TabItem>
+
+</Tabs>
+
+
+## Usage
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<button
+  onClick={() => {
+    const dialog = document.querySelector('#usage-dialog')
+
+    if (dialog instanceof HTMLDialogElement) {
+      dialog.showModal()
+    }
+  }}
+>
+  Open Dialog
+</button>
+
+<dialog id="usage-dialog">
+
+  <h2>Dialog Title</h2>
+
+  <p>
+    This is a simple dialog example.
+  </p>
+
+  <footer data-actions>
+
+    <button
+      onClick={() => {
+        const dialog = document.querySelector('#usage-dialog')
+
+        if (dialog instanceof HTMLDialogElement) {
+          dialog.close()
+        }
+      }}
+    >
+      Cancel
+    </button>
+
+    <button
+      data-intent="primary"
+      onClick={() => {
+        const dialog = document.querySelector('#usage-dialog')
+
+        if (dialog instanceof HTMLDialogElement) {
+          dialog.close()
+        }
+      }}
+    >
+      Confirm
+    </button>
+
+  </footer>
+
+</dialog>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<button onclick="document.querySelector('#myDialog').showModal()">
+  Open Dialog
+</button>
+
+<dialog id="myDialog">
+
+  <h2>Dialog Title</h2>
+
+  <p>
+    This is a simple dialog example.
+  </p>
+
+  <footer data-actions>
+
+    <button onclick="document.querySelector('#myDialog').close()">
+      Cancel
+    </button>
+
+    <button
+      data-intent="primary"
+      onclick="document.querySelector('#myDialog').close()"
+    >
+      Confirm
+    </button>
+
+  </footer>
+
+</dialog>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+
+## Attributes
+
+| Attribute | Type | Description |
+|---|---|---|
+| `data-intent` | `'danger' \| 'warning' \| 'info'` | Applies semantic styling to the dialog border and background |
+| `data-actions` | `attribute` on `<footer>` | Wraps action buttons in a semantic footer action row |
+| `data-intent` on `<button>` | `'danger' \| 'warning' \| 'primary' \| 'success'` | Colors an individual action button independently |
+| `open` | `boolean` | Native dialog open state |
+| `id` | `string` | Unique dialog identifier for JS targeting |
+| `showModal()` | `method` | Opens the dialog as a modal with backdrop |
+| `close()` | `method` | Closes the dialog |
