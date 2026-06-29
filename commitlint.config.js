@@ -19,7 +19,6 @@ export default {
         'stories',
         'cli',
         'engine',
-        'a2ui-demo',
         'skill',
       ],
     ],
