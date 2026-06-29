@@ -45,7 +45,9 @@ export async function previewCommand(
     try {
       result = JSON.parse(response.content[0].text)
     } catch {
-      spinner.fail(pc.red('Render failed: Invalid JSON response from preview engine.'))
+      spinner.fail(
+        pc.red('Render failed: Invalid JSON response from preview engine.')
+      )
       return
     }
 

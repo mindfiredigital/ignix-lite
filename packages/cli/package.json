@@ -1,12 +1,16 @@
 {
   "name": "@mindfiredigital/ignix-lite-cli",
-  "version": "1.0.0",
+  "version": "1.7.1",
   "description": "CLI tool for Ignix-Lite project scaffolding, validation, and theming",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
     "ignix-lite": "./dist/index.js"
   },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
@@ -14,8 +18,8 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@mindfiredigital/ignix-lite-engine": "workspace:*",
-    "@mindfiredigital/ignix-lite-mcp": "workspace:*",
+    "@mindfiredigital/ignix-lite-engine": "workspace:^",
+    "@mindfiredigital/ignix-lite-mcp": "workspace:^",
     "commander": "^13.1.0",
     "node-html-parser": "^7.1.0",
     "ora": "^9.4.0",
@@ -31,5 +35,6 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "license": "MIT"
 }

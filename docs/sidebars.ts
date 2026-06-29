@@ -7,7 +7,8 @@ const sidebars = {
       collapsed: false,
       items: [
         "introduction",
-        "installation"
+        "installation",
+        "mcp-server"
       ]
     },
 
@@ -32,6 +33,7 @@ const sidebars = {
         "components/form",
         "components/grid",
         "components/input",
+        "components/layout",
         "components/meter",
         "components/progress",
         "components/radio",

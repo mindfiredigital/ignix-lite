@@ -2,6 +2,7 @@ import { readFileSync, existsSync } from 'fs'
 import path from 'path'
 import pc from 'picocolors'
 import { validateHtml } from '@mindfiredigital/ignix-lite-engine'
+import { logSuggestedPatch } from '../utils/patch.js'
 
 export async function validateCommand(filePath: string) {
   const absolutePath = path.resolve(process.cwd(), filePath)
@@ -21,7 +22,9 @@ export async function validateCommand(filePath: string) {
   if (result.valid) {
     console.log(
       pc.bold(
-        pc.green(`\n✔ PASS: All checks passed! Score: ${result.score ?? 100}/100`)
+        pc.green(
+          `\n✔ PASS: All checks passed! Score: ${result.score ?? 100}/100`
+        )
       )
     )
   } else {
@@ -41,6 +44,9 @@ export async function validateCommand(filePath: string) {
       console.log(`  ${pc.bold('Problem:')} ${pc.yellow(err.message)}`)
       if (err.fix) {
         console.log(`  ${pc.bold('Fix:')}     ${pc.green(err.fix)}`)
+      }
+      if (err.suggestedPatch) {
+        logSuggestedPatch(err.suggestedPatch)
       }
       console.log()
     })

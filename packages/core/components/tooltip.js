@@ -10,7 +10,9 @@ class IxTooltip extends HTMLElement {
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'tooltip')
     }
-    const trigger = this.querySelector('button, a, input, select, textarea, [tabindex="0"]')
+    const trigger = this.querySelector(
+      'button, a, input, select, textarea, [tabindex="0"]'
+    )
     if (!trigger) return
 
     const content = this.getAttribute('content')
@@ -23,7 +25,7 @@ class IxTooltip extends HTMLElement {
     const tooltipEl = document.createElement('span')
     tooltipEl.id = tooltipId
     tooltipEl.setAttribute('role', 'tooltip')
-    
+
     // Position out of visual flow but visible to screen readers
     tooltipEl.style.position = 'absolute'
     tooltipEl.style.width = '1px'

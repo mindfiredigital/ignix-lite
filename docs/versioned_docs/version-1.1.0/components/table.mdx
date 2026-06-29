@@ -1,0 +1,503 @@
+---
+sidebar_position: 15
+title: Table
+description: Lightweight semantic table component for ignix-lite with sortable headers and accessible structure.
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import Preview from '@site/src/components/preview'
+
+# Table
+
+The Table component provides semantic, accessible and sortable data tables with lightweight styling.
+
+---
+
+## Default Table
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<section
+style={{
+overflowX:'auto',
+width:'100%'
+}}
+>
+
+<table>
+
+<thead>
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Email</th>
+<th>Department</th>
+<th>Role</th>
+<th>Status</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td>101</td>
+<td>John Doe</td>
+<td>john@example.com</td>
+<td>Engineering</td>
+<td>Developer</td>
+<td>
+<mark data-intent="success">
+Active
+</mark>
+</td>
+</tr>
+
+<tr>
+<td>102</td>
+<td>Jane Smith</td>
+<td>jane@example.com</td>
+<td>Design</td>
+<td>Designer</td>
+<td>
+<mark data-intent="danger">
+Inactive
+</mark>
+</td>
+</tr>
+
+<tr>
+<td>103</td>
+<td>Alex Johnson</td>
+<td>alex@example.com</td>
+<td>Management</td>
+<td>Manager</td>
+<td>
+<mark data-intent="warning">
+Pending
+</mark>
+</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</section>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<table>
+
+<thead>
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Email</th>
+<th>Department</th>
+<th>Role</th>
+<th>Status</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td>101</td>
+<td>John Doe</td>
+<td>john@example.com</td>
+<td>Engineering</td>
+<td>Developer</td>
+<td>Active</td>
+</tr>
+
+<tr>
+<td>102</td>
+<td>Jane Smith</td>
+<td>jane@example.com</td>
+<td>Design</td>
+<td>Designer</td>
+<td>Inactive</td>
+</tr>
+
+<tr>
+<td>103</td>
+<td>Alex Johnson</td>
+<td>alex@example.com</td>
+<td>Management</td>
+<td>Manager</td>
+<td>Pending</td>
+</tr>
+
+</tbody>
+
+</table>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Sortable Table
+
+Click headers or press **Enter** to sort.
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<section
+style={{
+overflowX:'auto',
+width:'100%'
+}}
+>
+
+<table is="ix-table">
+
+<thead>
+<tr>
+<th data-sortable>ID</th>
+<th data-sortable>Name</th>
+<th data-sortable>Age</th>
+<th data-sortable>Department</th>
+<th data-sortable>Role</th>
+<th data-sortable>Status</th>
+<th data-sortable>Experience</th>
+<th data-sortable>Location</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td>101</td>
+<td>John</td>
+<td>28</td>
+<td>Engineering</td>
+<td>Developer</td>
+<td><mark data-intent="success">Active</mark></td>
+<td>4 yrs</td>
+<td>Mumbai</td>
+</tr>
+
+<tr>
+<td>102</td>
+<td>Alex</td>
+<td>21</td>
+<td>Design</td>
+<td>UI Designer</td>
+<td><mark data-intent="warning">Pending</mark></td>
+<td>1 yr</td>
+<td>Delhi</td>
+</tr>
+
+<tr>
+<td>103</td>
+<td>Emma</td>
+<td>32</td>
+<td>Management</td>
+<td>Manager</td>
+<td><mark data-intent="danger">Inactive</mark></td>
+<td>8 yrs</td>
+<td>Bangalore</td>
+</tr>
+
+<tr>
+<td>104</td>
+<td>Riya</td>
+<td>25</td>
+<td>QA</td>
+<td>QA Engineer</td>
+<td><mark data-intent="success">Active</mark></td>
+<td>3 yrs</td>
+<td>Pune</td>
+</tr>
+
+<tr>
+<td>105</td>
+<td>Aman</td>
+<td>35</td>
+<td>Architecture</td>
+<td>Architect</td>
+<td><mark data-intent="success">Active</mark></td>
+<td>10 yrs</td>
+<td>Hyderabad</td>
+</tr>
+
+<tr>
+<td>106</td>
+<td>Neha</td>
+<td>24</td>
+<td>Analytics</td>
+<td>Analyst</td>
+<td><mark data-intent="warning">Pending</mark></td>
+<td>2 yrs</td>
+<td>Chennai</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</section>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<table is="ix-table">
+
+<thead>
+<tr>
+<th data-sortable>ID</th>
+<th data-sortable>Name</th>
+<th data-sortable>Age</th>
+<th data-sortable>Department</th>
+<th data-sortable>Role</th>
+<th data-sortable>Status</th>
+<th data-sortable>Experience</th>
+<th data-sortable>Location</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td>101</td>
+<td>John</td>
+<td>28</td>
+<td>Engineering</td>
+<td>Developer</td>
+<td>
+<mark data-intent="success">
+Active
+</mark>
+</td>
+<td>4 yrs</td>
+<td>Mumbai</td>
+</tr>
+
+<tr>
+<td>102</td>
+<td>Alex</td>
+<td>21</td>
+<td>Design</td>
+<td>UI Designer</td>
+<td>
+<mark data-intent="warning">
+Pending
+</mark>
+</td>
+<td>1 yr</td>
+<td>Delhi</td>
+</tr>
+
+<tr>
+<td>103</td>
+<td>Emma</td>
+<td>32</td>
+<td>Management</td>
+<td>Manager</td>
+<td>
+<mark data-intent="danger">
+Inactive
+</mark>
+</td>
+<td>8 yrs</td>
+<td>Bangalore</td>
+</tr>
+
+<tr>
+<td>104</td>
+<td>Riya</td>
+<td>25</td>
+<td>QA</td>
+<td>QA Engineer</td>
+<td>
+<mark data-intent="success">
+Active
+</mark>
+</td>
+<td>3 yrs</td>
+<td>Pune</td>
+</tr>
+
+<tr>
+<td>105</td>
+<td>Aman</td>
+<td>35</td>
+<td>Architecture</td>
+<td>Architect</td>
+<td>
+<mark data-intent="success">
+Active
+</mark>
+</td>
+<td>10 yrs</td>
+<td>Hyderabad</td>
+</tr>
+
+<tr>
+<td>106</td>
+<td>Neha</td>
+<td>24</td>
+<td>Analytics</td>
+<td>Analyst</td>
+<td>
+<mark data-intent="warning">
+Pending
+</mark>
+</td>
+<td>2 yrs</td>
+<td>Chennai</td>
+</tr>
+
+</tbody>
+
+</table>
+```
+
+</TabItem>
+
+</Tabs>
+
+
+## Usage
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<table is="ix-table">
+
+<thead>
+<tr>
+<th data-sortable>Name</th>
+<th data-sortable>Status</th>
+<th data-sortable>Department</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td>Riya Sharma</td>
+<td>
+<mark data-intent="success">
+Active
+</mark>
+</td>
+<td>Engineering</td>
+</tr>
+
+<tr>
+<td>Aditya Rao</td>
+<td>
+<mark data-intent="warning">
+Pending
+</mark>
+</td>
+<td>Design</td>
+</tr>
+
+<tr>
+<td>Neha Kapoor</td>
+<td>
+<mark data-intent="danger">
+Inactive
+</mark>
+</td>
+<td>Marketing</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<table is="ix-table">
+
+<thead>
+<tr>
+<th data-sortable>Name</th>
+<th data-sortable>Status</th>
+<th data-sortable>Department</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td>Riya Sharma</td>
+<td>
+<mark data-intent="success">
+Active
+</mark>
+</td>
+<td>Engineering</td>
+</tr>
+
+<tr>
+<td>Aditya Rao</td>
+<td>
+<mark data-intent="warning">
+Pending
+</mark>
+</td>
+<td>Design</td>
+</tr>
+
+<tr>
+<td>Neha Kapoor</td>
+<td>
+<mark data-intent="danger">
+Inactive
+</mark>
+</td>
+<td>Marketing</td>
+</tr>
+
+</tbody>
+
+</table>
+```
+
+</TabItem>
+
+</Tabs>
+
+
+---
+
+## Attributes
+
+| Attribute | Type | Description |
+|---|---|---|
+| data-sortable | boolean | Enables sortable behavior |
+| aria-sort | ascending \| descending \| none | Sort direction state |
+| is="ix-table" | string | Enables sortable enhancement |

@@ -103,7 +103,7 @@ describe(
       () => {
 
         cy.get(
-          '.avatar-skeleton'
+          '[data-avatar-skeleton]'
         )
         .should(
           'exist'
@@ -117,7 +117,7 @@ describe(
       () => {
 
         cy.get(
-          '.avatar-wrapper'
+          '[data-avatar-wrapper]'
         )
         .should(
           'exist'

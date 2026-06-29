@@ -65,6 +65,23 @@ const COMPONENT_TEMPLATES: Record<string, string> = {
             <section>Column 2</section>
             <section>Column 3</section>
             </section>`,
+  layout: `<div data-layout="app-shell">
+                <header data-region="header" data-layout="header" data-stack="sm">
+                    <h1>Dashboard</h1>
+                    <button data-intent="primary">Create</button>
+                </header>
+                <aside data-region="sidebar">
+                    Navigation
+                </aside>
+                <main data-region="main" data-layout="container" data-size="lg">
+                    <section data-layout="auto-grid" data-min="md" data-gap="md">
+                        <article>Card 1</article>
+                        <article>Card 2</article>
+                        <article>Card 3</article>
+                    </section>
+                </main>
+                <footer data-region="footer">Footer</footer>
+            </div>`,
 
   input: `<label>
                 Username

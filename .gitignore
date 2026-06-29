@@ -8,3 +8,10 @@ debug.log
 
 *storybook.log
 storybook-static
+
+# Local Agent Skills configurations
+.agents/
+skills-lock.json
+
+# TypeScript build cache
+*.tsbuildinfo

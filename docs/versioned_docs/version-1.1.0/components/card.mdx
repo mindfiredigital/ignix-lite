@@ -1,0 +1,276 @@
+---
+sidebar_position: 5
+title: Card
+description: Lightweight semantic card component for ignix-lite with avatar, metadata, actions, and flexible content slots.
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import Preview from '@site/src/components/preview'
+
+# Card
+
+The Card component provides lightweight structured content containers using semantic slots.
+
+Ignix Lite cards support avatars, metadata, actions, and flexible layouts without additional JavaScript.
+
+---
+
+## Profile Card
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<ix-card>
+
+  <img
+    slot="avatar"
+    src="https://i.pinimg.com/236x/da/fd/f2/dafdf25168edcb2f0e1d8702797946cc.jpg"
+    alt="User"
+  />
+
+  <span slot="title">
+    Neha Sharma
+  </span>
+
+  <span slot="meta">
+    Frontend Developer
+  </span>
+
+  <p slot="body">
+    Building accessible UI components.
+  </p>
+
+  <button slot="action">
+    Follow
+  </button>
+
+  <span slot="footer">
+    Joined 2024
+  </span>
+
+</ix-card>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<article>
+
+  <img
+    slot="avatar"
+    src="https://i.pinimg.com/236x/da/fd/f2/dafdf25168edcb2f0e1d8702797946cc.jpg"
+    alt="User"
+  />
+
+  <span slot="title">
+    Neha Sharma
+  </span>
+
+  <span slot="meta">
+    Frontend Developer
+  </span>
+
+  <p slot="body">
+    Building accessible UI components.
+  </p>
+
+  <button slot="action">
+    Follow
+  </button>
+
+  <span slot="footer">
+    Joined 2024
+  </span>
+
+</article>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<ix-card>
+
+  <img
+    slot="avatar"
+    src="https://i.pravatar.cc/100?img=12"
+    alt="Profile"
+  />
+
+  <span slot="title">
+    Alex Johnson
+  </span>
+
+  <span slot="meta">
+    UI Designer
+  </span>
+
+  <p slot="body">
+    Creating modern design systems and scalable user experiences.
+  </p>
+
+  <button slot="action">
+    Message
+  </button>
+
+  <span slot="footer">
+    Active now
+  </span>
+
+</ix-card>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<article>
+
+  <img
+    slot="avatar"
+    src="https://i.pravatar.cc/100?img=12"
+    alt="Profile"
+  />
+
+  <span slot="title">
+    Alex Johnson
+  </span>
+
+  <span slot="meta">
+    UI Designer
+  </span>
+
+  <p slot="body">
+    Creating modern design systems and scalable user experiences.
+  </p>
+
+  <button slot="action">
+    Message
+  </button>
+
+  <span slot="footer">
+    Active now
+  </span>
+
+</article>
+```
+
+</TabItem>
+
+</Tabs>
+
+
+
+
+## Usage
+### Product Card
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<ix-card>
+
+  <img
+    slot="avatar"
+    src="https://picsum.photos/100"
+    alt="Product"
+  />
+
+  <span slot="title">
+    Wireless Headphones
+  </span>
+
+  <span slot="meta">
+    Audio Device
+  </span>
+
+  <p slot="body">
+    Premium wireless headphones with immersive sound quality.
+  </p>
+
+  <button slot="action">
+    Buy Now
+  </button>
+
+  <span slot="footer">
+    In Stock
+  </span>
+
+</ix-card>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<article>
+
+  <img
+    slot="avatar"
+    src="https://picsum.photos/100"
+    alt="Product"
+  />
+
+  <span slot="title">
+    Wireless Headphones
+  </span>
+
+  <span slot="meta">
+    Audio Device
+  </span>
+
+  <p slot="body">
+    Premium wireless headphones with immersive sound quality.
+  </p>
+
+  <button slot="action">
+    Buy Now
+  </button>
+
+  <span slot="footer">
+    In Stock
+  </span>
+
+</article>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+
+## Slots
+
+| Slot | Description |
+|---|---|
+| `slot="avatar"` | Avatar or image content |
+| `slot="title"` | Card heading |
+| `slot="meta"` | Metadata or subtitle |
+| `slot="body"` | Main content |
+| `slot="action"` | Action button or controls |
+| `slot="footer"` | Footer metadata |

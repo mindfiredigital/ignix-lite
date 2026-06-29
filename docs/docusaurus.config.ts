@@ -72,6 +72,8 @@ const config: Config = {
           href: 'pathname:///ignix-lite/llms.txt',
           label: 'llms.txt',
           position: 'left',
+          type: 'docsVersionDropdown',
+          position: 'right',
         },
         {
           href: 'https://github.com/mindfiredigital/ignix-lite',

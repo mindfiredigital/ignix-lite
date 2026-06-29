@@ -23,8 +23,6 @@ class IxTabs extends HTMLElement {
           this.tabs[(i - 1 + this.tabs.length) % this.tabs.length].focus()
         }
 
-
-
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault()
           this.select(i)

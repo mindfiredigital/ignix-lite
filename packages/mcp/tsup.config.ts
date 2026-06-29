@@ -12,5 +12,6 @@ export default defineConfig({
   external: ['tiktoken'],
   banner: {
     js: '#!/usr/bin/env node'
-  }
+  },
+  tsconfig: 'tsconfig.build.json'
 })

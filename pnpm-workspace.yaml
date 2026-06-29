@@ -1,3 +1,4 @@
 packages:
   - "packages/*"
   - "docs"
+  - "skills/ignix-lite"

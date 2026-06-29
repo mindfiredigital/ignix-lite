@@ -1,6 +1,6 @@
-# @mindfiredigital/ignix-lite-cli
+# Ignix-Lite CLI
 
-> The official command-line tool for [Ignix-Lite](https://github.com/mindfiredigital/ignix-lite) — a zero-JS, CSS-only UI component framework driven entirely by semantic HTML and `data-*` attributes.
+> The official command-line tool for [Ignix-Lite](https://github.com/mindfiredigital/ignix-lite) - a zero-JS, CSS-only UI component framework driven entirely by semantic HTML and `data-*` attributes.
 
 [![npm version](https://img.shields.io/npm/v/@mindfiredigital/ignix-lite-cli)](https://www.npmjs.com/package/@mindfiredigital/ignix-lite-cli)
 [![license](https://img.shields.io/npm/l/@mindfiredigital/ignix-lite-cli)](LICENSE)
@@ -82,7 +82,7 @@ Updated theme variables in src/index.css
 
 ### `ignix-lite build <prompt>`
 
-Generate Ignix-Lite HTML (or Emmet shorthand) from a **plain English description**. Powered by the intent engine — no AI API key required.
+Generate Ignix-Lite HTML (or Emmet shorthand) from a **plain English description**. Powered by the intent engine - no AI API key required.
 
 ```bash
 ignix-lite build "a danger button that says Delete"
@@ -115,6 +115,26 @@ ignix-lite build "a search bar with a submit button" --emmet-only
 ```html
 <button data-intent="primary">Save Changes</button>
 ```
+
+---
+
+### `ignix-lite build-validated <prompt>`
+
+Generate, validate, and audit the accessibility of an Ignix-Lite UI component in a single command, running an auto-correct loop to fix any violations.
+
+```bash
+ignix-lite build-validated "a primary button saying Save"
+```
+
+**Options:**
+
+| Flag                        | Default | Description                                         |
+| --------------------------- | ------- | --------------------------------------------------- |
+| `-o, --output <file>`       | -       | Path to write the clean, validated HTML output file |
+| `-p, --preview`             | `false` | Generate a visual PNG preview image                 |
+| `-t, --theme <light\|dark>` | `light` | Emulated theme for rendering the preview            |
+| `-w, --width <pixels>`      | `400`   | Viewport width for the preview                      |
+| `-s, --scale <factor>`      | `2`     | Device scale factor for the preview                 |
 
 ---
 
@@ -269,13 +289,13 @@ ignix-lite preview component.html --output screenshot.png --width 800 --theme da
 
 ### `ignix-lite mcp setup <client>`
 
-Automatically configure the Ignix-Lite MCP server for your AI editor. **Zero manual steps** — the CLI writes directly to the editor's config file.
+Automatically configure the Ignix-Lite MCP server for your AI editor. **Zero manual steps** - the CLI writes directly to the editor's config file.
 
 ```bash
-ignix-lite mcp setup claude       
-ignix-lite mcp setup claude-code   
-ignix-lite mcp setup gemini        
-ignix-lite mcp setup cursor        
+ignix-lite mcp setup claude
+ignix-lite mcp setup claude-code
+ignix-lite mcp setup gemini
+ignix-lite mcp setup cursor
 ```
 
 **All clients are fully auto-configured.** After running the command:
@@ -319,7 +339,7 @@ Created by `ignix-lite init`. Most commands read this file automatically.
 
 ## Using with AI Editors (MCP)
 
-Ignix-Lite ships with a full **MCP server** that exposes all engine tools to AI assistants. Once set up, your AI can generate components, validate markup, audit accessibility, and preview components — all from natural language in the chat.
+Ignix-Lite ships with a full **MCP server** that exposes all engine tools to AI assistants. Once set up, your AI can generate components, validate markup, audit accessibility, and preview components - all from natural language in the chat.
 
 **One command. Zero manual config.**
 
@@ -342,10 +362,10 @@ Then just start chatting:
 
 The `build` command uses a **two-layer intent engine** (no external API needed):
 
-1. **Intent Table** (Layer 1) — A hand-crafted table of ~40 common patterns. Fast, deterministic, high confidence.
-2. **Vector Index** (Layer 2) — A local semantic index for novel or complex descriptions.
+1. **Intent Table** (Layer 1) - A hand-crafted table of ~40 common patterns. Fast, deterministic, high confidence.
+2. **Vector Index** (Layer 2) - A local semantic index for novel or complex descriptions.
 
-The engine supports **multi-component stitching** — when your description mentions multiple components (using "and", "with", etc.), it synthesizes them together:
+The engine supports **multi-component stitching** - when your description mentions multiple components (using "and", "with", etc.), it synthesizes them together:
 
 ```bash
 ignix-lite build "an avatar image and a loading skeleton below it"

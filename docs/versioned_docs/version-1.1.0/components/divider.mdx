@@ -1,0 +1,138 @@
+---
+sidebar_position: 21
+title: Divider
+description: Lightweight semantic divider component for ignix-lite with horizontal and vertical orientations.
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import Preview from '@site/src/components/preview'
+
+# Divider
+
+The Divider component provides lightweight visual separation between content sections using semantic HTML.
+
+Ignix Lite dividers support horizontal and vertical orientations with minimal accessible styling.
+
+---
+
+## Horizontal Divider
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<div
+  style={{
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '1rem',
+  }}
+>
+
+<p>
+  Overview Section
+</p>
+
+<hr />
+
+<p>
+  Analytics Section
+</p>
+
+<hr />
+
+<p>
+  Settings Section
+</p>
+
+</div>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<p>Overview Section</p>
+
+<hr />
+
+<p>Analytics Section</p>
+
+<hr />
+
+<p>Settings Section</p>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Vertical Divider
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<div
+  style={{
+    display: 'flex',
+    alignItems: 'center',
+    gap: '1rem',
+    height: '40px',
+  }}
+>
+
+<span>Home</span>
+
+<hr data-orientation="vertical" />
+
+<span>Docs</span>
+
+<hr data-orientation="vertical" />
+
+<span>Components</span>
+
+</div>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<div style="display:flex; align-items:center; gap:1rem; height:40px;">
+
+  <span>Home</span>
+
+  <hr data-orientation="vertical" />
+
+  <span>Docs</span>
+
+  <hr data-orientation="vertical" />
+
+  <span>Components</span>
+
+</div>
+```
+
+</TabItem>
+
+</Tabs>
+
+
+## Attributes
+
+| Attribute | Type | Description |
+|---|---|---|
+| `data-orientation` | `'vertical'` | Applies vertical divider orientation |
+| `hr` | `element` | Semantic content separator |

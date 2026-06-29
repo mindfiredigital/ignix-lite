@@ -1,9 +1,37 @@
 import emmet from 'emmet'
+import { parse, type HTMLElement } from 'node-html-parser'
+
+export function stabilizeHtml(html: string): string {
+  try {
+    const root = parse(html)
+    const traverse = (node: HTMLElement) => {
+      if (node.nodeType === 1) {
+        const attrs = { ...node.attributes }
+        const sortedKeys = Object.keys(attrs).sort()
+        for (const key of Object.keys(attrs)) {
+          node.removeAttribute(key)
+        }
+        for (const key of sortedKeys) {
+          const val = attrs[key]
+          node.setAttribute(key, (val === null || val === undefined) ? '' : val)
+        }
+      }
+      for (const child of node.childNodes) {
+        traverse(child as HTMLElement)
+      }
+    }
+    traverse(root as HTMLElement)
+    return root.toString()
+  } catch {
+    return html
+  }
+}
 
 // Expand Emmet shorthand to full HTML using the emmet npm package
 export function expandEmmet(emmetStr: string): string {
   try {
-    return emmet(emmetStr)
+    const expanded = emmet(emmetStr)
+    return stabilizeHtml(expanded)
   } catch {
     return `<!-- expand: ${emmetStr} -->`
   }
