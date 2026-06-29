@@ -14,6 +14,9 @@ The Toast component provides lightweight notification messages using semantic cu
 
 Ignix Lite toasts support semantic intents, motion variants, positions,  and accessible live regions.
 
+> [!NOTE]
+> Unlike pure CSS/HTML components in Ignix-Lite, Toast is a dynamic notification component that requires JavaScript for its lifecycle and triggers. Its visual styles are configured via `data-*` attributes on `<ix-toast>` but the toast instances are instantiated and triggered using the `.show()` JavaScript helper method.
+
 ---
 
 ## Intent Variants
@@ -24,13 +27,7 @@ Ignix Lite toasts support semantic intents, motion variants, positions,  and acc
 
 <Preview>
 
-<div
-  style={{
-    display: 'flex',
-    gap: '0.75rem',
-    flexWrap: 'wrap',
-  }}
->
+<div data-layout="cluster" data-gap="sm">
 
 <ix-toast id="intent-toast"></ix-toast>
 
@@ -160,13 +157,7 @@ toast.show({
 
 <Preview>
 
-<div
-  style={{
-    display: 'flex',
-    gap: '0.75rem',
-    flexWrap: 'wrap',
-  }}
->
+<div data-layout="cluster" data-gap="sm">
 
 <ix-toast id="motion-toast"></ix-toast>
 
@@ -257,13 +248,7 @@ toast.show({
 
 <Preview>
 
-<div
-  style={{
-    display: 'flex',
-    gap: '0.75rem',
-    flexWrap: 'wrap',
-  }}
->
+<div data-layout="cluster" data-gap="sm">
 
 <ix-toast
   id="top-left-toast"

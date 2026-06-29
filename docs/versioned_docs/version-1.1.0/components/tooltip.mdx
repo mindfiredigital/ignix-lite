@@ -16,7 +16,7 @@ Ignix Lite tooltips support multiple positions, semantic intent variants, and ke
 
 ---
 
-## Intent Varient
+## Intent Variant
 
 <Tabs defaultValue="preview">
 
@@ -24,14 +24,7 @@ Ignix Lite tooltips support multiple positions, semantic intent variants, and ke
 
 <Preview>
 
-<div
-  style={{
-    display: 'flex',
-    gap: '1rem',
-    flexWrap: 'wrap',
-    alignItems: 'center',
-  }}
->
+<div data-layout="cluster" data-gap="md" data-align="center">
 
 <ix-tooltip content="Default tooltip">
   <button>Default</button>
@@ -98,14 +91,7 @@ Ignix Lite tooltips support multiple positions, semantic intent variants, and ke
 
 <Preview>
 
-<div
-  style={{
-    display: 'flex',
-    gap: '1rem',
-    flexWrap: 'wrap',
-    alignItems: 'center',
-  }}
->
+<div data-layout="cluster" data-gap="md" data-align="center">
 
 <ix-tooltip
   content="Top tooltip"
@@ -243,5 +229,5 @@ Ignix Lite tooltips support multiple positions, semantic intent variants, and ke
 | `content` | `string` | Tooltip text content |
 | `data-position` | `'top' \| 'bottom' \| 'left' \| 'right'` | Tooltip placement |
 | `data-intent` | `'success' \| 'danger' \| 'warning'` | Semantic tooltip styling |
-| `tabindex` | `number` | Enables keyboard focus |
-| `role` | `tooltip` | Accessible tooltip role |
+| `tabindex` | `number` | Set on the trigger element to enable keyboard focus (e.g. `tabindex="0"`) |
+| `role` | `'tooltip'` | Set automatically on `<ix-tooltip>` for accessibility |

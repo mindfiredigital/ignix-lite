@@ -24,14 +24,7 @@ Ignix Lite badges are built using native HTML elements and semantic attributes f
 
 <Preview>
 
-<div
-  style={{
-    display: 'flex',
-    gap: '0.75rem',
-    flexWrap: 'wrap',
-    alignItems: 'center',
-  }}
->
+<div data-layout="cluster" data-gap="sm" data-align="center">
   <mark data-intent="success">Success</mark>
 
   <mark data-intent="danger">Error</mark>
@@ -141,14 +134,7 @@ Ignix Lite badges are built using native HTML elements and semantic attributes f
 
 <Preview>
 
-<div
-  style={{
-    display: 'flex',
-    gap: '0.75rem',
-    flexWrap: 'wrap',
-    alignItems: 'center',
-  }}
->
+<div data-layout="cluster" data-gap="sm" data-align="center">
   <span role="status" data-intent="success">
     Live
   </span>
@@ -203,5 +189,4 @@ Ignix Lite badges are built using native HTML elements and semantic attributes f
 |---|---|---|
 | `data-intent` | `'success' \| 'danger' \| 'warning' \| 'neutral'` | Applies semantic badge styles |
 | `role="status"` | `string` | Announces live status information for accessibility |
-| `class` | `string` | Add custom utility or component classes |
-| `children` | `text` | Badge label content |
+| `children` | `text` | Text content of the badge |

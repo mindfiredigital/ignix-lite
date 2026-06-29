@@ -28,7 +28,7 @@ We are committed to fostering a welcoming and inclusive community. Before contri
 
 ## Finding Something to Work On
 
-1.  **Explore the Issues:** Head over to our [issue tracker](https://github.com/mindfiredigital/ignix-ui/issues). This is the best place to find tasks.
+1.  **Explore the Issues:** Head over to our [issue tracker](https://github.com/mindfiredigital/ignix-lite/issues). This is the best place to find tasks.
 2.  **Good First Issues:** Look for issues tagged with `good first issue` or `help wanted`. These are specifically prepared for new contributors.
 3.  **Propose a New Feature:** If you have an idea for a new component or feature, please **open an issue first**. This allows us to discuss the feature and make sure it aligns with the project's goals before you start working on it.
 
@@ -40,11 +40,11 @@ We are committed to fostering a welcoming and inclusive community. Before contri
 
 First, get the project running on your local machine.
 
-  - **Fork the repository:** Click the "Fork" button at the top-right of the [Ignix UI repository](https://github.com/mindfiredigital/ignix-ui).
+  - **Fork the repository:** Click the "Fork" button at the top-right of the [Ignix UI repository](https://github.com/mindfiredigital/ignix-lite).
   - **Clone your forked repository:**
     ```bash
-    git clone https://github.com/your-username/ignix-ui.git
-    cd ignix-ui
+    git clone https://github.com/your-username/ignix-lite.git
+    cd ignix-lite
     ```
   - **Install dependencies:** This project uses `pnpm` as its package manager.
     ```bash
@@ -148,9 +148,9 @@ We use **Storybook** as our primary development environment. It allows you to bu
 
 Now that your component is complete, add documentation for it.
 
-  - Create a new MDX file in `apps/docs/docs/components/` (e.g., `button.mdx`).
+  - Create a new MDX file in `docs/docs/components/` (e.g., `button.mdx`).
   - Describe what your component does and provide usage examples.
-  - Add a link to your new documentation page in the sidebar by editing the `apps/docs/sidebars.ts` file.
+  - Add a link to your new documentation page in the sidebar by editing the `docs/sidebars.ts` file.
 
 ### 5\. Write Unit Tests
 
@@ -159,7 +159,7 @@ We require tests for all new features to maintain code quality.
   - Add test cases for your component in a file located alongside the component source code.
   - Ensure all tests pass before submitting your changes.
     ```bash
-    pnpm vitest
+    pnpm test
     ```
 
 ### 6\. Commit and Push Your Changes

@@ -214,14 +214,7 @@ Ignix Lite inputs are fully theme-aware, accessible, and work seamlessly with na
 
 <Preview>
 
-<div
-  style={{
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-    gap: '1rem',
-    width: '100%',
-  }}
->
+<div data-layout="grid" data-min="220" data-gap="md">
 
 <label>
   Text
@@ -283,14 +276,7 @@ Ignix Lite inputs are fully theme-aware, accessible, and work seamlessly with na
 
 <Preview>
 
-<div
-  style={{
-    width: '100%',
-    maxWidth: '420px',
-    display: 'grid',
-    gap: '1rem',
-  }}
->
+<div data-layout="stack" data-gap="md" style={{ maxWidth: '420px' }}>
 
 <label>
   Email Address
@@ -359,6 +345,5 @@ Ignix Lite inputs are fully theme-aware, accessible, and work seamlessly with na
 | `aria-invalid` | `boolean` | Applies invalid/error state styling |
 | `type` | HTML input types | Native input type |
 | `placeholder` | `string` | Placeholder text |
-| `class` | `string` | Additional custom classes |
 | `value` | `string` | Input value |
 | `name` | `string` | Native input name attribute |

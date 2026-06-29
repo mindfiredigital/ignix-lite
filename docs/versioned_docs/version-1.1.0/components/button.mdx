@@ -101,7 +101,7 @@ The Button component in ignix-lite uses the native `<button>` element and suppor
 <TabItem value="preview" label="Preview">
 
 <Preview>
-  <div style={{ display: 'flex', gap: '0.75rem' }}>
+  <div data-layout="inline" data-gap="sm">
     <button data-intent="primary">
       Save Changes
     </button>
@@ -117,7 +117,7 @@ The Button component in ignix-lite uses the native `<button>` element and suppor
 <TabItem value="code" label="Code">
 
 ```html
-<div class="actions">
+<div data-layout="inline" data-gap="sm">
   <button data-intent="primary">
     Save Changes
   </button>
@@ -142,5 +142,4 @@ The Button component in ignix-lite uses the native `<button>` element and suppor
 | `disabled` | `boolean` | Disables interactions and reduces opacity |
 | `aria-busy` | `boolean` | Displays loading spinner state |
 | `type` | `'button' \| 'submit' \| 'reset'` | Native HTML button type |
-| `class` | `string` | Add custom utility or component classes |
 | `children` | `HTML content` | Button label or content |
