@@ -1,0 +1,441 @@
+---
+sidebar_position: 18
+title: Toast
+description: Lightweight toast notification component for ignix-lite with intents, motion variants, positions, and action support.
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import Preview from '@site/src/components/preview'
+
+# Toast
+
+The Toast component provides lightweight notification messages using semantic custom elements.
+
+Ignix Lite toasts support semantic intents, motion variants, positions,  and accessible live regions.
+
+---
+
+## Intent Variants
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<div
+  style={{
+    display: 'flex',
+    gap: '0.75rem',
+    flexWrap: 'wrap',
+  }}
+>
+
+<ix-toast id="intent-toast"></ix-toast>
+
+<button
+  onClick={() => {
+    customElements.whenDefined('ix-toast').then(() => {
+      document.querySelector('#intent-toast').show({
+        title: 'Neutral',
+        message: 'This is a neutral notification.',
+        intent: 'neutral'
+      })
+    })
+  }}
+>
+  Neutral
+</button>
+
+<button
+  onClick={() => {
+    customElements.whenDefined('ix-toast').then(() => {
+      document.querySelector('#intent-toast').show({
+        title: 'Success',
+        message: 'Profile updated successfully.',
+        intent: 'success'
+      })
+    })
+  }}
+>
+  Success
+</button>
+
+<button
+  onClick={() => {
+    customElements.whenDefined('ix-toast').then(() => {
+      document.querySelector('#intent-toast').show({
+        title: 'Warning',
+        message: 'Please verify your input.',
+        intent: 'warning'
+      })
+    })
+  }}
+>
+  Warning
+</button>
+
+<button
+  onClick={() => {
+    customElements.whenDefined('ix-toast').then(() => {
+      document.querySelector('#intent-toast').show({
+        title: 'Danger',
+        message: 'Something failed unexpectedly.',
+        intent: 'danger'
+      })
+    })
+  }}
+>
+  Danger
+</button>
+
+<button
+  onClick={() => {
+    customElements.whenDefined('ix-toast').then(() => {
+      document.querySelector('#intent-toast').show({
+        title: 'Primary',
+        message: 'System update available.',
+        intent: 'primary'
+      })
+    })
+  }}
+>
+  Primary
+</button>
+
+<button
+  onClick={() => {
+    customElements.whenDefined('ix-toast').then(() => {
+      document.querySelector('#intent-toast').show({
+        title: 'Gradient',
+        message: 'Premium features unlocked.',
+        intent: 'gradient'
+      })
+    })
+  }}
+>
+  Gradient
+</button>
+
+</div>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```js
+toast.show({
+  title: 'Success',
+  message: 'Profile updated successfully.',
+  intent: 'success'
+})
+
+toast.show({
+  title: 'Danger',
+  message: 'Something failed unexpectedly.',
+  intent: 'danger'
+})
+
+toast.show({
+  title: 'Warning',
+  message: 'Please verify your input.',
+  intent: 'warning'
+})
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Motion Variants
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<div
+  style={{
+    display: 'flex',
+    gap: '0.75rem',
+    flexWrap: 'wrap',
+  }}
+>
+
+<ix-toast id="motion-toast"></ix-toast>
+
+<button
+  onClick={() => {
+    customElements.whenDefined('ix-toast').then(() => {
+      document.querySelector('#motion-toast').show({
+        title: 'Fade',
+        message: 'Fade animation toast.',
+        variant: 'fade',
+        intent: 'neutral'
+      })
+    })
+  }}
+>
+  Fade
+</button>
+
+<button
+  onClick={() => {
+    customElements.whenDefined('ix-toast').then(() => {
+      document.querySelector('#motion-toast').show({
+        title: 'Slide',
+        message: 'Slide animation toast.',
+        variant: 'slide',
+        intent: 'success'
+      })
+    })
+  }}
+>
+  Slide
+</button>
+
+<button
+  onClick={() => {
+    customElements.whenDefined('ix-toast').then(() => {
+      document.querySelector('#motion-toast').show({
+        title: 'Pop',
+        message: 'Pop animation toast.',
+        variant: 'pop',
+        intent: 'danger'
+      })
+    })
+  }}
+>
+  Pop
+</button>
+
+</div>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```js
+toast.show({
+  title: 'Fade',
+  message: 'Fade animation toast.',
+  variant: 'fade'
+})
+
+toast.show({
+  title: 'Slide',
+  message: 'Slide animation toast.',
+  variant: 'slide'
+})
+
+toast.show({
+  title: 'Pop',
+  message: 'Pop animation toast.',
+  variant: 'pop'
+})
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Position Variants
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<div
+  style={{
+    display: 'flex',
+    gap: '0.75rem',
+    flexWrap: 'wrap',
+  }}
+>
+
+<ix-toast
+  id="top-left-toast"
+  data-position="top-left"
+></ix-toast>
+
+<ix-toast
+  id="top-right-toast"
+  data-position="top-right"
+></ix-toast>
+
+<ix-toast
+  id="bottom-left-toast"
+  data-position="bottom-left"
+></ix-toast>
+
+<ix-toast
+  id="bottom-right-toast"
+  data-position="bottom-right"
+></ix-toast>
+
+<button
+  onClick={() => {
+    customElements.whenDefined('ix-toast').then(() => {
+      document.querySelector('#top-left-toast').show({
+        title: 'Top Left',
+        message: 'Toast at top left.',
+        intent: 'danger'
+      })
+    })
+  }}
+>
+  Top Left
+</button>
+
+<button
+  onClick={() => {
+    customElements.whenDefined('ix-toast').then(() => {
+      document.querySelector('#top-right-toast').show({
+        title: 'Top Right',
+        message: 'Toast at top right.',
+        intent: 'primary'
+      })
+    })
+  }}
+>
+  Top Right
+</button>
+
+<button
+  onClick={() => {
+    customElements.whenDefined('ix-toast').then(() => {
+      document.querySelector('#bottom-left-toast').show({
+        title: 'Bottom Left',
+        message: 'Toast at bottom left.',
+        intent: 'warning'
+      })
+    })
+  }}
+>
+  Bottom Left
+</button>
+
+<button
+  onClick={() => {
+    customElements.whenDefined('ix-toast').then(() => {
+      document.querySelector('#bottom-right-toast').show({
+        title: 'Bottom Right',
+        message: 'Toast at bottom right.',
+        intent: 'success'
+      })
+    })
+  }}
+>
+  Bottom Right
+</button>
+
+</div>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<ix-toast
+  id="topLeft"
+  data-position="top-left"
+></ix-toast>
+
+<ix-toast
+  id="bottomRight"
+  data-position="bottom-right"
+></ix-toast>
+```
+
+</TabItem>
+
+</Tabs>
+
+
+## Usage
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<div
+  style={{
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '1rem',
+    alignItems: 'flex-start',
+  }}
+>
+
+<ix-toast id="usage-toast"></ix-toast>
+
+<button
+  onClick={() => {
+    customElements.whenDefined('ix-toast').then(() => {
+      document.querySelector('#usage-toast').show({
+        title: 'Changes Saved',
+        message: 'Your workspace settings have been updated.',
+        intent: 'success',
+        variant: 'slide'
+      })
+    })
+  }}
+>
+  Save Settings
+</button>
+
+</div>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<ix-toast id="toast"></ix-toast>
+
+<button onclick="
+customElements.whenDefined('ix-toast').then(() => {
+  document.querySelector('#toast').show({
+    title: 'Changes Saved',
+    message: 'Your workspace settings have been updated.',
+    intent: 'success',
+    variant: 'slide'
+  })
+})
+">
+  Save Settings
+</button>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+
+## Attributes
+
+| Attribute | Type | Description |
+|---|---|---|
+| `data-intent` | `'neutral' \| 'primary' \| 'success' \| 'warning' \| 'danger' \| 'gradient'` | Applies semantic styling |
+| `data-variant` | `'fade' \| 'slide' \| 'pop' \| 'action'` | Applies motion style |
+| `data-position` | `'top-left' \| 'top-right' \| 'bottom-left' \| 'bottom-right' \| 'bottom-center'` | Controls toast placement |

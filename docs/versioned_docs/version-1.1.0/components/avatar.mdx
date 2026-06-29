@@ -1,0 +1,198 @@
+---
+sidebar_position: 3
+title: Avatar
+description: Lightweight avatar component for ignix-lite with image and fallback support.
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import Preview from '@site/src/components/preview'
+
+# Avatar
+
+The Avatar component provides lightweight user profile visuals using native `img` and `span` elements.
+
+Ignix Lite avatars support multiple sizes and text fallbacks for initials.
+
+---
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<div
+  style={{
+    display: 'flex',
+    alignItems: 'center',
+    gap: '1rem',
+    flexWrap: 'wrap',
+  }}
+>
+
+  <div className="avatar-wrapper">
+    <span
+      className="avatar-skeleton"
+      data-size="sm"
+    ></span>
+
+    <img
+      src="https://picsum.photos/100"
+      alt="User"
+      data-size="sm"
+      onLoad={(e) => {
+        e.currentTarget.previousElementSibling?.remove()
+      }}
+    />
+  </div>
+
+  <div className="avatar-wrapper">
+    <span
+      className="avatar-skeleton"
+      data-size="md"
+    ></span>
+
+    <img
+      src="https://picsum.photos/100"
+      alt="User"
+      data-size="md"
+      onLoad={(e) => {
+        e.currentTarget.previousElementSibling?.remove()
+      }}
+    />
+  </div>
+
+  <div className="avatar-wrapper">
+    <span
+      className="avatar-skeleton"
+      data-size="lg"
+    ></span>
+
+    <img
+      src="https://picsum.photos/100"
+      alt="User"
+      data-size="lg"
+      onLoad={(e) => {
+        e.currentTarget.previousElementSibling?.remove()
+      }}
+    />
+  </div>
+
+  <span data-size="md">
+    JD
+  </span>
+
+</div>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<img
+  src="https://picsum.photos/100"
+  alt="User"
+  data-size="sm"
+/>
+
+<img
+  src="https://picsum.photos/100"
+  alt="User"
+  data-size="md"
+/>
+
+<img
+  src="https://picsum.photos/100"
+  alt="User"
+  data-size="lg"
+/>
+
+<span data-size="md">
+  JD
+</span>
+```
+
+</TabItem>
+
+</Tabs>
+
+
+## Usage
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<div
+  style={{
+    display: 'flex',
+    alignItems: 'center',
+    gap: '1rem',
+  }}
+>
+
+  <div className="avatar-wrapper">
+    <span
+      className="avatar-skeleton"
+      data-size="md"
+    ></span>
+
+    <img
+      src="https://picsum.photos/100"
+      alt="Sarah"
+      data-size="md"
+      onLoad={(e) => {
+        e.currentTarget.previousElementSibling?.remove()
+      }}
+    />
+  </div>
+
+  <div>
+    <strong>Sarah Johnson</strong>
+
+    <p style={{ margin: 0 }}>
+      Product Designer
+    </p>
+  </div>
+
+</div>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+
+  <img
+    src="https://picsum.photos/100"
+    alt="Sarah"
+    data-size="md"
+  />
+
+ 
+    <strong>Sarah Johnson</strong>
+
+    <p>Product Designer</p>
+
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Attributes
+
+| Attribute | Type | Description |
+|---|---|---|
+| `data-size` | `'sm' \| 'md' \| 'lg'` | Controls avatar size |
+| `src` | `string` | Avatar image source |
+| `alt` | `string` | Accessible image description |

@@ -1,0 +1,260 @@
+---
+sidebar_position: 5
+title: Breadcrumb
+description: Lightweight semantic breadcrumb navigation component for ignix-lite with separator styles, intent variants, and accessibility support.
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import Preview from '@site/src/components/preview'
+
+# Breadcrumb
+
+A lightweight semantic breadcrumb component built with native HTML and CSS variables.
+
+The Breadcrumb component in ignix-lite uses the native `<nav>` element and supports multiple separator styles, intent variants, focus styles, and accessibility-friendly interactions.
+
+---
+
+### Default
+
+<Tabs defaultValue="preview">
+
+  <TabItem value="preview" label="Preview">
+    <Preview>
+      <nav aria-label="Breadcrumb">
+        <ol>
+          <li><a href="#" onclick="event.preventDefault()">Home</a></li>
+          <li><a href="#" onclick="event.preventDefault()">Components</a></li>
+          <li><a href="#" onclick="event.preventDefault()" aria-current="page">Breadcrumb</a></li>
+        </ol>
+      </nav>
+    </Preview>
+  </TabItem>
+
+  <TabItem value="code" label="Code">
+
+```html
+<nav aria-label="Breadcrumb">
+  <ol>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Components</a></li>
+    <li><a href="#" aria-current="page">Breadcrumb</a></li>
+  </ol>
+</nav>
+```
+
+  </TabItem>
+</Tabs>
+
+---
+
+### Separator Styles
+
+<Tabs defaultValue="preview">
+
+  <TabItem value="preview" label="Preview">
+    <Preview>
+      <nav aria-label="Breadcrumb" data-style="slash">
+        <ol>
+          <li><a href="#" onclick="event.preventDefault()">Home</a></li>
+          <li><a href="#" onclick="event.preventDefault()">Docs</a></li>
+          <li><a href="#" onclick="event.preventDefault()" aria-current="page">Slash</a></li>
+        </ol>
+      </nav>
+      <nav aria-label="Breadcrumb" data-style="guillemet">
+        <ol>
+          <li><a href="#" onclick="event.preventDefault()">Home</a></li>
+          <li><a href="#" onclick="event.preventDefault()">Docs</a></li>
+          <li><a href="#" onclick="event.preventDefault()" aria-current="page">Guillemet</a></li>
+        </ol>
+      </nav>
+      
+      <nav aria-label="Breadcrumb" data-style="arrow">
+        <ol>
+          <li><a href="#" onclick="event.preventDefault()">Home</a></li>
+          <li><a href="#" onclick="event.preventDefault()">Docs</a></li>
+          <li><a href="#" onclick="event.preventDefault()" aria-current="page">Arrow</a></li>
+        </ol>
+      </nav>
+      <nav aria-label="Breadcrumb" data-style="thread">
+        <ol>
+          <li><a href="#" onclick="event.preventDefault()">Home</a></li>
+          <li><a href="#" onclick="event.preventDefault()">Docs</a></li>
+          <li><a href="#" onclick="event.preventDefault()" aria-current="page">Thread</a></li>
+        </ol>
+      </nav>
+    </Preview>
+  </TabItem>
+
+  <TabItem value="code" label="Code">
+
+```html
+<!-- Slash -->
+<nav aria-label="Breadcrumb" data-style="slash">
+  <ol>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Docs</a></li>
+    <li><a href="#" aria-current="page">Slash</a></li>
+  </ol>
+</nav>
+
+
+<nav aria-label="Breadcrumb" data-style="guillemet">
+  <ol>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Docs</a></li>
+    <li><a href="#" aria-current="page">Guillemet</a></li>
+  </ol>
+</nav>
+
+
+<nav aria-label="Breadcrumb" data-style="arrow">
+  <ol>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Docs</a></li>
+    <li><a href="#" aria-current="page">Arrow</a></li>
+  </ol>
+</nav>
+
+
+<nav aria-label="Breadcrumb" data-style="thread">
+  <ol>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Docs</a></li>
+    <li><a href="#" aria-current="page">Thread</a></li>
+  </ol>
+</nav>
+```
+
+  </TabItem>
+</Tabs>
+
+---
+
+### Intent Variants
+
+<Tabs defaultValue="preview">
+
+  <TabItem value="preview" label="Preview">
+    <Preview>
+      <nav aria-label="Breadcrumb" data-intent="success">
+        <ol>
+          <li><a href="#" onclick="event.preventDefault()">Dashboard</a></li>
+          <li><a href="#" onclick="event.preventDefault()">Projects</a></li>
+          <li><a href="#" onclick="event.preventDefault()" aria-current="page">Success</a></li>
+        </ol>
+      </nav>
+      <nav aria-label="Breadcrumb" data-intent="warning">
+        <ol>
+          <li><a href="#" onclick="event.preventDefault()">Billing</a></li>
+          <li><a href="#" onclick="event.preventDefault()">Payments</a></li>
+          <li><a href="#" onclick="event.preventDefault()" aria-current="page">Warning</a></li>
+        </ol>
+      </nav>
+      <nav aria-label="Breadcrumb" data-intent="danger">
+        <ol>
+          <li><a href="#" onclick="event.preventDefault()">Admin</a></li>
+          <li><a href="#" onclick="event.preventDefault()">Settings</a></li>
+          <li><a href="#" onclick="event.preventDefault()" aria-current="page">Danger</a></li>
+        </ol>
+      </nav>
+      <nav aria-label="Breadcrumb" data-intent="gradient">
+        <ol>
+          <li><a href="#" onclick="event.preventDefault()">Ignix Lite</a></li>
+          <li><a href="#" onclick="event.preventDefault()">Documentation</a></li>
+          <li><a href="#" onclick="event.preventDefault()" aria-current="page">Gradient</a></li>
+        </ol>
+      </nav>
+    </Preview>
+  </TabItem>
+
+  <TabItem value="code" label="Code">
+
+```html
+
+<nav aria-label="Breadcrumb" data-intent="success">
+  <ol>
+    <li><a href="#">Dashboard</a></li>
+    <li><a href="#">Projects</a></li>
+    <li><a href="#" aria-current="page">Success</a></li>
+  </ol>
+</nav>
+
+
+<nav aria-label="Breadcrumb" data-intent="warning">
+  <ol>
+    <li><a href="#">Billing</a></li>
+    <li><a href="#">Payments</a></li>
+    <li><a href="#" aria-current="page">Warning</a></li>
+  </ol>
+</nav>
+
+
+<nav aria-label="Breadcrumb" data-intent="danger">
+  <ol>
+    <li><a href="#">Admin</a></li>
+    <li><a href="#">Settings</a></li>
+    <li><a href="#" aria-current="page">Danger</a></li>
+  </ol>
+</nav>
+
+
+<nav aria-label="Breadcrumb" data-intent="gradient">
+  <ol>
+    <li><a href="#">Ignix Lite</a></li>
+    <li><a href="#">Documentation</a></li>
+    <li><a href="#" aria-current="page">Gradient</a></li>
+  </ol>
+</nav>
+```
+
+  </TabItem>
+</Tabs>
+
+
+## Usage
+
+<Tabs defaultValue="preview">
+
+  <TabItem value="preview" label="Preview">
+    <Preview>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+        <nav aria-label="Breadcrumb">
+          <ol>
+            <li><a href="#" onclick="event.preventDefault()">Home</a></li>
+            <li><a href="#" onclick="event.preventDefault()">Settings</a></li>
+            <li><a href="#" onclick="event.preventDefault()" aria-current="page">Profile</a></li>
+          </ol>
+        </nav>
+      </div>
+    </Preview>
+  </TabItem>
+
+  <TabItem value="code" label="Code">
+
+```html
+<nav aria-label="Breadcrumb">
+  <ol>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Settings</a></li>
+    <li><a href="#" aria-current="page">Profile</a></li>
+  </ol>
+</nav>
+```
+
+  </TabItem>
+
+</Tabs>
+
+---
+
+## Attributes
+
+| Attribute | Type | Description |
+|---|---|---|
+| `aria-label` | `string` | Must be `"Breadcrumb"` for accessibility and component targeting |
+| `data-style` | `'chevron' \| 'slash' \| 'guillemet' \| 'arrow' \| 'thread'` | Controls the separator style between items |
+| `data-intent` | `'success' \| 'warning' \| 'danger' \| 'gradient'` | Applies semantic color to the active item and hover states |
+| `aria-current` | `'page'` | Marks the current active page item |
+| `href` | `string` | Native anchor href; enables keyboard focus and navigation |

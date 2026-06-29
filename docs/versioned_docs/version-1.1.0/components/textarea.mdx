@@ -1,0 +1,400 @@
+---
+sidebar_position: 14
+title: Textarea
+description: Lightweight semantic textarea component for ignix-lite with validation states and intent variants.
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import Preview from '@site/src/components/preview'
+
+# Textarea
+
+The Textarea component provides semantic multiline text input with lightweight styling and accessible interactions.
+
+Ignix Lite textareas support validation states, intent variants, disabled states, and flexible sizing.
+
+---
+
+## Row Variants
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<div
+  style={{
+    display: 'grid',
+    gap: '1.5rem',
+    width: '100%',
+  }}
+>
+
+<label
+  style={{
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.5rem',
+  }}
+>
+  2 Rows
+
+  <textarea rows="2"></textarea>
+</label>
+
+<label
+  style={{
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.5rem',
+  }}
+>
+  4 Rows
+
+  <textarea rows="4"></textarea>
+</label>
+
+<label
+  style={{
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.5rem',
+  }}
+>
+  6 Rows
+
+  <textarea rows="6"></textarea>
+</label>
+
+</div>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<textarea rows="2"></textarea>
+
+<textarea rows="4"></textarea>
+
+<textarea rows="6"></textarea>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Color Variants
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<div
+  style={{
+    display: 'grid',
+    gap: '1.25rem',
+    width: '100%',
+  }}
+>
+
+<label
+  style={{
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.5rem',
+  }}
+>
+  Primary
+
+  <textarea
+    rows="3"
+    data-intent="primary"
+    placeholder="Primary textarea"
+  ></textarea>
+</label>
+
+<label
+  style={{
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.5rem',
+  }}
+>
+  Success
+
+  <textarea
+    rows="3"
+    data-intent="success"
+    placeholder="Success textarea"
+  ></textarea>
+</label>
+
+<label
+  style={{
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.5rem',
+  }}
+>
+  Warning
+
+  <textarea
+    rows="3"
+    data-intent="warning"
+    placeholder="Warning textarea"
+  ></textarea>
+</label>
+
+<label
+  style={{
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.5rem',
+  }}
+>
+  Danger
+
+  <textarea
+    rows="3"
+    data-intent="danger"
+    placeholder="Danger textarea"
+  ></textarea>
+</label>
+
+</div>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<textarea
+  rows="3"
+  data-intent="primary"
+></textarea>
+
+<textarea
+  rows="3"
+  data-intent="success"
+></textarea>
+
+<textarea
+  rows="3"
+  data-intent="warning"
+></textarea>
+
+<textarea
+  rows="3"
+  data-intent="danger"
+></textarea>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Validation States
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<div
+  style={{
+    display: 'grid',
+    gap: '1.25rem',
+    width: '100%',
+  }}
+>
+
+<label
+  style={{
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.5rem',
+  }}
+>
+  Required
+
+  <textarea
+    rows="3"
+    required
+    placeholder="Required field"
+  ></textarea>
+</label>
+
+<label
+  style={{
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.5rem',
+  }}
+>
+  Invalid
+
+  <textarea
+    rows="3"
+    aria-invalid="true"
+    placeholder="Invalid textarea"
+  ></textarea>
+</label>
+
+<label
+  style={{
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.5rem',
+  }}
+>
+  Disabled
+
+  <textarea
+    rows="3"
+    disabled
+    placeholder="Disabled textarea"
+  ></textarea>
+</label>
+
+</div>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<textarea
+  rows="3"
+  required
+></textarea>
+
+<textarea
+  rows="3"
+  aria-invalid="true"
+></textarea>
+
+<textarea
+  rows="3"
+  disabled
+></textarea>
+```
+
+</TabItem>
+
+</Tabs>
+
+
+## Usage
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<div
+  style={{
+    padding: '1.5rem',
+    border: '1px solid var(--ix-border)',
+    borderRadius: '1rem',
+    background: 'var(--ix-surface-raised)',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '1rem',
+    width: '100%',
+  }}
+>
+
+<div>
+  <h3 style={{ marginBottom: '0.5rem' }}>
+    Product Feedback
+  </h3>
+
+  <p
+    style={{
+      margin: 0,
+      color: 'var(--ix-text-muted)',
+    }}
+  >
+    Help us improve your experience by sharing detailed feedback.
+  </p>
+</div>
+
+<label
+  style={{
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.5rem',
+  }}
+>
+  Feedback
+
+  <textarea
+    rows="5"
+    placeholder="Write your feedback..."
+  ></textarea>
+</label>
+
+</div>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<div class="feedback-card">
+
+  <h3>
+    Product Feedback
+  </h3>
+
+  <p>
+    Help us improve your experience by sharing detailed feedback.
+  </p>
+
+  <label>
+    Feedback
+
+    <textarea
+      rows="5"
+      placeholder="Write your feedback..."
+    ></textarea>
+  </label>
+
+</div>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Attributes
+
+| Attribute | Type | Description |
+|---|---|---|
+| `rows` | `number` | Controls textarea height |
+| `placeholder` | `string` | Placeholder text |
+| `disabled` | `boolean` | Disabled state |
+| `required` | `boolean` | Required field |
+| `aria-invalid` | `boolean` | Invalid state |
+| `data-intent` | `'primary' \| 'success' \| 'warning' \| 'danger'` | Semantic intent styling |
