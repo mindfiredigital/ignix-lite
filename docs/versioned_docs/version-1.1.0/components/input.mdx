@@ -255,12 +255,37 @@ Ignix Lite inputs are fully theme-aware, accessible, and work seamlessly with na
 <TabItem value="code" label="Code">
 
 ```html
-<input type="text" />
-<input type="email" />
-<input type="password" />
-<input type="number" />
-<input type="search" />
-<input type="date" />
+<div data-layout="grid" data-min="220" data-gap="md">
+  <label>
+    Text
+    <input type="text" />
+  </label>
+
+  <label>
+    Email
+    <input type="email" />
+  </label>
+
+  <label>
+    Password
+    <input type="password" />
+  </label>
+
+  <label>
+    Number
+    <input type="number" />
+  </label>
+
+  <label>
+    Search
+    <input type="search" />
+  </label>
+
+  <label>
+    Date
+    <input type="date" />
+  </label>
+</div>
 ```
 
 </TabItem>
@@ -308,26 +333,28 @@ Ignix Lite inputs are fully theme-aware, accessible, and work seamlessly with na
 <TabItem value="code" label="Code">
 
 ```html
-<label>
-  Email Address
-  <input
-    type="email"
-    data-intent="primary"
-    placeholder="you@example.com"
-  />
-</label>
+<div data-layout="stack" data-gap="md" style="max-width: 420px;">
+  <label>
+    Email Address
+    <input
+      type="email"
+      data-intent="primary"
+      placeholder="you@example.com"
+    />
+  </label>
 
-<label>
-  Password
-  <input
-    type="password"
-    placeholder="Enter your password"
-  />
-</label>
+  <label>
+    Password
+    <input
+      type="password"
+      placeholder="Enter your password"
+    />
+  </label>
 
-<button data-intent="primary">
-  Sign In
-</button>
+  <button data-intent="primary">
+    Sign In
+  </button>
+</div>
 ```
 
 </TabItem>
