@@ -1,0 +1,677 @@
+---
+sidebar_position: 14
+title: Layout
+description: Attribute-first layout primitives for Ignix Lite covering app shells, containers, stacks, grids, sidebars, centered states, aspect ratios, pinned helpers, and form grouping.
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import Preview from '@site/src/components/preview'
+
+# Layout
+
+Ignix Lite layout primitives use semantic elements and `data-layout` attributes. They cover page structure, readable containers, spacing, responsive grids, sidebars, centered states, aspect-ratio media, pinned helpers, and form grouping. They are structural by design: use them for composition, not decoration.
+
+---
+
+## App Shell
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<div data-layout="app-shell" style={{ minHeight: '360px', border: '1px solid var(--ix-border)', borderRadius: 'var(--ix-radius-lg)', overflow: 'hidden' }}>
+  <header data-region="header" data-layout="split" style={{ padding: 'var(--ix-space-md) var(--ix-space-lg)', background: 'var(--ix-surface-raised)', borderBottom: '1px solid var(--ix-border)' }}>
+    <strong>Ignix App</strong>
+    <div data-layout="inline" data-gap="sm">
+      <button data-intent="ghost">Docs</button>
+      <button data-intent="primary">Get Started</button>
+    </div>
+  </header>
+  <aside data-region="sidebar" data-layout="stack" data-gap="xs" style={{ padding: 'var(--ix-space-md)', background: 'var(--ix-surface)', borderRight: '1px solid var(--ix-border)' }}>
+    <button data-intent="ghost">Overview</button>
+    <button data-intent="ghost">Analytics</button>
+    <button data-intent="ghost">Settings</button>
+  </aside>
+  <main data-region="main" data-layout="stack" data-gap="md" style={{ padding: 'var(--ix-space-lg)' }}>
+    <header data-layout="split">
+      <h2 style={{ margin: 0 }}>Dashboard</h2>
+      <button data-intent="success">New Report</button>
+    </header>
+    <section data-layout="grid" data-cols="3" data-gap="md">
+      <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontWeight: 600 }}>142 Users</article>
+      <article style={{ background: 'var(--ix-success-bg)', color: 'var(--ix-success)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontWeight: 600 }}>$4,200</article>
+      <article style={{ background: 'var(--ix-danger-bg)', color: 'var(--ix-danger)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontWeight: 600 }}>3 Issues</article>
+    </section>
+  </main>
+  <footer data-region="footer" style={{ padding: 'var(--ix-space-sm) var(--ix-space-lg)', background: 'var(--ix-surface)', borderTop: '1px solid var(--ix-border)', fontSize: 'var(--ix-size-xs)', color: 'var(--ix-text-muted)' }}>
+    Ignix Lite &mdash; Zero classes, ~8KB CSS
+  </footer>
+</div>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<div data-layout="app-shell">
+  <header data-region="header">Header</header>
+  <aside data-region="sidebar">Navigation</aside>
+  <main data-region="main">Content</main>
+  <footer data-region="footer">Footer</footer>
+</div>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Container and Section
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<main data-layout="container" data-size="lg" style={{ border: '1px dashed var(--ix-border)', borderRadius: 'var(--ix-radius)' }}>
+  <section data-layout="section" data-size="lg">
+    <header data-layout="split" data-stack="sm">
+      <div>
+        <h2 style={{ margin: 0 }}>Page Title</h2>
+        <p style={{ margin: '4px 0 0', fontSize: 'var(--ix-size-sm)', color: 'var(--ix-text-muted)' }}>Section description</p>
+      </div>
+      <div data-layout="inline" data-gap="sm">
+        <button data-intent="neutral">Filter</button>
+        <button data-intent="primary">Create</button>
+      </div>
+    </header>
+  </section>
+</main>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<main data-layout="container" data-size="lg">
+  <section data-layout="section" data-size="lg">
+    <header data-layout="header" data-stack="sm">
+      <h1>Dashboard</h1>
+      <button data-intent="primary">Create</button>
+    </header>
+  </section>
+</main>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Box
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<section data-layout="box" data-width="sm" data-pad="lg" data-surface data-border data-radius>
+  <h3 style={{ margin: '0 0 var(--ix-space-sm)' }}>Box Component</h3>
+  <p style={{ margin: 0, fontSize: 'var(--ix-size-sm)', color: 'var(--ix-text-muted)' }}>Width, padding, border, radius, and surface are all controlled via data attributes.</p>
+</section>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<section data-layout="box" data-width="md" data-pad="lg" data-surface data-border data-radius>
+  Content
+</section>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Stack
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<section data-layout="stack" data-gap="md">
+  <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontWeight: 600 }}>First Item</article>
+  <article style={{ background: 'var(--ix-success-bg)', color: 'var(--ix-success)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontWeight: 600 }}>Second Item</article>
+  <article style={{ background: 'var(--ix-warning-bg)', color: 'var(--ix-warning)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontWeight: 600 }}>Third Item</article>
+</section>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<section data-layout="stack" data-gap="md">
+  <article>One</article>
+  <article>Two</article>
+  <article>Three</article>
+</section>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Inline
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<div data-layout="inline" data-gap="sm">
+  <button data-intent="primary">Save</button>
+  <button data-intent="neutral">Cancel</button>
+  <button data-intent="danger">Delete</button>
+</div>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<div data-layout="inline" data-gap="sm" data-align="center">
+  <button data-intent="primary">Save</button>
+  <button data-intent="neutral">Cancel</button>
+  <button data-intent="danger">Delete</button>
+</div>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Cluster
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<div data-layout="cluster" data-gap="sm">
+  <mark data-intent="success">Active</mark>
+  <mark data-intent="warning">Pending</mark>
+  <mark data-intent="danger">Overdue</mark>
+  <mark data-intent="neutral">Draft</mark>
+  <button data-intent="ghost">Clear filters</button>
+</div>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<div data-layout="cluster" data-gap="sm">
+  <mark data-intent="success">Active</mark>
+  <mark data-intent="warning">Pending</mark>
+  <mark data-intent="danger">Overdue</mark>
+  <mark data-intent="neutral">Draft</mark>
+  <button data-intent="ghost">Reset</button>
+</div>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Split
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<div data-layout="stack" data-gap="sm">
+  <header data-layout="split" style={{ padding: 'var(--ix-space-md)', background: 'var(--ix-surface)', border: '1px solid var(--ix-border)', borderRadius: 'var(--ix-radius)' }}>
+    <h3 style={{ margin: 0 }}>User Management</h3>
+    <div data-layout="inline" data-gap="sm">
+      <button data-intent="neutral">Export</button>
+      <button data-intent="primary">Invite</button>
+    </div>
+  </header>
+  <header data-layout="split" style={{ padding: 'var(--ix-space-md)', background: 'var(--ix-surface)', border: '1px solid var(--ix-border)', borderRadius: 'var(--ix-radius)' }}>
+    <div data-layout="inline" data-gap="sm">
+      <mark data-intent="danger">Critical</mark>
+      <span style={{ fontSize: 'var(--ix-size-sm)', color: 'var(--ix-text-muted)' }}>3 unresolved incidents</span>
+    </div>
+    <button data-intent="danger">Resolve All</button>
+  </header>
+</div>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<header data-layout="split" data-stack="sm">
+  <h2>Settings</h2>
+  <button data-intent="primary">Save</button>
+</header>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Sidebar
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<section data-layout="sidebar" data-gap="lg" style={{ minHeight: '260px' }}>
+  <aside data-layout="stack" data-gap="sm" style={{ padding: 'var(--ix-space-md)', background: 'var(--ix-surface)', border: '1px solid var(--ix-border)', borderRadius: 'var(--ix-radius)' }}>
+    <p style={{ margin: '0 0 var(--ix-space-sm)', fontSize: 'var(--ix-size-xs)', fontWeight: 600, color: 'var(--ix-text-muted)' }}>FILTERS</p>
+    <button data-intent="ghost">All Items</button>
+    <button data-intent="ghost">Active</button>
+    <button data-intent="ghost">Archived</button>
+  </aside>
+  <section data-layout="auto-grid" data-min="sm" data-gap="md">
+    <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontWeight: 600 }}>Article One</article>
+    <article style={{ background: 'var(--ix-success-bg)', color: 'var(--ix-success)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontWeight: 600 }}>Article Two</article>
+    <article style={{ background: 'var(--ix-warning-bg)', color: 'var(--ix-warning)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontWeight: 600 }}>Article Three</article>
+  </section>
+</section>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<section data-layout="sidebar" data-gap="lg">
+  <aside>Filters</aside>
+  <main data-layout="auto-grid" data-min="md" data-gap="md">
+    <article>Result 1</article>
+    <article>Result 2</article>
+  </main>
+</section>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Center
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<section data-layout="center" data-height="content" style={{ background: 'var(--ix-surface)', border: '1px solid var(--ix-border)', borderRadius: 'var(--ix-radius-lg)' }}>
+  <div data-layout="stack" data-gap="md" style={{ textAlign: 'center', maxWidth: '320px' }}>
+    <aside data-intent="info">No results found for this filter.</aside>
+    <p style={{ margin: 0, color: 'var(--ix-text-muted)', fontSize: 'var(--ix-size-sm)' }}>Try adjusting your search or filters.</p>
+    <div data-layout="inline" data-gap="sm" data-justify="center">
+      <button data-intent="neutral">Clear Filters</button>
+      <button data-intent="primary">Browse All</button>
+    </div>
+  </div>
+</section>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<section data-layout="center" data-height="content">
+  <article>No results</article>
+</section>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Grid
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<section data-layout="grid" data-cols="3" data-gap="md">
+  <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontWeight: 600 }}>Card One</article>
+  <article style={{ background: 'var(--ix-success-bg)', color: 'var(--ix-success)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontWeight: 600 }}>Card Two</article>
+  <article style={{ background: 'var(--ix-warning-bg)', color: 'var(--ix-warning)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontWeight: 600 }}>Card Three</article>
+  <article data-span="full" style={{ background: 'var(--ix-danger-bg)', color: 'var(--ix-danger)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontWeight: 600 }}>Full Width Banner</article>
+</section>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<section data-layout="grid" data-cols="3" data-gap="md">
+  <article>Card</article>
+  <article>Card</article>
+  <article data-span="2">Wide card</article>
+</section>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Auto Grid
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<section data-layout="auto-grid" data-min="md" data-gap="md">
+  <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontWeight: 600 }}>Analytics</article>
+  <article style={{ background: 'var(--ix-success-bg)', color: 'var(--ix-success)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontWeight: 600 }}>Security</article>
+  <article style={{ background: 'var(--ix-warning-bg)', color: 'var(--ix-warning)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontWeight: 600 }}>Performance</article>
+  <article style={{ background: 'var(--ix-danger-bg)', color: 'var(--ix-danger)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontWeight: 600 }}>Support</article>
+</section>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<section data-layout="auto-grid" data-min="md" data-gap="md">
+  <article>Card</article>
+  <article>Card</article>
+  <article>Card</article>
+</section>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Masonry
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<section data-layout="masonry" data-cols="3">
+  <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontWeight: 600, marginBlockEnd: 'var(--ix-space-md)' }}>Short</article>
+  <article style={{ background: 'var(--ix-success-bg)', color: 'var(--ix-success)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontWeight: 600, marginBlockEnd: 'var(--ix-space-md)', minHeight: '120px' }}>Taller content here</article>
+  <article style={{ background: 'var(--ix-warning-bg)', color: 'var(--ix-warning)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontWeight: 600, marginBlockEnd: 'var(--ix-space-md)', minHeight: '80px' }}>Medium</article>
+  <article style={{ background: 'var(--ix-danger-bg)', color: 'var(--ix-danger)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontWeight: 600, marginBlockEnd: 'var(--ix-space-md)', minHeight: '160px' }}>Tall card</article>
+  <article style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-md)', borderRadius: 'var(--ix-radius)', fontWeight: 600, marginBlockEnd: 'var(--ix-space-md)' }}>Short</article>
+</section>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<section data-layout="masonry" data-cols="3">
+  <article>Short</article>
+  <article>Taller content</article>
+  <article>Tall</article>
+</section>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Aspect Ratio
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<div data-layout="cluster" data-gap="md">
+  <div style={{ width: '180px' }}>
+    <p style={{ margin: '0 0 4px', fontSize: 'var(--ix-size-xs)', color: 'var(--ix-text-muted)' }}>16:9</p>
+    <figure data-layout="aspect" data-ratio="video" style={{ borderRadius: 'var(--ix-radius)', background: 'var(--ix-primary-bg)', border: '1px solid var(--ix-border)' }}>
+      <div style={{ width: '100%', height: '100%', display: 'grid', placeItems: 'center', color: 'var(--ix-primary)', fontSize: 'var(--ix-size-sm)', fontWeight: 600 }}>Video</div>
+    </figure>
+  </div>
+  <div style={{ width: '140px' }}>
+    <p style={{ margin: '0 0 4px', fontSize: 'var(--ix-size-xs)', color: 'var(--ix-text-muted)' }}>1:1</p>
+    <figure data-layout="aspect" data-ratio="square" style={{ borderRadius: 'var(--ix-radius)', background: 'var(--ix-success-bg)', border: '1px solid color-mix(in srgb,var(--ix-success) 20%,transparent)' }}>
+      <div style={{ width: '100%', height: '100%', display: 'grid', placeItems: 'center', color: 'var(--ix-success)', fontSize: 'var(--ix-size-sm)', fontWeight: 600 }}>Square</div>
+    </figure>
+  </div>
+</div>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<figure data-layout="aspect" data-ratio="video">
+  <img src="preview.jpg" alt="Preview" />
+</figure>
+
+<figure data-layout="aspect" data-ratio="square">
+  <img src="thumbnail.jpg" alt="Thumbnail" />
+</figure>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Form Layout
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<form data-layout="form" style={{ maxWidth: '360px' }}>
+  <label data-layout="field-group">
+    Email
+    <input type="email" required placeholder="you@example.com" />
+  </label>
+  <label data-layout="field-group">
+    Message
+    <textarea rows={4} placeholder="Write here"></textarea>
+  </label>
+  <div data-layout="inline" data-gap="sm">
+    <button type="submit" data-intent="primary">Submit</button>
+    <button type="reset" data-intent="neutral">Reset</button>
+  </div>
+</form>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<form data-layout="form">
+  <label data-layout="field-group">
+    Email
+    <input type="email" required />
+  </label>
+  <button type="submit" data-intent="primary">Submit</button>
+</form>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Spacer
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<div data-layout="stack" data-gap="none" style={{ border: '1px dashed var(--ix-border)', borderRadius: 'var(--ix-radius)', padding: 'var(--ix-space-md)' }}>
+  <div style={{ background: 'var(--ix-primary-bg)', color: 'var(--ix-primary)', padding: 'var(--ix-space-sm)', borderRadius: 'var(--ix-radius)', fontWeight: 600 }}>Content above</div>
+  <div data-layout="spacer" data-size="lg" style={{ background: 'repeating-linear-gradient(45deg, var(--ix-border) 0, var(--ix-border) 2px, transparent 0, transparent 8px)', opacity: 0.5 }}></div>
+  <div style={{ background: 'var(--ix-success-bg)', color: 'var(--ix-success)', padding: 'var(--ix-space-sm)', borderRadius: 'var(--ix-radius)', fontWeight: 600 }}>Content below with extra breathing room</div>
+</div>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<section data-layout="stack" data-gap="md">
+  <p>Content above</p>
+  <span data-layout="spacer" data-size="lg"></span>
+  <p>Content below with extra breathing room</p>
+</section>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Pin and Position
+
+<Tabs defaultValue="preview">
+
+<TabItem value="preview" label="Preview">
+
+<Preview>
+
+<div style={{ position: 'relative', minHeight: '160px', border: '1px solid var(--ix-border)', borderRadius: 'var(--ix-radius)', padding: 'var(--ix-space-md)', background: 'var(--ix-surface)' }}>
+  <p style={{ margin: 0, fontSize: 'var(--ix-size-sm)', color: 'var(--ix-text-muted)' }}>This container has a button pinned to its bottom-right corner using absolute positioning.</p>
+  <button data-pin="absolute" data-position="bottom-right" data-intent="primary">
+    Help
+  </button>
+</div>
+
+</Preview>
+
+</TabItem>
+
+<TabItem value="code" label="Code">
+
+```html
+<!-- Pin an element absolute or fixed in the page or parent container -->
+<button data-pin="fixed" data-position="bottom-right" data-intent="primary">
+  Help
+</button>
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+## Attributes
+
+| Attribute | Values | Description |
+|---|---|---|
+| `data-layout` | `app-shell`, `box`, `container`, `section`, `header`, `stack`, `inline`, `cluster`, `split`, `center`, `sidebar`, `grid`, `auto-grid`, `masonry`, `aspect`, `spacer`, `field-group`, `form` | Selects the layout primitive. |
+| `data-region` | `header`, `sidebar`, `main`, `footer` | Places children inside `app-shell`. |
+| `data-size` | `xs`, `sm`, `md`, `lg`, `xl`, `full` | Controls container width, section padding, or spacer size. |
+| `data-width` | `xs`, `sm`, `md`, `lg`, `fit`, `full` | Controls box width. |
+| `data-pad` | `none`, `xs`, `sm`, `md`, `lg`, `xl` | Controls box padding. |
+| `data-gap` | `none`, `xs`, `sm`, `md`, `lg`, `xl` | Controls spacing between children. |
+| `data-align` | `start`, `center`, `end`, `stretch`, `baseline` | Controls cross-axis alignment. |
+| `data-justify` | `start`, `center`, `end`, `between`, `around`, `evenly` | Controls main-axis alignment. |
+| `data-cols` | `1`, `2`, `3`, `4`, `5`, `6`, `auto`, `fill` | Controls grid or masonry columns. |
+| `data-min` | `sm`, `md`, `lg`, `xl` | Controls auto-grid minimum column width. |
+| `data-side` | `left`, `right` | Chooses sidebar side. |
+| `data-height` | `screen`, `content` | Sets center layout minimum height. |
+| `data-stack` | `sm`, `md` | Stacks responsive flex layouts. |
+| `data-ratio` | `square`, `video`, `wide`, `portrait` | Sets aspect ratio. |
+| `data-pin` | `absolute`, `fixed` | Pins an element. |
+| `data-position` | `top-left`, `top-right`, `bottom-left`, `bottom-right` | Sets pinned position. |
+| `data-hide` | `always`, `md`, `sm` | Hides an element at a breakpoint. |
+| `data-debug` | boolean | Shows dashed layout outlines for debugging. |
+
+## Child Attributes
+
+| Attribute | Values | Description |
+|---|---|---|
+| `data-grow` | `0`, `1`, `2` | Flex grow factor. |
+| `data-shrink` | `0`, `1` | Flex shrink factor. |
+| `data-basis` | `0`, `auto`, `full` | Flex basis. |
+| `data-span` | `1`, `2`, `3`, `4`, `full` | Grid column span. |

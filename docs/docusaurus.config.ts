@@ -69,6 +69,10 @@ const config: Config = {
           label: 'Documentation',
         },
         {
+          type: 'docsVersionDropdown',
+          position: 'right',
+        },
+        {
           href: 'https://github.com/mindfiredigital/ignix-lite',
           className: 'header--github-link',
           'aria-label': 'GitHub repository',

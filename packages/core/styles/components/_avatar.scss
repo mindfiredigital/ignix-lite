@@ -66,21 +66,27 @@ img[data-size] {
 
     transform: translateX(-100%);
 
-    background: linear-gradient(90deg,
-        transparent,
-        rgba(255, 255, 255, 0.2),
-        transparent);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
 
     animation: ix-avatar-shimmer 1.5s infinite;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-
   .avatar-skeleton::after,
   [data-avatar-skeleton]::after {
     animation: none;
   }
+}
+
+.avatar-wrapper .avatar-skeleton,
+[data-avatar-wrapper] [data-avatar-skeleton] {
+  border-radius: 50%;
 }
 
 @keyframes ix-avatar-shimmer {

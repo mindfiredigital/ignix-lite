@@ -3,7 +3,14 @@ import { validateHtml } from './validator.js'
 import { auditA11y } from './check-a11y.js'
 import { preview } from './preview.js'
 import { parse } from 'node-html-parser'
-import type { MCPResponse } from '../types.js'
+import type { MCPResponse, SuggestedPatch } from '../types.js'
+
+interface ParsedBuild {
+  html?: string
+  emmet?: string
+  components_used?: string[]
+  error?: string
+}
 
 export type BuildValidatedArgs = {
   description: string
@@ -26,10 +33,11 @@ export async function buildValidated(args: BuildValidatedArgs): Promise<MCPRespo
     return buildResult
   }
 
-  let parsedBuild: any
+  let parsedBuild: ParsedBuild
   try {
-    parsedBuild = JSON.parse(buildResult.content[0].text)
-  } catch {
+    parsedBuild = JSON.parse(buildResult.content[0].text) as ParsedBuild
+  } catch (err) {
+    console.error('Failed to parse build result JSON:', err)
     return buildResult
   }
 
@@ -47,7 +55,7 @@ export async function buildValidated(args: BuildValidatedArgs): Promise<MCPRespo
   const maxIterations = 5
 
   while ((!validation.valid || a11y.issues.length > 0) && iterations < maxIterations) {
-    const patches: any[] = []
+    const patches: SuggestedPatch[] = []
 
     for (const err of validation.errors) {
       if (err.suggestedPatch) {
@@ -84,6 +92,7 @@ export async function buildValidated(args: BuildValidatedArgs): Promise<MCPRespo
           }
         }
       } catch (err) {
+        console.error(`Failed to apply patch on selector "${patch.selector}":`, err)
       }
     }
 
