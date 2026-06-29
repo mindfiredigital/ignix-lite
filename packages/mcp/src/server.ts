@@ -2,7 +2,11 @@ import { Server } from '@modelcontextprotocol/sdk/server/index.js'
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
 import {
   ListToolsRequestSchema,
-  CallToolRequestSchema
+  CallToolRequestSchema,
+  ListResourcesRequestSchema,
+  ReadResourceRequestSchema,
+  ListPromptsRequestSchema,
+  GetPromptRequestSchema
 } from '@modelcontextprotocol/sdk/types.js'
 
 import type { MCPResponse } from './types.js'
@@ -18,7 +22,10 @@ import {
   getTokenSummary,
   recordCall,
   createHandoff,
-  applyHandoff
+  applyHandoff,
+  buildValidated,
+  manifests,
+  getTokenCost
 } from '@mindfiredigital/ignix-lite-engine'
 
 type ValidateArgs = {
@@ -49,6 +56,7 @@ type CreateHandoffArgs = {
 
 type ApplyHandoffArgs = {
   handoff_id: string
+  version?: string
   changes: Array<{
     selector: string
     action: 'update' | 'add' | 'remove'
@@ -64,7 +72,9 @@ const server = new Server(
   },
   {
     capabilities: {
-      tools: {}
+      tools: {},
+      resources: {},
+      prompts: {}
     }
   }
 )
@@ -222,6 +232,10 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
           handoff_id: {
             type: 'string'
           },
+          version: {
+            type: 'string',
+            description: 'The expected schema version of the handoff snapshot'
+          },
           changes: {
             type: 'array',
             items: {
@@ -246,6 +260,58 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
           }
         },
         required: ['handoff_id', 'changes']
+      }
+    },
+    {
+      name: 'build_validated',
+      description:
+        'Generate ignix-lite UI from plain English description, validate rules, audit accessibility, and optionally preview in one round-trip.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          description: {
+            type: 'string',
+            description:
+              'The natural language description of the UI layout or component to build'
+          },
+          options: {
+            type: 'object',
+            properties: {
+              preview: {
+                type: 'boolean',
+                description: 'Whether to generate a visual PNG preview'
+              },
+              width: {
+                type: 'number',
+                description: 'Width of the preview viewport'
+              },
+              theme: {
+                type: 'string',
+                description: 'Theme scheme for preview (light or dark)'
+              },
+              scale: {
+                type: 'number',
+                description: 'Device scale factor'
+              }
+            }
+          }
+        },
+        required: ['description']
+      }
+    },
+    {
+      name: 'get_token_cost',
+      description:
+        'Compare the token cost (footprint) of Ignix-Lite vs. a utility-first (Tailwind CSS) equivalent.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          html: {
+            type: 'string',
+            description: 'The Ignix-Lite HTML markup to analyze'
+          }
+        },
+        required: ['html']
       }
     }
   ]
@@ -337,6 +403,26 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       break
     }
 
+    case 'build_validated': {
+      const compositeArgs = args as {
+        description: string
+        options?: {
+          width?: number
+          theme?: string
+          scale?: number
+          preview?: boolean
+        }
+      }
+      response = await buildValidated(compositeArgs)
+      break
+    }
+
+    case 'get_token_cost': {
+      const costArgs = args as { html: string }
+      response = getTokenCost(costArgs.html ?? '')
+      break
+    }
+
     default:
       response = {
         content: [
@@ -369,6 +455,88 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
   }
 
   return response
+})
+
+server.setRequestHandler(ListResourcesRequestSchema, async () => ({
+  resources: [
+    {
+      uri: 'manifests://all',
+      name: 'All Component Manifests',
+      description:
+        'Single bundled resource containing manifests for all 28 Ignix-Lite components',
+      mimeType: 'application/json'
+    }
+  ]
+}))
+
+server.setRequestHandler(ReadResourceRequestSchema, async (request) => {
+  const { uri } = request.params
+  if (uri === 'manifests://all') {
+    return {
+      contents: [
+        {
+          uri,
+          mimeType: 'application/json',
+          text: JSON.stringify(manifests)
+        }
+      ]
+    }
+  }
+  throw new Error(`Resource not found: ${uri}`)
+})
+
+server.setRequestHandler(ListPromptsRequestSchema, async () => ({
+  prompts: [
+    {
+      name: 'ignix-rules',
+      description:
+        'System instructions and guidelines to configure an agent to generate valid, semantic, classless Ignix-Lite HTML markup.'
+    }
+  ]
+}))
+
+server.setRequestHandler(GetPromptRequestSchema, async (request) => {
+  const { name } = request.params
+  if (name === 'ignix-rules') {
+    return {
+      description: 'System instructions for generating valid Ignix-Lite HTML.',
+      messages: [
+        {
+          role: 'user',
+          content: {
+            type: 'text',
+            text: [
+              'Here are the core rules for generating valid Ignix-Lite HTML markup:',
+              '1. **Classless & Semantic Tags**: Do NOT use class attributes. Always use semantic tags for components:',
+              '   - `<button>` for buttons',
+              '   - `<aside>` for alerts',
+              '   - `<details>` & `<summary>` for accordions',
+              '   - `<mark>` or `span[role=status]` for badges',
+              '   - `<img>` / `span` for avatars',
+              '   - `<article>` for cards',
+              '   - `<progress>` for progress indicators',
+              '   - `<meter>` for scalar progress measurements',
+              '   - `<dialog>` for modal dialogs',
+              '   - `<hr>` for dividers',
+              '   - `pre > code` for codeblocks',
+              '   - `ix-dropdown`, `ix-combobox`, `ix-tabs`, `ix-tooltip`, `ix-toast` for advanced components',
+              '2. **Visual Intent & Sizing**: Use custom data attributes instead of CSS utility classes:',
+              '   - `data-intent="primary|danger|warning|success|neutral|ghost"` for colors',
+              '   - `data-size="sm|md|lg"` for sizes',
+              '3. **Layout Primitives**: Structure pages and groups using `data-layout` elements:',
+              '   - `<div data-layout="stack" data-gap="lg">` for vertical lists',
+              '   - `<div data-layout="inline" data-gap="md">` for horizontal rows',
+              '   - `<div data-layout="grid" data-cols="3">` for grids',
+              '   - `<div data-layout="box" data-pad="md">` for padded blocks/panels',
+              '   - `<div data-layout="split">` for title-actions headers',
+              '4. **Accessibility (WCAG AA)**: Always wrap `<input>` and `<textarea>` inside `<label>` elements. Always provide alternative text (`alt` attribute) on `<img>` avatar elements. Dialogs require unique `id` attributes.'
+            ].join('\n')
+          }
+        }
+      ]
+    }
+  }
+  throw new Error(`Prompt not found: ${name}`)
 })
 
 async function start() {

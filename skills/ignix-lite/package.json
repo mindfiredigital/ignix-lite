@@ -1,0 +1,16 @@
+{
+  "name": "@mindfiredigital/ignix-lite-skill",
+  "version": "2.0.0",
+  "description": "AI skill, intents, reference guides, templates, and rule context for Ignix-Lite",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "files": [
+    "SKILL.md",
+    "assets",
+    "references",
+    "templates"
+  ],
+  "license": "MIT"
+}

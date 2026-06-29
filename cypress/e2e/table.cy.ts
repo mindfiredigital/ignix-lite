@@ -8,6 +8,10 @@ describe(
         'http://localhost:3000/ignix-lite/docs/components/table'
       )
 
+      cy.window().then((win) => {
+        return win.customElements.whenDefined('ix-table')
+      })
+
     })
 
     it(
@@ -32,7 +36,7 @@ describe(
         cy.get(
           'table[is="ix-table"] th[data-sortable]'
         )
-        .first()
+        .eq(1)
         .click()
 
         cy.get(
@@ -54,7 +58,7 @@ describe(
         cy.get(
           'table[is="ix-table"] th[data-sortable]'
         )
-        .first()
+        .eq(1)
         .trigger(
           'keydown',
           {

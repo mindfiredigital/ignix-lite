@@ -1,5 +1,6 @@
 import type { HTMLElement } from 'node-html-parser'
 import type { A11yIssue, RuleResult } from './a11y-types.js'
+import { getElementSelector } from '../tools/handoff.js'
 
 function injectAttr(outerHTML: string, attr: string, value: string): string {
   return outerHTML.replace(/^(<[a-zA-Z][a-zA-Z0-9-]*)/, `$1 ${attr}="${value}"`)
@@ -93,7 +94,13 @@ export function checkImages(root: HTMLElement): RuleResult {
             img.outerHTML,
             'alt',
             ariaLabel ?? '[Describe the image]'
-          )
+          ),
+          suggestedPatch: {
+            selector: getElementSelector(img, root),
+            action: 'setAttribute',
+            attribute: 'alt',
+            value: ariaLabel ?? '[Describe the image]'
+          }
         })
       } else {
         issues.push({
@@ -101,7 +108,13 @@ export function checkImages(root: HTMLElement): RuleResult {
           rule: ruleName,
           element: clip(img.outerHTML),
           message: '<img> is missing the alt attribute',
-          fix: injectAttr(img.outerHTML, 'alt', '[Describe the image]')
+          fix: injectAttr(img.outerHTML, 'alt', '[Describe the image]'),
+          suggestedPatch: {
+            selector: getElementSelector(img, root),
+            action: 'setAttribute',
+            attribute: 'alt',
+            value: '[Describe the image]'
+          }
         })
       }
       return
@@ -114,7 +127,13 @@ export function checkImages(root: HTMLElement): RuleResult {
         element: clip(img.outerHTML),
         message:
           '<img> has an empty alt but is not marked as decorative - add role="presentation" or provide a description',
-        fix: injectAttr(img.outerHTML, 'role', 'presentation')
+        fix: injectAttr(img.outerHTML, 'role', 'presentation'),
+        suggestedPatch: {
+          selector: getElementSelector(img, root),
+          action: 'setAttribute',
+          attribute: 'role',
+          value: 'presentation'
+        }
       })
     }
   })
@@ -156,14 +175,20 @@ export function checkFormLabels(root: HTMLElement): RuleResult {
         !ariaLabelledBy &&
         !hasTitle
       ) {
+        const fixContent = id
+          ? `<label for="${id}">[Label text]</label>\n${el.outerHTML}`
+          : `<label>[Label text] ${el.outerHTML}</label>`
         issues.push({
           type: 'error',
           rule: ruleName,
           element: clip(el.outerHTML),
           message: `<${tag}> is not associated with a <label> - use for/id, wrapping label, or aria-label`,
-          fix: id
-            ? `<label for="${id}">[Label text]</label>\n${el.outerHTML}`
-            : `<label>[Label text] ${el.outerHTML}</label>`
+          fix: fixContent,
+          suggestedPatch: {
+            selector: getElementSelector(el, root),
+            action: 'replaceOuterHTML',
+            value: fixContent
+          }
         })
         return
       }
@@ -193,7 +218,12 @@ export function checkFormLabels(root: HTMLElement): RuleResult {
         element: '<fieldset>',
         message:
           '<fieldset> must have a non-empty <legend> to group related form controls',
-        fix: `<fieldset>\n  <legend>[Group label]</legend>\n  ...\n</fieldset>`
+        fix: `<fieldset>\n  <legend>[Group label]</legend>\n  ...\n</fieldset>`,
+        suggestedPatch: {
+          selector: getElementSelector(fieldset, root),
+          action: 'replaceOuterHTML',
+          value: `<fieldset>\n  <legend>[Group label]</legend>${fieldset.innerHTML}\n</fieldset>`
+        }
       })
     }
   })
@@ -210,13 +240,19 @@ export function checkEmptyLabels(root: HTMLElement): RuleResult {
     const hasAriaLabel = !!label.getAttribute('aria-label')?.trim()
 
     if (!hasText && !hasAriaLabel) {
+      const fixContent = label.outerHTML.replace('</label>', '[Label text]</label>')
       issues.push({
         type: 'warning',
         rule: ruleName,
         element: clip(label.outerHTML),
         message:
           '<label> is empty and provides no accessible name for its control',
-        fix: label.outerHTML.replace('</label>', '[Label text]</label>')
+        fix: fixContent,
+        suggestedPatch: {
+          selector: getElementSelector(label, root),
+          action: 'replaceOuterHTML',
+          value: fixContent
+        }
       })
     }
 
@@ -248,7 +284,13 @@ export function checkButtons(root: HTMLElement): RuleResult {
         element: clip(button.outerHTML),
         message:
           '<button> has no accessible name - add text content, aria-label, or a child <img> with alt',
-        fix: injectAttr(button.outerHTML, 'aria-label', '[Action description]')
+        fix: injectAttr(button.outerHTML, 'aria-label', '[Action description]'),
+        suggestedPatch: {
+          selector: getElementSelector(button, root),
+          action: 'setAttribute',
+          attribute: 'aria-label',
+          value: '[Action description]'
+        }
       })
     }
   })
@@ -287,7 +329,13 @@ export function checkLinks(root: HTMLElement): RuleResult {
           link.outerHTML,
           'aria-label',
           '[Describe the link destination]'
-        )
+        ),
+        suggestedPatch: {
+          selector: getElementSelector(link, root),
+          action: 'setAttribute',
+          attribute: 'aria-label',
+          value: '[Describe the link destination]'
+        }
       })
       return
     }
@@ -302,7 +350,13 @@ export function checkLinks(root: HTMLElement): RuleResult {
           link.outerHTML,
           'aria-label',
           '[Describe where this link goes]'
-        )
+        ),
+        suggestedPatch: {
+          selector: getElementSelector(link, root),
+          action: 'setAttribute',
+          attribute: 'aria-label',
+          value: '[Describe where this link goes]'
+        }
       })
     }
 
@@ -313,7 +367,13 @@ export function checkLinks(root: HTMLElement): RuleResult {
         element: clip(link.outerHTML),
         message:
           '<a> has no href - use <button> for actions, or add a valid href',
-        fix: link.outerHTML.replace(/^<a\b/, '<a href="#"')
+        fix: link.outerHTML.replace(/^<a\b/, '<a href="#"'),
+        suggestedPatch: {
+          selector: getElementSelector(link, root),
+          action: 'setAttribute',
+          attribute: 'href',
+          value: '#'
+        }
       })
     }
   })
@@ -344,7 +404,13 @@ export function checkAriaStates(root: HTMLElement): RuleResult {
         fix: el.outerHTML.replace(
           `aria-invalid="${invalidVal}"`,
           'aria-invalid="true"'
-        )
+        ),
+        suggestedPatch: {
+          selector: getElementSelector(el, root),
+          action: 'setAttribute',
+          attribute: 'aria-invalid',
+          value: 'true'
+        }
       })
       return
     }
@@ -358,7 +424,13 @@ export function checkAriaStates(root: HTMLElement): RuleResult {
           element: clip(el.outerHTML),
           message:
             'Element with aria-invalid="true" must have aria-describedby pointing to the error message element',
-          fix: injectAttr(el.outerHTML, 'aria-describedby', 'error-message-id')
+          fix: injectAttr(el.outerHTML, 'aria-describedby', 'error-message-id'),
+          suggestedPatch: {
+            selector: getElementSelector(el, root),
+            action: 'setAttribute',
+            attribute: 'aria-describedby',
+            value: 'error-message-id'
+          }
         })
       } else {
         // Verify the describedby target exists
@@ -392,7 +464,13 @@ export function checkAriaStates(root: HTMLElement): RuleResult {
           rule: 'WCAG 4.1.2 ARIA State Values',
           element: clip(el.outerHTML),
           message: `${attr} must be "true" or "false", got "${val}"`,
-          fix: el.outerHTML.replace(`${attr}="${val}"`, `${attr}="true"`)
+          fix: el.outerHTML.replace(`${attr}="${val}"`, `${attr}="true"`),
+          suggestedPatch: {
+            selector: getElementSelector(el, root),
+            action: 'setAttribute',
+            attribute: attr,
+            value: 'true'
+          }
         })
       }
     })
@@ -410,7 +488,13 @@ export function checkAriaStates(root: HTMLElement): RuleResult {
         fix: el.outerHTML.replace(
           `aria-checked="${val}"`,
           'aria-checked="false"'
-        )
+        ),
+        suggestedPatch: {
+          selector: getElementSelector(el, root),
+          action: 'setAttribute',
+          attribute: 'aria-checked',
+          value: 'false'
+        }
       })
     }
   })
@@ -425,7 +509,13 @@ export function checkAriaStates(root: HTMLElement): RuleResult {
         rule: 'WCAG 4.1.2 ARIA State Values',
         element: clip(el.outerHTML),
         message: `aria-live="${val}" is not valid - use "off", "polite", or "assertive"`,
-        fix: el.outerHTML.replace(`aria-live="${val}"`, 'aria-live="polite"')
+        fix: el.outerHTML.replace(`aria-live="${val}"`, 'aria-live="polite"'),
+        suggestedPatch: {
+          selector: getElementSelector(el, root),
+          action: 'setAttribute',
+          attribute: 'aria-live',
+          value: 'polite'
+        }
       })
     }
   })
@@ -448,7 +538,13 @@ export function checkDuplicateIds(root: HTMLElement): RuleResult {
         rule: ruleName,
         element: clip(el.outerHTML),
         message: 'id="" is an empty ID - IDs must have a non-empty value',
-        fix: el.outerHTML.replace('id=""', 'id="[unique-id]"')
+        fix: el.outerHTML.replace('id=""', 'id="[unique-id]"'),
+        suggestedPatch: {
+          selector: getElementSelector(el, root),
+          action: 'setAttribute',
+          attribute: 'id',
+          value: '[unique-id]'
+        }
       })
       return
     }
@@ -485,7 +581,13 @@ export function checkTabIndex(root: HTMLElement): RuleResult {
         rule: ruleName,
         element: clip(el.outerHTML),
         message: `tabindex="${raw}" is not a valid integer`,
-        fix: el.outerHTML.replace(`tabindex="${raw}"`, 'tabindex="0"')
+        fix: el.outerHTML.replace(`tabindex="${raw}"`, 'tabindex="0"'),
+        suggestedPatch: {
+          selector: getElementSelector(el, root),
+          action: 'setAttribute',
+          attribute: 'tabindex',
+          value: '0'
+        }
       })
       return
     }
@@ -496,7 +598,13 @@ export function checkTabIndex(root: HTMLElement): RuleResult {
         rule: ruleName,
         element: clip(el.outerHTML),
         message: `tabindex="${val}" disrupts natural tab order - use tabindex="0" or rely on DOM order`,
-        fix: el.outerHTML.replace(`tabindex="${val}"`, 'tabindex="0"')
+        fix: el.outerHTML.replace(`tabindex="${val}"`, 'tabindex="0"'),
+        suggestedPatch: {
+          selector: getElementSelector(el, root),
+          action: 'setAttribute',
+          attribute: 'tabindex',
+          value: '0'
+        }
       })
     }
   })
@@ -522,19 +630,30 @@ export function checkHeadings(root: HTMLElement): RuleResult {
         rule: ruleName,
         element: clip(h.outerHTML),
         message: `<${tag}> is empty - headings must have descriptive text`,
-        fix: `<${tag}>[Heading text]</${tag}>`
+        fix: `<${tag}>[Heading text]</${tag}>`,
+        suggestedPatch: {
+          selector: getElementSelector(h, root),
+          action: 'replaceOuterHTML',
+          value: `<${tag}>[Heading text]</${tag}>`
+        }
       })
     }
 
     if (level === 1) h1Count++
 
     if (lastLevel > 0 && level > lastLevel + 1) {
+      const fixContent = `<h${lastLevel + 1}>${h.text.trim() || '[Heading text]'}</h${lastLevel + 1}>`
       issues.push({
         type: 'warning',
         rule: ruleName,
         element: clip(h.outerHTML),
         message: `Heading skips from h${lastLevel} to h${level} - use h${lastLevel + 1} to maintain document outline`,
-        fix: `<h${lastLevel + 1}>${h.text.trim()}</h${lastLevel + 1}>`
+        fix: fixContent,
+        suggestedPatch: {
+          selector: getElementSelector(h, root),
+          action: 'replaceOuterHTML',
+          value: fixContent
+        }
       })
     }
 
@@ -574,22 +693,34 @@ export function checkTables(root: HTMLElement): RuleResult {
         element: '<table>',
         message:
           '<table> has no caption, aria-label, or aria-labelledby - screen readers cannot identify its purpose',
-        fix: injectAttr('<table>', 'aria-label', '[Describe the table]')
+        fix: injectAttr('<table>', 'aria-label', '[Describe the table]'),
+        suggestedPatch: {
+          selector: getElementSelector(table, root),
+          action: 'setAttribute',
+          attribute: 'aria-label',
+          value: '[Describe the table]'
+        }
       })
     }
 
     // Empty caption is as bad as no caption
     if (caption && !caption.text.trim()) {
+      const fixContent = caption.outerHTML.replace(
+        '</caption>',
+        '[Table description]</caption>'
+      )
       issues.push({
         type: 'warning',
         rule: ruleName,
         element: clip(caption.outerHTML),
         message:
           '<caption> is empty - provide a meaningful description of the table',
-        fix: caption.outerHTML.replace(
-          '</caption>',
-          '[Table description]</caption>'
-        )
+        fix: fixContent,
+        suggestedPatch: {
+          selector: getElementSelector(caption, root),
+          action: 'replaceOuterHTML',
+          value: fixContent
+        }
       })
     }
 
@@ -601,7 +732,13 @@ export function checkTables(root: HTMLElement): RuleResult {
           element: clip(th.outerHTML),
           message:
             '<th> is missing the scope attribute - use scope="col" for column headers or scope="row" for row headers',
-          fix: injectAttr(th.outerHTML, 'scope', 'col')
+          fix: injectAttr(th.outerHTML, 'scope', 'col'),
+          suggestedPatch: {
+            selector: getElementSelector(th, root),
+            action: 'setAttribute',
+            attribute: 'scope',
+            value: 'col'
+          }
         })
       }
     })
@@ -626,7 +763,13 @@ export function checkDialogs(root: HTMLElement): RuleResult {
         element: '<dialog>',
         message:
           '<dialog> has no id - required by the ignix-lite button[onclick="dialogId.showModal()"] pattern',
-        fix: injectAttr('<dialog>', 'id', 'dialog-id')
+        fix: injectAttr('<dialog>', 'id', 'dialog-id'),
+        suggestedPatch: {
+          selector: getElementSelector(dialog, root),
+          action: 'setAttribute',
+          attribute: 'id',
+          value: 'dialog-id'
+        }
       })
     }
 
@@ -639,7 +782,13 @@ export function checkDialogs(root: HTMLElement): RuleResult {
           '<dialog> has no accessible name - add aria-labelledby pointing to a heading inside, or aria-label',
         fix: id
           ? `<dialog id="${id}" aria-labelledby="dialog-title">...</dialog>`
-          : `<dialog aria-label="[Dialog purpose]">...</dialog>`
+          : `<dialog aria-label="[Dialog purpose]">...</dialog>`,
+        suggestedPatch: {
+          selector: getElementSelector(dialog, root),
+          action: 'setAttribute',
+          attribute: id ? 'aria-labelledby' : 'aria-label',
+          value: id ? 'dialog-title' : '[Dialog purpose]'
+        }
       })
     } else if (ariaLabelledBy) {
       // Verify the labelledby target exists
@@ -682,7 +831,13 @@ export function checkRoles(root: HTMLElement): RuleResult {
         element: clip(el.outerHTML),
         message:
           'Element with role="button" must have tabindex="0" to be keyboard-accessible',
-        fix: injectAttr(el.outerHTML, 'tabindex', '0')
+        fix: injectAttr(el.outerHTML, 'tabindex', '0'),
+        suggestedPatch: {
+          selector: getElementSelector(el, root),
+          action: 'setAttribute',
+          attribute: 'tabindex',
+          value: '0'
+        }
       })
     }
   })
@@ -701,7 +856,13 @@ export function checkRoles(root: HTMLElement): RuleResult {
           rule: ruleName,
           element: clip(el.outerHTML),
           message: `role="${role}" requires aria-checked attribute (values: "true", "false"${role === 'checkbox' ? ', "mixed"' : ''})`,
-          fix: injectAttr(el.outerHTML, 'aria-checked', 'false')
+          fix: injectAttr(el.outerHTML, 'aria-checked', 'false'),
+          suggestedPatch: {
+            selector: getElementSelector(el, root),
+            action: 'setAttribute',
+            attribute: 'aria-checked',
+            value: 'false'
+          }
         })
       }
     })
@@ -714,7 +875,13 @@ export function checkRoles(root: HTMLElement): RuleResult {
         rule: ruleName,
         element: clip(el.outerHTML),
         message: 'role="combobox" requires aria-expanded attribute',
-        fix: injectAttr(el.outerHTML, 'aria-expanded', 'false')
+        fix: injectAttr(el.outerHTML, 'aria-expanded', 'false'),
+        suggestedPatch: {
+          selector: getElementSelector(el, root),
+          action: 'setAttribute',
+          attribute: 'aria-expanded',
+          value: 'false'
+        }
       })
     }
   })
@@ -728,7 +895,13 @@ export function checkRoles(root: HTMLElement): RuleResult {
           rule: ruleName,
           element: clip(el.outerHTML),
           message: `role="${role}" requires aria-selected attribute`,
-          fix: injectAttr(el.outerHTML, 'aria-selected', 'false')
+          fix: injectAttr(el.outerHTML, 'aria-selected', 'false'),
+          suggestedPatch: {
+            selector: getElementSelector(el, root),
+            action: 'setAttribute',
+            attribute: 'aria-selected',
+            value: 'false'
+          }
         })
       }
     })
@@ -743,7 +916,13 @@ export function checkRoles(root: HTMLElement): RuleResult {
         rule: ruleName,
         element: clip(el.outerHTML),
         message: `role="slider" is missing required attributes: ${missing.join(', ')}`,
-        fix: 'Add aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" to the element'
+        fix: 'Add aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" to the element',
+        suggestedPatch: {
+          selector: getElementSelector(el, root),
+          action: 'replaceOuterHTML',
+          value: el.outerHTML
+            .replace(/^(<[a-zA-Z][a-zA-Z0-9-]*)/, `$1 aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"`)
+        }
       })
     }
   })
@@ -759,7 +938,13 @@ export function checkRoles(root: HTMLElement): RuleResult {
         element: clip(el.outerHTML),
         message:
           'role="progressbar" should have aria-valuenow or aria-valuetext to communicate current progress',
-        fix: injectAttr(el.outerHTML, 'aria-valuenow', '0')
+        fix: injectAttr(el.outerHTML, 'aria-valuenow', '0'),
+        suggestedPatch: {
+          selector: getElementSelector(el, root),
+          action: 'setAttribute',
+          attribute: 'aria-valuenow',
+          value: '0'
+        }
       })
     }
   })
@@ -776,7 +961,13 @@ export function checkRoles(root: HTMLElement): RuleResult {
           el.outerHTML,
           'aria-label',
           '[Describe the list options]'
-        )
+        ),
+        suggestedPatch: {
+          selector: getElementSelector(el, root),
+          action: 'setAttribute',
+          attribute: 'aria-label',
+          value: '[Describe the list options]'
+        }
       })
     }
   })
@@ -804,7 +995,13 @@ export function checkAutocomplete(root: HTMLElement): RuleResult {
         rule: ruleName,
         element: clip(input.outerHTML),
         message: `<input type="${type}"> should have autocomplete="${expected}" to assist users with autofill`,
-        fix: injectAttr(input.outerHTML, 'autocomplete', expected)
+        fix: injectAttr(input.outerHTML, 'autocomplete', expected),
+        suggestedPatch: {
+          selector: getElementSelector(input, root),
+          action: 'setAttribute',
+          attribute: 'autocomplete',
+          value: expected
+        }
       })
     }
 
@@ -815,7 +1012,13 @@ export function checkAutocomplete(root: HTMLElement): RuleResult {
         element: clip(input.outerHTML),
         message:
           '<input type="password"> should have autocomplete="current-password" or autocomplete="new-password"',
-        fix: injectAttr(input.outerHTML, 'autocomplete', 'current-password')
+        fix: injectAttr(input.outerHTML, 'autocomplete', 'current-password'),
+        suggestedPatch: {
+          selector: getElementSelector(input, root),
+          action: 'setAttribute',
+          attribute: 'autocomplete',
+          value: 'current-password'
+        }
       })
     }
   })
@@ -835,15 +1038,21 @@ export function checkFocusStyle(root: HTMLElement): RuleResult {
   root.querySelectorAll('[style]').forEach((el) => {
     const style = el.getAttribute('style') ?? ''
     if (KILLS_FOCUS.some((rx) => rx.test(style))) {
+      const fixContent = el.outerHTML
+        .replace(/outline\s*:\s*(none|0(?:px)?)\s*;?/gi, '')
+        .replace(/outline-width\s*:\s*0\s*;?/gi, '')
       issues.push({
         type: 'warning',
         rule: ruleName,
         element: clip(el.outerHTML),
         message:
           'Inline style removes the focus outline - keyboard users cannot see the focus indicator',
-        fix: el.outerHTML
-          .replace(/outline\s*:\s*(none|0(?:px)?)\s*;?/gi, '')
-          .replace(/outline-width\s*:\s*0\s*;?/gi, '')
+        fix: fixContent,
+        suggestedPatch: {
+          selector: getElementSelector(el, root),
+          action: 'replaceOuterHTML',
+          value: fixContent
+        }
       })
     }
   })
@@ -863,7 +1072,13 @@ export function checkLang(root: HTMLElement): RuleResult {
       element: '<html>',
       message:
         '<html> is missing the lang attribute - screen readers need this to select the correct voice/language',
-      fix: '<html lang="en">'
+      fix: '<html lang="en">',
+      suggestedPatch: {
+        selector: getElementSelector(htmlEl, root),
+        action: 'setAttribute',
+        attribute: 'lang',
+        value: 'en'
+      }
     })
   }
 

@@ -59,7 +59,7 @@ function extractState(element: HTMLElement): Record<string, string> {
   return state
 }
 
-function getElementSelector(el: HTMLElement, root: HTMLElement): string {
+export function getElementSelector(el: HTMLElement, root: HTMLElement): string {
   const elementId = el.getAttribute('id')
   if (elementId) {
     return `#${elementId}`
@@ -193,9 +193,10 @@ export interface HandoffChange {
 
 export function applyHandoff(args: {
   handoff_id: string
+  version?: string
   changes: HandoffChange[]
 }): MCPResponse {
-  const { handoff_id, changes } = args
+  const { handoff_id, version, changes } = args
   const envelope = handoffs.get(handoff_id)
 
   if (!envelope) {
@@ -205,6 +206,21 @@ export function applyHandoff(args: {
           type: 'text',
           text: JSON.stringify({
             error: `Handoff snapshot not found: ${handoff_id}`,
+            tokens_used: 5
+          })
+        }
+      ]
+    }
+  }
+
+  // Schema drift detection
+  if (version && envelope.version !== version) {
+    return {
+      content: [
+        {
+          type: 'text',
+          text: JSON.stringify({
+            error: `Schema drift detected: snapshot version is ${envelope.version}, but requested version is ${version}`,
             tokens_used: 5
           })
         }

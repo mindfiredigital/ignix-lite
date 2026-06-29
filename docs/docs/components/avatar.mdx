@@ -31,9 +31,10 @@ Ignix Lite avatars support multiple sizes and text fallbacks for initials.
   }}
 >
 
-  <div className="avatar-wrapper">
+  <div className="avatar-wrapper" data-avatar-wrapper>
     <span
       className="avatar-skeleton"
+      data-avatar-skeleton
       data-size="sm"
     ></span>
 
@@ -47,9 +48,10 @@ Ignix Lite avatars support multiple sizes and text fallbacks for initials.
     />
   </div>
 
-  <div className="avatar-wrapper">
+  <div className="avatar-wrapper" data-avatar-wrapper>
     <span
       className="avatar-skeleton"
+      data-avatar-skeleton
       data-size="md"
     ></span>
 
@@ -63,9 +65,10 @@ Ignix Lite avatars support multiple sizes and text fallbacks for initials.
     />
   </div>
 
-  <div className="avatar-wrapper">
+  <div className="avatar-wrapper" data-avatar-wrapper>
     <span
       className="avatar-skeleton"
+      data-avatar-skeleton
       data-size="lg"
     ></span>
 
@@ -77,6 +80,15 @@ Ignix Lite avatars support multiple sizes and text fallbacks for initials.
         e.currentTarget.previousElementSibling?.remove()
       }}
     />
+  </div>
+
+  <div className="avatar-wrapper" data-avatar-wrapper>
+    <span
+      className="avatar-skeleton"
+      data-avatar-skeleton
+      data-size="md"
+      style={{ position: 'relative' }}
+    ></span>
   </div>
 
   <span data-size="md">
@@ -92,27 +104,18 @@ Ignix Lite avatars support multiple sizes and text fallbacks for initials.
 <TabItem value="code" label="Code">
 
 ```html
-<img
-  src="https://picsum.photos/100"
-  alt="User"
-  data-size="sm"
-/>
+<!-- Image Avatars -->
+<img src="https://picsum.photos/100" alt="User" data-size="sm" />
+<img src="https://picsum.photos/100" alt="User" data-size="md" />
+<img src="https://picsum.photos/100" alt="User" data-size="lg" />
 
-<img
-  src="https://picsum.photos/100"
-  alt="User"
-  data-size="md"
-/>
+<!-- Avatar loading skeleton (optional wrapper) -->
+<div class="avatar-wrapper" data-avatar-wrapper>
+  <span class="avatar-skeleton" data-avatar-skeleton data-size="md" style="position: relative;"></span>
+</div>
 
-<img
-  src="https://picsum.photos/100"
-  alt="User"
-  data-size="lg"
-/>
-
-<span data-size="md">
-  JD
-</span>
+<!-- Fallback Initials -->
+<span data-size="md">JD</span>
 ```
 
 </TabItem>
@@ -136,9 +139,10 @@ Ignix Lite avatars support multiple sizes and text fallbacks for initials.
   }}
 >
 
-  <div className="avatar-wrapper">
+  <div className="avatar-wrapper" data-avatar-wrapper>
     <span
       className="avatar-skeleton"
+      data-avatar-skeleton
       data-size="md"
     ></span>
 
