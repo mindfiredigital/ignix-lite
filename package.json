@@ -23,7 +23,8 @@
     "cy:open": "cypress open",
     "merge-reports": "npx mochawesome-merge cypress/reports/*.json > cypress/reports/report.json",
     "generate-report": "npx marge cypress/reports/report.json -f report -o cypress/reports",
-    "test:report": "npm run cy:run && npm run merge-reports && npm run generate-report"
+    "test:report": "npm run cy:run && npm run merge-reports && npm run generate-report",
+    "ix": "node packages/cli/dist/index.js"
   },
   "keywords": [],
   "author": "",
