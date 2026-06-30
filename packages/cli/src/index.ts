@@ -63,8 +63,15 @@ program
 program
   .command('agent-docs')
   .description('Generate customized AI agent instruction context files')
-  .option('-a, --agent <type>', 'Target AI assistant type (cursor, claude, codex)', 'cursor')
-  .option('-o, --output-path <path>', 'Custom directory or file path to write rules')
+  .option(
+    '-a, --agent <type>',
+    'Target AI assistant type (cursor, claude, codex)',
+    'cursor'
+  )
+  .option(
+    '-o, --output-path <path>',
+    'Custom directory or file path to write rules'
+  )
   .action(agentDocsCommand)
 
 program
