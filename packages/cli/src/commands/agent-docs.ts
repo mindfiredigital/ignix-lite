@@ -1,4 +1,4 @@
-import { writeFileSync, mkdirSync } from 'fs'
+import { writeFileSync, mkdirSync, statSync, existsSync } from 'fs'
 import path from 'path'
 import pc from 'picocolors'
 import { manifests } from '@mindfiredigital/ignix-lite-engine'
@@ -9,7 +9,15 @@ interface AgentDocsOptions {
 }
 
 export function agentDocsCommand(options: AgentDocsOptions) {
-  const agentType = options.agent || 'cursor'
+  const agentType = options.agent
+
+  // Validation: Fail fast for unsupported agents
+  const validAgents = ['cursor', 'claude', 'codex']
+  if (!validAgents.includes(agentType)) {
+    console.log(pc.red(`\nError: Unsupported agent type "${agentType}".`))
+    console.log(`Allowed agents are: ${pc.yellow(validAgents.join(', '))}\n`)
+    process.exit(1)
+  }
 
   let fileName = '.cursorrules'
   if (agentType === 'claude') {
@@ -18,9 +26,32 @@ export function agentDocsCommand(options: AgentDocsOptions) {
     fileName = 'AGENTS.md'
   }
 
-  const targetPath = options.outputPath
-    ? path.resolve(process.cwd(), options.outputPath)
-    : path.resolve(process.cwd(), fileName)
+  let targetPath = path.resolve(process.cwd(), fileName)
+  if (options.outputPath) {
+    const resolvedOutput = path.resolve(process.cwd(), options.outputPath)
+
+    // Check if the output path targets a directory
+    let isDir: boolean
+    try {
+      if (existsSync(resolvedOutput)) {
+        isDir = statSync(resolvedOutput).isDirectory()
+      } else {
+        // If directory doesn't exist yet, treat it as a directory if it ends with a slash or has no file extension
+        isDir =
+          options.outputPath.endsWith('/') ||
+          options.outputPath.endsWith('\\') ||
+          !path.basename(options.outputPath).includes('.')
+      }
+    } catch {
+      isDir = false
+    }
+
+    if (isDir) {
+      targetPath = path.join(resolvedOutput, fileName)
+    } else {
+      targetPath = resolvedOutput
+    }
+  }
 
   const rulesContent = generateRulesContent()
 
