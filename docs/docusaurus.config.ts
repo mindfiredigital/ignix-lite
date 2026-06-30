@@ -69,13 +69,11 @@ const config: Config = {
           label: 'Documentation',
         },
         {
-          type: 'docsVersionDropdown',
-          position: 'right',
-        },
-        {
           href: 'pathname:///ignix-lite/llms.txt',
           label: 'llms.txt',
           position: 'left',
+        },
+        {
           type: 'docsVersionDropdown',
           position: 'right',
         },
