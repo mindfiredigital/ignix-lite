@@ -171,7 +171,7 @@ This specification serves as the absolute source of truth for LLM agents to writ
 
 **Description**: Status indicator using mark or span[role=status] with intent styling.
 
-- **HTML Tag / Element**: `<badge>`
+- **HTML Tag / Element**: `<mark>` or `<span role="status">`
 - **Emmet Template**: `mark[data-intent=?]{Label}`
 
 #### Allowed Attributes & Properties
@@ -262,13 +262,13 @@ This specification serves as the absolute source of truth for LLM agents to writ
 **Slash style**:
 - Emmet: `nav[aria-label=Breadcrumb data-style=slash]>ol>(li>a[href=?])*3`
 ```html
-<nav aria-label="Breadcrumb" data-style="slash"></nav>
+<nav aria-label="Breadcrumb" data-style="slash"><ol><li><a href="#">Home</a></li><li><a href="#">Docs</a></li><li><a aria-current="page">Breadcrumb</a></li></ol></nav>
 ```
 
 **Danger intent**:
 - Emmet: `nav[aria-label=Breadcrumb data-intent=danger]>ol>(li>a[href=?])*3`
 ```html
-<nav aria-label="Breadcrumb" data-intent="danger"></nav>
+<nav aria-label="Breadcrumb" data-intent="danger"><ol><li><a href="#">Home</a></li><li><a href="#">Docs</a></li><li><a aria-current="page">Breadcrumb</a></li></ol></nav>
 ```
 
 
@@ -287,6 +287,7 @@ This specification serves as the absolute source of truth for LLM agents to writ
 - `disabled` (`boolean`): Use native disabled attribute
 - `aria-busy` (`boolean`): Use for loading state
 - `type` (`enum`):  (values: `button`, `submit`, `reset`) (default: `button`)
+- `data-size` (`enum`): Controls button scale. (values: `sm`, `md`, `lg`) (default: `md`)
 
 #### Specifications & Constraints
 
@@ -332,6 +333,10 @@ This specification serves as the absolute source of truth for LLM agents to writ
 
 - **HTML Tag / Element**: `<article>`
 - **Emmet Template**: `article>(img[slot=avatar])+(span[slot=title])+(p[slot=body])`
+
+#### Allowed Attributes & Properties
+
+_(None — card uses slot attributes for content placement)_
 
 #### Specifications & Constraints
 
@@ -431,7 +436,7 @@ This specification serves as the absolute source of truth for LLM agents to writ
 
 **Description**: Displays formatted code snippets using native pre and code elements with language metadata support and horizontal scrolling.
 
-- **HTML Tag / Element**: `<pre > code>`
+- **HTML Tag / Element**: `<pre><code>` (nested)
 - **Emmet Template**: `pre>code[data-lang=?]{content}`
 
 #### Allowed Attributes & Properties
@@ -485,8 +490,8 @@ This specification serves as the absolute source of truth for LLM agents to writ
 
 - `multiple` (`boolean`): Enables chip rendering and multi-select mode.
 - `data-intent` (`enum`):  (values: `primary`, `success`, `warning`, `danger`, `gradient`)
-- `data-clear` (`boolean`): 
-- `data-chips` (`boolean`): 
+- `data-clear` (`boolean`): Enables a clear-all button for selected chips.
+- `data-chips` (`boolean`): Renders selected options as removable chips.
 
 #### Specifications & Constraints
 
@@ -719,6 +724,8 @@ This specification serves as the absolute source of truth for LLM agents to writ
 - `data-align` (`string`): Controls vertical alignment. (values: `start`, `center`, `end`, `stretch`, `baseline`)
 - `data-justify` (`string`): Controls horizontal alignment. (values: `start`, `center`, `end`, `stretch`)
 - `data-dense` (`boolean`): Enables dense auto flow packing.
+- `data-col` (`string`): Controls column span for child items.
+- `data-row` (`string`): Controls row span for child items.
 
 #### Specifications & Constraints
 
@@ -900,7 +907,7 @@ This specification serves as the absolute source of truth for LLM agents to writ
 
 #### Allowed Attributes & Properties
 
-- `aria-current` (`enum`): Marks active navigation link. (values: `page`) (default: `null`)
+- `aria-current` (`enum`): Marks active navigation link. (values: `page`, `false`) (default: `false`)
 - `href` (`string`): Navigation destination. (default: `#`)
 
 #### Specifications & Constraints
@@ -1587,7 +1594,7 @@ document.getElementById('toast').show({title:'Delete file',message:'Undo availab
   - Template: `button[data-intent=primary]{Label}`
 
 - **secondary button / cancel button / back button**:
-  - Template: `button[data-intent=secondary]{Cancel}`
+  - Template: `button[data-intent=ghost]{Cancel}`
 
 - **small button / tiny button**:
   - Template: `button[data-intent=primary data-size=sm]{Label}`
@@ -1739,7 +1746,7 @@ document.getElementById('toast').show({title:'Delete file',message:'Undo availab
   - Template: `nav>ul>(li>a[href=/]{Home})+(li>a[href=/about]{About})+(li>a[href=/contact]{Contact})`
 
 - **breadcrumb trail**:
-  - Template: `nav[aria-label=Breadcrumb data-style=chevro]n>ol>(li>a[href=/]{Home})+(li>a[href=/settings]{Settings})+(li[aria-current="page"]{Profile})`
+  - Template: `nav[aria-label=Breadcrumb data-style=chevron]>ol>(li>a[href=/]{Home})+(li>a[href=/settings]{Settings})+(li[aria-current="page"]{Profile})`
 
 - **tabs / tabbed sections**:
   - Template: `ix-tabs[data-variant=underline]>(button[slot=tab aria-selected=true]{Tab 1})+(button[slot=tab]{Tab 2})+(section[slot=panel]{Content 1})+(section[slot=panel hidden]{Content 2})`
