@@ -1,7 +1,7 @@
 import pc from 'picocolors'
 import { manifests } from '@mindfiredigital/ignix-lite-engine'
 
-export function infoCommand(component: string) {
+export function infoCommand(component: string, options?: { dense?: boolean }) {
   const name = component.toLowerCase().trim()
   const manifest = manifests[name]
 
@@ -11,6 +11,11 @@ export function infoCommand(component: string) {
       `Run ${pc.yellow('ignix-lite list')} to see all available components.\n`
     )
     process.exit(1)
+  }
+
+  if (options?.dense) {
+    console.log(JSON.stringify(manifest))
+    return
   }
 
   console.log(pc.bold(pc.cyan(`\n📦 Component: <${name.toUpperCase()}>`)))

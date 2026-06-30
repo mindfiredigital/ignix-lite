@@ -56,7 +56,8 @@
     "Do not use class styling",
     "Do not use variant prop",
     "Do not use custom active props",
-    "Do not omit tab slot"
+    "Do not omit tab slot",
+    "Do not use generic div elements for panels, use section instead"
   ],
   "examples": [
     {
