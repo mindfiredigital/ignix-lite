@@ -1,0 +1,1865 @@
+# Ignix Lite Reference & System Instructions
+
+Ignix Lite is a minimal, CSS-first classless UI system (~8KB CSS). It uses semantic HTML elements with data attributes for state and intent, avoiding framework-specific markup, JS libraries, or utility classes.
+
+This specification serves as the absolute source of truth for LLM agents to write correct HTML/CSS using Ignix Lite without hallucination, even when the MCP server is unavailable.
+
+---
+
+## Core Design Principles
+
+- **No CSS Classes**: Never use `class="..."` or inline styles for layout/variants. Styling is applied directly to semantic elements.
+- **Data Intents**: Use `data-intent="..."` for variant styling instead of custom class names or colors.
+- **Native HTML Attributes for State**: Use standard HTML attributes like `disabled`, `checked`, `required`, `open`, `aria-busy="true"`, `aria-invalid="true"`, etc., to manage component state.
+- **Accessibility (A11y)**: Built-in focus states, ARIA roles, and keyboard support via standard semantic elements.
+- **Light & Dark Theme**: Supported automatically. Custom themes are configured via CSS variables under `:root`.
+
+---
+
+## 27 Core Components Specification
+
+### Component: accordion
+
+**Description**: Displays expandable content sections using native HTML details and summary elements. Works without JavaScript and is accessible by default.
+
+- **HTML Tag / Element**: `<details>`
+- **Emmet Template**: `details[open?]>summary{title}+p{content}`
+
+#### Allowed Attributes & Properties
+
+- `open` (`boolean`): Use open to keep accordion expanded by default.
+
+#### Specifications & Constraints
+
+- **Supported States**: `open`
+- **Forbidden Attributes (DO NOT USE)**: `expanded`, `isOpen`, `collapsed`, `variant`, `class`
+- **Required Children**: `summary`
+
+#### DOs
+- Use summary as the accordion trigger
+- Use open to expand by default
+- Use native details element for accessibility
+
+#### DONTs
+- Do not replace details with div
+- Do not use JavaScript for open state
+- Do not use class attribute
+
+#### Examples
+
+**Default accordion**:
+- Emmet: `details>summary{What is ignix-lite?}+p{Lightweight semantic UI library}`
+```html
+<details><summary>What is ignix-lite?</summary><p>Lightweight semantic UI library</p></details>
+```
+
+**Open by default**:
+- Emmet: `details[open]>summary{How does this work?}+p{Uses native browser behavior}`
+```html
+<details open><summary>How does this work?</summary><p>Uses native browser behavior</p></details>
+```
+
+**FAQ item**:
+- Emmet: `details>summary{Does it require JS?}+p{No, it works without JavaScript}`
+```html
+<details><summary>Does it require JS?</summary><p>No, it works without JavaScript</p></details>
+```
+
+
+---
+
+### Component: alert
+
+**Description**: Displays semantic feedback messages using native <aside> element for warnings, errors, success messages, and informational updates.
+
+- **HTML Tag / Element**: `<aside>`
+- **Emmet Template**: `aside[data-intent=?]{message}`
+
+#### Allowed Attributes & Properties
+
+- `data-intent` (`enum`): Use danger for errors, warning for cautions, success for confirmations, info for updates. (values: `danger`, `warning`, `success`, `info`) (default: `info`)
+
+#### Specifications & Constraints
+
+- **Forbidden Attributes (DO NOT USE)**: `variant`, `color`, `appearance`, `colorScheme`, `severity`, `status`, `class`
+
+#### DOs
+- Use data-intent='danger' for error states
+- Use data-intent='warning' for caution messages
+- Use native aside element for semantic alerts
+
+#### DONTs
+- Do not use div instead of aside
+- Do not use variant or severity props
+- Do not use class attribute
+
+#### Examples
+
+**Danger alert**:
+- Emmet: `aside[data-intent=danger]{Something went wrong}`
+```html
+<aside data-intent="danger">Something went wrong</aside>
+```
+
+**Warning alert**:
+- Emmet: `aside[data-intent=warning]{Session expires soon}`
+```html
+<aside data-intent="warning">Session expires soon</aside>
+```
+
+**Success alert**:
+- Emmet: `aside[data-intent=success]{Saved successfully}`
+```html
+<aside data-intent="success">Saved successfully</aside>
+```
+
+
+---
+
+### Component: avatar
+
+**Description**: Displays user profile visuals using native img element with text fallback support through span. Supports multiple sizes and loading skeletons.
+
+- **HTML Tag / Element**: `<img | span>`
+- **Emmet Template**: `img[src=? alt=? data-size=?]`
+
+#### Allowed Attributes & Properties
+
+- `data-size` (`enum`): Use sm for compact lists, md for profile previews, lg for detailed cards. (values: `sm`, `md`, `lg`) (default: `md`)
+- `src` (`string`): Image URL for avatar image.
+- `alt` (`string`): Always provide descriptive alt text for accessibility.
+
+#### Specifications & Constraints
+
+- **Supported States**: `loading`
+- **Forbidden Attributes (DO NOT USE)**: `size`, `variant`, `shape`, `rounded`, `class`
+
+#### DOs
+- Use img for avatar images
+- Use span fallback for initials
+- Always provide alt text on images
+
+#### DONTs
+- Do not use class attribute
+- Do not use size prop instead of data-size
+- Do not omit alt attribute on img
+
+#### Examples
+
+**Small avatar**:
+- Emmet: `img[src=? alt=User data-size=sm]`
+```html
+<img src="https://picsum.photos/100" alt="User" data-size="sm">
+```
+
+**Medium avatar**:
+- Emmet: `img[src=? alt=Sarah data-size=md]`
+```html
+<img src="https://picsum.photos/100" alt="Sarah" data-size="md">
+```
+
+**Fallback initials**:
+- Emmet: `span[data-size=md]{JD}`
+```html
+<span data-size="md">JD</span>
+```
+
+
+---
+
+### Component: badge
+
+**Description**: Status indicator using mark or span[role=status] with intent styling.
+
+- **HTML Tag / Element**: `<badge>`
+- **Emmet Template**: `mark[data-intent=?]{Label}`
+
+#### Allowed Attributes & Properties
+
+- `data-intent` (`enum`): Controls badge color (values: `success`, `danger`, `warning`, `neutral`) (default: `neutral`)
+- `role` (`enum`): Required when using span (values: `status`)
+
+#### Specifications & Constraints
+
+- **Forbidden Attributes (DO NOT USE)**: `class`, `variant`, `color`, `style`, `onclick`
+
+#### DOs
+- Use mark for standard badges
+- Use span with role=status for accessibility cases
+- Use data-intent to convey meaning
+- Keep text short
+
+#### DONTs
+- Do not use class attribute
+- Do not use variant or color props
+- Do not attach JS handlers
+- Do not use span without role=status
+
+#### Examples
+
+**Basic badge**:
+- Emmet: `mark[data-intent=neutral]{Active}`
+```html
+<mark data-intent="neutral">Active</mark>
+```
+
+**Success badge**:
+- Emmet: `mark[data-intent=success]{Active}`
+```html
+<mark data-intent="success">Active</mark>
+```
+
+**Danger badge**:
+- Emmet: `mark[data-intent=danger]{Error}`
+```html
+<mark data-intent="danger">Error</mark>
+```
+
+**Status badge**:
+- Emmet: `span[role=status data-intent=success]{Active}`
+```html
+<span role="status" data-intent="success">Active</span>
+```
+
+
+---
+
+### Component: breadcrumb
+
+**Description**: Displays hierarchical navigation path using native nav > ol > li > a structure.
+
+- **HTML Tag / Element**: `<nav>`
+- **Emmet Template**: `nav[aria-label=Breadcrumb]>ol>(li>a[href=?])*3`
+
+#### Allowed Attributes & Properties
+
+- `data-style` (`enum`): Controls breadcrumb separator style. (values: `chevron`, `slash`, `guillemet`, `arrow`, `thread`, `pipe`) (default: `chevron`)
+- `data-intent` (`enum`): Controls active breadcrumb color intent. (values: `primary`, `success`, `warning`, `danger`, `gradient`) (default: `primary`)
+- `aria-label` (`string`): Use aria-label='Breadcrumb' for accessibility.
+
+#### Specifications & Constraints
+
+- **Forbidden Attributes (DO NOT USE)**: `variant`, `color`, `appearance`, `separator`, `items`, `activeItem`, `class`
+
+#### DOs
+- Use nav as breadcrumb container
+- Use ordered list structure
+- Mark current page using aria-current='page'
+
+#### DONTs
+- Do not use class attribute
+- Do not replace nav with div
+- Do not pass breadcrumb items as props
+
+#### Examples
+
+**Default breadcrumb**:
+- Emmet: `nav[aria-label=Breadcrumb]>ol>(li>a[href=?])*3`
+```html
+<nav aria-label="Breadcrumb"><ol><li><a href="#">Home</a></li><li><a href="#">Docs</a></li><li><a aria-current="page">Breadcrumb</a></li></ol></nav>
+```
+
+**Slash style**:
+- Emmet: `nav[aria-label=Breadcrumb data-style=slash]>ol>(li>a[href=?])*3`
+```html
+<nav aria-label="Breadcrumb" data-style="slash"></nav>
+```
+
+**Danger intent**:
+- Emmet: `nav[aria-label=Breadcrumb data-intent=danger]>ol>(li>a[href=?])*3`
+```html
+<nav aria-label="Breadcrumb" data-intent="danger"></nav>
+```
+
+
+---
+
+### Component: button
+
+**Description**: Triggers an action. Renders as native <button>.
+
+- **HTML Tag / Element**: `<button>`
+- **Emmet Template**: `button[data-intent=?]{label}`
+
+#### Allowed Attributes & Properties
+
+- `data-intent` (`enum`): Use danger for destructive actions. Use ghost for secondary actions. (values: `primary`, `danger`, `warning`, `success`, `neutral`, `ghost`) (default: `primary`)
+- `disabled` (`boolean`): Use native disabled attribute
+- `aria-busy` (`boolean`): Use for loading state
+- `type` (`enum`):  (values: `button`, `submit`, `reset`) (default: `button`)
+
+#### Specifications & Constraints
+
+- **Supported States**: `disabled`, `aria-busy`
+- **Forbidden Attributes (DO NOT USE)**: `variant`, `color`, `appearance`, `colorScheme`, `isLoading`, `isDisabled`, `size`, `class`
+
+#### DOs
+- Use data-intent='danger' for destructive actions
+- Use aria-busy='true' for loading state
+- Use type='submit' inside forms
+
+#### DONTs
+- Do not use class attribute
+- Do not use variant or color props
+- Do not use isLoading or isDisabled
+
+#### Examples
+
+**Primary button**:
+- Emmet: `button[data-intent=primary]{Save}`
+```html
+<button data-intent="primary">Save</button>
+```
+
+**Danger button**:
+- Emmet: `button[data-intent=danger]{Delete}`
+```html
+<button data-intent="danger">Delete</button>
+```
+
+**Loading button**:
+- Emmet: `button[aria-busy=true]{Saving...}`
+```html
+<button aria-busy="true">Saving...</button>
+```
+
+
+---
+
+### Component: card
+
+**Description**: Displays structured content using semantic slots for avatar, title, metadata, body, actions, and footer. Renders as native article element.
+
+- **HTML Tag / Element**: `<article>`
+- **Emmet Template**: `article>(img[slot=avatar])+(span[slot=title])+(p[slot=body])`
+
+#### Specifications & Constraints
+
+- **Forbidden Attributes (DO NOT USE)**: `title`, `subtitle`, `avatar`, `image`, `body`, `footer`, `actionLabel`, `class`
+
+#### DOs
+- Use slot attributes for content placement
+- Use article as card container
+- Place actions inside slot='action'
+
+#### DONTs
+- Do not pass title or body as props
+- Do not replace slots with attributes
+- Do not use class attribute
+
+
+---
+
+### Component: checkbox
+
+**Description**: Checkbox for boolean selection. Must be wrapped inside a label element.
+
+- **HTML Tag / Element**: `<input>`
+- **Emmet Template**: `label[data-intent=? data-size=?]>(input[type=checkbox]+{Label})`
+
+#### Allowed Attributes & Properties
+
+- `type` (`enum`): Always use type=checkbox (values: `checkbox`) (default: `checkbox`)
+- `checked` (`boolean`): Marks checkbox as checked
+- `disabled` (`boolean`): Disables checkbox
+- `required` (`boolean`): Marks checkbox as required
+- `name` (`string`): Used for grouping checkboxes
+- `value` (`string`): Submitted value in forms
+- `data-intent` (`enum`): Controls checkbox color (applied on label) (values: `success`, `danger`, `warning`, `neutral`) (default: `neutral`)
+- `data-size` (`enum`): Controls checkbox size (applied on label) (values: `sm`, `md`, `lg`) (default: `md`)
+
+#### Specifications & Constraints
+
+- **Supported States**: `checked`, `disabled`
+- **Forbidden Attributes (DO NOT USE)**: `class`, `variant`, `color`, `style`, `onclick`
+
+#### DOs
+- Wrap checkbox inside label
+- Use checked for default state
+- Use name and value for grouping
+- Use data-intent for styling
+- Use data-size for scaling
+
+#### DONTs
+- Do not use class attribute
+- Do not use variant or color props
+- Do not use inline JS handlers
+- Do not place checkbox outside label
+
+#### Examples
+
+**Basic checkbox**:
+- Emmet: `label>(input[type=checkbox]+{Accept terms})`
+```html
+<label><input type="checkbox" />Accept terms</label>
+```
+
+**Checked checkbox**:
+- Emmet: `label>(input[type=checkbox checked]+{Checked})`
+```html
+<label><input type="checkbox" checked />Checked</label>
+```
+
+**Disabled checkbox**:
+- Emmet: `label>(input[type=checkbox disabled]+{Disabled})`
+```html
+<label><input type="checkbox" disabled />Disabled</label>
+```
+
+**Intent variant**:
+- Emmet: `label[data-intent=success]>(input[type=checkbox checked]+{Success})`
+```html
+<label data-intent="success"><input type="checkbox" checked />Success</label>
+```
+
+**Size variant**:
+- Emmet: `label[data-size=lg]>(input[type=checkbox]+{Large})`
+```html
+<label data-size="lg"><input type="checkbox" />Large</label>
+```
+
+**Checkbox group**:
+- Emmet: `label>(input[type=checkbox name=lang value=js]+{JavaScript})`
+```html
+<label><input type="checkbox" name="lang" value="js" />JavaScript</label>
+```
+
+
+---
+
+### Component: code
+
+**Description**: Displays formatted code snippets using native pre and code elements with language metadata support and horizontal scrolling.
+
+- **HTML Tag / Element**: `<pre > code>`
+- **Emmet Template**: `pre>code[data-lang=?]{content}`
+
+#### Allowed Attributes & Properties
+
+- `data-lang` (`string`): Specify language metadata for code examples. (values: `js`, `ts`, `python`, `bash`, `html`, `css`, `json`) (default: `text`)
+
+#### Specifications & Constraints
+
+- **Forbidden Attributes (DO NOT USE)**: `language`, `variant`, `theme`, `class`
+- **Required Children**: `code`
+
+#### DOs
+- Wrap code inside pre element
+- Use data-lang to indicate language
+- Use code element for code content
+
+#### DONTs
+- Do not use div instead of pre
+- Do not use language prop
+- Do not use class attribute
+
+#### Examples
+
+**JavaScript code**:
+- Emmet: `pre>code[data-lang=js]{function greet(){}}`
+```html
+<pre><code data-lang="js">function greet(){}</code></pre>
+```
+
+**Python code**:
+- Emmet: `pre>code[data-lang=python]{print('Hello')}`
+```html
+<pre><code data-lang="python">print('Hello')</code></pre>
+```
+
+**Bash command**:
+- Emmet: `pre>code[data-lang=bash]{npm install ignix-lite}`
+```html
+<pre><code data-lang="bash">npm install ignix-lite</code></pre>
+```
+
+
+---
+
+### Component: ix-combobox
+
+- **HTML Tag / Element**: `<ix-combobox>`
+- **Emmet Template**: `ix-combobox>(label>(span[data-chips])+input[placeholder=?]+button[data-clear]{Clear})+ul>(li{Option})*`
+
+#### Allowed Attributes & Properties
+
+- `multiple` (`boolean`): Enables chip rendering and multi-select mode.
+- `data-intent` (`enum`):  (values: `primary`, `success`, `warning`, `danger`, `gradient`)
+- `data-clear` (`boolean`): 
+- `data-chips` (`boolean`): 
+
+#### Specifications & Constraints
+
+- **Required Children**: `label`, `input`, `ul`, `li`
+- **Optional Children**: `[data-chips]`, `button[data-clear]`
+
+
+---
+
+### Component: dialog
+
+**Description**: Modal dialog used for confirmations, warnings, and information display.
+
+- **HTML Tag / Element**: `<dialog>`
+- **Emmet Template**: `dialog#id[data-intent=?]>(h2{Title}+p{Message}+button{Cancel}+button{Confirm})`
+
+#### Allowed Attributes & Properties
+
+- `id` (`string`): Unique identifier used to control dialog
+- `data-intent` (`enum`): Controls dialog style (danger for destructive, warning for caution) (values: `danger`, `warning`, `info`) (default: `info`)
+
+#### Specifications & Constraints
+
+- **Forbidden Attributes (DO NOT USE)**: `class`, `variant`, `color`, `style`
+
+#### DOs
+- Always include a heading (h2)
+- Include descriptive text using p tags
+- Provide at least one action button
+- Use data-intent for styling
+
+#### DONTs
+- Do not use class attribute
+- Do not attach JS handlers like onclick
+- Do not leave dialog empty
+
+#### Examples
+
+**Confirm dialog**:
+- Emmet: `dialog#confirm[data-intent=danger]>(h2{Confirm}+p{Are you sure?}+button{Cancel}+button{Delete})`
+```html
+<dialog id="confirm" data-intent="danger"><h2>Confirm</h2><p>Are you sure?</p><button>Cancel</button><button>Delete</button></dialog>
+```
+
+**Warning dialog**:
+- Emmet: `dialog#warn[data-intent=warning]>(h2{Warning}+p{Unsaved changes}+button{Close})`
+```html
+<dialog id="warn" data-intent="warning"><h2>Warning</h2><p>Unsaved changes</p><button>Close</button></dialog>
+```
+
+**Info dialog**:
+- Emmet: `dialog#info[data-intent=info]>(h2{Info}+p{Session expiring}+button{Close})`
+```html
+<dialog id="info" data-intent="info"><h2>Info</h2><p>Session expiring</p><button>Close</button></dialog>
+```
+
+
+---
+
+### Component: divider
+
+**Description**: Visual separator using semantic hr element with orientation support.
+
+- **HTML Tag / Element**: `<hr>`
+- **Emmet Template**: `hr`
+
+#### Allowed Attributes & Properties
+
+- `data-orientation` (`string`): Controls divider direction. (values: `horizontal`, `vertical`) (default: `horizontal`)
+
+#### Specifications & Constraints
+
+- **Forbidden Attributes (DO NOT USE)**: `class`
+
+#### DOs
+- Use hr element
+- Use data-orientation for vertical mode
+
+#### DONTs
+- Do not use div wrappers
+- Do not use class attribute
+
+#### Examples
+
+**Horizontal**:
+- Emmet: `hr`
+```html
+<hr>
+```
+
+**Vertical**:
+- Emmet: `hr[data-orientation=vertical]`
+```html
+<hr data-orientation="vertical">
+```
+
+
+---
+
+### Component: dropdown
+
+**Description**: Accessible dropdown component using ix-dropdown custom element with trigger and menu slots, keyboard navigation and semantic intents.
+
+- **HTML Tag / Element**: `<ix-dropdown>`
+- **Emmet Template**: `ix-dropdown>button[slot=trigger]+ul[slot=menu]`
+
+#### Allowed Attributes & Properties
+
+- `data-intent` (`enum`): Applies dropdown styling. (values: `primary`, `success`, `warning`, `danger`, `ghost`, `gradient`, `neutral`) (default: `neutral`)
+- `slot` (`enum`): Defines dropdown trigger and menu. (values: `trigger`, `menu`)
+- `aria-haspopup` (`string`): Indicates menu popup. (values: `menu`) (default: `menu`)
+- `aria-expanded` (`boolean`): Open state of dropdown. (default: `false`)
+
+#### Specifications & Constraints
+
+- **Supported States**: `closed`, `open`, `focused`
+- **Forbidden Attributes (DO NOT USE)**: `variant`, `theme`, `size`, `class`
+
+#### DOs
+- Provide trigger slot
+- Provide menu slot
+- Use button items inside menu
+- Keep menu inside ul
+
+#### DONTs
+- Do not omit trigger
+- Do not omit menu
+- Do not use div instead of menu list
+- Do not place plain text inside menu
+
+#### Examples
+
+**Default dropdown**:
+- Emmet: `ix-dropdown`
+```html
+<ix-dropdown><button slot="trigger">Options ▾</button><ul slot="menu"><li><button>Profile</button></li><li><button>Settings</button></li></ul></ix-dropdown>
+```
+
+**Primary dropdown**:
+- Emmet: `ix-dropdown[data-intent=primary]`
+```html
+<ix-dropdown data-intent="primary"><button slot="trigger">Primary ▾</button><ul slot="menu"><li><button>Dashboard</button></li><li><button>Profile</button></li></ul></ix-dropdown>
+```
+
+**Ghost dropdown**:
+- Emmet: `ix-dropdown[data-intent=ghost]`
+```html
+<ix-dropdown data-intent="ghost"><button slot="trigger">Ghost ▾</button><ul slot="menu"><li><button>Item 1</button></li><li><button>Item 2</button></li></ul></ix-dropdown>
+```
+
+**Gradient dropdown**:
+- Emmet: `ix-dropdown[data-intent=gradient]`
+```html
+<ix-dropdown data-intent="gradient"><button slot="trigger">Gradient ▾</button><ul slot="menu"><li><button>Modern</button></li><li><button>Premium</button></li></ul></ix-dropdown>
+```
+
+**Workspace menu**:
+- Emmet: `ix-dropdown[data-intent=primary]`
+```html
+<ix-dropdown data-intent="primary"><button slot="trigger">Workspace ▾</button><ul slot="menu"><li><button>Settings</button></li><li><button>Invite Members</button></li><li><button>Billing</button></li><li><button>Logout</button></li></ul></ix-dropdown>
+```
+
+
+---
+
+### Component: form
+
+**Description**: Form container used to collect user input. Contains labels, inputs, and submit button.
+
+- **HTML Tag / Element**: `<form>`
+- **Emmet Template**: `form#id>(label>{Label}+input[type=? name=?])+button[type=submit]{Submit}`
+
+#### Allowed Attributes & Properties
+
+- `id` (`string`): Unique identifier for the form
+- `action` (`string`): URL where form is submitted
+- `method` (`enum`): HTTP method for submission (values: `get`, `post`) (default: `post`)
+- `aria-busy` (`boolean`): Indicates loading/submitting state
+- `data-loading` (`boolean`): Triggers loading UI styles
+
+#### Specifications & Constraints
+
+- **Supported States**: `aria-busy`, `data-loading`
+- **Forbidden Attributes (DO NOT USE)**: `class`, `variant`, `color`, `style`
+
+#### DOs
+- Always include a submit button inside form
+- Wrap inputs inside label elements
+- Use aria-busy for loading state
+
+#### DONTs
+- Do not use class attribute
+- Do not attach JS handlers like onsubmit
+- Do not leave form without submit button
+
+#### Examples
+
+**Basic form**:
+- Emmet: `form#signup>(label>{Email}+input[type=email name=email])+button[type=submit]{Submit}`
+```html
+<form id="signup"><label>Email <input type="email" name="email" /></label><button type="submit">Submit</button></form>
+```
+
+**Form loading**:
+- Emmet: `form[aria-busy=true data-loading]>(label>{Email}+input[type=email])+button{Submitting...}`
+```html
+<form aria-busy="true" data-loading><label>Email <input type="email" /></label><button>Submitting...</button></form>
+```
+
+**Validation state**:
+- Emmet: `form>(label[data-state=error]>(input[type=email aria-invalid=true])+small{Error})`
+```html
+<form><label data-state="error"><input type="email" aria-invalid="true" /><small>Error</small></label></form>
+```
+
+
+---
+
+### Component: grid
+
+**Description**: Responsive semantic grid layout using section container with column spans, gaps, alignment and auto layouts.
+
+- **HTML Tag / Element**: `<section>`
+- **Emmet Template**: `section[data-grid=3]>article*3`
+
+#### Allowed Attributes & Properties
+
+- `data-grid` (`string`): Controls column count or auto layout. (values: `1`, `2`, `3`, `4`, `5`, `6`, `auto`, `fill`) (default: `3`)
+- `data-gap` (`string`): Controls spacing between items. (values: `xs`, `sm`, `md`, `lg`, `xl`) (default: `md`)
+- `data-align` (`string`): Controls vertical alignment. (values: `start`, `center`, `end`, `stretch`, `baseline`)
+- `data-justify` (`string`): Controls horizontal alignment. (values: `start`, `center`, `end`, `stretch`)
+- `data-dense` (`boolean`): Enables dense auto flow packing.
+
+#### Specifications & Constraints
+
+- **Forbidden Attributes (DO NOT USE)**: `class`
+
+#### DOs
+- Use section as grid container
+- Use semantic children
+- Use data-col for spans
+- Use data-row for row spans
+- Use data-gap for spacing
+
+#### DONTs
+- Do not use div wrappers
+- Do not use class attribute
+- Do not replace grid config with inline styles
+
+#### Examples
+
+**Two columns**:
+- Emmet: `section[data-grid=2]>article*2`
+```html
+<section data-grid="2"><article>Column 1</article><article>Column 2</article></section>
+```
+
+**Three columns**:
+- Emmet: `section[data-grid=3]>article*3`
+```html
+<section data-grid="3"><article>A</article><article>B</article><article>C</article></section>
+```
+
+**Auto fit**:
+- Emmet: `section[data-grid=auto]>article*5`
+```html
+<section data-grid="auto"><article>1</article><article>2</article><article>3</article></section>
+```
+
+**Column span**:
+- Emmet: `section[data-grid=4]>(article[data-col=2])+(article*4)`
+```html
+<section data-grid="4"><article data-col="2">Wide</article><article>A</article><article>B</article></section>
+```
+
+**Full width**:
+- Emmet: `section[data-grid=3]>(article*3)+(article[data-col=full])`
+```html
+<section data-grid="3"><article>1</article><article>2</article><article>3</article><article data-col="full">Full</article></section>
+```
+
+**Dense layout**:
+- Emmet: `section[data-grid=4][data-dense]>article*6`
+```html
+<section data-grid="4" data-dense><article data-col="2">Wide</article><article>A</article><article>B</article></section>
+```
+
+
+---
+
+### Component: input
+
+**Description**: User input field. Must be wrapped inside <label> for accessibility.
+
+- **HTML Tag / Element**: `<input>`
+- **Emmet Template**: `label>{Label}+input[type=?]`
+
+#### Allowed Attributes & Properties
+
+- `type` (`enum`): Choose correct input type based on data (values: `text`, `email`, `password`, `number`, `date`, `search`, `tel`, `url`, `file`) (default: `text`)
+- `placeholder` (`string`): Short hint shown inside input
+- `required` (`boolean`): Marks field as mandatory
+- `disabled` (`boolean`): Disables user interaction
+- `aria-invalid` (`boolean`): Set true for validation errors
+- `data-intent` (`enum`): Controls border color (design intent) (values: `primary`, `danger`, `warning`, `success`, `neutral`) (default: `neutral`)
+
+#### Specifications & Constraints
+
+- **Supported States**: `disabled`, `aria-invalid`
+- **Forbidden Attributes (DO NOT USE)**: `variant`, `color`, `appearance`, `size`, `class`
+
+#### DOs
+- Always wrap input inside <label>
+- Use correct type (email, number, etc.)
+- Use aria-invalid for error state
+
+#### DONTs
+- Do not use class attribute
+- Do not use variant or color props
+- Do not place input outside label
+
+#### Examples
+
+**Basic input**:
+- Emmet: `label>{Name}+input[type=text]`
+```html
+<label>Name <input type="text" /></label>
+```
+
+**Email required**:
+- Emmet: `label>{Email}+input[type=email required]`
+```html
+<label>Email <input type="email" required /></label>
+```
+
+**Invalid state**:
+- Emmet: `label>{Email}+input[type=email aria-invalid=true]`
+```html
+<label>Email <input type="email" aria-invalid="true" /></label>
+```
+
+
+---
+
+### Component: meter
+
+**Description**: Visualizes scalar measurements within a known range using the native HTML meter element.
+
+- **HTML Tag / Element**: `<meter>`
+- **Emmet Template**: `meter[value=70 min=0 max=100]`
+
+#### Allowed Attributes & Properties
+
+- `value` (`number`): Current measured value.
+- `min` (`number`):  (default: `0`)
+- `max` (`number`):  (default: `1`)
+- `low` (`number`): Lower threshold value.
+- `high` (`number`): Upper threshold value.
+- `optimum` (`number`): Preferred or ideal value.
+
+#### Specifications & Constraints
+
+- **Supported States**: `low`, `high`, `optimum`
+- **Forbidden Attributes (DO NOT USE)**: `variant`, `intent`, `color`, `percentage`, `progress`, `class`
+
+#### DOs
+- Use value with min and max
+- Use low and high for thresholds
+- Use optimum for ideal value ranges
+
+#### DONTs
+- Do not use class attribute
+- Do not use progress prop
+- Do not use variant or intent props
+
+#### Examples
+
+**Storage usage**:
+- Emmet: `meter[value=68 min=0 max=100 low=30 high=70 optimum=100]`
+```html
+<meter value="68" min="0" max="100" low="30" high="70" optimum="100"></meter>
+```
+
+**Low state**:
+- Emmet: `meter[value=20 min=0 max=100 low=30 high=70 optimum=100]`
+```html
+<meter value="20" min="0" max="100" low="30" high="70" optimum="100"></meter>
+```
+
+**Medium state**:
+- Emmet: `meter[value=50 min=0 max=100 low=30 high=70 optimum=100]`
+```html
+<meter value="50" min="0" max="100" low="30" high="70" optimum="100"></meter>
+```
+
+**Optimal state**:
+- Emmet: `meter[value=90 min=0 max=100 low=30 high=70 optimum=100]`
+```html
+<meter value="90" min="0" max="100" low="30" high="70" optimum="100"></meter>
+```
+
+
+---
+
+### Component: navigation
+
+**Description**: Semantic navigation component using native nav, ul, li and anchor elements with active state support.
+
+- **HTML Tag / Element**: `<nav>`
+- **Emmet Template**: `nav>ul>li*3>a`
+
+#### Allowed Attributes & Properties
+
+- `aria-current` (`enum`): Marks active navigation link. (values: `page`) (default: `null`)
+- `href` (`string`): Navigation destination. (default: `#`)
+
+#### Specifications & Constraints
+
+- **Supported States**: `default`, `active`, `focus`
+- **Forbidden Attributes (DO NOT USE)**: `variant`, `intent`, `theme`, `class`, `size`
+
+#### DOs
+- Wrap links inside nav
+- Use ul and li structure
+- Apply aria-current="page" to active link
+- Keep anchor href present
+
+#### DONTs
+- Do not skip ul structure
+- Do not apply aria-current on multiple links
+- Do not use div instead of nav
+- Do not omit href
+
+#### Examples
+
+**Default navigation**:
+- Emmet: `nav>ul>li*3>a`
+```html
+<nav><ul><li><a href="#" aria-current="page">Home</a></li><li><a href="#">About</a></li><li><a href="#">Contact</a></li></ul></nav>
+```
+
+**Extended navigation**:
+- Emmet: `nav>ul>li*4>a`
+```html
+<nav><ul><li><a href="#" aria-current="page">Dashboard</a></li><li><a href="#">Projects</a></li><li><a href="#">Settings</a></li><li><a href="#">Profile</a></li></ul></nav>
+```
+
+**Active link**:
+- Emmet: `a[aria-current=page]`
+```html
+<a href="#" aria-current="page">Home</a>
+```
+
+
+---
+
+### Component: progress
+
+**Description**: Displays task completion progress using the native HTML <progress> element.
+
+- **HTML Tag / Element**: `<progress>`
+- **Emmet Template**: `progress[value=? max=?]`
+
+#### Allowed Attributes & Properties
+
+- `value` (`number`): Current progress amount.
+- `max` (`number`): Maximum progress amount. (default: `1`)
+
+#### Specifications & Constraints
+
+- **Supported States**: `empty`, `partial`, `complete`
+- **Forbidden Attributes (DO NOT USE)**: `variant`, `intent`, `appearance`, `percentage`, `color`, `colorScheme`, `meter`, `class`
+
+#### DOs
+- Use value='0' for empty progress
+- Use value between 0 and max for partial progress
+- Use value=max for completed progress
+- Always provide max when progress range is known
+
+#### DONTs
+- Do not use class attribute
+- Do not use variant or intent props
+- Do not use percentage prop
+- Do not replace progress with meter element semantics
+
+#### Examples
+
+**Default progress**:
+- Emmet: `progress[value=72 max=100]`
+```html
+<progress value="72" max="100"></progress>
+```
+
+**Empty progress**:
+- Emmet: `progress[value=0 max=100]`
+```html
+<progress value="0" max="100"></progress>
+```
+
+**Partial progress**:
+- Emmet: `progress[value=50 max=100]`
+```html
+<progress value="50" max="100"></progress>
+```
+
+**Completed progress**:
+- Emmet: `progress[value=100 max=100]`
+```html
+<progress value="100" max="100"></progress>
+```
+
+**Upload progress**:
+- Emmet: `progress[value=72 max=100]`
+```html
+<progress value="72" max="100"></progress>
+```
+
+
+---
+
+### Component: radio
+
+**Description**: Radio input for single selection. Must be wrapped inside a label element.
+
+- **HTML Tag / Element**: `<input>`
+- **Emmet Template**: `label[data-intent=? data-size=?]>(input[type=radio]+{Label})`
+
+#### Allowed Attributes & Properties
+
+- `type` (`enum`): Always use type=radio (values: `radio`) (default: `radio`)
+- `checked` (`boolean`): Marks radio as selected
+- `disabled` (`boolean`): Disables radio
+- `required` (`boolean`): Marks radio as required
+- `name` (`string`): Used for grouping radios
+- `value` (`string`): Submitted value in forms
+- `data-intent` (`enum`): Controls radio color (values: `success`, `danger`, `warning`, `neutral`) (default: `neutral`)
+- `data-size` (`enum`): Controls radio size (values: `sm`, `md`, `lg`) (default: `md`)
+
+#### Specifications & Constraints
+
+- **Supported States**: `checked`, `disabled`
+- **Forbidden Attributes (DO NOT USE)**: `class`, `variant`, `color`, `style`, `onclick`
+
+#### DOs
+- Wrap radio inside label
+- Use checked for default state
+- Use same name for grouping radios
+- Use data-intent for styling
+- Use data-size for scaling
+
+#### DONTs
+- Do not use class attribute
+- Do not use variant or color props
+- Do not use inline JS handlers
+- Do not place radio outside label
+
+#### Examples
+
+**Basic radio**:
+- Emmet: `label>(input[type=radio]+{JavaScript})`
+```html
+<label><input type="radio" />JavaScript</label>
+```
+
+**Checked radio**:
+- Emmet: `label>(input[type=radio checked]+{Selected})`
+```html
+<label><input type="radio" checked />Selected</label>
+```
+
+**Disabled radio**:
+- Emmet: `label>(input[type=radio disabled]+{Disabled})`
+```html
+<label><input type="radio" disabled />Disabled</label>
+```
+
+**Intent variant**:
+- Emmet: `label[data-intent=success]>(input[type=radio checked]+{Success})`
+```html
+<label data-intent="success"><input type="radio" checked />Success</label>
+```
+
+**Size variant**:
+- Emmet: `label[data-size=lg]>(input[type=radio]+{Large})`
+```html
+<label data-size="lg"><input type="radio" />Large</label>
+```
+
+**Radio group**:
+- Emmet: `label>(input[type=radio name=group value=js]+{JavaScript})`
+```html
+<label><input type="radio" name="group" value="js" />JavaScript</label>
+```
+
+
+---
+
+### Component: select
+
+**Description**: Provides accessible dropdown selection using the native HTML select element with semantic intent variants.
+
+- **HTML Tag / Element**: `<select>`
+- **Emmet Template**: `select[data-intent=primary]>option{Option}`
+
+#### Allowed Attributes & Properties
+
+- `data-intent` (`enum`): Use danger for destructive selections, success for positive states, primary for main forms. (values: `primary`, `danger`, `warning`, `success`, `neutral`) (default: `neutral`)
+- `disabled` (`boolean`): Disable user interaction.
+- `required` (`boolean`): Marks field as required.
+- `aria-invalid` (`boolean`): Use for validation error state.
+- `multiple` (`boolean`): Enable multiple selection.
+- `name` (`string`): 
+
+#### Specifications & Constraints
+
+- **Supported States**: `disabled`, `invalid`, `required`, `multiple`
+- **Forbidden Attributes (DO NOT USE)**: `variant`, `color`, `appearance`, `colorScheme`, `size`, `isDisabled`, `class`
+
+#### DOs
+- Use data-intent='primary' for default form flows
+- Use aria-invalid='true' for validation errors
+- Use disabled for unavailable selections
+- Use multiple for multi-select lists
+
+#### DONTs
+- Do not use class attribute
+- Do not use variant props
+- Do not use color props
+- Do not use isDisabled
+
+#### Examples
+
+**Default select**:
+- Emmet: `select[data-intent=neutral]>option{India}`
+```html
+<select data-intent="neutral"><option>India</option></select>
+```
+
+**Primary select**:
+- Emmet: `select[data-intent=primary]>option{India}`
+```html
+<select data-intent="primary"><option>India</option></select>
+```
+
+**Disabled select**:
+- Emmet: `select[data-intent=neutral disabled]>option{Disabled}`
+```html
+<select data-intent="neutral" disabled><option>Disabled</option></select>
+```
+
+**Invalid select**:
+- Emmet: `select[data-intent=neutral aria-invalid=true]>option{Error}`
+```html
+<select data-intent="neutral" aria-invalid="true"><option>Error</option></select>
+```
+
+**Multiple select**:
+- Emmet: `select[data-intent=neutral multiple]>option{India}+option{USA}`
+```html
+<select data-intent="neutral" multiple><option>India</option><option>USA</option></select>
+```
+
+
+---
+
+### Component: skeleton
+
+**Description**: Displays loading placeholders using native span elements with semantic loading states.
+
+- **HTML Tag / Element**: `<span>`
+- **Emmet Template**: `span[aria-busy=true data-shape=text]`
+
+#### Allowed Attributes & Properties
+
+- `data-shape` (`enum`): Use text for content placeholders, rect for cards/banners, circle for avatars. (values: `text`, `rect`, `circle`) (default: `text`)
+- `aria-busy` (`boolean`): Required loading state indicator.
+- `role` (`string`): Use status role for accessibility. (default: `status`)
+- `aria-label` (`string`): Provide accessible loading description.
+- `data-lines` (`number`): Use for multiple text line placeholders.
+
+#### Specifications & Constraints
+
+- **Supported States**: `loading`, `text`, `rect`, `circle`, `multiple-lines`
+- **Forbidden Attributes (DO NOT USE)**: `variant`, `intent`, `color`, `appearance`, `size`, `isLoading`, `class`
+
+#### DOs
+- Use aria-busy='true' during loading
+- Use data-shape='text' for text placeholders
+- Use data-shape='rect' for cards and banners
+- Use data-shape='circle' for avatars
+- Provide aria-label for accessibility
+
+#### DONTs
+- Do not use class attribute
+- Do not use variant props
+- Do not use color props
+- Do not use skeleton after content loads
+
+#### Examples
+
+**Text skeleton**:
+- Emmet: `span[role=status aria-busy=true aria-label='loading text' data-shape=text]`
+```html
+<span role="status" aria-busy="true" aria-label="loading text" data-shape="text"></span>
+```
+
+**Rectangle skeleton**:
+- Emmet: `span[role=status aria-busy=true aria-label='loading rectangle' data-shape=rect]`
+```html
+<span role="status" aria-busy="true" aria-label="loading rectangle" data-shape="rect"></span>
+```
+
+**Circle skeleton**:
+- Emmet: `span[role=status aria-busy=true aria-label='loading avatar' data-shape=circle]`
+```html
+<span role="status" aria-busy="true" aria-label="loading avatar" data-shape="circle"></span>
+```
+
+**Multiple lines**:
+- Emmet: `span[role=status aria-busy=true data-shape=text data-lines=3]`
+```html
+<span role="status" aria-busy="true" data-shape="text" data-lines="3"></span>
+```
+
+
+---
+
+### Component: tabs
+
+**Description**: Provides semantic tab navigation using the ix-tabs custom element with keyboard accessibility and visual variants.
+
+- **HTML Tag / Element**: `<ix-tabs>`
+- **Emmet Template**: `ix-tabs>button[slot=tab]*3`
+
+#### Allowed Attributes & Properties
+
+- `data-variant` (`enum`): Controls tab appearance. (values: `default`, `underline`, `pill`, `gradient`) (default: `default`)
+- `slot` (`enum`): tab defines trigger buttons, panel defines tab content. (values: `tab`, `panel`)
+- `aria-selected` (`boolean`): Marks active tab.
+- `role` (`string`): Automatically applied for accessibility.
+- `hidden` (`boolean`): Used for inactive panels.
+
+#### Specifications & Constraints
+
+- **Supported States**: `selected`, `focused`, `keyboard-navigation`
+- **Forbidden Attributes (DO NOT USE)**: `variant`, `color`, `size`, `appearance`, `class`, `activeTab`
+
+#### DOs
+- Use slot='tab' for tab triggers
+- Use slot='panel' for content sections
+- Use data-variant for visual styles
+- Use aria-selected for active state
+- Keep related panels inside ix-tabs
+
+#### DONTs
+- Do not use class styling
+- Do not use variant prop
+- Do not use custom active props
+- Do not omit tab slot
+
+#### Examples
+
+**Default tabs**:
+- Emmet: `ix-tabs>button[slot=tab]*3`
+```html
+<ix-tabs><button slot="tab">Overview</button><button slot="tab">Analytics</button><button slot="tab">Settings</button></ix-tabs>
+```
+
+**Underline tabs**:
+- Emmet: `ix-tabs[data-variant=underline]`
+```html
+<ix-tabs data-variant="underline"><button slot="tab">Profile</button><button slot="tab">Activity</button><button slot="tab">Security</button></ix-tabs>
+```
+
+**Pill tabs**:
+- Emmet: `ix-tabs[data-variant=pill]`
+```html
+<ix-tabs data-variant="pill"><button slot="tab">Files</button><button slot="tab">Shared</button><button slot="tab">Starred</button></ix-tabs>
+```
+
+**Gradient tabs**:
+- Emmet: `ix-tabs[data-variant=gradient]`
+```html
+<ix-tabs data-variant="gradient"><button slot="tab">Home</button><button slot="tab">Dashboard</button><button slot="tab">Reports</button></ix-tabs>
+```
+
+**Tabs with panels**:
+- Emmet: `ix-tabs>button[slot=tab]+section[slot=panel]`
+```html
+<ix-tabs><button slot="tab">Account</button><button slot="tab">Billing</button><section slot="panel">Account content</section><section slot="panel">Billing content</section></ix-tabs>
+```
+
+
+---
+
+### Component: table
+
+**Description**: Provides semantic tables with optional sortable columns using the ix-table custom element extension.
+
+- **HTML Tag / Element**: `<table>`
+- **Emmet Template**: `table[is=ix-table]>thead>tr+tbody`
+
+#### Allowed Attributes & Properties
+
+- `data-sortable` (`boolean`): Enables sorting on table header. (default: `false`)
+- `aria-sort` (`enum`): Current sort direction. (values: `ascending`, `descending`, `none`) (default: `none`)
+- `is` (`string`): Activates sortable table behavior. (values: `ix-table`) (default: `ix-table`)
+
+#### Specifications & Constraints
+
+- **Supported States**: `default`, `ascending`, `descending`, `sortable`
+- **Forbidden Attributes (DO NOT USE)**: `sortable`, `variant`, `theme`, `direction`, `class`
+
+#### DOs
+- Use is="ix-table" for sorting
+- Apply data-sortable on th only
+- Keep tbody present
+- Use aria-sort state
+
+#### DONTs
+- Do not add data-sortable on td
+- Do not omit tbody
+- Do not use custom sort attributes
+- Do not use class based sorting
+
+#### Examples
+
+**Default table**:
+- Emmet: `table>thead>tr+tbody`
+```html
+<table><thead><tr><th>Name</th><th>Email</th></tr></thead><tbody><tr><td>John</td><td>john@example.com</td></tr></tbody></table>
+```
+
+**Sortable table**:
+- Emmet: `table[is=ix-table]`
+```html
+<table is="ix-table"><thead><tr><th data-sortable>Name</th><th data-sortable>Age</th></tr></thead><tbody><tr><td>John</td><td>28</td></tr><tr><td>Alex</td><td>21</td></tr></tbody></table>
+```
+
+**Ascending state**:
+- Emmet: `th[data-sortable]`
+```html
+<th data-sortable aria-sort="ascending">Name</th>
+```
+
+**Descending state**:
+- Emmet: `th[data-sortable]`
+```html
+<th data-sortable aria-sort="descending">Age</th>
+```
+
+**Status table**:
+- Emmet: `table[is=ix-table]`
+```html
+<table is="ix-table"><thead><tr><th data-sortable>Name</th><th data-sortable>Status</th></tr></thead><tbody><tr><td>Riya</td><td><mark data-intent="success">Active</mark></td></tr></tbody></table>
+```
+
+
+---
+
+### Component: textarea
+
+**Description**: Provides semantic multiline text input using the native HTML textarea element with validation states and intent variants.
+
+- **HTML Tag / Element**: `<textarea>`
+- **Emmet Template**: `textarea[rows=3 placeholder=?]`
+
+#### Allowed Attributes & Properties
+
+- `rows` (`number`): Controls textarea height. (default: `3`)
+- `placeholder` (`string`): 
+- `data-intent` (`enum`): Use primary for standard forms, danger for destructive flows, success for positive actions. (values: `primary`, `danger`, `warning`, `success`, `neutral`) (default: `neutral`)
+- `disabled` (`boolean`): Disables interaction.
+- `required` (`boolean`): Marks field as mandatory.
+- `aria-invalid` (`boolean`): Use for validation errors.
+
+#### Specifications & Constraints
+
+- **Supported States**: `required`, `disabled`, `invalid`
+- **Forbidden Attributes (DO NOT USE)**: `variant`, `color`, `appearance`, `colorScheme`, `size`, `isDisabled`, `class`
+
+#### DOs
+- Use rows to control height
+- Use aria-invalid='true' for validation errors
+- Use disabled for unavailable fields
+- Use data-intent for semantic styling
+- Use placeholder for guidance text
+
+#### DONTs
+- Do not use class attribute
+- Do not use variant props
+- Do not use color props
+- Do not use isDisabled
+
+#### Examples
+
+**Default textarea**:
+- Emmet: `textarea[rows=3 placeholder='Enter message']`
+```html
+<textarea rows="3" placeholder="Enter message"></textarea>
+```
+
+**Primary textarea**:
+- Emmet: `textarea[data-intent=primary rows=3]`
+```html
+<textarea rows="3" data-intent="primary"></textarea>
+```
+
+**Required textarea**:
+- Emmet: `textarea[rows=3 required]`
+```html
+<textarea rows="3" required></textarea>
+```
+
+**Invalid textarea**:
+- Emmet: `textarea[rows=3 aria-invalid=true]`
+```html
+<textarea rows="3" aria-invalid="true"></textarea>
+```
+
+**Disabled textarea**:
+- Emmet: `textarea[rows=3 disabled]`
+```html
+<textarea rows="3" disabled></textarea>
+```
+
+**Large textarea**:
+- Emmet: `textarea[rows=6 placeholder='Write feedback']`
+```html
+<textarea rows="6" placeholder="Write feedback"></textarea>
+```
+
+
+---
+
+### Component: toast
+
+**Description**: Provides lightweight notification messages using the ix-toast custom element with semantic intents, motion variants, positions, and action support.
+
+- **HTML Tag / Element**: `<ix-toast>`
+- **Emmet Template**: `ix-toast#toast+button`
+
+#### Allowed Attributes & Properties
+
+- `data-intent` (`enum`): Applies semantic styling. (values: `neutral`, `primary`, `success`, `warning`, `danger`, `gradient`) (default: `neutral`)
+- `data-variant` (`enum`): Controls animation style. (values: `fade`, `slide`, `pop`, `action`) (default: `fade`)
+- `data-position` (`enum`): Controls toast placement. (values: `top-left`, `top-right`, `bottom-left`, `bottom-right`, `bottom-center`) (default: `top-right`)
+- `title` (`string`): Toast heading text passed to show().
+- `message` (`string`): Toast body text.
+- `duration` (`number`): Auto dismiss duration. (default: `3000`)
+- `actionText` (`string`): Action button label. (default: `OK`)
+- `aria-live` (`string`): Accessibility live region. (default: `polite`)
+
+#### Specifications & Constraints
+
+- **Supported States**: `open`, `dismissed`, `animated`, `action`
+- **Forbidden Attributes (DO NOT USE)**: `variant`, `position`, `theme`, `class`, `animation`, `placement`
+
+#### DOs
+- Use show() for displaying notifications
+- Use semantic intents
+- Use data-position for placement
+- Use action variant for interactive toast
+- Keep toast container mounted
+
+#### DONTs
+- Do not inject aside manually
+- Do not use custom animation props
+- Do not style using classes
+- Do not remove ix-toast container
+
+#### Examples
+
+**Basic toast**:
+- Emmet: `ix-toast#toast+button`
+```html
+<ix-toast id="toast"></ix-toast><button onclick="document.getElementById('toast').show({title:'Saved',message:'Changes saved.',intent:'neutral'})">Show Toast</button>
+```
+
+**Success toast**:
+- Emmet: `ix-toast`
+```html
+document.getElementById('toast').show({title:'Success',message:'Profile updated.',intent:'success'})
+```
+
+**Danger toast**:
+- Emmet: `ix-toast`
+```html
+document.getElementById('toast').show({title:'Error',message:'Operation failed.',intent:'danger'})
+```
+
+**Slide variant**:
+- Emmet: `ix-toast`
+```html
+document.getElementById('toast').show({title:'Saved',message:'Updated successfully.',variant:'slide',intent:'success'})
+```
+
+**Pop variant**:
+- Emmet: `ix-toast`
+```html
+document.getElementById('toast').show({title:'Alert',message:'Something failed.',variant:'pop',intent:'danger'})
+```
+
+**Action toast**:
+- Emmet: `ix-toast`
+```html
+document.getElementById('toast').show({title:'Delete file',message:'Undo available.',variant:'action',actionText:'Undo'})
+```
+
+**Bottom right position**:
+- Emmet: `ix-toast[data-position=bottom-right]`
+```html
+<ix-toast id="toast" data-position="bottom-right"></ix-toast>
+```
+
+
+---
+
+### Component: tooltip
+
+**Description**: Provides contextual information using the ix-tooltip custom element with position variants, semantic intents, and keyboard accessibility.
+
+- **HTML Tag / Element**: `<ix-tooltip>`
+- **Emmet Template**: `ix-tooltip[content]>button`
+
+#### Allowed Attributes & Properties
+
+- `content` (`string`): Defines tooltip text.
+- `data-position` (`enum`): Controls tooltip placement. (values: `top`, `bottom`, `left`, `right`) (default: `top`)
+- `data-intent` (`enum`): Applies semantic tooltip styling. (values: `success`, `danger`, `warning`)
+- `tabindex` (`number`): Enables keyboard focus. (default: `0`)
+- `role` (`string`): Accessibility role. (default: `tooltip`)
+
+#### Specifications & Constraints
+
+- **Supported States**: `hover`, `focus-within`, `visible`
+- **Forbidden Attributes (DO NOT USE)**: `variant`, `placement`, `color`, `theme`, `position`, `class`
+
+#### DOs
+- Provide tooltip text using content attribute
+- Use data-position for placement
+- Use semantic intents when needed
+- Wrap interactive elements inside ix-tooltip
+- Allow keyboard focus
+
+#### DONTs
+- Do not omit content
+- Do not use placement prop
+- Do not use custom classes for variants
+- Do not place tooltip text inside children
+
+#### Examples
+
+**Default tooltip**:
+- Emmet: `ix-tooltip[content]>button`
+```html
+<ix-tooltip content="Tooltip text"><button>Hover me</button></ix-tooltip>
+```
+
+**Position variants**:
+- Emmet: `ix-tooltip[data-position]`
+```html
+<ix-tooltip content="Bottom tooltip" data-position="bottom"><button>Bottom</button></ix-tooltip>
+```
+
+**Success tooltip**:
+- Emmet: `ix-tooltip[data-intent=success]`
+```html
+<ix-tooltip content="Success tooltip" data-intent="success"><button>Success</button></ix-tooltip>
+```
+
+**Danger tooltip**:
+- Emmet: `ix-tooltip[data-intent=danger]`
+```html
+<ix-tooltip content="Danger tooltip" data-intent="danger"><button>Delete</button></ix-tooltip>
+```
+
+**Warning tooltip**:
+- Emmet: `ix-tooltip[data-intent=warning]`
+```html
+<ix-tooltip content="Warning tooltip" data-intent="warning"><button>Warning</button></ix-tooltip>
+```
+
+**Position example**:
+- Emmet: `ix-tooltip[data-position=right]`
+```html
+<ix-tooltip content="Right tooltip" data-position="right"><button>Info</button></ix-tooltip>
+```
+
+
+---
+
+## Common Usage Patterns & Intent Templates
+
+### Pattern Section: BUTTONS
+
+- **primary button / action button / main button / call to action**:
+  - Template: `button[data-intent=primary]{Label}`
+
+- **secondary button / cancel button / back button**:
+  - Template: `button[data-intent=secondary]{Cancel}`
+
+- **small button / tiny button**:
+  - Template: `button[data-intent=primary data-size=sm]{Label}`
+
+- **large button / big button**:
+  - Template: `button[data-intent=primary data-size=lg]{Label}`
+
+- **disabled button / inactive button**:
+  - Template: `button[data-intent=primary disabled]{Label}`
+
+- **loading button / spinner button / busy button**:
+  - Template: `button[data-intent=primary aria-busy=true]{Saving…}`
+
+### Pattern Section: DESTROY / DANGER
+
+- **danger button / delete button / destructive button**:
+  - Template: `button[data-intent=danger]{Delete}`
+
+- **user want remove item from list**:
+  - Template: `button[data-intent=danger]{Remove}`
+
+- **user want cancel account / danger zone**:
+  - Template: `section>(h2{Danger Zone})+p{Cannot undo.}+button[data-intent=danger]{Delete Account}`
+
+- **user need confirm before destroy**:
+  - Template: `dialog#confirm[data-intent=danger]>(h2{Are you sure?})+p{This cannot be undone.}+(button{Cancel})+(button[data-intent=danger]{Delete})`
+
+### Pattern Section: WARN USER
+
+- **user about to do risky thing**:
+  - Template: `dialog#warn[data-intent=warning]>(h2{Warning})+p{This will affect all users.}+(button{Cancel})+(button[data-intent=warning]{Continue})`
+
+- **show yellow warning banner / warning alert / warning message / session warning**:
+  - Template: `aside[data-intent=warning]{Your session will expire soon.}`
+
+### Pattern Section: TELL USER SUCCESS
+
+- **thing worked. show green**:
+  - Template: `aside[data-intent=success]{Changes saved!}`
+
+- **show success popup / toast**:
+  - Template: `ix-toast#t[data-intent=success data-variant=slide];show({title:"Done",message:"Saved.",intent:"success",duration:3000})`
+
+### Pattern Section: TELL USER ERROR
+
+- **something broke. show red**:
+  - Template: `aside[data-intent=danger]{Something went wrong. Please try again.}`
+
+- **input is wrong. highlight field**:
+  - Template: `label>(input[type=text aria-invalid=true data-intent=danger]+span{Error message here})`
+
+- **show error popup**:
+  - Template: `ix-toast#t[data-intent=danger data-variant=pop];show({title:"Error",message:"Failed.",intent:"danger"})`
+
+### Pattern Section: SHOW INFO
+
+- **neutral info banner / tip**:
+  - Template: `aside[data-intent=info]{Your data syncs every 5 minutes.}`
+
+### Pattern Section: LOADING / ASYNC
+
+- **button doing async work right now**:
+  - Template: `button[aria-busy=true data-intent=primary]{Saving…}`
+
+- **whole form submitting**:
+  - Template: `form#f[aria-busy=true]>(label{Email}+input[type=email])+button[type=submit aria-busy=true]{Submitting…}`
+
+- **page section loading / loading skeleton / rectangular skeleton / rect skeleton / skeleton rectangle**:
+  - Template: `span[role=status aria-busy=true data-shape=rect]`
+
+- **avatar with skeleton / avatar and loading / profile image with skeleton**:
+  - Template: `img[src=? alt="User" data-size=md]+span[role=status aria-busy=true data-shape=rect]`
+
+- **show skeleton card while data loads**:
+  - Template: `article>(span[slot=avatar aria-busy data-shape=circle])+(span[slot=title aria-busy data-shape=text])+(p[slot=body aria-busy data-shape=text])`
+
+### Pattern Section: USER INPUT: TEXT
+
+- **user type text**:
+  - Template: `label{Label}+input[type=text]`
+
+- **user type email**:
+  - Template: `label{Email}+input[type=email required]`
+
+- **user type password**:
+  - Template: `label{Password}+input[type=password required]`
+
+- **user type number**:
+  - Template: `label{Amount}+input[type=number]`
+
+- **user type phone**:
+  - Template: `label{Phone}+input[type=tel]`
+
+- **user type url**:
+  - Template: `label{Website}+input[type=url]`
+
+- **user pick date**:
+  - Template: `label{Date}+input[type=date]`
+
+- **user search / filter list**:
+  - Template: `label{Search}+input[type=search]`
+
+- **search bar with button / search input and button / search with submit**:
+  - Template: `label{Search}+input[type=search]+button[type=submit data-intent=primary]{Search}`
+
+- **user upload file**:
+  - Template: `label{Upload}+input[type=file]`
+
+- **user write long text / bio / message**:
+  - Template: `label{Message}+textarea[rows=4 placeholder="Type here…"]`
+
+### Pattern Section: USER INPUT: CHOICE
+
+- **user pick one from dropdown list**:
+  - Template: `select[required]>(option{Choose…})+(option[value=a]{Option A})+(option[value=b]{Option B})`
+
+- **user pick one with radio buttons**:
+  - Template: `(label>(input[type=radio name=g value=a]+{Option A}))+(label>(input[type=radio name=g value=b]+{Option B}))`
+
+- **user toggle yes/no with checkbox / checkbox input / accept terms / agree terms**:
+  - Template: `label>(input[type=checkbox]+{I agree to terms})`
+
+- **user pick many items / multi-select chips**:
+  - Template: `ix-combobox>(label>(span[data-chips])+input[placeholder="Search…"]+button[data-clear])+ul>(li{Option A})+(li{Option B})+(li{Option C})`
+
+### Pattern Section: FORM
+
+- **basic form with submit**:
+  - Template: `form#f[method=post]>(label{Name}+input[type=text required])+button[type=submit data-intent=primary]{Submit}`
+
+- **login form / sign in form / email password form / form with email and password**:
+  - Template: `form#login>(label{Email}+input[type=email required])+(label{Password}+input[type=password required])+button[type=submit data-intent=primary]{Sign In}`
+
+- **login form with avatar / login with profile picture**:
+  - Template: `form#login>(img[src=? alt="User avatar" data-size=md])+(label{Email}+input[type=email required])+(label{Password}+input[type=password required])+button[type=submit data-intent=primary]{Sign In}`
+
+- **signup / register form**:
+  - Template: `form#signup>(label{Name}+input[type=text required])+(label{Email}+input[type=email required])+(label{Password}+input[type=password required])+button[type=submit data-intent=primary]{Create Account}`
+
+- **contact / message form**:
+  - Template: `form#contact>(label{Name}+input[type=text required])+(label{Email}+input[type=email required])+(label{Message}+textarea[rows=5 required])+button[type=submit data-intent=primary]{Send}`
+
+- **settings form with save button**:
+  - Template: `form#settings>(label{Display Name}+input[type=text])+(label{Email}+input[type=email])+button[type=submit data-intent=primary]{Save Changes}`
+
+### Pattern Section: NAVIGATION
+
+- **top nav / menu links**:
+  - Template: `nav>ul>(li>a[href=/]{Home})+(li>a[href=/about]{About})+(li>a[href=/contact]{Contact})`
+
+- **breadcrumb trail**:
+  - Template: `nav[aria-label=Breadcrumb data-style=chevro]n>ol>(li>a[href=/]{Home})+(li>a[href=/settings]{Settings})+(li[aria-current="page"]{Profile})`
+
+- **tabs / tabbed sections**:
+  - Template: `ix-tabs[data-variant=underline]>(button[slot=tab aria-selected=true]{Tab 1})+(button[slot=tab]{Tab 2})+(section[slot=panel]{Content 1})+(section[slot=panel hidden]{Content 2})`
+
+- **pill tabs**:
+  - Template: `ix-tabs[data-variant=pill]>(button[slot=tab aria-selected=true]{Overview})+(button[slot=tab]{Details})+(section[slot=panel]{…})+(section[slot=panel hidden]{…})`
+
+### Pattern Section: DROPDOWN / MENU
+
+- **button that opens menu**:
+  - Template: `ix-dropdown>(button[slot=trigger aria-haspopup=menu aria-expanded=false]{Options ▾})+ul[slot=menu]>(li>button{Edit})+(li>button{Duplicate})+(li>button[data-intent=danger]{Delete})`
+
+- **user avatar menu / profile menu**:
+  - Template: `ix-dropdown>(button[slot=trigger aria-haspopup=menu aria-expanded=false]{Profile ▾})+ul[slot=menu]>(li>a[href=/profile]{My Profile})+(li>a[href=/settings]{Settings})+(li>button[data-intent=danger]{Sign Out})`
+
+### Pattern Section: TOOLTIP / HINT
+
+- **show hint on hover / tooltip / hover hint**:
+  - Template: `ix-tooltip[content="More info here" data-position=top]>button{?}`
+
+- **show danger warning on hover / tooltip on delete button / danger tooltip**:
+  - Template: `ix-tooltip[content="This will delete everything" data-intent=danger data-position=top]>button[data-intent=danger]{Delete}`
+
+### Pattern Section: BADGE / LABEL / TAG
+
+- **green status badge**:
+  - Template: `mark[data-intent=success]{Active}`
+
+- **red status badge / error tag**:
+  - Template: `mark[data-intent=danger]{Failed}`
+
+- **yellow warning tag**:
+  - Template: `mark[data-intent=warning]{Pending}`
+
+- **neutral grey tag**:
+  - Template: `mark[data-intent=neutral]{Draft}`
+
+### Pattern Section: CARD
+
+- **user profile card**:
+  - Template: `article>(img[slot=avatar src=? alt="User photo" data-size=md])+(h2[slot=title]{Name})+(small[slot=meta]{Role})+(p[slot=body]{Short bio here.})+(button[slot=action data-intent=primary]{View Profile})`
+
+- **product card**:
+  - Template: `article>(img[slot=avatar src=? alt="Product"])+(h3[slot=title]{Product Name})+(small[slot=meta]{$29.99})+(p[slot=body]{Short description.})+(a[slot=action href=? data-intent=primary]{Buy Now})`
+
+- **simple content card / info card**:
+  - Template: `article>(h3[slot=title]{Card Title})+(p[slot=body]{Card body content goes here.})+(button[slot=action data-intent=ghost]{Learn More})`
+
+### Pattern Section: ACCORDION / FAQ
+
+- **expandable section / FAQ item**:
+  - Template: `details>summary{Question goes here?}+p{Answer goes here.}`
+
+- **multiple FAQ items**:
+  - Template: `(details>summary{Question 1}+p{Answer 1})+(details>summary{Question 2}+p{Answer 2})+(details>summary{Question 3}+p{Answer 3})`
+
+- **default open accordion**:
+  - Template: `details[open]>summary{Already Open}+p{This is visible by default.}`
+
+### Pattern Section: PROGRESS / METER
+
+- **show how far along task is**:
+  - Template: `progress[value=60 max=100]`
+
+- **show health / score / level gauge**:
+  - Template: `meter[value=7 min=0 max=10 low=3 high=8 optimum=9]`
+
+### Pattern Section: TABLE
+
+- **data table with sort**:
+  - Template: `table[is=ix-table]>(thead>tr>(th[data-sortable aria-sort=ascending]{Name})+(th[data-sortable aria-sort=ascending]{Status})+(th{Actions}))+(tbody>tr>(td{Row 1})+(td>mark[data-intent=success]{Active})+(td>button[data-intent=danger]{Delete}))`
+
+### Pattern Section: CODE / PREFORMATTED
+
+- **show code snippet**:
+  - Template: `pre>code[data-lang=js]{const x = 1;}`
+
+### Pattern Section: DIVIDER
+
+- **horizontal line / separator**:
+  - Template: `hr[data-orientation=horizontal]`
+
+- **vertical divider between items**:
+  - Template: `hr[data-orientation=vertical]`
+
+### Pattern Section: AVATAR / IMAGE
+
+- **user avatar small**:
+  - Template: `img[src=? alt="User" data-size=sm]`
+
+- **user avatar large**:
+  - Template: `img[src=? alt="User" data-size=lg]`
+
+### Pattern Section: GRID LAYOUT
+
+- **2-column card grid**:
+  - Template: `section[data-grid=2 data-gap]>(article{Card 1})+(article{Card 2})+(article{Card 3})+(article{Card 4})`
+
+- **3-column responsive grid**:
+  - Template: `section[data-grid=3 data-gap]>(article{A})+(article{B})+(article{C})`
+
+- **auto-fill responsive grid**:
+  - Template: `section[data-grid=fill data-gap]>(article{Item})*6`
+
+### Pattern Section: FULL PAGE PATTERNS
+
+- **settings page with danger zone**:
+  - Template: `main>(form#settings>(label{Email}+input[type=email])+button[type=submit data-intent=primary]{Save})+(section>(h2{Danger Zone})+button[data-intent=danger]{Delete Account})`
+
+- **dashboard with cards and table**:
+  - Template: `main>(section[data-grid=3 data-gap]>(article>(h3[slot=title]{Users})+(p[slot=body]{142}))+(article>(h3[slot=title]{Revenue})+(p[slot=body]{$4,200}))+(article>(h3[slot=title]{Issues})+(p[slot=body]>mark[data-intent=danger]{3 open})))+(table[is=ix-table]>(thead>tr>(th[data-sortable aria-sort=ascending]{Name})+(th{Status}))+(tbody>tr>(td{Alice})+(td>mark[data-intent=success]{Active})))`
+
+- **login page**:
+  - Template: `main>(h1{Sign In})+(form#login>(label{Email}+input[type=email required])+(label{Password}+input[type=password required])+button[type=submit data-intent=primary]{Sign In})`
+
+### NEVER DO Guidelines
+
+- never use class=         - use data-intent
+- never use variant=       - use data-intent
+- never use color=         - use data-intent
+- never use isDisabled=    - use disabled
+- never use isLoading=     - use aria-busy=true
+- never use onClick on CSS component - CSS-only, no JS handler needed
