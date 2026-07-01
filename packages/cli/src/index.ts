@@ -10,6 +10,7 @@ import { buildCommand } from './commands/build.js'
 import { buildValidatedCommand } from './commands/build-validated.js'
 import { previewCommand } from './commands/preview.js'
 import { mcpSetupCommand, mcpStartCommand } from './commands/mcp.js'
+import { agentDocsCommand } from './commands/agent-docs.js'
 
 const program = new Command()
 
@@ -56,7 +57,22 @@ program
 program
   .command('info <component>')
   .description('Show detailed manifest and guidelines for a component')
+  .option('--dense', 'Output token-efficient minified format for AI context')
   .action(infoCommand)
+
+program
+  .command('agent-docs')
+  .description('Generate customized AI agent instruction context files')
+  .option(
+    '-a, --agent <type>',
+    'Target AI assistant type (cursor, claude, codex)',
+    'cursor'
+  )
+  .option(
+    '-o, --output-path <path>',
+    'Custom directory or file path to write rules'
+  )
+  .action(agentDocsCommand)
 
 program
   .command('build <prompt>')
