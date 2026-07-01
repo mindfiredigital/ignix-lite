@@ -1,4 +1,4 @@
-import { Command } from 'commander'
+import { Command, Option } from 'commander'
 import { initCommand } from './commands/init.js'
 import { themeCommand } from './commands/theme.js'
 import { addCommand } from './commands/add.js'
@@ -10,7 +10,7 @@ import { buildCommand } from './commands/build.js'
 import { buildValidatedCommand } from './commands/build-validated.js'
 import { previewCommand } from './commands/preview.js'
 import { mcpSetupCommand, mcpStartCommand } from './commands/mcp.js'
-import { agentDocsCommand } from './commands/agent-docs.js'
+import { agentDocsCommand, SUPPORTED_AGENTS } from './commands/agent-docs.js'
 
 const program = new Command()
 
@@ -63,14 +63,18 @@ program
 program
   .command('agent-docs')
   .description('Generate customized AI agent instruction context files')
-  .option(
-    '-a, --agent <type>',
-    'Target AI assistant type (cursor, claude, codex)',
-    'cursor'
+  .addOption(
+    new Option('-a, --agent <type>', 'Target AI assistant type')
+      .choices([...SUPPORTED_AGENTS])
+      .default('cursor')
   )
   .option(
     '-o, --output-path <path>',
-    'Custom directory or file path to write rules'
+    'Custom directory (must end with slash) or file path to write rules'
+  )
+  .option(
+    '-f, --force',
+    'Overwrite existing agent rules files without confirmation prompt'
   )
   .action(agentDocsCommand)
 

@@ -1,23 +1,20 @@
 import { writeFileSync, mkdirSync, statSync, existsSync } from 'fs'
 import path from 'path'
 import pc from 'picocolors'
+import prompts from 'prompts'
 import { manifests } from '@mindfiredigital/ignix-lite-engine'
 
+export const SUPPORTED_AGENTS = ['cursor', 'claude', 'codex'] as const
+export type SupportedAgent = typeof SUPPORTED_AGENTS[number]
+
 interface AgentDocsOptions {
-  agent: 'cursor' | 'claude' | 'codex'
+  agent: SupportedAgent
   outputPath?: string
+  force?: boolean
 }
 
-export function agentDocsCommand(options: AgentDocsOptions) {
+export async function agentDocsCommand(options: AgentDocsOptions) {
   const agentType = options.agent
-
-  // Validation: Fail fast for unsupported agents
-  const validAgents = ['cursor', 'claude', 'codex']
-  if (!validAgents.includes(agentType)) {
-    console.log(pc.red(`\nError: Unsupported agent type "${agentType}".`))
-    console.log(`Allowed agents are: ${pc.yellow(validAgents.join(', '))}\n`)
-    process.exit(1)
-  }
 
   let fileName = '.cursorrules'
   if (agentType === 'claude') {
@@ -36,11 +33,10 @@ export function agentDocsCommand(options: AgentDocsOptions) {
       if (existsSync(resolvedOutput)) {
         isDir = statSync(resolvedOutput).isDirectory()
       } else {
-        // If directory doesn't exist yet, treat it as a directory if it ends with a slash or has no file extension
+        // Trailing slash (either / or \) explicitly signals directory intent when non-existent
         isDir =
           options.outputPath.endsWith('/') ||
-          options.outputPath.endsWith('\\') ||
-          !path.basename(options.outputPath).includes('.')
+          options.outputPath.endsWith('\\')
       }
     } catch {
       isDir = false
@@ -50,6 +46,21 @@ export function agentDocsCommand(options: AgentDocsOptions) {
       targetPath = path.join(resolvedOutput, fileName)
     } else {
       targetPath = resolvedOutput
+    }
+  }
+
+  // Interactive Overwrite Guard
+  if (existsSync(targetPath) && !options.force) {
+    const response = await prompts({
+      type: 'confirm',
+      name: 'overwrite',
+      message: `File "${path.basename(targetPath)}" already exists at "${targetPath}". Overwrite?`,
+      initial: false
+    })
+
+    if (!response.overwrite) {
+      console.log(pc.yellow('\nGeneration cancelled. Use --force or -f to overwrite.\n'))
+      return
     }
   }
 
@@ -88,6 +99,22 @@ function generateRulesContent(): string {
     content += `* **HTML Tag / Element**: \`<${manifest.element}>\`\n`
     content += `* **Default Emmet**: \`${manifest.emmet}\`\n`
 
+    if (manifest.required_wrapper) {
+      content += `* **Required Parent Wrapper**: \`<${manifest.required_wrapper}>\`\n`
+    }
+
+    if (manifest.required_props && manifest.required_props.length > 0) {
+      content += `* **Required Attributes**: \`${manifest.required_props.join('`, `')}\`\n`
+    }
+
+    if (manifest.forbidden_props && manifest.forbidden_props.length > 0) {
+      content += `* **Forbidden Attributes**: \`${manifest.forbidden_props.join('`, `')}\`\n`
+    }
+
+    if (manifest.required_slots && manifest.required_slots.length > 0) {
+      content += `* **Required Slots**: \`${manifest.required_slots.join('`, `')}\`\n`
+    }
+
     if (manifest.props && Object.keys(manifest.props).length > 0) {
       content += `* **Allowed Attributes**:\n`
       Object.entries(manifest.props).forEach(([propName, propDef]) => {
@@ -106,6 +133,10 @@ function generateRulesContent(): string {
         const reqStr = slotDef.required ? ' (required)' : ''
         content += `  - \`slot="${slotName}"\`${reqStr}\n`
       })
+    }
+
+    if (manifest.methods && manifest.methods.length > 0) {
+      content += `* **Available JavaScript Methods**: \`${manifest.methods.join('()`, `')}()\`\n`
     }
 
     if (manifest.do && manifest.do.length > 0) {
