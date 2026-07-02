@@ -25,7 +25,8 @@ import {
   applyHandoff,
   buildValidated,
   manifests,
-  getTokenCost
+  getTokenCost,
+  getTokenCount
 } from '@mindfiredigital/ignix-lite-engine'
 
 type ValidateArgs = {
@@ -437,22 +438,36 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       break
   }
 
-  // Intercept and record tokens_used if present in the response
+  // Intercept and record real tokens_used
+  const inputStr = JSON.stringify(args || {})
+  let outputStr = ''
+  if (response && response.content && response.content[0]) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const item = response.content[0] as any
+    if (typeof item.text === 'string') {
+      outputStr = item.text
+    } else if (item.blob) {
+      outputStr = item.blob
+    }
+  }
+  const realTokens = getTokenCount(inputStr) + getTokenCount(outputStr)
+
   if (
     response &&
     response.content &&
     response.content[0] &&
-    response.content[0].text
+    typeof response.content[0].text === 'string'
   ) {
     try {
       const parsed = JSON.parse(response.content[0].text)
-      if (parsed && typeof parsed.tokens_used === 'number') {
-        recordCall(name, parsed.tokens_used)
-      }
+      parsed.tokens_used = realTokens
+      response.content[0].text = JSON.stringify(parsed)
     } catch {
       // Ignore if response text is not valid JSON
     }
   }
+
+  recordCall(name, realTokens)
 
   return response
 })
@@ -464,6 +479,13 @@ server.setRequestHandler(ListResourcesRequestSchema, async () => ({
       name: 'All Component Manifests',
       description:
         'Single bundled resource containing manifests for all 28 Ignix-Lite components',
+      mimeType: 'application/json'
+    },
+    {
+      uri: 'tokens://session',
+      name: 'Session Token Cost Log',
+      description:
+        'Real-time token cost and budget analysis for the current conversation',
       mimeType: 'application/json'
     }
   ]
@@ -478,6 +500,18 @@ server.setRequestHandler(ReadResourceRequestSchema, async (request) => {
           uri,
           mimeType: 'application/json',
           text: JSON.stringify(manifests)
+        }
+      ]
+    }
+  }
+  if (uri === 'tokens://session') {
+    const summary = getTokenSummary()
+    return {
+      contents: [
+        {
+          uri,
+          mimeType: 'application/json',
+          text: summary.content[0].text
         }
       ]
     }
