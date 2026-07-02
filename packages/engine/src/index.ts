@@ -14,4 +14,5 @@ export { listComponents } from './tools/list-components.js'
 export { getTokenSummary, recordCall } from './tools/token-counter.js'
 export { buildValidated, BuildValidatedArgs } from './tools/build-validated.js'
 export { getTokenCost } from './tools/token-cost.js'
+export { getTokenCount } from './utils/tokenizer.js'
 
