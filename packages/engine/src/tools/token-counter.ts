@@ -1,3 +1,5 @@
+import { writeFileSync } from 'fs'
+import path from 'path'
 import type { MCPResponse } from '../types.js'
 
 export type CallRecord = {
@@ -11,6 +13,19 @@ const calls: CallRecord[] = []
 const sessionId = Math.random().toString(36).substring(2, 15)
 
 const MAX_CALL_HISTORY = 1000
+
+function saveTokenLog() {
+  try {
+    const data = {
+      session_id: sessionId,
+      total_tokens_used: totalTokensUsed,
+      calls
+    }
+    writeFileSync(path.resolve(process.cwd(), 'ignix-token-log.json'), JSON.stringify(data, null, 2))
+  } catch (e) {
+    // Ignore error
+  }
+}
 
 export function recordCall(toolName: string, tokensUsed: number): void {
   const parsedTokens = Number(tokensUsed)
@@ -28,6 +43,7 @@ export function recordCall(toolName: string, tokensUsed: number): void {
     timestamp: Date.now()
   })
   totalTokensUsed += validTokens
+  saveTokenLog()
 }
 
 export function getTokenSummary(
