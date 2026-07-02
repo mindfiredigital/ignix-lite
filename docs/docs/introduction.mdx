@@ -79,6 +79,39 @@ Override variables, extend utilities, or build your own design system on top of 
 
 ## FAQ
 
+## Working with AI
+
+Ignix Lite is designed to be AI-friendly, using standard HTML elements with data attributes for visual variant styling (Zero Class Names). 
+
+To configure your AI coding assistant (such as Cursor, Claude Code, or Copilot) to generate correct Ignix Lite code, you can use the CLI tool to generate custom rules files:
+
+```bash
+# Setup agent rules for Cursor (.cursorrules)
+npx @mindfiredigital/ignix-lite-cli agent-docs --agent cursor
+
+# Setup agent rules for Claude (CLAUDE.md)
+npx @mindfiredigital/ignix-lite-cli agent-docs --agent claude
+
+# Setup agent rules for Codex/Copilot (AGENTS.md)
+npx @mindfiredigital/ignix-lite-cli agent-docs --agent codex
+```
+
+### Agent Knowledge Self-Check
+
+Before starting to write any layout or component code, paste this self-check prompt into your AI chat to verify it has loaded the correct Ignix Lite context:
+
+```text
+Before writing any Ignix Lite markup, check your system knowledge:
+
+1. What is the correct styling attribute for applying button or alert visual intents? (e.g. primary, danger)
+2. How do you trigger a loading skeleton state on an avatar?
+3. Are class names allowed for component styling or layout alignment?
+
+If you don't know all three, run `npx @mindfiredigital/ignix-lite-cli agent-docs` to install the agent rules.
+```
+
+---
+
 ## Get Started
 
 Ready to begin? Check out the [Installation](/docs/installation) guide to get started.
