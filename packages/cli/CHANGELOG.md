@@ -1,5 +1,11 @@
 # @mindfiredigital/ignix-lite-cli
 
+## 2.2.0
+
+### Minor Changes
+
+- Merge pull request [#187](https://github.com/mindfiredigital/ignix-lite/issues/187) from mindfiredigital/development
+
 ## 2.1.0
 
 ### Minor Changes
